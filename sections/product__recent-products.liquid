@@ -1,0 +1,14 @@
+<div class="pb-6 sl-container xl:pb-14">
+  <span class="block section-title mb-6 pt-4 xl:py-14">מוצרים שהתעניינת בהם</span>
+
+  {%- render 'products-slideshow', products: blank, show_badges: false, show_price: false, size: 'sm' -%}
+</div>
+
+{%- render 'vite-tag' with '@/additionalEntrypoints/product/recentProducts/product.recent.products.ts' -%}
+
+{%- schema -%}
+{
+  "name": "Recent products",
+  "class": "jsRecentProducts"
+}
+{%- endschema -%}

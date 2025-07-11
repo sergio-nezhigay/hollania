@@ -1,0 +1,168 @@
+<div class="stores-accordion">
+  <h2 class="stores-accordion__title" style="color: {{ section.settings.heading_color }}">
+    {{ section.settings.heading }}
+  </h2>
+  <div class="stores-accordion__list">
+    {% for block in section.blocks %}
+      <div class="accordion-item" data-accordion-index="{{ forloop.index0 }}">
+        <button type="button"
+                class="accordion-trigger"
+                style="color: {{ section.settings.item_color }}"
+                aria-expanded="false">
+          <span class="accordion-trigger__label">{{ block.settings.store_name }}</span>
+          <svg class="accordion-trigger__icon" width="24" height="24" viewBox="0 0 24 24">
+            <path d="M7 10l5 5 5-5" stroke="currentColor" stroke-width="2" fill="none" fill-rule="evenodd"/>
+          </svg>
+        </button>
+        <div class="accordion-panel">{{ block.settings.store_content }}</div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<style>
+  
+  .accordion-trigger__icon path {
+    stroke: #888888;
+  }
+  .stores-accordion {
+    margin: 0 auto;
+    max-width: 850px;
+    padding-top: 60px;
+    padding-bottom: 80px;
+  }
+  @media (max-width: 480px) {
+    .stores-accordion {
+      max-width: 328px;
+      padding: 30px 0px;
+    }
+  }
+  .stores-accordion__title {
+    font-family: 'Inter', sans-serif;
+    color: #B6B8C1 !important;
+    font-size: 42px;
+    text-align: center;
+    margin-bottom: 18px;
+  }
+  .accordion-item {
+    border: 1px solid #e1e1e1;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    overflow: hidden;
+  }
+  .accordion-trigger {
+    width: 100%;
+    padding: 16px;
+    background: #fff;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    font-size: 18px;
+  }
+  .accordion-trigger__icon {
+    transition: transform 0.3s;
+  }
+  .accordion-item.open .accordion-trigger__icon {
+    transform: rotate(180deg);
+  }
+  .accordion-panel {
+    display: none;
+    padding: 16px;
+    background: #fafafa;
+    font-size: 16px;
+    line-height: 1.4;
+  }
+  .accordion-item.open .accordion-panel {
+    display: block;
+  }
+  .accordion-trigger {
+  font-size: 18px;
+}
+
+@media (max-width: 480px) {
+  .stores-accordion__title {
+    font-size: 26px;
+  }
+  .accordion-trigger {
+    font-size: 16px;
+  }
+
+}
+
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const items = document.querySelectorAll('.stores-accordion .accordion-item');
+    items.forEach(item => {
+      item.querySelector('.accordion-trigger').addEventListener('click', () => {
+        const isOpen = item.classList.contains('open');
+        items.forEach(i => i.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Our Stores (Accordion)",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section heading",
+      "default": "Our Stores"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#888888"
+    },
+    {
+      "type": "color",
+      "id": "item_color",
+      "label": "Item color",
+      "default": "#dd2d4a"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "store",
+      "name": "Store",
+      "settings": [
+        {
+          "type": "text",
+          "id": "store_name",
+          "label": "Store name",
+        },
+        {
+          "type": "richtext",
+          "id": "store_content",
+          "label": "Store content",
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "FAQ custom",
+      "category": "Custom",
+      "blocks": [
+        { "type": "store", "settings": { "store_name": "סניף הרצליה", "store_content": "" } },
+        { "type": "store", "settings": { "store_name": "סניף בני ברק, דיזיין-סנטר", "store_content": "" } },
+        { "type": "store", "settings": { "store_name": "סניף ראשון לציון", "store_content": "" } },
+        { "type": "store", "settings": { "store_name": "Outlet סניף רחובות ביל\"ו סנטר", "store_content": "" } },
+        { "type": "store", "settings": { "store_name": "סניף קרית אתא, מתחם Redesign", "store_content": "" } },
+        { "type": "store", "settings": { "store_name": "סניף ירושלים", "store_content": "" } },
+        { "type": "store", "settings": { "store_name": "סניף מישור אדומים, D-City", "store_content": "" } },
+        { "type": "store", "settings": { "store_name": "סניף באר שבע, +Design", "store_content": "" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

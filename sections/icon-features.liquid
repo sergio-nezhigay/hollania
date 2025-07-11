@@ -1,0 +1,178 @@
+<!-- sections/icon-features.liquid -->
+<div class="icon-features-section">
+  <div class="container">
+    <div class="icon-features-grid">
+      {% for block in section.blocks %}
+        {% if block.type == 'feature' %}
+          <div class="icon-feature-item" {{ block.shopify_attributes }}>
+            <div class="icon-wrapper">
+              {% if block.settings.custom_svg != blank %}
+                {{ block.settings.custom_svg }}
+              {% elsif block.settings.icon_image != blank %}
+                <img src="{{ block.settings.icon_image | image_url: width: 80 }}" 
+                     alt="{{ block.settings.text }}"
+                     width="40" 
+                     height="40">
+              {% endif %}
+            </div>
+            {% if block.settings.text != blank %}
+              <p class="icon-text">{{ block.settings.text }}</p>
+            {% endif %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<style>
+.icon-features-section {
+  padding: 40px 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.icon-features-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 48px;
+}
+
+.icon-feature-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex: 0 0 auto;
+}
+
+.icon-wrapper {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.icon-wrapper img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.icon-wrapper svg {
+  width: 40px;
+  height: 40px;
+}
+
+.icon-text {
+  font-size: 12px;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.icon-feature-item {
+  min-width: 200px;
+}
+@media (max-width: 768px) {
+  .icon-feature-item {
+  min-width: 0px !important;
+}
+  .icon-features-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    justify-items: center;
+  }
+  
+  /* Center single item in row */
+  .icon-features-grid .icon-feature-item:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+  
+  .container {
+    padding: 0 15px;
+  }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Icon Features",
+  "tag": "section",
+  "class": "section",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon_image",
+          "label": "Icon Image"
+        },
+        {
+          "type": "html",
+          "id": "custom_svg",
+          "label": "Custom SVG Code",
+          "info": "If you want to use custom SVG instead of image"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Feature text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Icon Features",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "text": "100% חומרים מהטבע",
+            "custom_svg": "<svg width=\"40\" height=\"40\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#e91e63\" stroke-width=\"2\"><path d=\"M12 2L13.09 8.26L20 9L13.09 9.74L12 16L10.91 9.74L4 9L10.91 8.26L12 2Z\"/></svg>"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "text": "מיון התכנונות בעלות 2 חומרים",
+            "custom_svg": "<svg width=\"40\" height=\"40\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#e91e63\" stroke-width=\"2\"><circle cx=\"12\" cy=\"12\" r=\"3\"/><path d=\"M12 1v6m0 6v6m11-7h-6m-6 0H1\"/></svg>"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "text": "שמירה מתודי הכנה",
+            "custom_svg": "<svg width=\"40\" height=\"40\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#e91e63\" stroke-width=\"2\"><circle cx=\"12\" cy=\"12\" r=\"10\"/><polyline points=\"12,6 12,12 16,14\"/></svg>"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "text": "עברית הכנה המסייעת בעקלת על גירוית",
+            "custom_svg": "<svg width=\"40\" height=\"40\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#e91e63\" stroke-width=\"2\"><circle cx=\"12\" cy=\"12\" r=\"10\"/><path d=\"M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3\"/><line x1=\"12\" y1=\"17\" x2=\"12.01\" y2=\"17\"/></svg>"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "text": "מגוון צבעים חגב יומיומי",
+            "custom_svg": "<svg width=\"40\" height=\"40\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#e91e63\" stroke-width=\"2\"><polygon points=\"13,2 3,14 12,14 11,22 21,10 12,10 13,2\"/></svg>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

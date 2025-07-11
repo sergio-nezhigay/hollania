@@ -1,0 +1,37 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Sealy theme",
+    "theme_version": "1.0.0",
+    "theme_author": "Sealy",
+    "theme_documentation_url": "https:\/\/shopify.dev",
+    "theme_support_email": "rseverinr@gmail.com"
+  },
+  {
+    "name": "Logo",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo"
+      },
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon",
+        "info": "Will be scaled down to 32px x 32px."
+      }
+    ]
+  },
+  {
+    "name": "Contacts",
+    "settings": [
+      {
+        "type": "text",
+        "id": "whatsapp",
+        "label": "WhatsApp number",
+        "default": "972-559596317"
+      }
+    ]
+  }
+]

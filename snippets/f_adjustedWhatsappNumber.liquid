@@ -1,0 +1,7 @@
+{% liquid
+  assign adjustedWhatsappNumber = settings.whatsapp | replace: '-', '' | replace: '+', '' | replace: ' ', ''
+  unless  adjustedWhatsappNumber contains 972
+    assign adjustedWhatsappNumber = adjustedWhatsappNumber | prepend: '972'
+  endunless
+%}
+{{- adjustedWhatsappNumber }}

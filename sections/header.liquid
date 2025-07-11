@@ -1,0 +1,1142 @@
+{%- liquid assign main_menu = section.settings.main_menu -%}
+
+<style>
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: white;
+}
+
+.main-header {
+  height: 64px;
+  background: white;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.main-header .container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 28px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  direction: ltr;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+}
+
+.header-logo a {
+  display: block;
+}
+
+.header-logo img {
+  max-height: 40px;
+  width: auto;
+  object-fit: contain;
+}
+
+.header-link {
+  flex-direction: row-reverse;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 20px;
+  color: #333;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.header-link:hover {
+  color: #DD2D4A;
+}
+
+.header-icon {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  transition: color 0.3s ease;
+}
+
+.header-icon:hover {
+  color: #DD2D4A;
+}
+
+.search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.search-input {
+  width: 0;
+  height: 40px;
+  padding: 12px 16px 12px 10px;
+  border: 1px solid #DD2D4A;
+  border-radius: 8px;
+  background: #FEF9FA;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  font-size: 16px;
+  color: #333;
+  outline: none;
+  text-align: right;
+  direction: rtl;
+}
+
+.search-input::placeholder {
+  color: #B6B8C1;
+  text-align: right;
+  font-size: 16px;
+}
+
+.search-container:hover .search-input,
+.search-input:focus {
+  width: 696px;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.search-icon {
+  position: absolute;
+  left: 10px;
+  z-index: 1;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.navigation {
+  background: white;
+  border-bottom: 1px solid #e5e5e5;
+  padding: 12px 0;
+  position: relative;
+}
+
+.navigation .container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 60px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-menu > li {
+  position: relative;
+}
+
+.nav-menu > li > a {
+  font-size: 20px;
+  color: #333;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  display: block;
+  padding: 10px 0;
+}
+
+.nav-menu > li > a:hover {
+  color: #DD2D4A;
+}
+
+.mega-menu {
+  position: fixed;
+  top: 160px;
+  left: 0;
+  right: 0;
+  width: 100vw;
+  height: 224px;
+  background: white;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 999;
+  border-top: 1px solid #e5e5e5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 0;
+}
+
+.nav-menu > li:hover .mega-menu {
+  opacity: 1;
+  visibility: visible;
+}
+
+.mega-menu-content {
+  max-width: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  padding: 0 28px;
+}
+
+.mega-menu-item {
+  text-align: center;
+  text-decoration: none;
+  color: #1A1A1B;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.mega-menu-item:hover {
+  color: #DD2D4A;
+}
+
+.mega-menu-item:hover .mega-menu-image img {
+  transform: scale(1.1);
+}
+
+.mega-menu-item:hover .mega-menu-title {
+  color: #DD2D4A;
+}
+
+.mega-menu-image {
+  width: 237px;
+  height: 141px;
+  border-radius: 15px;
+  overflow: hidden;
+  margin-bottom: 7px;
+}
+
+.mega-menu-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.mega-menu-title {
+  font-size: 16px;
+  color: #333;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.mobile-search-overlay {
+  position: fixed;
+  top: 83px;
+  left: 0;
+  width: 100%;
+  height: 56px;
+  background: white;
+  padding: 8px 16px;
+  transform: translateY(-100%);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  z-index: 998;
+  display: flex;
+  align-items: center;
+}
+
+.mobile-search-overlay.active {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.mobile-search-input {
+  width: 340px;
+  height: 40px;
+  padding: 12px 16px;
+  border: 1px solid #DD2D4A;
+  border-radius: 8px;
+  background: #FEF9FA;
+  font-size: 16px;
+  color: #333;
+  outline: none;
+  text-align: right;
+  direction: rtl;
+  margin: 0 auto;
+}
+
+.mobile-search-input::placeholder {
+  color: #B6B8C1;
+  text-align: right;
+  font-size: 16px;
+}
+
+@media (max-width: 768px) {
+  .desktop-only {
+    display: none !important;
+  }
+  .mobile-only {
+    display: flex !important;
+  }
+  .main-header {
+    height: 51px;
+  }
+  .main-header .container {
+    justify-content: space-between;
+    padding: 0 16px;
+  }
+  .header-left {
+    gap: 18px;
+  }
+  .header-right {
+    gap: 15px;
+  }
+  .navigation {
+    display: none !important;
+  }
+  .mobile-menu {
+    position: fixed;
+    top: 83px;
+    right: 0;
+    width: 330px;
+    height: calc(100vh - 83px);
+    background: white;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    z-index: 1001;
+  }
+  .mobile-menu.active {
+    transform: translateX(0);
+  }
+  .mobile-menu-overlay {
+    position: fixed;
+    top: 83px;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 83px);
+    background: rgba(0,0,0,0.5);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    z-index: 999;
+  }
+  .mobile-menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+  .burger-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    cursor: pointer;
+    width: 17px;
+    height: 15px;
+    justify-content: space-between;
+  }
+  .burger-line {
+    width: 17px;
+    height: 2px;
+    background: #DD2D4A;
+    transition: all 0.3s ease;
+  }
+  .burger-menu.active .burger-line:nth-child(1) {
+    transform: rotate(45deg) translate(4px, 5px);
+  }
+  .burger-menu.active .burger-line:nth-child(2) {
+    opacity: 0;
+  }
+  .burger-menu.active .burger-line:nth-child(3) {
+    transform: rotate(-45deg) translate(4px, -5px);
+  }
+  .mobile-logo {
+    width: 100px;
+    height: 27px;
+    display: flex;
+    align-items: center;
+  }
+  .mobile-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  .mobile-search-overlay {
+    top: 83px;
+  }
+  body.mobile-menu-open {
+    overflow: hidden;
+  }
+}
+
+@media (min-width: 769px) {
+  .mobile-only {
+    display: none !important;
+  }
+  .mobile-menu,
+  .mobile-menu-overlay,
+  .mobile-search-overlay {
+    display: none !important;
+  }
+}
+
+.cart-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 400px;
+  height: 100vh;
+  background: white;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+  z-index: 1001;
+  box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+}
+
+@media (max-width: 440px) {
+  .cart-drawer {
+    width: calc(100vw - 40px);
+  }
+}
+
+.cart-drawer.active {
+  transform: translateX(0);
+}
+
+.drawer-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  z-index: 999;
+}
+
+.drawer-overlay.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.drawer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.drawer-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.drawer-close {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #666;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.drawer-close:hover {
+  color: #DD2D4A;
+}
+
+.mobile-menu-content {
+  padding: 20px;
+  padding-top: 0 !important;
+}
+
+.mobile-menu-nav {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.mobile-menu-nav li {
+  margin-bottom: 0;
+  border-bottom: 1px solid #D1D5DD;
+}
+.mobile-menu-nav li:last-child {
+  border-bottom: none;
+}
+  
+.mobile-menu-nav .menu-item {
+  display: block;
+  padding: 15px 0;
+  font-size: 14px;
+  color: #333;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+
+.mobile-menu-nav .menu-item:hover {
+  color: #DD2D4A;
+}
+
+.mobile-menu-nav .menu-item.has-mega {
+  position: relative;
+  padding-left: 25px;
+  transition: background-color 0.3s ease;
+}
+
+.mobile-menu-nav .menu-item.has-mega::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 19px;
+  width: 10px;
+  height: 8px;
+  background: url("data:image/svg+xml,%3Csvg width='10' height='8' viewBox='0 0 10 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0.131785 1.27453C0.131785 1.16499 0.173653 1.05534 0.257281 0.971712C0.424645 0.804355 0.695662 0.804355 0.862918 0.971712L4.84324 4.95204L8.82357 0.971712C8.99093 0.804355 9.26195 0.804355 9.4292 0.971712C9.59646 1.13908 9.59657 1.41009 9.4292 1.57735L5.14606 5.86049C4.9787 6.02786 4.70768 6.02786 4.54042 5.86049L0.257281 1.57735C0.173653 1.49372 0.131785 1.38407 0.131785 1.27453Z' fill='%2338383A'/%3E%3C/svg%3E") no-repeat center;
+  background-size: contain;
+  transition: transform 0.3s ease;
+}
+
+.mobile-menu-nav .menu-item.has-mega.active {
+  background: rgba(255, 246, 247, 0);
+  margin: 0 -20px;
+  padding: 15px 20px 15px 45px;
+  animation: fadeInBg 0.3s ease forwards;
+  color: #DD2D4A;
+}
+
+@keyframes fadeInBg {
+  from { background: rgba(255, 246, 247, 0); }
+  to { background: rgba(255, 246, 247, 1); }
+}
+
+.mobile-menu-nav .menu-item.has-mega.active::before {
+  transform: rotate(180deg);
+  left: 20px;
+}
+
+.mobile-menu-nav .menu-item.has-mega.active {
+  background: #FFF6F7;
+  margin: 0 -20px;
+  padding: 15px 20px 15px 45px;
+}
+
+.mobile-mega-menu {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  background: #FFF6F7;
+  margin: 0 -20px;
+}
+
+.mobile-mega-menu.active {
+  max-height: 600px;
+}
+
+.mobile-mega-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 14px;
+  margin-bottom: 24px;
+  padding: 20px;
+}
+
+.mobile-mega-item {
+  text-align: center;
+  text-decoration: none;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mobile-mega-image {
+  width: 139px;
+  height: 82px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+
+.mobile-mega-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mobile-mega-title {
+  font-size: 14px;
+  color: #333;
+  font-weight: 500;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.mobile-mega-button {
+  width: 116px;
+  height: 37px;
+  border: 1px solid #DD2D4A;
+  background: #FFFFFF;
+  color: #DD2D4A;
+  font-size: 14px;
+  border-radius: 32px;
+  display: block;
+  margin: 0 auto 20px auto;
+  text-align: center;
+  line-height: 35px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  font-weight: 600;
+}
+
+.mobile-mega-button:hover {
+  background: #DD2D4A;
+  color: #FFFFFF;
+}
+
+.mobile-menu-secondary {
+  margin-top: 10px;
+  padding: 20px;
+  background: #FFF6F7;
+  margin-left: -20px;
+  margin-right: -20px;
+  border-top: 1px solid #eee;
+}
+
+.mobile-menu-secondary .menu-item {
+  display: block;
+  padding: 10px 0;
+  font-size: 14px;
+  text-decoration: none;
+  color: #333;
+}
+
+.mobile-menu-secondary .menu-item:last-child {
+  border-bottom: none;
+}
+
+.mobile-menu-secondary {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+}
+
+.cart-empty {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.cart-empty p {
+  color: #666;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.cart-empty button {
+  background: #DD2D4A;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.cart-empty button:hover {
+  background: #c22440;
+}
+</style>
+
+<header class="header">
+  <div class="main-header">
+    <div class="container">
+      <div class="header-left desktop-only">
+        <div class="header-icon" data-cart-open>
+          {% render 'cart-icon' %}
+        </div>
+        <div class="search-container">
+          <div class="search-wrapper">
+            <input type="text" class="search-input" id="search-input" placeholder="חפש">
+            <div class="header-icon search-icon" id="search-toggle">
+              {% render 'search-icon' %}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="header-right desktop-only">
+        <a href="{{ section.settings.magazine_link }}" class="header-link">
+          {% render 'note-icon' %}
+          <span>{{ section.settings.magazine_text }}</span>
+        </a>
+        <a href="{{ section.settings.support_link }}" class="header-link">
+          {% render 'support-icon' %}
+          <span>{{ section.settings.support_text }}</span>
+        </a>
+        <a href="{{ section.settings.stores_link }}" class="header-link">
+          {% render 'shop-icon' %}
+          <span>{{ section.settings.stores_text }}</span>
+        </a>
+        <div class="header-logo">
+          <a href="/">{% render 'logo-header' %}</a>
+        </div>
+      </div>
+
+      <div class="mobile-only">
+        <div class="mobile-logo">
+          <a href="/">{% render 'logo-header-mobile' %}</a>
+        </div>
+      </div>
+
+      <div class="header-right mobile-only">
+        <div class="header-icon" id="mobile-search">
+          {% render 'search-icon' %}
+        </div>
+        <div class="header-icon" data-cart-open>
+          {% render 'cart-icon' %}
+        </div>
+        <div class="header-icon">
+          {% render 'shop-icon' %}
+        </div>
+        <div class="burger-menu" id="mobile-menu-toggle">
+          <div class="burger-line"></div>
+          <div class="burger-line"></div>
+          <div class="burger-line"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <nav class="navigation desktop-only">
+    <div class="container">
+      <ul class="nav-menu">
+        {%- for link in linklists[main_menu].links -%}
+          <li>
+            <a href="{{ link.url }}">{{ link.title }}</a>
+            
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'mega_menu' and block.settings.menu_trigger == link.title -%}
+                <div class="mega-menu">
+                  <div class="mega-menu-content">
+                    {%- if block.settings.mega_item_1_image != blank -%}
+                      <a href="{{ block.settings.mega_item_1_link }}" class="mega-menu-item">
+                        <div class="mega-menu-image">
+                          <img src="{{ block.settings.mega_item_1_image | img_url: '474x282' }}" alt="{{ block.settings.mega_item_1_title }}">
+                        </div>
+                        <div class="mega-menu-title">{{ block.settings.mega_item_1_title }}</div>
+                      </a>
+                    {%- endif -%}
+                    
+                    {%- if block.settings.mega_item_2_image != blank -%}
+                      <a href="{{ block.settings.mega_item_2_link }}" class="mega-menu-item">
+                        <div class="mega-menu-image">
+                          <img src="{{ block.settings.mega_item_2_image | img_url: '474x282' }}" alt="{{ block.settings.mega_item_2_title }}">
+                        </div>
+                        <div class="mega-menu-title">{{ block.settings.mega_item_2_title }}</div>
+                      </a>
+                    {%- endif -%}
+                    
+                    {%- if block.settings.mega_item_3_image != blank -%}
+                      <a href="{{ block.settings.mega_item_3_link }}" class="mega-menu-item">
+                        <div class="mega-menu-image">
+                          <img src="{{ block.settings.mega_item_3_image | img_url: '474x282' }}" alt="{{ block.settings.mega_item_3_title }}">
+                        </div>
+                        <div class="mega-menu-title">{{ block.settings.mega_item_3_title }}</div>
+                      </a>
+                    {%- endif -%}
+                    
+                    {%- if block.settings.mega_item_4_image != blank -%}
+                      <a href="{{ block.settings.mega_item_4_link }}" class="mega-menu-item">
+                        <div class="mega-menu-image">
+                          <img src="{{ block.settings.mega_item_4_image | img_url: '474x282' }}" alt="{{ block.settings.mega_item_4_title }}">
+                        </div>
+                        <div class="mega-menu-title">{{ block.settings.mega_item_4_title }}</div>
+                      </a>
+                    {%- endif -%}
+                  </div>
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<div class="mobile-search-overlay" id="mobile-search-overlay">
+  <input type="text" class="mobile-search-input" id="mobile-search-input" placeholder="חפש">
+</div>
+
+<div class="mobile-menu-overlay" id="mobile-menu-overlay"></div>
+<div class="mobile-menu" id="mobile-menu">
+  <div class="mobile-menu-content">
+    <nav>
+      <ul class="mobile-menu-nav">
+        {%- for link in linklists[main_menu].links -%}
+          {%- assign has_mega = false -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'mega_menu' and block.settings.menu_trigger == link.title -%}
+              {%- assign has_mega = true -%}
+              {%- assign mega_block = block -%}
+              {%- break -%}
+            {%- endif -%}
+          {%- endfor -%}
+          
+          <li>
+            {%- if has_mega -%}
+              <div class="menu-item has-mega" onclick="toggleMobileMega(this)">{{ link.title }}</div>
+              <div class="mobile-mega-menu">
+                <div class="mobile-mega-grid">
+                  {%- if mega_block.settings.mega_item_1_image != blank -%}
+                    <a href="{{ mega_block.settings.mega_item_1_link }}" class="mobile-mega-item">
+                      <div class="mobile-mega-image">
+                        <img src="{{ mega_block.settings.mega_item_1_image | img_url: '278x164' }}" alt="{{ mega_block.settings.mega_item_1_title }}">
+                      </div>
+                      <div class="mobile-mega-title">{{ mega_block.settings.mega_item_1_title }}</div>
+                    </a>
+                  {%- endif -%}
+                  
+                  {%- if mega_block.settings.mega_item_2_image != blank -%}
+                    <a href="{{ mega_block.settings.mega_item_2_link }}" class="mobile-mega-item">
+                      <div class="mobile-mega-image">
+                        <img src="{{ mega_block.settings.mega_item_2_image | img_url: '278x164' }}" alt="{{ mega_block.settings.mega_item_2_title }}">
+                      </div>
+                      <div class="mobile-mega-title">{{ mega_block.settings.mega_item_2_title }}</div>
+                    </a>
+                  {%- endif -%}
+                  
+                  {%- if mega_block.settings.mega_item_3_image != blank -%}
+                    <a href="{{ mega_block.settings.mega_item_3_link }}" class="mobile-mega-item">
+                      <div class="mobile-mega-image">
+                        <img src="{{ mega_block.settings.mega_item_3_image | img_url: '278x164' }}" alt="{{ mega_block.settings.mega_item_3_title }}">
+                      </div>
+                      <div class="mobile-mega-title">{{ mega_block.settings.mega_item_3_title }}</div>
+                    </a>
+                  {%- endif -%}
+                  
+                  {%- if mega_block.settings.mega_item_4_image != blank -%}
+                    <a href="{{ mega_block.settings.mega_item_4_link }}" class="mobile-mega-item">
+                      <div class="mobile-mega-image">
+                        <img src="{{ mega_block.settings.mega_item_4_image | img_url: '278x164' }}" alt="{{ mega_block.settings.mega_item_4_title }}">
+                      </div>
+                      <div class="mobile-mega-title">{{ mega_block.settings.mega_item_4_title }}</div>
+                    </a>
+                  {%- endif -%}
+                </div>
+                <a href="{{ link.url }}" class="mobile-mega-button">לכל המיטות</a>
+              </div>
+            {%- else -%}
+              <a href="{{ link.url }}" class="menu-item">{{ link.title }}</a>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+    </nav>
+    <div class="mobile-menu-secondary">
+      <a href="{{ section.settings.magazine_link }}" class="menu-item">{{ section.settings.magazine_text }}</a>
+      <a href="{{ section.settings.support_link }}" class="menu-item">{{ section.settings.support_text }}</a>
+      <a href="{{ section.settings.stores_link }}" class="menu-item">{{ section.settings.stores_text }}</a>
+    </div>
+  </div>
+</div>
+
+<div class="drawer-overlay" id="cart-overlay"></div>
+<div class="cart-drawer" id="cart-drawer" data-cart-drawer>
+  <div class="drawer-header">
+    <h3>עגלת קניות</h3>
+    <button class="drawer-close" id="cart-close">&times;</button>
+  </div>
+  <div id="cart-content">
+    <div class="cart-empty">
+      <p>העגלה שלך ריקה</p>
+      <button onclick="window.location.href='{{ routes.collections_url }}'">המשך קניות</button>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var searchInput = document.getElementById('search-input');
+  var mobileSearchInput = document.getElementById('mobile-search-input');
+  var mobileSearchOverlay = document.getElementById('mobile-search-overlay');
+  
+  if (searchInput) {
+    searchInput.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        window.location.href = `{{ routes.search_url }}?q=${encodeURIComponent(this.value)}`;
+      }
+    });
+  }
+
+  if (mobileSearchInput) {
+    mobileSearchInput.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        window.location.href = `{{ routes.search_url }}?q=${encodeURIComponent(this.value)}`;
+      }
+    });
+  }
+
+  var mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+  var mobileMenu = document.getElementById('mobile-menu');
+  var mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+  var mobileMenuClose = document.getElementById('mobile-menu-close');
+  
+  function toggleMobileMenu() {
+    mobileMenu.classList.toggle('active');
+    mobileMenuOverlay.classList.toggle('active');
+    mobileMenuToggle.classList.toggle('active');
+    
+    // Block/unblock scroll
+    document.body.classList.toggle('mobile-menu-open');
+    
+    // Close mobile search if open
+    mobileSearchOverlay.classList.remove('active');
+  }
+  
+  if (mobileMenuToggle) mobileMenuToggle.addEventListener('click', toggleMobileMenu);
+  if (mobileMenuOverlay) mobileMenuOverlay.addEventListener('click', toggleMobileMenu);
+
+  var cartTriggers = document.querySelectorAll('[data-cart-open]');
+  var cartDrawer = document.getElementById('cart-drawer');
+  var cartOverlay = document.getElementById('cart-overlay');
+  var cartClose = document.getElementById('cart-close');
+  
+  function toggleCart() {
+    cartDrawer.classList.toggle('active');
+    cartOverlay.classList.toggle('active');
+  }
+  
+  cartTriggers.forEach(function(trigger) { 
+    trigger.addEventListener('click', toggleCart); 
+  });
+  if (cartClose) cartClose.addEventListener('click', toggleCart);
+  if (cartOverlay) cartOverlay.addEventListener('click', toggleCart);
+
+  var mobileSearch = document.getElementById('mobile-search');
+  if (mobileSearch) {
+    mobileSearch.addEventListener('click', function() {
+      mobileSearchOverlay.classList.toggle('active');
+      
+      // Close mobile menu if open
+      mobileMenu.classList.remove('active');
+      mobileMenuOverlay.classList.remove('active');
+      mobileMenuToggle.classList.remove('active');
+      
+      if (mobileSearchOverlay.classList.contains('active')) {
+        mobileSearchInput.focus();
+      }
+    });
+  }
+
+  // Mobile mega menu toggle function
+  window.toggleMobileMega = function(element) {
+    var megaMenu = element.nextElementSibling;
+    var isActive = element.classList.contains('active');
+    
+    // Close all other mega menus
+    var allToggles = document.querySelectorAll('.menu-item.has-mega');
+    allToggles.forEach(function(toggle) {
+      if (toggle !== element) {
+        toggle.classList.remove('active');
+        toggle.nextElementSibling.classList.remove('active');
+      }
+    });
+    
+    // Toggle current menu
+    if (!isActive) {
+      element.classList.add('active');
+      megaMenu.classList.add('active');
+    } else {
+      element.classList.remove('active');
+      megaMenu.classList.remove('active');
+    }
+  };
+
+  // Mobile mega menu toggles
+  var mobileMegaToggles = document.querySelectorAll('[data-menu-toggle]');
+  mobileMegaToggles.forEach(function(toggle) {
+    toggle.addEventListener('click', function() {
+      var megaMenu = this.nextElementSibling;
+      var isActive = this.classList.contains('active');
+      
+      // Close all other mega menus
+      mobileMegaToggles.forEach(function(otherToggle) {
+        otherToggle.classList.remove('active');
+        otherToggle.nextElementSibling.classList.remove('active');
+      });
+      
+      // Toggle current menu
+      if (!isActive) {
+        this.classList.add('active');
+        megaMenu.classList.add('active');
+      }
+    });
+  });
+
+  // Close mobile search when clicking outside
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('#mobile-search') && !e.target.closest('.mobile-search-overlay')) {
+      mobileSearchOverlay.classList.remove('active');
+    }
+  });
+});
+</script>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "main_menu",
+      "label": "Main Menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "header",
+      "content": "Header Links"
+    },
+    {
+      "type": "text",
+      "id": "magazine_text",
+      "label": "Magazine Link Text",
+      "default": "מגזין שינה"
+    },
+    {
+      "type": "url",
+      "id": "magazine_link",
+      "label": "Magazine Link URL"
+    },
+    {
+      "type": "text",
+      "id": "support_text",
+      "label": "Support Link Text",
+      "default": "שירות לקוחות"
+    },
+    {
+      "type": "url",
+      "id": "support_link",
+      "label": "Support Link URL"
+    },
+    {
+      "type": "text",
+      "id": "stores_text",
+      "label": "Stores Link Text",
+      "default": "סניפים"
+    },
+    {
+      "type": "url",
+      "id": "stores_link",
+      "label": "Stores Link URL"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "mega_menu",
+      "name": "Mega Menu",
+      "settings": [
+        {
+          "type": "text",
+          "id": "menu_trigger",
+          "label": "Menu Item Name",
+          "info": "Enter the exact name of the menu item that should trigger this mega menu"
+        },
+        {
+          "type": "image_picker",
+          "id": "mega_item_1_image",
+          "label": "Item 1 - Image"
+        },
+        {
+          "type": "text",
+          "id": "mega_item_1_title",
+          "label": "Item 1 - Title"
+        },
+        {
+          "type": "url",
+          "id": "mega_item_1_link",
+          "label": "Item 1 - Link"
+        },
+        {
+          "type": "image_picker",
+          "id": "mega_item_2_image",
+          "label": "Item 2 - Image"
+        },
+        {
+          "type": "text",
+          "id": "mega_item_2_title",
+          "label": "Item 2 - Title"
+        },
+        {
+          "type": "url",
+          "id": "mega_item_2_link",
+          "label": "Item 2 - Link"
+        },
+        {
+          "type": "image_picker",
+          "id": "mega_item_3_image",
+          "label": "Item 3 - Image"
+        },
+        {
+          "type": "text",
+          "id": "mega_item_3_title",
+          "label": "Item 3 - Title"
+        },
+        {
+          "type": "url",
+          "id": "mega_item_3_link",
+          "label": "Item 3 - Link"
+        },
+        {
+          "type": "image_picker",
+          "id": "mega_item_4_image",
+          "label": "Item 4 - Image"
+        },
+        {
+          "type": "text",
+          "id": "mega_item_4_title",
+          "label": "Item 4 - Title"
+        },
+        {
+          "type": "url",
+          "id": "mega_item_4_link",
+          "label": "Item 4 - Link"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

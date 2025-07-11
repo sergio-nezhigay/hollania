@@ -1,0 +1,60 @@
+{% comment -%}
+  props:
+    - type: whatsapp | phone | email | hours
+    - whatsapp: phone number
+    - phone: phone number
+    - hours: hours string
+    - email: email address
+    - class: additional classes
+    - title_class: additional classes for title
+    - title: title
+    - value: value
+{%- endcomment %}
+
+{% liquid
+  assign whatsapp = value | default: settings.whatsapp
+  assign phone = value | default: shop.phone
+  assign email = value | default: shop.email
+  assign hours = value | default: "א-ה 08:30-16:30"
+
+  case type
+  when 'whatsapp'
+    assign icon = 'whatsapp-circled'
+    assign title = title | default: 'WhatsApp'
+    assign link = 'https://api.whatsapp.com/send?phone=' | append: whatsapp | replace: '-', '' | replace: '+', '' | replace: ' ', ''
+    assign text = whatsapp
+  when 'phone'
+    assign icon = 'phone-circled'
+    assign title = title | default: 'התקשרו'
+    assign link = 'tel:' | append: phone | replace: '-', '' | replace: '+', '' | replace: ' ', ''
+    assign text = phone
+  when 'email'
+    assign icon = 'email-circled'
+    assign title = title | default: 'מייל'
+    assign link = 'mailto:' | append: email
+    assign text = email
+  when 'hours'
+    assign icon = 'clock-circled'
+    assign title = title | default: 'שעות פעילות מוקד שירות הלקוחות ואספקות:'
+    assign link = ''
+    assign text = hours
+  endcase
+%}
+
+<div class="text-center bg-brand-50 p-6 space-y-1 rounded-2xl flex flex-col justify-center items-center relative mt-6 lg:flex-1 xl:p-8 {{ class }}">
+  <div class="absolute-centered-x top-0 -translate-y-1/2 w-12 h-12">
+    {%- render 'icon', name: icon -%}
+  </div>
+  <div class="font-bold xl:text-xl {{ title_class }}">{{ title }}</div>
+  <a
+    dir="ltr"
+    href="{{ link }}"
+    {% if type == 'whatsapp' -%}
+      target="_blank"
+      rel="noreferrer nofollow"
+    {%- endif %}
+    class="block font-bold text-brand-700 xl:text-lg"
+  >
+    {{- text -}}
+  </a>
+</div>

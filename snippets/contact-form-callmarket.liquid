@@ -1,0 +1,114 @@
+{%- comment -%}
+  props:
+    - subjects: array of strings
+{%- endcomment -%}
+
+<form data-cs-form action="https://app.callmarker.com/api/simple/customers/messages" id="slCSForm-{{- block.id -}}" class="space-y-4">
+  <input
+    type="hidden"
+    name="token"
+    value="83b8176d5245a02bd1b1da77810a5b71" />
+  <input
+    type="hidden"
+    name="type"
+    value="email" />
+
+  <input
+    type="text"
+    name="name"
+    placeholder="שם מלא"
+    class="py-3.5 px-4 leading-normal border border-grey-300 rounded-lg shadow-sm shadow-grey-900/5 w-full placeholder-grey-900/60 focus:outline-brand-500/70"
+  />
+
+  <input
+    type="tel"
+    pattern="\+?\d+"
+    name="number"
+    placeholder="מספר טלפון"
+    class="[direction:rtl] py-3.5 px-4 leading-normal border border-grey-300 rounded-lg shadow-sm shadow-grey-900/5 w-full placeholder-grey-900/60 focus:outline-brand-500/70"
+  />
+
+  <input
+    type="email"
+    required
+    name="email"
+    placeholder="דואר אלקטרוני"
+    class="py-3.5 px-4 leading-normal border border-grey-300 rounded-lg shadow-sm shadow-grey-900/5 w-full placeholder-grey-900/60 focus:outline-brand-500/70"
+  />
+
+  {% if subjects != blank %}
+  {% liquid
+    assign subjects = subjects | split: ','
+  %}
+    <custom-select
+      data-closed="true"
+      class="block col-span-7 group/cs relative"
+    >
+      <div
+        data-custom-select-placeholder
+        class="relative py-3 px-4 bg-white z-20 rounded-lg border border-grey-300 group-data-[closed=false]/cs:border-transparent
+                  group-data-[closed=false]/cs:rounded-b-none group-data-[closed=false]/cs:bg-[#F9FAFB] lg:hover:cursor-pointer"
+      >
+        <span>נושא הפנייה</span>
+        {%- render 'icon', name: 'chevron-down', class: 'absolute-centered-y left-4 w-5 h-5 group-data-[closed=false]/cs:rotate-180' -%}
+      </div>
+
+      <ul class="group-data-[closed=true]/cs:hidden absolute top-full left-0 w-full bg-white rounded-b-lg shadow-sl-12 z-10 overflow-hidden">
+        {%- assign subjects = block.settings.subjects | split: ',' -%}
+        {%- for subject in subjects -%}
+          <li
+            data-option
+            data-selected="false"
+            class="py-3 px-4 text-sm
+                        data-[selected=true]:font-medium data-[selected=true]:text-brand-600 data-[selected=true]:bg-brand-600/10
+                        lg:hover:cursor-pointer lg:hover:bg-brand-30"
+          >
+            {{- subject -}}
+          </li>
+
+          {%- capture optionsForSubjectsSelect -%}
+            {{- optionsForSubjectsSelect -}}
+            <option
+              {% if selected -%}selected="selected"{%- endif %}
+              value="{{- subject -}}"
+            ></option>
+          {%- endcapture -%}
+        {%- endfor -%}
+      </ul>
+
+      <select
+        name="title"
+        hidden
+      >
+        {{- optionsForSubjectsSelect -}}
+      </select>
+    </custom-select>
+  {% endif %}
+
+  <textarea
+    name="content"
+    placeholder="הודעה"
+    rows="4"
+    class="py-3.5 px-4 leading-normal border border-grey-300 rounded-lg shadow-sm shadow-grey-900/5 w-full placeholder-grey-900/60 focus:outline-brand-500/70"></textarea>
+
+  {%- render 'button', size: 'lg', attrs: 'type="submit"', class: 'w-full btn-gradient', content: 'שליחה ' -%}
+
+  <p
+    dir="ltr"
+    data-cs-form-success
+    hidden
+    class="text-green-600 text-lg focus:outline-none text-center"
+  >
+    ההודעה נשלחה בהצלחה
+    נחזור אלייך בהקדם
+  </p>
+
+  <p
+    dir="ltr"
+    data-cs-form-error
+    hidden
+    class="text-red-600 text-lg focus:outline-none text-center"
+  >
+    Something went wrong. Please try again or contact us.
+  </p>
+</form>

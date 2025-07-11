@@ -1,0 +1,105 @@
+<a id="{{ section.settings.anchor }}"></a>
+<div class="pt-6 xl:pt-8">
+  <h2 class="text-2xl text-brand-600 font-bold text-center xl:text-40p">{{ section.settings.title }}</h2>
+
+  <ul class="px-4 mt-4 space-y-6 xl:mt-8 sl-container lg:grid lg:grid-cols-2 lg:gap-4 lg:space-y-0">
+    {% for block in section.blocks -%}
+      <li class="xl:p-8 {% if block.settings.full_width %}lg:col-span-2 lg:grid lg:grid-cols-2 xl:gap-x-20{% endif %}">
+        {%-
+          render 'image-with-placeholder',
+          image: block.settings.image,
+          alt: block.settings.title,
+          width: 2048,
+          widths: '343w, 512w, 686w, 1024w, 1029w, 2048w',
+          sizes: '(min-width: 2048px) 1024px, (min-width: 1024px) 512px, calc(100vw - 2rem)',
+          class: 'w-full rounded-lg'
+        -%}
+
+        <div class="mt-4 space-y-1">
+          <h3 class="text-brand-600 font-bold text-lg xl:text-grey-900">{{ block.settings.title }}</h3>
+          <p class="text-grey-900/60">{{ block.settings.text }}</p>
+        </div>
+
+        {% if block.settings.phone != blank or block.settings.email != blank %}
+          <div class="pt-6 space-y-10 xl:grid xl:grid-cols-2 xl:gap-x-4 xl:space-y-0 xl:mt-2">
+            {% if block.settings.phone != blank %}
+              {% render 'contact', type: 'phone', phone: block.settings.phone, class: 'xl:mt-0' %}
+            {% endif %}
+
+            {% if block.settings.email != blank %}
+              {% render 'contact', type: 'email', email: block.settings.email %}
+            {% endif %}
+          </div>
+        {% endif %}
+
+        {% if block.settings.additional_info != blank %}
+          <div class="mt-10 text-grey-900/60 bg-brand-50 rounded-2xl p-6 xl:mt-4 xl:p-8">{{ block.settings.additional_info }}</div>
+        {% endif %}
+      </li>
+    {%- endfor %}
+  </ul>
+</div>
+
+{%- schema -%}
+{
+  "name": "Page about grid",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "סילי ארה\"ב"
+    },
+    {
+      "type": "text",
+      "id": "anchor",
+      "label": "Anchor",
+      "info": "Anchor should be unique for each section. Used for navigation. Example: section-1"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "block",
+      "name": "Block",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Banner image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Text"
+        },
+        {
+          "type": "text",
+          "id": "phone",
+          "label": "Phone"
+        },
+        {
+          "type": "text",
+          "id": "email",
+          "label": "Email"
+        },
+        {
+          "type": "checkbox",
+          "id": "full_width",
+          "label": "Full width block"
+        },
+        {
+          "type": "textarea",
+          "id": "additional_info",
+          "label": "Additional info"
+        }
+      ]
+    }
+  ]
+}
+{%- endschema %}

@@ -1,0 +1,146 @@
+ .instagram-feed {
+    padding: 80px 20px;
+  }
+  
+  .instagram-feed__container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .instagram-feed__header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+    gap: 20px;
+  }
+  
+  .instagram-feed__title {
+    font-size: 30px;
+    font-weight: semi-bold;
+    margin: 0;
+    color: #000;
+    font-family: 'Inter';
+  }
+  
+  .instagram-feed__divider {
+    width: 1px;
+    height: 43px;
+    background-color: #D1D5DD;
+  }
+  
+  .instagram-feed__badge {
+    display: inline-flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    background-color: #F4EFEC;
+    padding: 12px 20px;
+    border-radius: 9px;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+    line-height: 1;
+  }
+  
+  .instagram-feed__badge:hover {
+    opacity: 0.8;
+  }
+  
+  .instagram-feed__badge-text {
+    font-size: 17px;
+    font-weight: 500;
+    color: #000;
+  }
+  
+  .instagram-feed__icon {
+    margin-right: 8px;
+  }
+  
+  .instagram-feed__icon svg {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .instagram-feed__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 247px);
+    gap: 4px;
+    justify-content: center;
+  }
+  
+  .instagram-feed__item {
+    width: 247px;
+    height: 247px;
+    overflow: hidden;
+  }
+  
+  .instagram-feed__item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+  
+  .instagram-feed__item:hover img {
+    transform: scale(1.05);
+  }
+  
+  @media (max-width: 768px) {
+    .instagram-feed {
+      padding: 20px 10px;
+    }
+    
+    .instagram-feed__header {
+      margin-bottom: 12px;
+      gap: 20px;
+      justify-content: center;
+    }
+    
+    .instagram-feed__title {
+      font-size: 16px;
+    }
+    
+    .instagram-feed__divider {
+      height: 20px;
+    }
+    
+    .instagram-feed__badge {
+      padding: 8px 12px;
+      border-radius: 5px;
+    }
+    
+    .instagram-feed__badge-text {
+      font-size: 9px;
+    }
+    
+    .instagram-feed__icon {
+      margin-right: 4px;
+    }
+    
+    .instagram-feed__icon svg {
+      width: 9px;
+      height: 9px;
+    }
+    
+    .instagram-feed__grid {
+      display: grid;
+      grid-template-columns: repeat(4, 82px);
+      grid-template-rows: repeat(2, 82px);
+      gap: 1px;
+      justify-content: center;
+      width: fit-content;
+      margin: 0 auto;
+    }
+    
+    .instagram-feed__item {
+      width: 82px !important;
+      height: 82px !important;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+    
+    .instagram-feed__item img {
+      width: 82px !important;
+      height: 82px !important;
+      object-fit: cover;
+    }
+  }

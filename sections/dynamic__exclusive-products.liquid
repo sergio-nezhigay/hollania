@@ -1,0 +1,93 @@
+{%- capture cssVariables -%}
+  --section-bg-image: url('{{- section.settings.bg_image | image_url -}}');
+{%- endcapture -%}
+
+<div
+    class="pb-8 bg-[url:var(--section-bg-image)] bg-[left_top_1rem] bg-repeat xl:pb-14 xl:bg-none"
+    style="{{ cssVariables | strip }}"
+>
+  <div class="px-4 pt-8 pb-6 xl:py-14 xl:px-0 sl-container">
+    <h2 class="section-title mb-6 lg:mb-0">{{ section.settings.heading }}</h2>
+    {%- if section.settings.subheading != blank -%}
+      <p class="hidden lg:block lg:text-brand-700 lg:text-center lg:mb-3 xl:text-2xl xl:mt-2 xl:mb-14">{{ section.settings.subheading }}</p>
+    {%- endif -%}
+
+    {%- render 'exclusive-cards', blocks: section.blocks, block_class: 'bg-brand-50' -%}
+  </div>
+
+  <div class="sl-container">
+    {%- render 'products-slideshow', products: section.settings.collection.products -%}
+  </div>
+
+  {%-
+    render 'button',
+    url: section.settings.collection.url,
+    content: section.settings.btn_text,
+    class: 'btn-primary w-fit min-w-[180px] mx-auto mt-6 xl:mt-14 xl:min-w-[200px]'
+  -%}
+</div>
+
+{%- schema %}
+{
+  "name": "Exclusive products",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "בלעדי באתר!"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "מוצרים בתנאים מיוחדים",
+      "info": "This text will be displayed below the heading on desktop devices"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection",
+      "info": "Select a collection to display"
+    },
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Button text",
+      "default": "לכל המיטות המתכווננות"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background image",
+      "info": "Background position is left top, repeat both directions"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "icon_block",
+      "name": "Icon block",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text-line-1",
+          "label": "Text line 1",
+          "default": "משלוח חינם"
+        },
+        {
+          "type": "text",
+          "id": "text-line-2",
+          "label": "Text line 2",
+          "default": "עד לבית"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+        }
+      ]
+    }
+  ]
+}
+{%- endschema %}

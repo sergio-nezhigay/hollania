@@ -1,0 +1,26 @@
+<div class="px-4 pb-4 pt-12 lg:max-w-2xl mx-auto">
+  <h2 class="text-brand-700 font-bold text-xl text-center">{{ section.settings.title }}</h2>
+
+  {%- render 'contact-form-default_id' -%}
+</div>
+
+{%- schema -%}
+{
+  "name": "Page form",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "נשמח לעמוד לשירותכם בכל עת, השאירו פרטיכם ונחזור אליכם בהקדם"
+    },
+    {
+      "type": "textarea",
+      "id": "subjects",
+      "label": "Subjects",
+      "info": "Comma separated list of subjects",
+      "default": "שירות למוצר קיים, תיאום אספקה"
+    }
+  ]
+}
+{%- endschema %}

@@ -1,0 +1,40 @@
+{%- comment -%}
+  props:
+    - rating
+    - review
+    - author
+{%- endcomment -%}
+
+<div class="bg-white py-6 px-4 rounded-2xl border border-platinum shadow-[0_0_17px_0_rgba(0,0,0,0.07)] overflow-hidden h-full">
+  <div>
+    {%- liquid
+      assign currentRating = rating | default: 4.5
+
+      for i in (1..5)
+        assign itq = i | minus: 0.25
+        assign ih = i | minus: 0.5
+        assign ioq = i | minus: 0.75
+        assign starSuffix = 'empty'
+        if i <= currentRating
+          assign starSuffix = 'full'
+        elsif itq <= currentRating
+          assign starSuffix = 'three_quarters'
+        elsif ih <= currentRating
+          assign starSuffix = 'half'
+        elsif ioq <= currentRating
+          assign starSuffix = 'one_quarter'
+        endif
+
+        assign starName = 'star-' | append: starSuffix
+
+        render 'icon', name: starName, class: 'w-7 h-7 inline-block text-warning-400'
+      endfor
+    -%}
+  </div>
+  <div class="mt-3">
+    {{- review | default: 'המזרון שרכשתי יותר טוב מהמזרון הקודם,אני מאוד נהנה ממנו, אמליץ למשפחה וחברים.' -}}
+  </div>
+  <div class="text-xsm font-medium text-[rgba(14,16,22,0.60)] mt-1 xl:text-sm">
+    {{- author | default: 'יעקב שטוסרמן, חיפה' -}}
+  </div>
+</div>

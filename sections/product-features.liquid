@@ -1,0 +1,198 @@
+{{ 'product-feautures.css' | asset_url | stylesheet_tag }}
+
+<div class="product-features-section" style="background-color: {{ section.settings.background_color }};">
+  <div class="container">
+    {% if section.settings.title != blank %}
+      <h2 class="section-title">{{ section.settings.title }}</h2>
+    {% endif %}
+    
+    {% if section.settings.subtitle != blank %}
+      <p class="section-subtitle">{{ section.settings.subtitle }}</p>
+    {% endif %}
+    
+    <div class="features-content {% if section.settings.image_position == 'right' %}reverse{% endif %}">
+      {% if section.settings.image != blank %}
+        <div class="image-container">
+          <img src="{{ section.settings.image | img_url: '600x347' }}" 
+               alt="{{ section.settings.image.alt | default: section.settings.title }}"
+               loading="lazy">
+        </div>
+      {% endif %}
+      
+      <div class="features-list">
+        <div class="features-items">
+          {% for block in section.blocks %}
+            <div class="feature-item" {{ block.shopify_attributes }}>
+              <div class="feature-content">
+                <div class="feature-main">
+                  <div class="feature-icon">
+                    {% if block.settings.icon_type == 'svg' %}
+                      {{ block.settings.svg_code }}
+                    {% elsif block.settings.icon_image != blank %}
+                      <img src="{{ block.settings.icon_image | img_url: '30x30' }}" 
+                           alt="{{ block.settings.text }}"
+                           loading="lazy">
+                    {% endif %}
+                  </div>
+                  <span class="feature-text {% if block.settings.bold_text %}bold{% endif %}">{{ block.settings.text }}</span>
+                </div>
+                {% if block.settings.description != blank %}
+                  <div class="feature-description">{{ block.settings.description }}</div>
+                {% endif %}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+        
+        {% if section.settings.bottom_text != blank %}
+          <div class="bottom-text">{{ section.settings.bottom_text }}</div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+{% schema %}
+{
+  "name": "Product Features",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "השכיבה הטובה ביותר בחיינו יש לזה בסיס"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Section Subtitle"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Feature Image"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#f8f8f8"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image Position",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "textarea",
+      "id": "bottom_text",
+      "label": "Text Below Features"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Feature Text",
+          "default": "Feature description"
+        },
+        {
+          "type": "checkbox",
+          "id": "bold_text",
+          "label": "Make text bold",
+          "default": false
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Additional Description",
+          "info": "Optional text that appears below the feature"
+        },
+        {
+          "type": "select",
+          "id": "icon_type",
+          "label": "Icon Type",
+          "options": [
+            {
+              "value": "image",
+              "label": "Image"
+            },
+            {
+              "value": "svg",
+              "label": "SVG Code"
+            }
+          ],
+          "default": "image"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon_image",
+          "label": "Icon Image"
+        },
+        {
+          "type": "html",
+          "id": "svg_code",
+          "label": "SVG Code",
+          "info": "Paste your SVG code here"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Features",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "text": "2 מנועים חזקים ושקטים במיוחד",
+            "icon_type": "svg",
+            "svg_code": "<svg width=\"30\" height=\"30\" viewBox=\"0 0 30 30\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"15\" cy=\"15\" r=\"12\" fill=\"#ff6b6b\" stroke=\"#fff\" stroke-width=\"2\"/><path d=\"M10 15l3 3 7-7\" stroke=\"#fff\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "text": "מעל 10,000 ק\"ג חמלכה מתאמת לגוף",
+            "icon_type": "svg",
+            "svg_code": "<svg width=\"30\" height=\"30\" viewBox=\"0 0 30 30\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"15\" cy=\"15\" r=\"12\" fill=\"#ff9f43\" stroke=\"#fff\" stroke-width=\"2\"/><path d=\"M10 15l3 3 7-7\" stroke=\"#fff\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "text": "מערכת שכיבה חלקה בטוחה לאורך שנים",
+            "icon_type": "svg",
+            "svg_code": "<svg width=\"30\" height=\"30\" viewBox=\"0 0 30 30\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"15\" cy=\"15\" r=\"12\" fill=\"#ff6b9d\" stroke=\"#fff\" stroke-width=\"2\"/><path d=\"M10 15l3 3 7-7\" stroke=\"#fff\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "text": "אחריות מלאה המגן שירות דיגיטלי ובריאות",
+            "icon_type": "svg",
+            "svg_code": "<svg width=\"30\" height=\"30\" viewBox=\"0 0 30 30\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"15\" cy=\"15\" r=\"12\" fill=\"#a55eea\" stroke=\"#fff\" stroke-width=\"2\"/><path d=\"M10 15l3 3 7-7\" stroke=\"#fff\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

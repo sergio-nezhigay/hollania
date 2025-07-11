@@ -1,0 +1,34 @@
+<div class="px-4 pb-6 sl-container xl:px-0 xl:pb-14">
+  {%- render 'exclusive-cards', blocks: section.blocks, block_class: 'bg-white' -%}
+</div>
+
+{%- schema %}
+{
+  "name": "Collection icon cards",
+  "blocks": [
+    {
+      "type": "icon_block",
+      "name": "Icon block",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text-line-1",
+          "label": "Text line 1",
+          "default": "משלוח חינם"
+        },
+        {
+          "type": "text",
+          "id": "text-line-2",
+          "label": "Text line 2",
+          "default": "עד לבית"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+        }
+      ]
+    }
+  ]
+}
+{%- endschema %}

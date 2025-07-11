@@ -1,0 +1,86 @@
+{% assign title = section.settings.title -%}
+{% assign img_alt = section.settings.title | default: section.settings.image_text | default: page.title -%}
+
+<div class="relative pt-4 mb-14 xl:mb-[73px]">
+  {%-
+    render 'image-with-placeholder',
+    image: section.settings.image,
+    alt: img_alt,
+    width: 1125,
+    sizes: '(max-width: 1024px) 100vw, 1px',
+    class: 'w-full lg:hidden'
+  -%}
+
+  {%-
+    render 'image-with-placeholder',
+    image: section.settings.image_desktop,
+    alt: img_alt,
+    width: 3072,
+    sizes: '(min-width: 1024px) 100vw, 1px',
+    class: 'w-full hidden lg:block'
+  -%}
+
+  {% if section.settings.image_text != blank %}
+    <h1 class="absolute-centered text-white text-4xl font-bold w-full text-center px-4 xl:text-5xl">
+      {{ section.settings.image_text }}
+    </h1>
+  {% endif %}
+
+  {% if title != blank %}
+    <div class="absolute left-0 top-full transform -translate-y-1/2 px-4 w-full lg:absolute-centered-x lg:max-w-[940px]">
+      <div class="bg-brand-30 border border-brand-600/20 rounded-lg text-center py-6">
+        <h1 class="text-2xl font-bold bg-clip-text text-transparent bg-brand-gradient-bg-2 xl:text-5xl">
+          {{ title }}
+        </h1>
+
+        <div class="flex items-center justify-center space-x-reverse space-x-3 mt-1 xl:mt-4">
+          {% if section.settings.icon %}
+            <img class="w-5 h-5 xl:w-6 xl:h-6" src="{{ section.settings.icon | image_url: width: '20' }}" alt="{{ title }} icon">
+          {% endif %}
+          <p class="text-lg font-medium bg-clip-text text-transparent bg-brand-gradient-bg-2 xl:text-2xl">
+            {{ section.settings.text_gr }}
+          </p>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+</div>
+
+{%- schema -%}
+{
+  "name": "Page banner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Banner image | Mobile"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_desktop",
+      "label": "Banner image | Desktop"
+    },
+    {
+      "type": "text",
+      "id": "image_text",
+      "label": "Text over image"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "text",
+      "id": "text_gr",
+      "label": "Text gradient",
+      "default": "Text gradient"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon",
+      "label": "Icon"
+    }
+  ]
+}
+{%- endschema %}

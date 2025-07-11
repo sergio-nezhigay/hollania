@@ -1,0 +1,21 @@
+{%- comment -%}
+  props:
+    - text
+    - bg_color
+    - text_color
+    - class
+    - attrs
+{%- endcomment -%}
+
+{%- capture cssVars -%}
+  --badge-bg-color: {{- bg_color -}};
+  --badge-text-color: {{- text_color -}};
+{%- endcapture -%}
+
+<div
+  {{ attrs }}
+  class="rounded-2xl py-0.5 px-2 font-medium bg-[--badge-bg-color] text-[--badge-text-color] {{ class -}}"
+  style="{{- cssVars | strip -}}"
+>
+  {{- text -}}
+</div>

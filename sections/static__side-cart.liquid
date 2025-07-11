@@ -1,0 +1,137 @@
+<div class="p-6 flex-1 overflow-y-auto scrollbar-hidden">
+  <p class="font-bold text-brand-700 text-lg">עגלת קניות</p>
+
+  <div class="space-y-4 mt-4">
+    {% for item in cart.items %}
+      <div class="border border-[#e4e4e4] bg-white shadow-sl-12 rounded-lg py-3 px-4 space-y-2 xl:p-4 xl:space-y-2.5">
+        <div class="flex items-start space-x-reverse space-x-3">
+          {%-
+            render 'image-with-placeholder',
+            image: item.image,
+            alt: item.title,
+            width: 267,
+            class: 'w-9 h-auto flex-shrink-0 flex-grow-0 self-center lg:w-[90px]'
+          -%}
+
+          <div class="space-y-1 flex-1">
+            <a href="{{ item.url }}" class="font-bold text-xs xl:text-lg">{{ item.product.title }}</a>
+
+            {% for option in item.options_with_values %}
+              {% if option.name == 'Size' %}
+                <p class="text-grey-600 text-xs xl:text-sm">גודל: {{ option.value }}</p>
+                {% continue %}
+              {% endif %}
+
+              {% if option.name == 'Size sheet width' %}
+                <p class="text-grey-600 text-xs xl:text-sm">מידת רוחב הסדין : {{ option.value }}</p>
+                {% continue %}
+              {% endif %}
+
+              {% if option.name == 'Color' %}
+                <p class="text-grey-600 text-xs xl:text-sm">צבע: {{ option.value }}</p>
+                {% continue %}
+              {% endif %}
+            {% endfor %}
+
+            {% for prop in item.properties %}
+              {% if prop.first == '_parent_variant_id'  %}
+                <p class="text-grey-600 text-xs xl:text-sm">עבור פריט: {{ cart.items | where: 'variant_id', prop.last | map: 'title' }}</p>
+              {% endif %}
+            {% endfor %}
+          </div>
+
+          <div class="space-y-1 w-[60px] flex-shrink-0 xl:w-[90px]">
+            <s
+              class="font-bold text-grey-400 text-xs xl:text-sm">{{ item.variant.compare_at_price | money_without_trailing_zeros }}</s>
+            <p class="font-bold text-brand-700 text-xs xl:text-base">{{ item.variant.price | money_without_trailing_zeros }}</p>
+            {% if item.variant.compare_at_price != blank %}
+              <div class="text-[8px] font-medium text-brand-700 w-full py-0.5 px-1 bg-brand-50 text-center rounded xl:text-xs">
+                חסכת {{ item.variant.compare_at_price | minus: item.variant.price | money_without_trailing_zeros | replace: ',', '' }}
+              </div>
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="flex justify-between xl:pr-[102px]">
+          <div class="flex items-center space-x-reverse space-x-2">
+            {%- capture minus_icon -%}
+              {%- render 'icon', name: 'minus', class: 'w-3 text-brand-700 xl:text-brand-600 xl:hover:text-brand-700' -%}
+            {%- endcapture -%}
+            {%- capture plus_icon -%}
+              {%- render 'icon', name: 'plus', class: 'w-3 text-brand-700 xl:text-brand-600 xl:hover:text-brand-700' -%}
+            {%- endcapture -%}
+
+            {% assign minusDisabled = false %}
+
+            {% if item.quantity == 1 %}
+              {% assign minusDisabled = true %}
+            {% endif %}
+
+            {%-
+              render 'button',
+              content: minus_icon,
+              attrs: 'data-side-cart-quantity-control=decrease',
+              class: 'w-9 h-8 bg-brand-50 rounded-lg text-brand-700 p-0 flex items-center justify-center xl:hover:bg-brand-100 disabled:opacity-50',
+              disabled: minusDisabled
+            -%}
+
+            <input
+              type="number"
+              readonly
+              class="w-12 h-8 rounded-lg border border-grey-300 text-sm text-center text-grey-900/60 input-number-reset focus:outline-none"
+              value="{{ item.quantity }}"
+              data-side-cart-quantity-input="{{ item.key }}">
+
+            {%-
+              render 'button',
+              content: plus_icon,
+              attrs: 'data-side-cart-quantity-control=increase',
+              class: 'w-9 h-8 bg-brand-50 rounded-lg text-brand-700 p-0 flex items-center justify-center xl:hover:bg-brand-100'
+            -%}
+          </div>
+          <button class="w-6 h-6 flex items-center justify-center text-black/30" data-remove-cart-item="{{ item.key }}">
+            {% render 'icon', name: 'trash-can', class: 'w-[15px] h-[17px]' %}
+          </button>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="bg-white p-6 shadow-sl-12">
+  <ul class="text-grey-600">
+    <li class="flex items-center justify-between border-b border-b-[#E3E3E3] last:border-none py-2.5">
+      <span>עלויות משלוח יוצגו בצ'יק אווט</span>
+    </li>
+    <li class="flex items-center justify-between border-b border-b-[#E3E3E3] last:border-none py-2.5">
+      <span>מספר מוצרים:</span><span class="text-lg w-20 xl:w-24">{{ cart.item_count }}</span>
+    </li>
+    <li class="flex items-center justify-between border-b border-b-[#E3E3E3] last:border-none py-2.5">
+      <span>סה"כ לתשלום:</span><span class="font-bold text-lg text-brand-600 w-20 xl:w-24">{{ cart.total_price | money_without_trailing_zeros }}</span>
+    </li>
+  </ul>
+
+  <div class="mt-4 grid grid-cols-2 gap-x-3">
+    {%-
+      render 'button',
+      content: 'לתשלום',
+      class: 'btn-primary border-none text-lg xl:text-xl xl:p-4',
+      url: '/checkout'
+    -%}
+    {%-
+      render 'button',
+      content: 'לעגלת הקניות',
+      class: 'btn-secondary border-none text-base font-bold px-0 xl:text-xl xl:p-4',
+      url: '/cart'
+    -%}
+  </div>
+</div>
+
+<div data-side-cart-disabler class="absolute left-0 top-0 w-full h-full z-50 bg-white/60 hidden"></div>
+
+{% schema %}
+{
+  "name": "Side Cart",
+  "class": "sl-side-cart"
+}
+{% endschema %}

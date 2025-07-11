@@ -1,0 +1,25 @@
+{%- liquid
+  assign main_collection = product.collections.first.products
+-%}
+
+{% if main_collection.size > 1 %}
+  <div class="pb-6 sl-container xl:pb-14">
+    <span class="block section-title mb-6 mt-4 xl:my-14">אולי תאהבו גם...</span>
+
+    {%-
+      render 'products-slideshow',
+      products: main_collection,
+      exclude_product_id: product.id,
+      products_limit: 14,
+      show_badges: false,
+      show_price: false,
+      size: 'sm'
+    -%}
+  </div>
+{% endif %}
+
+{%- schema -%}
+{
+  "name": "Product recommendations"
+}
+{%- endschema -%}

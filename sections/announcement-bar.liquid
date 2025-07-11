@@ -1,0 +1,154 @@
+<style>
+  .announcement-bar {
+    height: 32px;
+    background-color: #DD2D4A;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding: 0 48px; 
+  }
+
+  .announcement-bar .swiper {
+    width: 100%;
+    height: 100%;
+  }
+
+  .announcement-bar .swiper-slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    font-size: 16px;
+    white-space: nowrap;
+    width: 100% !important;
+  }
+
+  .announcement-arrows {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .announcement-prev {
+    left: 450px;
+    padding-left: 8px; 
+  }
+
+  .announcement-next {
+    right: 450px;
+    padding-right: 8px;
+  }
+
+  .announcement-arrows svg {
+    display: block;
+    height: 14px;
+    width: auto;
+  }
+
+  @media (max-width: 768px) {
+    .announcement-bar {
+      padding: 0 24px;
+    }
+
+    .announcement-bar .swiper-slide {
+      font-size: 12px;
+    }
+  }
+</style>
+<div class="announcement-bar">
+  <div class="announcement-arrows announcement-prev" id="announcement-prev">
+    <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M6.38622 13.0225C6.5262 13.0225 6.66632 12.969 6.77319 12.8621C6.98706 12.6483 6.98706 12.3019 6.77319 12.0882L1.68672 7.00172L6.77319 1.91526C6.98706 1.70138 6.98706 1.35505 6.77319 1.14131C6.55931 0.927574 6.21298 0.927437 5.99924 1.14131L0.525808 6.61475C0.311933 6.82862 0.311933 7.17495 0.525808 7.38869L5.99924 12.8621C6.10611 12.969 6.24623 13.0225 6.38622 13.0225Z" fill="white"/>
+    </svg>
+  </div>
+
+  <div class="swiper announcement-swiper">
+    <div class="swiper-wrapper">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'announcement' -%}
+          <div class="swiper-slide" {{ block.shopify_attributes }}>
+            {{ block.settings.message }}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+
+  <div class="announcement-arrows announcement-next" id="announcement-next">
+    <svg width="7" height="14" viewBox="0 0 7 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0.613784 13.0225C0.473801 13.0225 0.333681 12.969 0.226812 12.8621C0.0129376 12.6483 0.0129376 12.3019 0.226812 12.0882L5.31328 7.00172L0.226812 1.91526C0.0129376 1.70138 0.0129376 1.35505 0.226812 1.14131C0.440687 0.927574 0.787018 0.927437 1.00076 1.14131L6.47419 6.61475C6.68807 6.82862 6.68807 7.17495 6.47419 7.38869L1.00076 12.8621C0.893887 12.969 0.753767 13.0225 0.613784 13.0225Z" fill="white"/>
+    </svg>
+  </div>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const announcementSwiper = new Swiper('.announcement-swiper', {
+      loop: true,
+      autoplay: {
+        delay: 5000,
+        disableOnInteraction: false,
+      },
+      navigation: {
+        nextEl: '#announcement-next',
+        prevEl: '#announcement-prev',
+      },
+      slidesPerView: 1,
+      centeredSlides: true,
+      effect: 'slide',
+      speed: 500
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Announcement Bar",
+  "max_blocks": 5,
+  "blocks": [
+    {
+      "type": "announcement",
+      "name": "Announcement",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "message",
+          "label": "Announcement Message",
+          "default": "מתווה אחים יכולים לקוגש שינה משלוחת, מחיר טמפרף 39 ₪ ער תחתירת"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Announcement Bar",
+      "blocks": [
+        {
+          "type": "announcement",
+          "settings": {
+            "message": "מתווה אחים יכולים לקוגש שינה משלוחת, מחיר טמפרף 39 ₪ ער תחתירת"
+          }
+        },
+        {
+          "type": "announcement",
+          "settings": {
+            "message": "מבצע מיוחד - הנחה של 50% על כל המזרונים"
+          }
+        },
+        {
+          "type": "announcement",
+          "settings": {
+            "message": "משלוח חינם לכל הארץ על קניות מעל 500 ₪"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

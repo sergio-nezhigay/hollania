@@ -1,0 +1,219 @@
+{{ 'product-slider-pdp.css' | asset_url | stylesheet_tag }}
+<style>
+  #shopify-section-{{ section.id }} .section-title {
+    text-align: right;
+    margin-bottom: 22px !important;
+    position: relative;
+  }
+</style>
+
+<div class="product-slider-pdp-section" id="product-slider-pdp-{{ section.id }}">
+  <div class="product-slider-pdp-container">
+    {% if section.settings.title != blank %}
+      <div class="section-title">
+        <h2>{{ section.settings.title }}</h2>
+      </div>
+    {% endif %}
+    
+    <div class="product-slider-pdp-wrapper">
+      <div class="product-slider-pdp-prev" data-slider="{{ section.id }}">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      
+      <div class="product-slider-pdp-next" data-slider="{{ section.id }}">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      
+      <div class="swiper product-slider-pdp-swiper" id="swiper-pdp-{{ section.id }}">
+        <div class="swiper-wrapper">
+          {% assign products_rendered = 0 %}
+          
+        
+          {% assign you_may_also_like = product.metafields.custom.you_may_also_like %}
+          {% if you_may_also_like == blank %}
+            {% assign you_may_also_like = product.metafields['custom']['you_may_also_like'] %}
+          {% endif %}
+          {% if you_may_also_like == blank %}
+            {% assign you_may_also_like = product.metafields.custom['you_may_also_like'] %}
+          {% endif %}
+          
+          
+          {% if you_may_also_like != blank %}
+            {% if you_may_also_like.value %}
+              {% assign metafield_products = you_may_also_like.value %}
+            {% else %}
+              {% assign metafield_products = you_may_also_like %}
+            {% endif %}
+            
+            
+            {% for related_product in metafield_products limit: section.settings.products_to_show %}
+              {% if related_product and related_product.id and related_product.id != product.id %}
+                <div class="swiper-slide">
+                  {% render 'custom-product-card-pdp', 
+                    product: related_product, 
+                    show_discount_badge: section.settings.show_discount_badge,
+                    free_shipping_threshold: section.settings.free_shipping_threshold
+                  %}
+                </div>
+                {% assign products_rendered = products_rendered | plus: 1 %}
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+          
+         
+          {% if products_rendered == 0 and section.settings.collection != blank %}
+            {% assign collection = collections[section.settings.collection] %}
+            {% if collection and collection.products.size > 0 %}
+              {% for fallback_product in collection.products limit: section.settings.products_to_show %}
+                {% unless fallback_product.id == product.id %}
+                  <div class="swiper-slide">
+                    {% render 'custom-product-card-pdp', 
+                      product: fallback_product, 
+                      show_discount_badge: section.settings.show_discount_badge,
+                      free_shipping_threshold: section.settings.free_shipping_threshold
+                    %}
+                  </div>
+                  {% assign products_rendered = products_rendered | plus: 1 %}
+                {% endunless %}
+              {% endfor %}
+            {% endif %}
+          {% endif %}
+        </div>
+      </div>
+      
+     
+      {% if products_rendered > 1 %}
+        <style>
+          #product-slider-pdp-{{ section.id }} .product-slider-pdp-prev,
+          #product-slider-pdp-{{ section.id }} .product-slider-pdp-next {
+            display: flex;
+          }
+        </style>
+      {% else %}
+        <style>
+          #product-slider-pdp-{{ section.id }} .product-slider-pdp-prev,
+          #product-slider-pdp-{{ section.id }} .product-slider-pdp-next {
+            display: none;
+          }
+        </style>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const sectionId = '{{ section.id }}';
+    const swiperElement = document.getElementById('swiper-pdp-' + sectionId);
+    
+    if (swiperElement) {
+      const productSliderPdp = new Swiper('#swiper-pdp-' + sectionId, {
+        slidesPerView: 1,
+        spaceBetween: 18,
+        loop: false,
+        centeredSlides: true,
+        navigation: {
+          nextEl: '[data-slider="' + sectionId + '"].product-slider-pdp-next',
+          prevEl: '[data-slider="' + sectionId + '"].product-slider-pdp-prev',
+        },
+        breakpoints: {
+          768: {
+            slidesPerView: 4,
+            spaceBetween: 18,
+            centeredSlides: false,
+            allowTouchMove: false,
+          },
+        },
+        on: {
+          init: function() {
+            this.update();
+            updateNavigationPdp(this, sectionId);
+            
+            // Приховуємо стрілочки якщо недостатньо слайдів для прокрутки
+            const totalSlides = this.slides.length;
+            const slidesPerView = window.innerWidth >= 768 ? 4 : 1;
+            
+            if (totalSlides <= slidesPerView) {
+              const prevBtn = document.querySelector('[data-slider="' + sectionId + '"].product-slider-pdp-prev');
+              const nextBtn = document.querySelector('[data-slider="' + sectionId + '"].product-slider-pdp-next');
+              if (prevBtn) prevBtn.style.display = 'none';
+              if (nextBtn) nextBtn.style.display = 'none';
+            }
+          },
+          slideChange: function() {
+            updateNavigationPdp(this, sectionId);
+          }
+        }
+      });
+    }
+
+    function updateNavigationPdp(swiper, sectionId) {
+      const prevBtn = document.querySelector('[data-slider="' + sectionId + '"].product-slider-pdp-prev');
+      const nextBtn = document.querySelector('[data-slider="' + sectionId + '"].product-slider-pdp-next');
+      
+      if (prevBtn && nextBtn) {
+        if (swiper.isBeginning) {
+          prevBtn.classList.add('swiper-button-disabled');
+        } else {
+          prevBtn.classList.remove('swiper-button-disabled');
+        }
+        
+        if (swiper.isEnd) {
+          nextBtn.classList.add('swiper-button-disabled');
+        } else {
+          nextBtn.classList.remove('swiper-button-disabled');
+        }
+      }
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Product Slider PDP",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "אולי תאהבו גם..."
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Fallback Collection",
+      "info": "Used when product metafield 'you_may_also_like' is empty"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 4,
+      "max": 20,
+      "step": 1,
+      "label": "Products to show",
+      "default": 8
+    },
+    {
+      "type": "checkbox",
+      "id": "show_discount_badge",
+      "label": "Show discount badge",
+      "default": true
+    },
+    {
+      "type": "number",
+      "id": "free_shipping_threshold",
+      "label": "Free shipping threshold (₪)",
+      "default": 1000
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Slider PDP"
+    }
+  ]
+}
+{% endschema %}

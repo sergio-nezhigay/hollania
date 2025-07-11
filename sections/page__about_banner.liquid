@@ -1,0 +1,60 @@
+<div class="py-8 px-6 space-y-4 text-center bg-brand-50 mt-6 xl:mt-0 xl:py-12">
+  {%-
+    render 'image-with-placeholder',
+    image: section.settings.image,
+    alt: section.settings.title,
+    width: 576,
+    class: 'w-48 mx-auto'
+  -%}
+
+  <div class="space-y-1 lg:max-w-[285px] lg:mx-auto">
+    <h2 class="text-lg font-bold lg:px-9">{{ section.settings.title }}</h2>
+    <p class="text-sm">{{ section.settings.text }}</p>
+  </div>
+</div>
+
+{% if section.settings.video != blank %}
+  <div class="py-6 px-8 sl-container lg:px-0 xl:py-8">
+    <div class="aspect-w-16 aspect-h-9">
+      <iframe
+        src="https://www.youtube.com/embed/{{ section.settings.video.id }}"
+        title="{{ section.settings.title }}"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        class="w-full h-full"
+        allowfullscreen></iframe>
+    </div>
+  </div>
+{% endif %}
+
+{%- schema -%}
+{
+  "name": "Page about banner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Banner image"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "תמיכה מדוקדקת בדיוק במקום שאתם זקוקים לה "
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "default": "הטכנולוגיה הבלעדית שלנו ™Posturepedic - מפותחת בעזרת מומחים אורטופדיים - מספקת תמיכה מחוזקת במקום שאתה הכי זקוק לה "
+    },
+    {
+      "type": "video_url",
+      "id": "video",
+      "label": "Video",
+      "accept": [
+        "youtube"
+      ]
+    }
+  ]
+}
+{%- endschema %}

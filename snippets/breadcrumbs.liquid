@@ -1,0 +1,117 @@
+{%- comment -%}
+  props:
+    - collection: the object of collection (for product and collection page)
+    - class
+    - page_title: currently only for cart
+{%- endcomment -%}
+
+{%- liquid
+  if collection != blank
+    assign parentCollection = ''
+
+    for link in linklists.collections.links
+      for subLink in link.links
+        if subLink.title == collection.title
+          assign parentCollection = link.object
+          break
+        endif
+      endfor
+    endfor
+  endif
+-%}
+
+{%- unless template == 'index' -%}
+  {%- assign t = template | split: '.' | first -%}
+
+  <nav role="navigation" aria-label="breadcrumbs" class="overflow-x-auto scrollbar-hidden {{ class -}}">
+    <ol class="flex w-max items-center space-x-reverse space-x-1.5">
+      <li class="breadcrumbs__item">
+        <a class="breadcrumbs__link" href="/">בית</a>
+      </li>
+
+      {%- case t -%}
+        {%- when 'cart' -%}
+          <li class="breadcrumbs__item">
+            <span aria-current="page">{{ page_title | default: 'עגלת קניות' }}</span>
+          </li>
+
+        {%- when 'list-collections' -%}
+          <li class="breadcrumbs__item">
+            <span aria-current="page">{{ page_title | default: 'אוספים' }}</span>
+          </li>
+
+        {%- when '404' -%}
+          <li class="breadcrumbs__item">
+            <span aria-current="page">{{ page_title | default: '404 Not Found' }}</span>
+          </li>
+
+        {%- when 'page' -%}
+          <li class="breadcrumbs__item">
+            <span aria-current="page">{{ page.title }}</span>
+          </li>
+
+        {%- when 'product' -%}
+          {%- if parentCollection != blank -%}
+            <li class="breadcrumbs__item">
+              <a class="breadcrumbs__link" href="{{ parentCollection.url }}">{{ parentCollection.title }}</a>
+            </li>
+          {%- endif -%}
+          {%- if collection.url -%}
+            <li class="breadcrumbs__item">
+              <a class="breadcrumbs__link" href="{{ collection.url }}">{{ collection.title }}</a>
+            </li>
+          {%- endif -%}
+          <li class="breadcrumbs__item">
+            <span aria-current="page">{{ product.title }}</span>
+          </li>
+
+        {%- when 'collection' and collection.handle -%}
+          {%- if parentCollection != blank -%}
+            <li class="breadcrumbs__item">
+              <a class="breadcrumbs__link" href="{{ parentCollection.url }}">{{ parentCollection.title }}</a>
+            </li>
+          {%- endif -%}
+          {%- if current_tags -%}
+            <li class="breadcrumbs__item">
+              {{ collection.title | link_to: collection.url }}
+            </li>
+            <li class="breadcrumbs__item">
+              {%- capture tag_url -%}{{ collection.url }}/{{ current_tags | join: "+"}}{%- endcapture -%}
+              <a class="breadcrumbs__link" href="{{ tag_url }}" aria-current="page">{{ current_tags | join: " + "}}</a>
+            </li>
+          {%- else -%}
+            <li class="breadcrumbs__item">
+              <span aria-current="page">{{ collection.title }}</span>
+            </li>
+          {%- endif -%}
+
+        {%- when 'blog' -%}
+          {%- if current_tags -%}
+            <li class="breadcrumbs__item">
+              <a class="breadcrumbs__link" href="{{ blog.url }}">{{ blog.title }}</a>
+            </li>
+            <li class="breadcrumbs__item">
+              {%- capture tag_url -%}{{blog.url}}/tagged/{{ current_tags | join: "+" }}{%- endcapture -%}
+              <a class="breadcrumbs__link" href="{{ tag_url }}" aria-current="page">{{ current_tags | join: " + " }}</a>
+            </li>
+          {%- else -%}
+            <li class="breadcrumbs__item">
+              <span aria-current="page">{{ blog.title }}</span>
+            </li>
+          {%- endif -%}
+
+        {%- when 'article' -%}
+          <li class="breadcrumbs__item">
+            <a class="breadcrumbs__link" href="{{ blog.url }}">{{ blog.title }}</a>
+          </li>
+          <li class="breadcrumbs__item">
+            <span aria-current="page">{{ article.title }}</span>
+          </li>
+        {%- else -%}
+          <li class="breadcrumbs__item">
+            <span aria-current="page">{{ page_title }}</span>
+          </li>
+      {%- endcase -%}
+    </ol>
+  </nav>
+{%- endunless -%}

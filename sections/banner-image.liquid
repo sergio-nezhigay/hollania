@@ -1,0 +1,72 @@
+{% if section.settings.link != blank %}
+<a href="{{ section.settings.link }}">
+{% endif %}
+  {% if section.settings.image != blank %}
+    {%-
+      render 'image-with-placeholder',
+      image: section.settings.image,
+      width: 1125,
+      widths: '375, 650, 1125',
+      sizes: '(min-width: 651px) 1125px, (min-width: 376px) 650px, 375px',
+      class: 'w-full md:hidden'
+    -%}
+  {% endif %}
+
+  {% if section.settings.image_desktop != blank %}
+    {%-
+      render 'image-with-placeholder',
+      image: section.settings.image_desktop,
+      width: 5000,
+      widths: '1280px, 1440px, 1600px, 1920px, 5000px',
+      sizes: '(min-width: 1921px) 5000px, (min-width: 1601px) 1920px, (min-width: 1441px) 1600px, (min-width: 1281px) 1440px, 1280px',
+      class: 'w-full hidden md:block'
+    -%}
+  {% endif %}
+
+  {% if section.settings.button_text != blank %}
+    {%-
+      render 'button',
+      url: section.settings.link,
+      content: section.settings.button_text,
+      class: 'btn-primary min-w-45 absolute-centered-x bottom-[8%] md:bottom-auto md:absolute-centered'
+    -%}
+  {% endif %}
+{% if section.settings.link != blank %}
+</a>
+{% endif %}
+
+{%- schema %}
+{
+  "name": "Banner image",
+  "class": "relative",
+  "settings": [
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link",
+      "default": "/"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image mobile"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_desktop",
+      "label": "Image desktop"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Banner image",
+      "category": "Image"
+    }
+  ]
+}
+{%- endschema %}

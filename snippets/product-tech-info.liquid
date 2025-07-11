@@ -1,0 +1,68 @@
+{% comment %}
+  props:
+    - title: string
+    - image: object
+    - reverse: boolean
+    - columns: number
+    - info_blocks: array
+      - title: string
+      - content: string
+      - rich_text: html
+{% endcomment %}
+
+<div class="mt-8 space-y-6 px-4 pb-6 xl:mt-8 xl:px-8 xl:pb-20 xl:space-y-14">
+  {% if title != blank %}
+    <div class="section-title">{{ title }}</div>
+  {% endif %}
+
+  <div class="space-y-6 lg:grid lg:grid-cols-2 lg:gap-x-12 lg:items-center">
+    <div class="aspect-w-2 aspect-h-1 lg:before:w-px lg:before:h-full lg:before:bg-brand-100 lg:before:top-0 lg:before:absolute
+              {% if reverse %}lg:before:-right-6{% else %}lg:before:-left-6{% endif %} lg:h-full">
+      {%- if image.media_type == 'video' -%}
+        {{- image | video_tag: loop:"loop", muted:true, playsinline:true , autoplay:true -}}
+      {%- else -%}
+        {%-
+          render 'image-with-placeholder',
+          image: image,
+          width: 1125,
+          widths: '375, 650, 1125',
+          sizes: '(min-width: 651px) 1125px, (min-width: 376px) 650px, 375px',
+          class: 'w-full h-full object-contain'
+        -%}
+      {%- endif -%}
+    </div>
+
+    <div class="space-y-6 {% if reverse %}lg:-order-1{% endif %} lg:space-y-0
+      {% if columns > 1 %}lg:grid lg:grid-cols-2 lg:gap-x-16{% endif %}">
+
+      {%- for block in info_blocks -%}
+        <div class="grid grid-cols-[1.75rem_minmax(0,1fr)] py-3 gap-x-6 lg:py-6 lg:px-4
+            {% if columns > 1 %}lg:col-span-1 lg:relative lg:[&:nth-child(4n-3)]:before:w-px lg:[&:nth-child(4n-3)]:before:h-3/4
+            lg:[&:nth-child(4n-3)]:before:bg-brand-100 lg:[&:nth-child(4n-3)]:before:absolute-centered-y lg:[&:nth-child(4n-3)]:before:-left-8{% endif %}">
+          {%- render 'icon', name: 'check-info-icon', class: 'w-7 h-7 lg:mt-1' -%}
+
+          <div class="space-y-0.5">
+            <p class="font-medium xl:text-xl">{{ block.title }}</p>
+            {%- if block.rich_text != blank -%}
+              <div class="text-sm text-grey-500 xl:text-base">
+                {{ block.rich_text | metafield_tag | newline_to_br }}
+              </div>
+            {%- endif -%}
+            {%- if block.content != blank -%}
+              <p class="text-sm text-grey-500 xl:text-base">{{ block.content }}</p>
+            {%- endif -%}
+          </div>
+        </div>
+
+        {%- liquid
+          if forloop.last
+            break
+          endif
+        -%}
+
+        <hr class="border-brand-100 {% if columns > 1 %}lg:col-span-2 lg:hidden lg:[&:nth-child(4n)]:block{% endif %}" />
+
+      {%- endfor -%}
+    </div>
+  </div>
+</div>

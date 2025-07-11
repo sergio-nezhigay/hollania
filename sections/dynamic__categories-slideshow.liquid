@@ -1,0 +1,145 @@
+{%- capture cssVariables -%}
+  --section-bg-image: url('{{- section.settings.bg_image | image_url -}}');
+  --section-bg-color: {{- section.settings.bg_color -}};
+{%- endcapture -%}
+
+<div
+    class="bg-[--section-bg-color] pb-14
+    {% unless content_for_header contains "Shopify.designMode" and section.settings.preview_mode %} hidden xl:block{% endunless %}"
+    style="{{ cssVariables | strip_newlines }}"
+>
+  <div class="px-4 pt-8 pb-6 xl:py-14 xl:max-w-xl xl:mx-auto">
+    <p class="section-title">{{ section.settings.heading }}</p>
+  </div>
+
+  <div class="sl-container">
+    <swiper-container class="sl-slideshow sl-cat-slideshow" init="false" navigation="true" space-between="24" slides-per-view="4" css-mode="true">
+
+      {%- for link in section.settings.categories.links -%}
+        {%- liquid
+          assign linkOptions = link.title | split: '|'
+          assign collectionImage = link.object.image
+          assign collectionLink = link.object.url
+          assign collectionTitle = linkOptions.first | default: link.object.title | strip
+          assign linkBgColor = '#FFFFFF'
+          assign linkBorderColor = '#EAECF0'
+
+          for linkOpt in linkOptions offset: 1
+            assign linkOpt = linkOpt | strip | replace: ' ', ''
+            if linkOpt contains 'bg:'
+              assign linkBgColor = linkOpt | remove: 'bg:'
+            elsif linkOpt contains 'border:'
+              assign linkBorderColor = linkOpt | remove: 'border:'
+            endif
+          endfor
+
+          assign customSettings = section.blocks | map: 'settings' | where: 'target_index', forloop.index | first
+        -%}
+
+        {%- capture cssVars -%}
+          --category-border-color: {{- linkBorderColor | default: '#EAECF0' -}};
+          --category-background-color: {{- linkBgColor | default: '#FFFFFF' -}};
+
+          --category-btn-background-color: {{- linkBgColor | color_darken: 10 -}};
+          --category-btn-text-color: {{- linkBgColor | color_darken: 65 -}};
+
+          --image-custom-scale: {{ customSettings.scale | default: 1 }};
+          --image-custom-left: {{ customSettings.left | default: 0 | append: '%' }};
+          --image-custom-bottom: {{ customSettings.bottom | default: -16 | append: '%' }};
+        {%- endcapture -%}
+
+        <swiper-slide>
+          <div class="aspect-w-1 aspect-h-1">
+            <a
+              href="{{ collectionLink }}"
+              style="{{ cssVars | strip_newlines }}"
+              class="rounded-2xl overflow-hidden w-full h-full p-8 flex flex-col justify-start items-center border
+              border-[--category-border-color] bg-[--category-background-color] shadow-sl-12"
+            >
+              <button class="py-2.5 px-5 min-w-[155px] font-bold rounded-[60px] shadow-sl-12 bg-white
+                          text-[--category-btn-text-color] bg-[--category-btn-background-color]">
+                {{- collectionTitle -}}
+              </button>
+
+              {%-
+                render 'image-with-placeholder',
+                image: collectionImage,
+                alt: collectionTitle,
+                width: 900,
+                class: 'absolute w-[150%] left-[--image-custom-left] bottom-[--image-custom-bottom] scale-[--image-custom-scale] max-w-none top-auto right-auto'
+              -%}
+            </a>
+          </div>
+        </swiper-slide>
+      {%- endfor -%}
+
+    </swiper-container>
+  </div>
+</div>
+
+{%- schema %}
+{
+  "name": "Scrollable categories",
+  "settings": [
+    {
+      "type": "text",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#F5FAFF"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "קטגוריות"
+    },
+    {
+      "type": "link_list",
+      "id": "categories",
+      "label": "Collections nav"
+    },
+    {
+      "type": "checkbox",
+      "id": "preview_mode",
+      "label": "Preview mode",
+      "default": true,
+      "info": "If selected you will see this block in customizer not only on desktop screens"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item_settings",
+      "name": "Item custom settings",
+      "settings": [
+        {
+          "type": "number",
+          "id": "target_index",
+          "label": "Target block index",
+          "info": "Beginning with 1"
+        },
+        {
+          "type": "range",
+          "id": "scale",
+          "min": 0,
+          "max": 2,
+          "step": 0.1,
+          "label": "Image scale",
+          "default": 1
+        },
+        {
+          "type": "number",
+          "id": "left",
+          "label": "Left position %",
+          "default": 0
+        },
+        {
+          "type": "number",
+          "id": "bottom",
+          "label": "Bottom position %",
+          "default": -16
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

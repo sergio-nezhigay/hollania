@@ -1,0 +1,143 @@
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
+{
+  "sections": {
+    "top": {
+      "type": "collection__top",
+      "settings": {
+      }
+    },
+    "exclusive": {
+      "type": "collection__exclusive",
+      "blocks": {
+        "657d3ec5-4191-4cc2-9076-91ab372f1c40": {
+          "type": "icon_block",
+          "settings": {
+            "text-line-1": "102",
+            "text-line-2": "לילות ניסיון",
+            "icon": "shopify:\/\/shop_images\/dark_mode_FILL0_wght300_GRAD0_opsz24_1.svg"
+          }
+        },
+        "f8e6b989-91ae-4b3c-b0e5-45c8ad6e8f37": {
+          "type": "icon_block",
+          "settings": {
+            "text-line-1": "אספקה מהירה",
+            "text-line-2": "עד 10 ימי עבודה",
+            "icon": "shopify:\/\/shop_images\/verified_FILL0_wght300_GRAD0_opsz24_1_1.svg"
+          }
+        },
+        "8f995820-2d0c-42ba-a031-07ee19186ab6": {
+          "type": "icon_block",
+          "settings": {
+            "text-line-1": "הובלה חינם",
+            "text-line-2": "עד לבית",
+            "icon": "shopify:\/\/shop_images\/home_FILL0_wght300_GRAD0_opsz24_1_1_1.svg"
+          }
+        }
+      },
+      "block_order": [
+        "657d3ec5-4191-4cc2-9076-91ab372f1c40",
+        "f8e6b989-91ae-4b3c-b0e5-45c8ad6e8f37",
+        "8f995820-2d0c-42ba-a031-07ee19186ab6"
+      ],
+      "settings": {
+      }
+    },
+    "products-grid": {
+      "type": "collection__products-grid",
+      "blocks": {
+        "8e6f0d6b-d943-42c2-9116-e1e6ae0ea2aa": {
+          "type": "banner",
+          "disabled": true,
+          "settings": {
+            "collections": [
+              "collection11"
+            ],
+            "hide_on_desktop": true,
+            "hide_on_mobile": false,
+            "order": 4,
+            "image": "shopify:\/\/shop_images\/More.jpg",
+            "link": "shopify:\/\/collections\/collection10"
+          }
+        },
+        "902bec59-1842-409b-954a-75ade81ab614": {
+          "type": "banner_coupon",
+          "disabled": true,
+          "settings": {
+            "collections": [
+
+            ],
+            "hide_on_desktop": false,
+            "hide_on_mobile": false,
+            "order": 7,
+            "heading": "33% הנחה",
+            "description": "חג שמח! מבצע ראש השנה",
+            "coupon_code": "roshhashane",
+            "bg_image": "shopify:\/\/shop_images\/pexels-max-rahubovskiy-6186815_1.jpg"
+          }
+        },
+        "banner_KR4QMG": {
+          "type": "banner",
+          "disabled": true,
+          "settings": {
+            "collections": [
+
+            ],
+            "hide_on_desktop": false,
+            "hide_on_mobile": true,
+            "order": 4,
+            "image": "shopify:\/\/shop_images\/More_desktop.jpg",
+            "link": "\/"
+          }
+        }
+      },
+      "block_order": [
+        "8e6f0d6b-d943-42c2-9116-e1e6ae0ea2aa",
+        "902bec59-1842-409b-954a-75ade81ab614",
+        "banner_KR4QMG"
+      ],
+      "settings": {
+      }
+    },
+    "info_tech": {
+      "type": "collection__info_tech",
+      "settings": {
+      }
+    },
+    "about": {
+      "type": "collection__about",
+      "settings": {
+        "btn_text_open": "סגור",
+        "btn_text_close": "להתחבא"
+      }
+    },
+    "contacts": {
+      "type": "dynamic__contacts",
+      "settings": {
+        "heading": "אנחנו פה לכל שאלה",
+        "bg_color": "#ffffff"
+      }
+    },
+    "subscribe": {
+      "type": "static__subscribe",
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "top",
+    "exclusive",
+    "products-grid",
+    "info_tech",
+    "about",
+    "contacts",
+    "subscribe"
+  ]
+}

@@ -1,0 +1,88 @@
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
+{
+  "sections": {
+    "top": {
+      "type": "page__top",
+      "settings": {
+      }
+    },
+    "banner": {
+      "type": "page__banner",
+      "settings": {
+        "image": "shopify:\/\/shop_images\/Frame_1000004512.jpg",
+        "image_desktop": "shopify:\/\/shop_images\/cs_mobile_hero_desktop.jpg",
+        "image_text": "",
+        "title": "Return page",
+        "text_gr": "",
+        "icon": "shopify:\/\/shop_images\/support_agent_FILL0_wght300_GRAD0_opsz24_1_1.svg"
+      }
+    },
+    "form": {
+      "type": "page__contact-form",
+      "settings": {
+        "title": "מעוניינים לבטל הזמנה?"
+      }
+    },
+    "contacts": {
+      "type": "page__contacts",
+      "blocks": {
+        "hours_Ayj4yJ": {
+          "type": "hours",
+          "settings": {
+            "title": "שעות פעילות מוקד שירות הלקוחות ושירות האספקות",
+            "hours": "א-ה: 8:30-16:30"
+          }
+        },
+        "contact_8TWeQg": {
+          "type": "contact",
+          "settings": {
+            "contact_type": "phone",
+            "title": "טלפון לנציג Sealy:",
+            "value": "077-9966644"
+          }
+        },
+        "contact_mKxhjW": {
+          "type": "contact",
+          "settings": {
+            "contact_type": "whatsapp",
+            "title": "שירות לקוחות ב - WhatsApp",
+            "value": "0559596317"
+          }
+        }
+      },
+      "block_order": [
+        "hours_Ayj4yJ",
+        "contact_8TWeQg",
+        "contact_mKxhjW"
+      ],
+      "settings": {
+        "title": "",
+        "text_gr": "Text gradient"
+      }
+    },
+    "our_branches": {
+      "type": "banner-image",
+      "settings": {
+        "button_text": "בקרו בסניפים שלנו",
+        "link": "\/",
+        "image": "shopify:\/\/shop_images\/d6555b2c5dcdf756505d56b3b757e624.jpg",
+        "image_desktop": "shopify:\/\/shop_images\/banner_img_desktop_3x_d3426569-a703-4ca1-9445-48728b00e9a1.jpg"
+      }
+    }
+  },
+  "order": [
+    "top",
+    "banner",
+    "form",
+    "contacts",
+    "our_branches"
+  ]
+}

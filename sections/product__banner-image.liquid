@@ -1,0 +1,20 @@
+{%- assign image = product.metafields.custom.product_banner_image -%}
+
+{%- if image != blank -%}
+  {%-
+    render 'image-with-placeholder',
+    image: image,
+    width: 5000,
+    widths: '375, 650, 1125, 1280, 1440, 1600, 1920, 5000',
+    sizes: '(min-width: 1921px) 5000px, (min-width: 1601px) 1920px, (min-width: 1441px) 1600px, (min-width: 1281px) 1440px,
+              (min-width: 1125px) 1280px, (min-width: 651px) 1125px, (min-width: 376px) 650px, 375px',
+    class: 'w-full pt-6 xl:pt-14'
+  -%}
+{%- endif -%}
+
+{%- schema %}
+{
+  "name": "Product banner image",
+  "class": "relative pb-4"
+}
+{%- endschema %}

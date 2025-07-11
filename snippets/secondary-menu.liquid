@@ -1,0 +1,34 @@
+{% comment %}
+  props:
+    - class
+    - link_class
+{% endcomment %}
+
+<ul class="grid grid-cols-2 gap-6 {{ class }}">
+  {%- for mainLinkItem in linklists.secondary-menu.links -%}
+    {%- liquid
+      assign title_array = mainLinkItem.title | split: '|'
+      assign mainLinkItemTitle = title_array[0] | strip
+      assign mainLinkItemIconName = ''
+
+      for title_array_item in title_array offset: 1
+        assign title_array_item_adjusted = title_array_item | strip
+
+        if title_array_item_adjusted contains 'icon'
+          assign mainLinkItemIconName = title_array_item_adjusted | split: ':' | last | strip
+        endif
+      endfor
+    -%}
+
+    <li>
+      <a href="{{ mainLinkItem.url }}" class="text-sm text-grey-500 block {{ link_class }}">
+        {% if mainLinkItemIconName != blank %}
+          <img src="{{ mainLinkItemIconName | file_url }}" alt="{{ mainLinkItemTitle }}" class="h-7 inline-block ml-2">
+        {% endif %}
+
+        <span class="align-sub">{{- mainLinkItemTitle -}}</span>
+      </a>
+    </li>
+  {%- endfor -%}
+</ul>
+

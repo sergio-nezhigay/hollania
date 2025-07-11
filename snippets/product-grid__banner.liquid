@@ -1,0 +1,32 @@
+{%- comment -%}
+  props:
+    - image
+    - width
+    - url
+    - class
+{%- endcomment -%}
+
+{%- assign width = width | default: 5000 -%}
+
+{%- capture innerContent -%}
+  {%-
+    render 'image-with-placeholder',
+    image: image,
+    width: width,
+    widths: '356w, 768px, 1024px, 1280px, 1440px, 1600px, 1920px, 5000px',
+    sizes: '(min-width: 1024px) 100vw, (min-width: 768px) 356px, 100vw',
+    class: 'w-full md:h-full md:object-cover lg:h-auto',
+    loading: 'lazy'
+  -%}
+{%- endcapture -%}
+
+{%- if url != blank -%}
+  <a href="{{ utl }}" class="block {{ class }}">
+    {{- innerContent -}}
+  </a>
+
+{%- else -%}
+  <div class="{{ class }}">
+    {{- innerContent -}}
+  </div>
+{%- endif -%}

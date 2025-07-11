@@ -1,0 +1,51 @@
+{{ 'custom-product-card.css' | asset_url | stylesheet_tag }}
+
+{% assign on_sale = false %}
+{% assign discount_percentage = 0 %}
+{% if product.compare_at_price > product.price %}
+  {% assign on_sale = true %}
+  {% assign discount_percentage = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price | round %}
+{% endif %}
+
+<div class="product-card">
+  <a href="{{ product.url }}" class="product-card-link">
+    <div class="product-image-container">
+      {% if show_discount_badge and on_sale %}
+        <div class="discount-badge">
+           OFF {{ discount_percentage }}%
+        </div>
+      {% endif %}
+      
+      <div class="product-image">
+        {% if product.featured_media %}
+          {{ product.featured_media | image_url: width: 570 | image_tag: 
+             alt: product.featured_media.alt | default: product.title,
+             loading: 'lazy',
+             sizes: '(max-width: 767px) 304px, 285px'
+          }}
+        {% else %}
+          <div class="product-image-placeholder">
+            <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+              <rect width="60" height="60" fill="#E5E7EB"/>
+              <path d="M20 20L40 40M40 20L20 40" stroke="#9CA3AF" stroke-width="2"/>
+            </svg>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+    
+    <div class="product-info">
+      <h3 class="product-title">{{ product.title }}</h3>
+      
+      <div class="product-price">
+        {% if on_sale %}
+          <span class="price-current">₪{{ product.price | divided_by: 100 }}</span>
+          <span class="price-original">₪{{ product.compare_at_price | divided_by: 100 }}</span>
+        {% else %}
+          <span class="price-current">₪{{ product.price | divided_by: 100 }}</span>
+        {% endif %}
+      </div>
+    </div>
+  </a>
+</div>
+

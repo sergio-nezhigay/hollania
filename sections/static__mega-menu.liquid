@@ -1,0 +1,87 @@
+<ul data-mgm-parent-menu class="flex px-2 relative z-10 bg-white shadow-sl-24">
+  {%- for mainLinkItem in linklists.main-menu.links -%}
+    {%- liquid
+      assign title_array = mainLinkItem.title | split: '|'
+      assign mainLinkItemTitle = title_array[0] | strip
+      assign mainLinkItemIconName = ''
+      assign mainLinkItemPosition = 'right'
+
+      for title_array_item in title_array offset: 1
+        assign title_array_item_adjusted = title_array_item | strip
+
+        if title_array_item_adjusted contains 'icon'
+          assign mainLinkItemIconName = title_array_item_adjusted | split: ':' | last | strip
+        elsif title_array_item_adjusted == 'left'
+          assign mainLinkItemPosition = 'left'
+        endif
+      endfor
+    -%}
+
+    <li
+      data-mgm-parent-link="{{ mainLinkItem.handle }}"
+      class="px-6 {% if collection.url == mainLinkItem.url -%}sl-menu-current {% endif -%}
+      {% if mainLinkItemPosition == 'left' %} mr-[auto]{% endif %}"
+    >
+      <a
+        class="block text-brand-600 font-bold py-3 2xl:text-lg"
+        href="{{ mainLinkItem.url }}">
+        {% if mainLinkItemIconName != blank %}
+          <img src="{{ mainLinkItemIconName | file_url }}" alt="{{ mainLinkItemTitle }}" class="h-7 inline-block ml-2">
+        {% endif %}
+
+        {{ mainLinkItemTitle }}
+      </a>
+
+      {%- if mainLinkItem.links != blank -%}
+        {% capture subMenus %}
+          {{ subMenus }}
+
+          <ul data-mgm-sub-menu="{{ mainLinkItem.handle }}" hidden class="grid grid-cols-5 gap-x-16 gap-y-8 p-8 absolute top-full w-full left-0 bg-white shadow-sl-24">
+            {%- for subLinkItem in mainLinkItem.links -%}
+              {% liquid
+                assign subLinkItemTitleArray = subLinkItem.title | split: '|'
+                assign subLinkItemTitle = subLinkItemTitleArray[0] | strip
+                assign isMobileButton = false
+
+                for subLinkItemTitleArrayItem in subLinkItemTitleArray offset: 1
+                  assign subLinkItemTitleArrayItemAdjusted = subLinkItemTitleArrayItem | strip
+
+                  if subLinkItemTitleArrayItemAdjusted == 'mobile:button'
+                    assign isMobileButton = true
+                  endif
+                endfor
+
+                comment
+                  Skip the sublink if it's a mobile button
+                endcomment
+                if isMobileButton
+                  continue
+                endif
+              %}
+              <li>
+                <a href="{{ subLinkItem.url }}" {% if collection.url == subLinkItem.url -%}class="sl-submenu-current"{%- endif %}>
+                  <div class="aspect-w-2 aspect-h-1">
+                    {%-
+                      render 'image-with-placeholder',
+                      image: subLinkItem.object.image,
+                      width: 660,
+                      class: 'object-contain',
+                      loading: 'lazy'
+                    -%}
+                  </div>
+
+                  <span class="text-lg mt-3">{{ subLinkItemTitle }}</span>
+                </a>
+              </li>
+            {%- endfor -%}
+          </ul>
+        {% endcapture %}
+      {%- endif -%}
+    </li>
+  {%- endfor -%}
+</ul>
+
+{{ subMenus }}
+
+<div data-mgm-underline class="absolute bottom-0 left-[--mgm-underline-left,0] w-[--mgm-underline-width,0] h-1 bg-brand-600
+  z-10 transition-all -translate-x-1/2"></div>

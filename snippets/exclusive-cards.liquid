@@ -1,0 +1,21 @@
+{% comment %}
+  props:
+    - blocks: section blocks
+    - block_class: additional block class
+{% endcomment %}
+
+<div class="flex flex-wrap justify-center">
+  {% for block in blocks %}
+    <div class="flex-[0_0_32%] [&:nth-child(n+4)]:mt-[2%] [&:nth-child(3n)]:ml-0 ml-[2%] last:ml-0 aspect-w-1 pt-[31%]
+            md:aspect-none md:pt-0 lg:relative ">
+      {%-
+        render 'exclusive-card',
+        class: block_class,
+        image: block.settings.icon,
+        image_class: 'xl:w-12 xl:h-12',
+        text_line_1: block.settings.text-line-1,
+        text_line_2: block.settings.text-line-2
+      -%}
+    </div>
+  {% endfor %}
+</div>

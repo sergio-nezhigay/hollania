@@ -1,0 +1,48 @@
+{% comment -%}
+  props:
+    - paginate: paginate object
+    - class: additional classes
+{%- endcomment %}
+
+<div class="text-brand-600 space-x-1.5 space-x-reverse flex items-center justify-center mx-auto {{ class }}">
+  {%- if paginate.current_page > 1 -%}
+    <a href="{{- paginate.parts.first.url -}}" class="w-8 h-8 flex items-center justify-center bg-white
+      border border-[#f1f1f1] rounded-full xl:hover:border-brand-500">
+      <img class="w-4 h-4 rotate-180" src="{{ 'icon--pagination-first.svg' | asset_url }}" alt="First" />
+    </a>
+  {%- endif -%}
+
+  {%- if paginate.previous != blank -%}
+    <a href="{{- paginate.previous.url -}}" class="w-8 h-8 flex items-center justify-center bg-white
+      border border-[#f1f1f1] rounded-full xl:hover:border-brand-500">
+      <img class="w-4 h-4 rotate-180" src="{{ 'icon--pagination-prev.svg' | asset_url }}" alt="Previous" />
+    </a>
+  {%- endif -%}
+
+  {%- for part in paginate.parts -%}
+    {%- if part.is_link -%}
+      <a href="{{- part.url -}}" class="w-8 h-8 flex items-center justify-center bg-white
+        border border-[#f1f1f1] rounded-full xl:hover:border-brand-500 text-xsm text-[#333]">
+        {{- part.title -}}
+      </a>
+    {%- else -%}
+      <span class="w-8 h-8 flex items-center justify-center bg-brand-500 rounded-full text-xsm text-white">
+          {{- part.title -}}
+        </span>
+    {%- endif -%}
+  {%- endfor -%}
+
+  {%- if paginate.next != blank -%}
+    <a href="{{- paginate.previous.url -}}" class="w-8 h-8 flex items-center justify-center bg-white
+      border border-[#f1f1f1] rounded-full xl:hover:border-brand-500">
+      <img class="w-4 h-4" src="{{ 'icon--pagination-prev.svg' | asset_url }}" alt="Next" />
+    </a>
+  {%- endif -%}
+
+  {%- if paginate.current_page < paginate.pages -%}
+    <a href="{{- paginate.parts.last.url -}}" class="w-8 h-8 flex items-center justify-center bg-white
+      border border-[#f1f1f1] rounded-full xl:hover:border-brand-500">
+      <img class="w-4 h-4" src="{{ 'icon--pagination-first.svg' | asset_url }}" alt="Last" />
+    </a>
+  {%- endif -%}
+</div>

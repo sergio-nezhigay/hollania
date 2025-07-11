@@ -1,0 +1,179 @@
+<div class="px-4 pb-14 mx-auto lg:max-w-xl xl:max-w-2xl xl:pb-20">
+  <custom-select
+    data-closed="true"
+    class="block col-span-7 group/cs relative lg:hover:cursor-pointer lg:hover:bg-brand-30"
+  >
+    <div
+      data-custom-select-placeholder
+      class="relative py-3.5 px-4 bg-white z-20 rounded-lg border border-black/10 shadow-sl-12 text-xl
+        group-data-[closed=false]/cs:rounded-b-none lg:hover:cursor-pointer xl:text-2xl xl:px-6 xl:py-5"
+    >
+      <span>{{- section.settings.select_placeholder -}}</span>
+      {%- render 'icon', name: 'chevron-down', class: 'absolute-centered-y left-4 w-5 h-5 group-data-[closed=false]/cs:rotate-180' -%}
+    </div>
+
+    <ul class="group-data-[closed=true]/cs:hidden -mt-1 absolute top-full left-0 w-full bg-white rounded-b-lg
+          shadow-sl-12 z-10 overflow-hidden border border-black/10 p-6 border-t-0">
+      {%- for block in section.blocks -%}
+        <li
+          dir="ltr"
+          data-option
+          data-selected="false"
+          class="py-4 px-6 text-xl rounded-lg
+            data-[selected=true]:font-medium data-[selected=true]:text-brand-600 data-[selected=true]:bg-[#E8F1FD]
+            lg:hover:cursor-pointer lg:hover:bg-[#E8F1FD] xl:text-2xl"
+        >
+          {{- block.settings.label -}}
+        </li>
+
+        {%- capture optionsForSelectTag -%}
+          {{- optionsForSelectTag -}}
+          <option
+            {% if selected -%}selected="selected"{%- endif %}
+            value="{{- block.id -}}"
+          ></option>
+        {%- endcapture -%}
+
+        {%- capture contactsAndForms -%}
+          {{- contactsAndForms -}}
+
+          <div hidden data-cs-form-block="{{- block.id -}}">
+            <div class="grid grid-cols-1 gap-y-4 mt-4 xl:mt-6 xl:grid-cols-2 xl:gap-6">
+              <div class="pt-6 bg-brand-50 xl:col-span-2">
+                {%- render 'contact', type: 'hours', value: block.settings.hours, title: block.settings.hours_title, title_class: 'xl:!text-lg' -%}
+              </div>
+
+              <div class="pt-6 bg-brand-50 xl:order-3">
+                {%- render 'contact', type: 'whatsapp', value: block.settings.whatsapp, title: block.settings.whatsapp_title, title_class: 'xl:!text-lg' -%}
+              </div>
+
+              <div class="pt-6 bg-brand-50">
+                {%- render 'contact', type: 'phone', value: block.settings.phone, title: block.settings.phone_title, title_class: 'xl:!text-lg' -%}
+              </div>
+            </div>
+
+            <div class="px-4 py-4 lg:max-w-2xl mx-auto xl:py-6">
+              <p class="text-brand-700 font-bold text-xl text-center">{{ block.settings.title }}</p>
+            </div>
+
+            {%- case block.settings.form_action -%}
+              {%- when 'default' -%}
+                {%- render 'contact-form-default', subjects: block.settings.subjects -%}
+              {%- when 'callmarket' -%}
+                {%- render 'contact-form-callmarket', subjects: block.settings.subjects -%}
+            {%- endcase -%}
+
+          </div>
+        {%- endcapture -%}
+      {%- endfor -%}
+    </ul>
+
+    <select
+      name="form_type"
+      data-cs-forms-select
+      hidden
+    >
+      {{- optionsForSelectTag -}}
+    </select>
+  </custom-select>
+
+  {{- contactsAndForms -}}
+</div>
+
+{%- render 'vite-tag' with '@/additionalEntrypoints/customer-services/customerServices.ts' -%}
+
+{%- schema -%}
+{
+  "name": "Customer services",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "נשמח לעמוד לשירותכם בכל עת, השאירו פרטיכם ונחזור אליכם בהקדם"
+    },
+    {
+      "type": "text",
+      "id": "select_placeholder",
+      "label": "Select placeholder",
+      "default": "איך אפשר לעזור לכם?"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "contact_form",
+      "name": "Contact form",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "label",
+          "default": "מתעניינים ברכישת מוצר חדש"
+        },
+        {
+          "type": "text",
+          "id": "hours_title",
+          "label": "Working hours title",
+          "default": "שעות פעילות מוקד שירות הלקוחות ואספקות:"
+        },
+        {
+          "type": "textarea",
+          "id": "hours",
+          "label": "Working hours",
+          "default": "א-ה 08:30-16:30"
+        },
+        {
+          "type": "text",
+          "id": "whatsapp_title",
+          "label": "Whatsapp title",
+          "default": "שירות לקוחות ב - WhatsApp"
+        },
+        {
+          "type": "text",
+          "id": "whatsapp",
+          "label": "Whatsapp",
+          "default": "0559596317"
+        },
+        {
+          "type": "text",
+          "id": "phone_title",
+          "label": "Phone title",
+          "default": "שירות לקוחות בטלפון"
+        },
+        {
+          "type": "text",
+          "id": "phone",
+          "label": "Phone",
+          "default": "0559596317"
+        },
+        {
+          "type": "header",
+          "content": "Form settings"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "צרו קשר ונחזור אליכם בהקדם"
+        },
+        {
+          "type": "textarea",
+          "id": "subjects",
+          "label": "Subjects",
+          "info": "Comma separated list of subjects"
+        },
+        {
+          "type": "select",
+          "id": "form_action",
+          "label": "Form action",
+          "options": [
+            { "value": "default", "label": "Default Contact Form" },
+            { "value": "callmarket", "label": "CallMarket" }
+          ],
+          "default": "default"
+        }
+      ]
+    }
+  ]
+}
+{%- endschema %}

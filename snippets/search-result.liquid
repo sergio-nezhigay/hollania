@@ -1,0 +1,6 @@
+{% comment %}
+  props:
+    - item: the item to be displayed
+{% endcomment %}
+
+<a href="{{ item.url }}">{{ item.title | highlight: search.terms }}</a>

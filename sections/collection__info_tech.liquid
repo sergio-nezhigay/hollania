@@ -1,0 +1,25 @@
+{%- if collection.metafields.custom.info_tech_section != blank -%}
+  {%- assign info_tech_section = collection.metafields.custom.info_tech_section.value -%}
+
+  <div class="bg-white">
+    <div class="px-4 py-6 sl-container space-y-6 lg:py-14 lg:space-y-28">
+      {% for block in info_tech_section %}
+        <div class="space-y-6 lg:flex lg:items-center lg:odd:flex-row-reverse lg:gap-x-14">
+          <div class="aspect-w-9 aspect-h-10 overflow-hidden rounded-lg lg:aspect-none lg:shadow-sl-24 lg:flex-[0_0_53%]">
+            {%-
+              render 'image-with-placeholder',
+              image: block.media.value,
+              width: 1857,
+              class: 'object-cover',
+              loading: 'lazy'
+            -%}
+          </div>
+          <div>
+            <h2 class="font-bold text-lg xl:text-[1.75rem]">{{ block.title }}</h2>
+            <div class="text-grey-900/60 mt-1 lg:pl-16 xl:text-xl xl:mt-3">{{ block.content | metafield_tag | newline_to_br }}</div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{%- endif -%}

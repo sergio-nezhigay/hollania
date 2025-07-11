@@ -1,0 +1,145 @@
+<!doctype html>
+<html class="h-full scroll-smooth" lang="he" dir="rtl">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="">
+    <title>{{ page_title }}</title>
+    <meta name="description" content="{{ page_description | escape }}">
+    <link rel="canonical" href="{{ canonical_url }}">
+
+    {%- if settings.favicon != blank -%}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+    {%- endif -%}
+
+    <title>{{ shop.name }}</title>
+
+    <meta name="description" content="">
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-TLVCQ96Z');</script>
+    <!-- End Google Tag Manager -->
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-WJ9WKHP');</script>
+    <!-- End Google Tag Manager -->
+
+    {%- liquid render 'vite-tag' with '@/analytics/dataLayer.ts' -%}
+
+    {%- liquid
+      render 'css-variables'
+      render 'vite-tag' with 'theme.css'
+      if template.name == 'product'
+        render 'vite-tag' with '@/additionalEntrypoints/product/product.css'
+      endif
+    -%}
+
+    {{ content_for_header }}
+
+    <meta name="google-site-verification" content="G4tVkEIEOacMB8RreH_RCH9DhFGOvBNpPQ6VUgtMx8k" />
+    {{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag }}
+  </head>
+
+  <body class="sl-{{ template | replace: '.', '_' }}-body">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TLVCQ96Z"
+                      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src=https://www.googletagmanager.com/ns.html?id=GTM-WJ9WKHP
+                      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <div class="z-30">
+      {%- sections 'header-group' -%}
+    </div>
+
+    <main class="template-{{ template.name }}-main">
+      {{ content_for_layout }}
+    </main>
+
+    {% render 'whatsapp' %}
+
+    {%- sections 'footer-group' -%}
+
+    <div data-overlay class="overlay-hidden transition-opacity fixed top-0 right-0 left-0 bottom-0 w-full h-full bg-black opacity-50 z-20"></div>
+
+    {%- liquid
+      render 'vite-tag' with '@/additionalEntrypoints/swiperRegister.ts'
+      render 'vite-tag' with '@/additionalEntrypoints/CustomElements.ts'
+      render 'vite-tag' with 'theme.js'
+    -%}
+
+    <!-- Accessibility -->
+    <script>
+    window.args = {
+    	sitekey   : '337d4ccef58cbbf56215e3937b6aff73',
+    	position  : 'Right',
+    	language  : 'HE',
+    	container : '',
+    	icon : '',
+    	access : 'https://vee-crm.com',
+    	styles : {
+    		primary_color: '#177fab',
+    		secondary_color: '#b586ff',
+    		background_color: '#f6f6f6',
+    		primary_text_color: '#636363',
+    		headers_text_color: '#105675',
+    		primary_font_size: 14,
+    		slider_left_color:  '#b586ff',
+    		slider_right_color:  '#177fab',
+    		icon_vertical_position: 'bottom',
+    		icon_offset_top: 'auto',
+    		icon_offset_bottom: 100,
+    		highlight_focus_color: '#177fab',
+    		toggler_icon_color: '#ffffff',
+    	},
+    	links : {
+    		acc_policy: '',
+    		additional_link: 'https://vee.co.il/pricing/'
+    	},
+    	options : {
+    		open: false,
+    		aaa: false,
+    		hide_tablet: false,
+    		hide_mobile: false,
+    		button_size_tablet: 44,
+    		button_size_mobile: 34,
+    		// position_tablet: 'Right',
+    		// position_mobile: 'Right',
+    		// icon_vertical_position_tablet: 'top',
+    		// icon_vertical_position_mobile: 'top',
+    		// icon_offset_top_tablet: 100,
+    		// icon_offset_bottom_tablet: 0,
+    		// icon_offset_top_mobile: 100,
+    		// icon_offset_bottom_mobile: 0,
+    		keyboard_shortcut: true,
+    		hide_purchase_link: false,
+    		display_checkmark_icon: false,
+    		active_toggler_color: '#118f38'
+    	},
+    	exclude : []
+    };
+    
+    (function(doc, head, body){
+    	var embed = doc.createElement('script');
+    	embed.src = window.args['access'] + '/js/';
+    	embed.defer = true;
+    	embed.crossOrigin = 'anonymous';
+    	embed.setAttribute('data-cfasync', true );
+    	body? body.appendChild(embed) : head.appendChild(embed);
+    })(document, document.head, document.body);
+    </script>
+    {{ 'swiper-bundle.min.js' | asset_url | script_tag }}
+  </body>
+</html>

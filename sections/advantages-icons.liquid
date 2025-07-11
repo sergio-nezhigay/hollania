@@ -1,0 +1,50 @@
+{% comment %} Cloning blocks to prevent ticker jumps to start often {% endcomment %}
+{%- assign cloneBlocksTimes = 3 -%}
+
+{% comment %}
+  Animation duration {{ timeForEachBlock }} seconds for each item.
+  Raise this value to make ticker slower.
+{% endcomment %}
+{%- assign timeForEachBlock = 4 -%}
+
+{%- assign animationDuration = section.blocks.size | times: timeForEachBlock | times: cloneBlocksTimes -%}
+
+<div class="overflow-hidden max-w-full xl:text-center" style="--ticker-animation-duration: {{- animationDuration -}}s">
+  <div class="inline-flex whitespace-nowrap space-x-12 space-x-reverse animate-ticker [animation-duration:--ticker-animation-duration]
+  p-3 antialiased xl:animate-none xl:p-6">
+    {%- for key in (1..cloneBlocksTimes) -%}
+      {%- for block in section.blocks -%}
+        <div class="flex items-center space-x-4 space-x-reverse flex-shrink-0 {% if key > 1 %}xl:hidden{% endif %}">
+          {{- block.settings.icon_inline_svg -}}
+          <span class="text-lg font-medium">{{ block.settings.text }}</span>
+        </div>
+      {%- endfor -%}
+    {%- endfor -%}
+  </div>
+</div>
+
+{%- schema %}
+{
+  "name": "Advantages icons",
+  "blocks": [
+    {
+      "type": "advantage",
+      "name": "Advantage",
+      "settings": [
+        {
+          "type": "html",
+          "id": "icon_inline_svg",
+          "label": "Icon inline SVG",
+          "default": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"33\" viewBox=\"0 0 32 33\" fill=\"none\">\n  <path d=\"M14.2996 17.9211L12.1355 15.7775C11.9509 15.5929 11.7222 15.4985 11.4496 15.4942C11.177 15.4899 10.9372 15.5912 10.7304 15.798C10.5372 15.9912 10.4406 16.2254 10.4406 16.5006C10.4406 16.7758 10.5372 17.0099 10.7304 17.2031L13.456 19.9287C13.6971 20.1698 13.9782 20.2903 14.2996 20.2903C14.621 20.2903 14.9021 20.1698 15.1432 19.9287L20.6688 14.4031C20.8671 14.2048 20.965 13.9728 20.9624 13.707C20.9598 13.4412 20.862 13.2049 20.6688 12.998C20.462 12.7912 20.2244 12.6843 19.956 12.6775C19.6876 12.6707 19.45 12.7707 19.2432 12.9775L14.2996 17.9211ZM10.9124 28.7441L9.06887 25.6441L5.5817 24.8954C5.28254 24.8373 5.04366 24.68 4.86503 24.4236C4.68641 24.1672 4.61504 23.8894 4.65093 23.5903L4.99197 20.0031L2.62017 17.2903C2.41506 17.0715 2.3125 16.8083 2.3125 16.5006C2.3125 16.1929 2.41506 15.9296 2.62017 15.7108L4.99197 12.998L4.65093 9.41087C4.61504 9.11172 4.68641 8.83394 4.86503 8.57754C5.04366 8.32112 5.28254 8.16385 5.5817 8.10574L9.06887 7.35704L10.9124 4.25704C11.0731 3.99379 11.2919 3.8143 11.5689 3.71857C11.8458 3.62286 12.127 3.63739 12.4124 3.76217L15.6996 5.1519L18.9868 3.76217C19.2722 3.63739 19.5534 3.62286 19.8303 3.71857C20.1073 3.8143 20.3261 3.99379 20.4868 4.25704L22.3303 7.35704L25.8175 8.10574C26.1167 8.16385 26.3555 8.32112 26.5342 8.57754C26.7128 8.83394 26.7842 9.11172 26.7483 9.41087L26.4072 12.998L28.779 15.7108C28.9842 15.9296 29.0867 16.1929 29.0867 16.5006C29.0867 16.8083 28.9842 17.0715 28.779 17.2903L26.4072 20.0031L26.7483 23.5903C26.7842 23.8894 26.7128 24.1672 26.5342 24.4236C26.3555 24.68 26.1167 24.8373 25.8175 24.8954L22.3303 25.6441L20.4868 28.7441C20.3261 29.0073 20.1073 29.1868 19.8303 29.2826C19.5534 29.3783 19.2722 29.3638 18.9868 29.239L15.6996 27.8492L12.4124 29.239C12.127 29.3638 11.8458 29.3783 11.5689 29.2826C11.2919 29.1868 11.0731 29.0073 10.9124 28.7441ZM12.2996 27.1006L15.6996 25.6595L19.1406 27.1006L21.0329 23.9006L24.6996 23.0595L24.3663 19.3006L26.8329 16.5006L24.3663 13.6595L24.6996 9.90057L21.0329 9.10057L19.0996 5.90057L15.6996 7.3416L12.2586 5.90057L10.3663 9.10057L6.6996 9.90057L7.03293 13.6595L4.56627 16.5006L7.03293 19.3006L6.6996 23.1006L10.3663 23.9006L12.2996 27.1006Z\" fill=\"url(#paint0_linear_581_11042)\"/>\n  <defs>\n    <linearGradient id=\"paint0_linear_581_11042\" x1=\"3.91429\" y1=\"16.5006\" x2=\"27.7583\" y2=\"15.8737\" gradientUnits=\"userSpaceOnUse\">\n      <stop stop-color=\"#194185\"/>\n      <stop offset=\"1\" stop-color=\"#1570EF\"/>\n    </linearGradient>\n  </defs>\n</svg>"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Free shipping"
+        }
+      ]
+    }
+  ]
+}
+{%- endschema %}

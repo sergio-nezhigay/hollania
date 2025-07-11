@@ -1,0 +1,47 @@
+{%- comment -%}
+
+  props:
+    - block
+    - image_load
+{%- endcomment -%}
+
+{%- assign settings = block.settings -%}
+
+<div class="bg-white rounded-lg border border-grey-200 shadow-md overflow-hidden pb-8 h-full relative space-y-4">
+  <div class="aspect-w-[327] aspect-h-[230] xl:aspect-w-[389] xl:aspect-h-[178]">
+    {%- if settings.video != blank -%}
+      <controlled-video>
+        {{- settings.video | video_tag: class: 'w-full h-full' -}}
+        <button
+            class="text-brand-700 bg-brand-50 p-3 shadow-sm shadow-[rgba(16,24,40,0.05)] rounded-lg absolute-centered"
+            data-play
+        >
+          {%- render 'icon', name: 'play', class: 'w-10 h-10 xl:w-8 xl:h-7' -%}
+        </button>
+      </controlled-video>
+      {%- elsif settings.video_url != blank -%}
+        <iframe
+          src="https://www.youtube.com/embed/{{ settings.video_url.id }}"
+          title="{{ settings.heading }}"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          class="w-full h-full"
+          allowfullscreen></iframe>
+      {%- else -%}
+      {%-
+          render 'image-with-placeholder',
+          image: settings.image,
+          alt: settings.image.alt,
+          width: 1029,
+          class: 'object-contain',
+          loading: image_load
+      -%}
+    {%- endif -%}
+  </div>
+
+  <div class="px-2 text-center text-lg">
+    <div class="font-bold">{{- settings.heading -}}</div>
+    <div dir="ltr" class="font-medium">{{- settings.subheading -}}</div>
+  </div>
+
+  <p class="px-2 text-center text-sm">{{- settings.description -}}</p>
+</div>

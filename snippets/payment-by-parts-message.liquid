@@ -1,0 +1,24 @@
+{% comment %}
+  props
+    - price
+    - class
+    - parts
+{% endcomment %}
+
+{% liquid
+  assign price_number = price | divided_by: 100
+
+  if parts != blank and parts > 0
+    assign parts_count = parts
+  else
+    if price_number < 500
+      assign parts_count = 3
+    elsif price_number >= 500 and price_number < 1000
+      assign parts_count = 10
+    elsif price_number >= 1000
+      assign parts_count = 12
+    endif
+  endif
+%}
+
+<div class="{{ class }}">{{ price | divided_by: parts_count | money_without_trailing_zeros }} לחודש * {{ parts_count }} תשלומים</div>

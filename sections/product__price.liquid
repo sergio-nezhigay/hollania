@@ -1,0 +1,137 @@
+{%- liquid
+  assign variant = product.selected_or_first_available_variant
+  assign compare_at_price = variant.compare_at_price
+  assign price = variant.price
+  assign price_label = 'מחיר חבילה'
+
+  comment
+    Product label logic:
+  endcomment
+  if product.metafields.custom.price_label != blank
+    assign price_label = product.metafields.custom.price_label
+  elsif product.metafields.custom.hide_detailed_bed_price_table.value
+    assign price_label = 'מחיר'
+  endif
+
+  comment
+    Discount price calculation logic:
+  endcomment
+  if compare_at_price != blank
+    assign discont_in_percent = compare_at_price | minus: price | times: 100 | divided_by: compare_at_price
+  endif
+  assign discount_expire_date = product.metafields.custom.discount_expire_date.value
+
+  comment
+    Gift message logic:
+  endcomment
+  assign gift_message_price = variant.metafields.custom.gift_price.value
+  assign gift_expire_date = variant.metafields.custom.gift_expire_date.value
+
+
+  comment
+    Delivery price calculation logic:
+  endcomment
+  assign delivery_price = 0
+  assign assembly_price = product.metafields.custom.assembly_price.value | default: 0
+  assign training_price = product.metafields.custom.training_price.value | default: 0
+  assign shipping_price = product.metafields.custom.shipping_price.value | default: 0
+  assign shipping_price2 = product.metafields.custom.shipping_price2.value | default: 0
+  assign variant_shipping_price = variant.metafields.custom.shipping_price.value | default: 0
+  assign delivery_price_text = 'משלוח'
+  assign is_pickup = variant.metafields.custom.pickup.value | default: false
+
+  if shipping_price > 0
+    assign delivery_price_text = 'הובלה'
+    assign delivery_price = shipping_price
+  endif
+
+  if shipping_price2 > 0
+    assign delivery_price_text = 'משלוח'
+    assign delivery_price = shipping_price2
+  endif
+
+  if assembly_price > 0
+    assign delivery_price_text = 'הובלה והרכבה'
+    assign delivery_price = assembly_price
+  endif
+
+  if training_price > 0
+    assign delivery_price_text = 'הובלה, הרכבה והדרכה'
+    assign delivery_price = training_price
+  endif
+
+  if variant_shipping_price > 0
+    assign delivery_price_text = 'משלוח'
+    assign delivery_price = variant_shipping_price
+  endif
+
+  if is_pickup
+    assign delivery_price_text = 'איסוף'
+  endif
+
+  assign total_price = price | plus: delivery_price
+-%}
+
+<div class="mt-4"></div>
+
+{% if gift_message_price != blank and gift_expire_date != blank %}
+  <div class="px-4 xl:pl-0 xl:pr-8">
+    <div class="bg-[#FEF5F5] px-2 py-1 rounded-t space-x-reverse space-x-2 flex items-center text-red-500 font-medium text-xsm xl:text-lg">
+      {% render 'icon', name: 'gift', class: 'w-5 xl:w-7' %}
+      שווי מתנה {{ gift_message_price | divided_by: 100 }} ש"ח בתוקף עד ה {{ gift_expire_date | date: "%d.%m.%y" }}
+    </div>
+  </div>
+{% elsif discont_in_percent != blank and discount_expire_date != blank %}
+  <div class="px-4 xl:pl-0 xl:pr-8">
+    <div class="bg-[#FEF5F5] px-2 py-1 rounded-t space-x-reverse space-x-2 flex items-center text-red-500 font-medium text-xsm xl:text-lg">
+      {% render 'icon', name: 'discount', class: 'w-3.5 xl:w-4' %}
+
+      {%-
+        render 'product-discount-message',
+        expire_date: discount_expire_date,
+        discont_in_percent: discont_in_percent,
+        show_percentage: product.metafields.custom.discount_show_percentage.value,
+        custom_discount_label: product.metafields.custom.discount-label,
+        product_id: product.id
+      -%}
+    </div>
+  </div>
+{% endif %}
+
+<div class="mx-4 grid grid-cols-3 xl:mx-0 xl:pr-8">
+  <div class="bg-brand-50 border-l border-grey-500/10 last:border-none flex flex-col items-center justify-center px-2 py-4">
+    {%- if compare_at_price != blank -%}
+      <s class="text-sm font-medium text-grey-500">{{ compare_at_price | money_without_trailing_zeros | replace: '₪', '' | replace: '.', ',' }} ש”ח</s>
+      {%- else -%}
+      <span class="text-sm font-medium text-grey-500">
+        {{ price_label }}
+      </span>
+    {%- endif -%}
+    <div class="font-bold text-brand-600">{{- price | money_without_trailing_zeros | replace: '.', ',' -}}</div>
+  </div>
+  <div class="bg-brand-50 border-l border-grey-500/10 last:border-none flex flex-col items-center justify-center px-2 py-4">
+    <div class="text-sm font-medium text-grey-500">{{ delivery_price_text }}</div>
+    <div class="font-bold text-brand-600">
+      {% if delivery_price > 0 %}
+        {{- delivery_price | money_without_trailing_zeros | replace: '.', ',' -}}
+      {% elsif is_pickup %}
+        עצמי
+      {% else %}
+        חינם
+      {% endif %}
+    </div>
+  </div>
+  <div class="bg-brand-50 border-l border-grey-500/10 last:border-none flex flex-col items-center justify-center px-2 py-4">
+    <div class="text-sm font-medium text-grey-500">סה”כ</div>
+    <div class="font-bold text-brand-600">{{- total_price | money_without_trailing_zeros | replace: '.', ',' -}}</div>
+  </div>
+</div>
+
+{% render 'payment-by-parts-message', price: price, parts: product.metafields.custom.payment_parts, class: 'mt-3 font-bold text-sm text-brand-700 text-center xl:pr-8 xl:text-right' %}
+
+{%- schema -%}
+ {
+   "name": "Product price",
+   "class": "jsProductPriceSection product-price-section"
+ }
+{%- endschema -%}

@@ -1,0 +1,96 @@
+<div class="p-4 space-y-10 mt-8 mb-6 lg:grid lg:grid-cols-2 lg:gap-y-10 lg:gap-x-4 lg:space-y-0 lg:max-w-3xl lg:mx-auto xl:mb-14">
+  {% for block in section.blocks %}
+    {% if block.type == 'hours' %}
+      <div class="flex flex-col items-center text-center space-y-3 max-w-[280px] mx-auto xl:col-span-2">
+        <img class="w-10 h-10" src="{{ 'icon--stores-time.svg' | asset_url }}" alt="Working hours">
+        <h3 class="text-xl font-bold">{{ block.settings.title }}</h3>
+        <p>{{ block.settings.hours }}</p>
+      </div>
+    {% else %}
+      {% render 'contact', type: block.settings.contact_type, value: block.settings.value, title: block.settings.title %}
+    {% endif %}
+  {% endfor %}
+</div>
+
+{%- schema -%}
+{
+  "name": "Page contacts",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "text",
+      "id": "text_gr",
+      "label": "Text gradient",
+      "default": "Text gradient"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon",
+      "label": "Icon"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "hours",
+      "name": "Hours",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "שעות פעילות מוקד שירות הלקוחות ושירות האספקות"
+        },
+        {
+          "type": "text",
+          "id": "hours",
+          "label": "hours",
+          "default": "א-ה: 8:30-16:30"
+        }
+      ]
+    },
+    {
+      "type": "contact",
+      "name": "Contact",
+      "settings": [
+        {
+          "type": "select",
+          "id": "contact_type",
+          "label": "Contact type",
+          "options": [
+            {
+              "value": "whatsapp",
+              "label": "Whatsapp"
+            },
+            {
+              "value": "phone",
+              "label": "Phone"
+            },
+            {
+              "value": "email",
+              "label": "Email"
+            }
+          ],
+          "default": "whatsapp"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "שירות לקוחות ב - WhatsApp"
+        },
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Contact",
+          "default": "0559596317",
+          "info": "Whatsapp or Phone number or email"
+        }
+      ]
+    }
+  ]
+}
+{%- endschema %}

@@ -1,0 +1,475 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero_baner_Ti8QUi": {
+      "type": "Hero-baner",
+      "name": "Dual Banner Section",
+      "settings": {
+        "main_banner_image": "shopify://shop_images/Frame_1000004525.png",
+        "main_banner_mobile_image": "shopify://shop_images/Frame_1000004525_1.png",
+        "secondary_banner_bg_color": "#f4efec",
+        "secondary_banner_title": "הולנדיה- המרכז להנדסת השינה",
+        "secondary_banner_subtitle": "44 שנה של טכנולוגיה חדשנית ואיכות ללא פשרות",
+        "secondary_title_color": "#1a1a1b",
+        "secondary_subtitle_color": "#1a1a1b",
+        "overlay_color": "#ede7e3",
+        "overlay_opacity": 0
+      }
+    },
+    "collection_list_TMKWaw": {
+      "type": "collection-list",
+      "blocks": {
+        "collection_wPAqaY": {
+          "type": "collection",
+          "settings": {
+            "collection": "מיטות"
+          }
+        },
+        "collection_WCBfnD": {
+          "type": "collection",
+          "settings": {
+            "collection": "מזרנים"
+          }
+        },
+        "collection_Cijwgr": {
+          "type": "collection",
+          "settings": {
+            "collection": "ספה-מיטה"
+          }
+        },
+        "collection_j68qY8": {
+          "type": "collection",
+          "settings": {
+            "collection": "כריות"
+          }
+        },
+        "collection_MiLWze": {
+          "type": "collection",
+          "settings": {
+            "collection": "כריות"
+          }
+        },
+        "collection_ezVg3E": {
+          "type": "collection",
+          "settings": {
+            "collection": "כריות"
+          }
+        }
+      },
+      "block_order": [
+        "collection_wPAqaY",
+        "collection_WCBfnD",
+        "collection_Cijwgr",
+        "collection_j68qY8",
+        "collection_MiLWze",
+        "collection_ezVg3E"
+      ],
+      "name": "Collections List",
+      "settings": {
+        "title": "Our Collections"
+      }
+    },
+    "baner_graident_FAKqXH": {
+      "type": "baner-graident",
+      "blocks": {
+        "slide_V9Latk": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/001.png",
+            "title": "חיטות מתכוננות",
+            "description": "מבחר חיטות מתכוננות מבית הגלריה, במגוון עיצובים מרשימים לנוחות מקסימלית בשינת הליל שלכם.",
+            "button_text": "לכל החיטות המתכוננות",
+            "button_url": "#"
+          }
+        },
+        "slide_LeAR8H": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/001.png",
+            "title": "חיטות מתכוננות123123123123",
+            "description": "מבחר חיטות מתכוננות מבית הגלריה, במגוון עיצובים מרשימים לנוחות מקסימלית בשינת הליל שלכם.",
+            "button_text": "לכל החיטות המתכוננות",
+            "button_url": "#"
+          }
+        },
+        "slide_KnMGaB": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/001.png",
+            "title": "חיטות מתכוננות123123123131",
+            "description": "מבחר חיטות מתכוננות מבית הגלריה, במגוון עיצובים מרשימים לנוחות מקסימלית בשינת הליל שלכם.",
+            "button_text": "לכל החיטות המתכוננות",
+            "button_url": "#"
+          }
+        },
+        "slide_4kWERd": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/001.png",
+            "title": "חיטות מתכוננות12312312312",
+            "description": "מבחר חיטות מתכוננות מבית הגלריה, במגוון עיצובים מרשימים לנוחות מקסימלית בשינת הליל שלכם.1r13r31r1",
+            "button_text": "לכל החיטות המתכוננות",
+            "button_url": "#"
+          }
+        },
+        "slide_pWtPCa": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/001.png",
+            "title": "חיטות מתכוננות",
+            "description": "מבחר חיטות מתכוננות מבית הגלריה, במגוון עיצובים מרשימים לנוחות מקסימלית בשינת הליל שלכם.3rr2r32r",
+            "button_text": "לכל החיטות המתכוננות",
+            "button_url": "#"
+          }
+        },
+        "slide_PJwCmU": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/001.png",
+            "title": "חיטות מתכוננות",
+            "description": "מבחר חיטות מתכוננות מבית הגלריה, במגוון עיצובים מרשימים לנוחות מקסימלית בשינת הליל שלכם.erg",
+            "button_text": "לכל החיטות המתכוננות",
+            "button_url": "#"
+          }
+        }
+      },
+      "block_order": [
+        "slide_V9Latk",
+        "slide_LeAR8H",
+        "slide_KnMGaB",
+        "slide_4kWERd",
+        "slide_pWtPCa",
+        "slide_PJwCmU"
+      ],
+      "custom_css": [
+        ".hero-image {padding-top: 10px;}"
+      ],
+      "name": "Hero Banner Slider",
+      "settings": {}
+    },
+    "product_slider_WkgfbV": {
+      "type": "product-slider",
+      "name": "Product Slider",
+      "settings": {
+        "title": "מבצעים",
+        "collection": "frontpage",
+        "products_to_show": 8,
+        "show_discount_badge": true,
+        "show_view_all": true,
+        "view_all_text": "צפו בהכל"
+      }
+    },
+    "baner_tUUmQf": {
+      "type": "baner",
+      "custom_css": [
+        "@media screen and (min-width: 1024px) {.custom-image-section {padding-bottom: 70px; }}"
+      ],
+      "name": "Baner",
+      "settings": {
+        "image": "shopify://shop_images/142506_1920x620_2.png",
+        "image_url": "shopify://collections"
+      }
+    },
+    "big_baner_meCyVM": {
+      "type": "Big-Baner",
+      "name": "Big Banner",
+      "settings": {
+        "background_image": "shopify://shop_images/Frame_845.png",
+        "background_image_mobile": "shopify://shop_images/Frame_845_1.png",
+        "title": "מזרני טמפור",
+        "text": "המזרנים הטובים בעולם עם תרכובת ה- Tempur advanced שפותחה במעבדות החלל של NASA, למזרן הרכב ייחודי המכיל מיליארדי תאים רגישים המגיבים לצורה המדויקת של הגוף שלכם.",
+        "button_text": "לכל המזרנים",
+        "button_link": "#"
+      }
+    },
+    "product_slider_3rkeCP": {
+      "type": "product-slider",
+      "name": "Product Slider",
+      "settings": {
+        "title": "משלימי חווית שינה",
+        "collection": "frontpage",
+        "products_to_show": 8,
+        "show_discount_badge": false,
+        "show_view_all": true,
+        "view_all_text": "צפו בהכל"
+      }
+    },
+    "video_baner_Y9KafV": {
+      "type": "video-baner",
+      "name": "Media with Text",
+      "settings": {
+        "content_type": "image",
+        "image": "shopify://shop_images/WhatsApp_Image_2025-04-01_at_16.25.27_1.png",
+        "video": "https://www.youtube.com/watch?v=GIWFBBwZdzw&list=RDGIWFBBwZdzw&start_radio=1",
+        "youtube_url": "",
+        "title": "ספות נפתחות למיטה",
+        "subtitle": "ק בהולנדיה, מזרן טמפור בספות הנפתחות למיטה.",
+        "text": "<p>מעכשיו השינה על ספות הנפתחות למיטה היא שינה איכותית ונוחה בדיוק כמו בכל מיטה עם מזרן טמפור.</p>",
+        "button_text": "לכל הכנסאות",
+        "button_link": "#"
+      }
+    },
+    "faq_DLGRfR": {
+      "type": "FAQ",
+      "blocks": {
+        "store_FD67fc": {
+          "type": "store",
+          "settings": {
+            "store_name": "סניף הרצליה",
+            "store_content": ""
+          }
+        },
+        "store_z8g3WK": {
+          "type": "store",
+          "settings": {
+            "store_name": "סניף בני ברק, דיזיין-סנטר",
+            "store_content": ""
+          }
+        },
+        "store_QenmLR": {
+          "type": "store",
+          "settings": {
+            "store_name": "סניף ראשון לציון",
+            "store_content": ""
+          }
+        },
+        "store_p8bAQA": {
+          "type": "store",
+          "settings": {
+            "store_name": "Outlet סניף רחובות ביל\"ו סנטר",
+            "store_content": ""
+          }
+        },
+        "store_DwjQ6X": {
+          "type": "store",
+          "settings": {
+            "store_name": "סניף קרית אתא, מתחם Redesign",
+            "store_content": ""
+          }
+        },
+        "store_CmhXbq": {
+          "type": "store",
+          "settings": {
+            "store_name": "סניף ירושלים",
+            "store_content": ""
+          }
+        },
+        "store_xUxV44": {
+          "type": "store",
+          "settings": {
+            "store_name": "סניף מישור אדומים, D-City",
+            "store_content": ""
+          }
+        },
+        "store_j7UEUT": {
+          "type": "store",
+          "settings": {
+            "store_name": "סניף באר שבע, +Design",
+            "store_content": ""
+          }
+        }
+      },
+      "block_order": [
+        "store_FD67fc",
+        "store_z8g3WK",
+        "store_QenmLR",
+        "store_p8bAQA",
+        "store_DwjQ6X",
+        "store_CmhXbq",
+        "store_xUxV44",
+        "store_j7UEUT"
+      ],
+      "name": "FAQ custom",
+      "settings": {
+        "heading": "Our Stores",
+        "heading_color": "#888888",
+        "item_color": "#dd2d4a"
+      }
+    },
+    "custom_contact_6jtxyi": {
+      "type": "custom-contact",
+      "name": "Contact Section",
+      "settings": {
+        "background_image": "shopify://shop_images/Frame_859_e3072029-b64d-471f-9110-5fff38a9cfa1.png",
+        "background_image_desktop": "shopify://shop_images/Frame_859.png",
+        "heading": "Contact Us",
+        "subheading": "כל אחד מאיתנו ייחודי, ולכן נדרשת התאמה אישית וחופש בחירה.",
+        "description": "לפגישת התאמה צרו קשר",
+        "button_text": "שליחה",
+        "checkbox_text": "מאשר קבלת הודעות על הטבות ומבצעים בדוא\"ל / מסרונים",
+        "require_checkbox": true,
+        "success_message": "ההודעה נשלחה בהצלחה! נחזור אלייך בהקדם",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "instagram_feed_FjNfEX": {
+      "type": "instagram-feed",
+      "blocks": {
+        "image_pF7Jgi": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/1.png",
+            "alt_text": ""
+          }
+        },
+        "image_rqyGW9": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/2.png",
+            "alt_text": ""
+          }
+        },
+        "image_ebKRB3": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/3.png",
+            "alt_text": ""
+          }
+        },
+        "image_g4MDmK": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/4.png",
+            "alt_text": ""
+          }
+        },
+        "image_tcwejW": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/5.png",
+            "alt_text": ""
+          }
+        },
+        "image_GRQFTe": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/6.png",
+            "alt_text": ""
+          }
+        },
+        "image_aAXyKe": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/7.png",
+            "alt_text": ""
+          }
+        },
+        "image_xwV4PN": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/8.png",
+            "alt_text": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_pF7Jgi",
+        "image_rqyGW9",
+        "image_ebKRB3",
+        "image_g4MDmK",
+        "image_tcwejW",
+        "image_GRQFTe",
+        "image_aAXyKe",
+        "image_xwV4PN"
+      ],
+      "name": "Instagram Feed",
+      "settings": {
+        "title": "Our Instagram Feed",
+        "instagram_url": "#",
+        "badge_text": "Follow us"
+      }
+    },
+    "book_showcase_WUXTpp": {
+      "type": "book-showcase",
+      "blocks": {
+        "product_gxMjHz": {
+          "type": "product",
+          "settings": {
+            "product_image": "shopify://shop_images/image_143.png",
+            "product_title": "NAP",
+            "product_description": "גלו איך תשיגו בוסט של אנרגיה מנמנום קצר באמצע היום",
+            "product_link": "#"
+          }
+        },
+        "product_UKcKM9": {
+          "type": "product",
+          "settings": {
+            "product_image": "shopify://shop_images/image_144.png",
+            "product_title": "לילה במתנה",
+            "product_description": "כל מה שרציתם לדעת על התרומה של החלל לחיינו – ולשינה שלנו",
+            "product_link": "#"
+          }
+        },
+        "product_pdLAG6": {
+          "type": "product",
+          "settings": {
+            "product_image": "shopify://shop_images/image_145.png",
+            "product_title": "ילדים, עכשיו לישון!",
+            "product_description": "הספר שיגרום לכם לישון טוב בלילה ולהתעורר עם חיוך",
+            "product_link": "#"
+          }
+        },
+        "product_f7hGd6": {
+          "type": "product",
+          "settings": {
+            "product_image": "shopify://shop_images/image_142.png",
+            "product_title": "הולנדיה הספר",
+            "product_description": "איך הוקמה הולנדיה מתוך לילות טרופי שינה של מגדל ארטישוקים במושב אורות",
+            "product_link": "#"
+          }
+        },
+        "product_nni3mh": {
+          "type": "product",
+          "settings": {
+            "product_image": "shopify://shop_images/image_141.png",
+            "product_title": "ספר החלל",
+            "product_description": "כל מה שרציתם לדעת על התרומה של החלל לחיינו – ולשינה שלנו",
+            "product_link": "#"
+          }
+        }
+      },
+      "block_order": [
+        "product_gxMjHz",
+        "product_UKcKM9",
+        "product_pdLAG6",
+        "product_f7hGd6",
+        "product_nni3mh"
+      ],
+      "custom_css": [
+        ".author-books-section-wrapper {margin-top: 20px; margin-bottom: 30px;}"
+      ],
+      "name": "Hebrew Product Showcase",
+      "settings": {
+        "text_bg_image": "shopify://shop_images/Group_844.png",
+        "author_avatar": "shopify://shop_images/2_57e21bbb-0b9c-4154-9041-b8cf1c10819e.png",
+        "section_title": "הספרים של אבי ברוססו",
+        "section_description": "שינה טובה אינה מותרת, והפרעות שינה אינן גזירת גורל. שינה טובה היא המנגנון המרפא של הגוף, ומלפחת את הזיכרון ואת מצב רחמו, מאפשרת לנו להיות יצירתיים ושמחים יותר. האם שנת הילדה שלכם רצופה וטובה? האם אתם קמים בבוקר רעננים? איך להבטיח לילה שקט גם עם תינוקות קטנים בבית?",
+        "cta_text": "לכל הספרים",
+        "cta_url": "#"
+      }
+    }
+  },
+  "order": [
+    "hero_baner_Ti8QUi",
+    "collection_list_TMKWaw",
+    "baner_graident_FAKqXH",
+    "product_slider_WkgfbV",
+    "baner_tUUmQf",
+    "big_baner_meCyVM",
+    "product_slider_3rkeCP",
+    "video_baner_Y9KafV",
+    "faq_DLGRfR",
+    "custom_contact_6jtxyi",
+    "instagram_feed_FjNfEX",
+    "book_showcase_WUXTpp"
+  ]
+}

@@ -1,0 +1,123 @@
+<div class="px-4 py-8 sl-container xl:py-14 lg:flex lg:items-start">
+
+  <div class="aspect-w-2 aspect-h-1 rounded-lg overflow-hidden flex-1 lg:aspect-w-5 lg:aspect-h-2 lg:mr-8">
+    {%- if section.settings.video != blank -%}
+      <controlled-video>
+        {{- section.settings.video | video_tag: class: 'w-full h-full' -}}
+        <button
+            class="text-brand-700 bg-brand-50 p-3 shadow-sm shadow-[rgba(16,24,40,0.05)] rounded-lg absolute-centered-x top-1/6 lg:absolute-centered"
+            data-play
+        >
+          {%- render 'icon', name: 'play', class: 'w-10 h-10' -%}
+        </button>
+      </controlled-video>
+
+    {%- else-%}
+
+      {%-
+        render 'image-with-placeholder',
+        image: section.settings.image,
+        width: 1029,
+        class: 'object-cover',
+        loading: 'lazy'
+      -%}
+    {%- endif -%}
+  </div>
+
+  <div class="lg:w-1/3 lg:-order-1">
+    {%- for block in section.blocks -%}
+      {%- capture blockHtml -%}
+        <h2 class="mt-4 font-bold text-lg xl:text-2xl xl:first:mt-0 xl:mt-10">{{- block.settings.heading -}}</h2>
+        <p class="opacity-60 xl:text-lg">{{- block.settings.text -}}</p>
+      {%- endcapture -%}
+
+      {%- liquid
+        if block.settings.hidden
+          capture hiddenBlocks
+            echo hiddenBlocks
+            echo blockHtml
+          endcapture
+          continue
+        endif
+      -%}
+
+      {{- blockHtml -}}
+    {%- endfor -%}
+
+    {%- if hiddenBlocks != blank -%}
+      {%- capture readMoreLessContent -%}
+        <span class="group-data-[toggle=opened]:hidden">{{ section.settings.btn_text_open }}</span>
+        <span class="group-data-[toggle=closed]:hidden">{{ section.settings.btn_text_close }}</span>
+      {%- endcapture -%}
+
+      <accordion-component class="flex flex-col items-start">
+        {%- render 'button',
+          size: 'sm',
+          class: 'btn-secondary mt-4 inline-block data-[toggle=opened]:order-3 group peer xl:py-1.5',
+          content: readMoreLessContent,
+          attrs: 'data-toggle=closed'
+        -%}
+
+        <div class="peer-data-[toggle=closed]:hidden xl:mt-10">
+          {{- hiddenBlocks -}}
+        </div>
+      </accordion-component>
+    {%- endif -%}
+  </div>
+</div>
+
+{%- schema -%}
+{
+  "name": "About",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Video",
+      "info": "It will be shown instead of image if both are set"
+    },
+    {
+      "type": "text",
+      "id": "btn_text_open",
+      "label": "Read more button text",
+      "default": "סגור"
+    },
+    {
+      "type": "text",
+      "id": "btn_text_close",
+      "label": "Read less button text",
+      "default": "להתחבא"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text_block",
+      "name": "Text Block",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "אודות סיילי"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text"
+        },
+        {
+          "type": "checkbox",
+          "id": "hidden",
+          "label": "Hide this block",
+          "info": "This block will be hidden over \"קיראו עוד\" button"
+        }
+      ]
+    }
+  ]
+}
+{%- endschema -%}

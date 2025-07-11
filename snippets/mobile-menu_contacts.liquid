@@ -1,0 +1,18 @@
+<div class="mt-6 pt-6 border-t border-t-brand-100 space-y-10">
+  <h2 class="section-title">תמיד לרשותכם</h2>
+
+  {% comment %}
+    WhatsApp
+  {% endcomment %}
+  {% render 'contact', type: 'whatsapp', class: 'lg:mt-0' %}
+
+  {% comment %}
+    Email
+  {% endcomment %}
+  {% render 'contact', type: 'email' %}
+
+  {% comment %}
+    Phone
+  {% endcomment %}
+  {% render 'contact', type: 'phone' %}
+</div>

@@ -1,0 +1,328 @@
+{{ 'book-showcase.css' | asset_url | stylesheet_tag }}
+
+<div class="author-books-section-wrapper">
+  <div class="author-books-products-block">
+    <div class="author-books-products-grid">
+      <div class="author-books-products-row-1">
+        {% for block in section.blocks limit: 3 %}
+          <div class="author-books-product-card" {{ block.shopify_attributes }}>
+            {% if block.settings.product_link != blank %}
+              <a href="{{ block.settings.product_link }}" style="text-decoration: none; color: inherit;">
+            {% endif %}
+            
+            <div class="author-books-product-image-container">
+              {% if block.settings.product_image != blank %}
+                <img src="{{ block.settings.product_image | img_url: '276x378' }}" 
+                     alt="{{ block.settings.product_title }}" 
+                     class="author-books-product-image">
+              {% else %}
+                <div class="author-books-product-image" style="background-color: rgba(255,255,255,0.1);"></div>
+              {% endif %}
+            </div>
+            
+            {% if block.settings.product_title != blank %}
+              <div class="author-books-product-title">{{ block.settings.product_title }}</div>
+            {% endif %}
+            
+            {% if block.settings.product_description != blank %}
+              <div class="author-books-product-description">{{ block.settings.product_description }}</div>
+            {% endif %}
+            
+            {% if block.settings.product_link != blank %}
+              </a>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+
+      <div class="author-books-products-row-2">
+        {% for block in section.blocks offset: 3 limit: 2 %}
+          <div class="author-books-product-card" {{ block.shopify_attributes }}>
+            {% if block.settings.product_link != blank %}
+              <a href="{{ block.settings.product_link }}" style="text-decoration: none; color: inherit;">
+            {% endif %}
+            
+            <div class="author-books-product-image-container">
+              {% if block.settings.product_image != blank %}
+                <img src="{{ block.settings.product_image | img_url: '276x378' }}" 
+                     alt="{{ block.settings.product_title }}" 
+                     class="author-books-product-image">
+              {% else %}
+                <div class="author-books-product-image" style="background-color: rgba(255,255,255,0.1);"></div>
+              {% endif %}
+            </div>
+            
+            {% if block.settings.product_title != blank %}
+              <div class="author-books-product-title">{{ block.settings.product_title }}</div>
+            {% endif %}
+            
+            {% if block.settings.product_description != blank %}
+              <div class="author-books-product-description">{{ block.settings.product_description }}</div>
+            {% endif %}
+            
+            {% if block.settings.product_link != blank %}
+              </a>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+
+      <div class="author-books-products-row-3">
+        {% for block in section.blocks offset: 5 %}
+          <div class="author-books-product-card" {{ block.shopify_attributes }}>
+            {% if block.settings.product_link != blank %}
+              <a href="{{ block.settings.product_link }}" style="text-decoration: none; color: inherit;">
+            {% endif %}
+            
+            <div class="author-books-product-image-container">
+              {% if block.settings.product_image != blank %}
+                <img src="{{ block.settings.product_image | img_url: '276x378' }}" 
+                     alt="{{ block.settings.product_title }}" 
+                     class="author-books-product-image">
+              {% else %}
+                <div class="author-books-product-image" style="background-color: rgba(255,255,255,0.1);"></div>
+              {% endif %}
+            </div>
+            
+            {% if block.settings.product_title != blank %}
+              <div class="author-books-product-title">{{ block.settings.product_title }}</div>
+            {% endif %}
+            
+            {% if block.settings.product_description != blank %}
+              <div class="author-books-product-description">{{ block.settings.product_description }}</div>
+            {% endif %}
+            
+            {% if block.settings.product_link != blank %}
+              </a>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="author-books-mobile-swiper swiper">
+      <div class="swiper-wrapper">
+        {% for block in section.blocks %}
+          <div class="swiper-slide">
+            <div class="author-books-product-card" {{ block.shopify_attributes }}>
+              {% if block.settings.product_link != blank %}
+                <a href="{{ block.settings.product_link }}" style="text-decoration: none; color: inherit;">
+              {% endif %}
+              
+              <div class="author-books-product-image-container">
+                {% if block.settings.product_image != blank %}
+                  <img src="{{ block.settings.product_image | img_url: '240x328' }}" 
+                       alt="{{ block.settings.product_title }}" 
+                       class="author-books-product-image">
+                {% else %}
+                  <div class="author-books-product-image" style="background-color: rgba(255,255,255,0.1);"></div>
+                {% endif %}
+              </div>
+              
+              {% if block.settings.product_title != blank %}
+                <div class="author-books-product-title">{{ block.settings.product_title }}</div>
+              {% endif %}
+              
+              {% if block.settings.product_description != blank %}
+                <div class="author-books-product-description">{{ block.settings.product_description }}</div>
+              {% endif %}
+              
+              {% if block.settings.product_link != blank %}
+                </a>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
+  </div>
+
+  <div class="author-books-text-block">
+    <div class="author-books-text-content">
+      {% if section.settings.author_avatar != blank %}
+        <img src="{{ section.settings.author_avatar | img_url: '254x254' }}" 
+             alt="Author Avatar" 
+             class="author-books-author-avatar">
+      {% endif %}
+      
+      {% if section.settings.section_title != blank %}
+        <h2 class="author-books-section-title">{{ section.settings.section_title }}</h2>
+      {% endif %}
+      
+      {% if section.settings.section_description != blank %}
+        <div class="author-books-section-description">{{ section.settings.section_description | newline_to_br }}</div>
+      {% endif %}
+      
+      {% if section.settings.cta_text != blank and section.settings.cta_url != blank %}
+        <a href="{{ section.settings.cta_url }}" class="author-books-cta-button">{{ section.settings.cta_text }}</a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    function initAuthorBooksSwiper() {
+      const authorBooksSwiperEl = document.querySelector('.author-books-mobile-swiper');
+      if (authorBooksSwiperEl && window.innerWidth <= 767) {
+        if (authorBooksSwiperEl.swiper) {
+          authorBooksSwiperEl.swiper.destroy(true, true);
+        }
+        
+        const authorBooksSwiper = new Swiper(authorBooksSwiperEl, {
+          slidesPerView: 'auto',
+          spaceBetween: 10,
+          centeredSlides: false,
+          freeMode: false,
+          initialSlide: 0,
+          watchSlidesProgress: true,
+          watchSlidesVisibility: true,
+          updateOnWindowResize: true,
+          observer: true,
+          observeParents: true,
+          width: null,
+          pagination: {
+            el: '.author-books-mobile-swiper .swiper-pagination',
+            clickable: true,
+            type: 'bullets',
+          },
+          breakpoints: {
+            320: {
+              slidesPerView: 'auto',
+              spaceBetween: 8,
+            },
+            480: {
+              slidesPerView: 'auto',
+              spaceBetween: 10,
+            }
+          }
+        });
+        
+        setTimeout(() => {
+          if (authorBooksSwiper) {
+            authorBooksSwiper.update();
+          }
+        }, 100);
+      }
+    }
+
+    initAuthorBooksSwiper();
+    
+    window.addEventListener('resize', function() {
+      setTimeout(initAuthorBooksSwiper, 100);
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Author Books Section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Text Block Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "text_bg_image",
+      "label": "Text Block Background Image",
+      "info": "Optional background image for the text block (default: white)"
+    },
+    {
+      "type": "image_picker",
+      "id": "author_avatar",
+      "label": "Author Avatar",
+      "info": "127x127px author image"
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "הספרים של אבי ברוססו"
+    },
+    {
+      "type": "textarea",
+      "id": "section_description",
+      "label": "Section Description",
+      "default": "שינה טובה אינה מותרת, והפרעות שינה אינן גזירת גורל. שינה טובה היא המנגנון המרפא של הגוף, ומלפחת את הזיכרון ואת מצב רחמו, מאפשרת לנו להיות יצירתיים ושמחים יותר. האם שנת הילדה שלכם רצופה וטובה? האם אתם קמים בבוקר רעננים? איך להבטיח לילה שקט גם עם תינוקות קטנים בבית?"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA Button Text",
+      "default": "לכל הספרים"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA Button URL"
+    },
+    {
+      "type": "header",
+      "content": "Products Block Settings"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product Card",
+      "limit": 9,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "product_image",
+          "label": "Product Image",
+          "info": "138x189px product image"
+        },
+        {
+          "type": "text",
+          "id": "product_title",
+          "label": "Product Title",
+          "default": "Book Title"
+        },
+        {
+          "type": "textarea",
+          "id": "product_description",
+          "label": "Product Description",
+          "default": "Short book description"
+        },
+        {
+          "type": "url",
+          "id": "product_link",
+          "label": "Product Link",
+          "info": "Optional link to product page"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Book Showcase",
+      "blocks": [
+        {
+          "type": "product",
+          "settings": {
+            "product_title": "ילדים עייפים לישון",
+            "product_description": "כל מה שחיפשתם לדעת על הינוקות שלכם, זמן שינה והליכו מיטה והליכו שינה"
+          }
+        },
+        {
+          "type": "product",
+          "settings": {
+            "product_title": "לילה במתנה",
+            "product_description": "הספר שמירים לכם לישון טוב בלילה ולהתעורר עם חיוכוימים"
+          }
+        },
+        {
+          "type": "product",
+          "settings": {
+            "product_title": "NAP",
+            "product_description": "גילו איך תשינו בוסטי של אנרגיה ממנמומים קצר באמצע היום"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

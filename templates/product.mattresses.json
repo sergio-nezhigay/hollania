@@ -1,0 +1,236 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "breadcrumbs": {
+      "type": "product__breadcrumbs",
+      "settings": {}
+    },
+    "meta": {
+      "type": "product__meta",
+      "settings": {}
+    },
+    "slider": {
+      "type": "product__top-slider",
+      "settings": {}
+    },
+    "rating": {
+      "type": "product__rating",
+      "disabled": true,
+      "settings": {}
+    },
+    "price": {
+      "type": "product__price",
+      "settings": {}
+    },
+    "form": {
+      "type": "product__form",
+      "settings": {}
+    },
+    "info": {
+      "type": "product__info",
+      "settings": {}
+    },
+    "mattress_slider": {
+      "type": "product__mattress_slider",
+      "blocks": {
+        "point_rhEEkK1": {
+          "type": "point",
+          "settings": {
+            "title": "כותרת של שכבה מספר",
+            "content": "טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט"
+          }
+        },
+        "point_rhEEkK2": {
+          "type": "point",
+          "settings": {
+            "title": "כותרת של שכבה מספר",
+            "content": "טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט"
+          }
+        },
+        "point_rhEEkK3": {
+          "type": "point",
+          "settings": {
+            "title": "כותרת של שכבה מספר",
+            "content": "טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט"
+          }
+        },
+        "point_rhEEkK4": {
+          "type": "point",
+          "settings": {
+            "title": "כותרת של שכבה מספר",
+            "content": "טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט"
+          }
+        },
+        "point_rhEEkK5": {
+          "type": "point",
+          "settings": {
+            "title": "כותרת של שכבה מספר",
+            "content": "טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט"
+          }
+        },
+        "point_rhEEkK6": {
+          "type": "point",
+          "settings": {
+            "title": "כותרת של שכבה מספר",
+            "content": "טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט"
+          }
+        },
+        "point_rhEEkK7": {
+          "type": "point",
+          "settings": {
+            "title": "כותרת של שכבה מספר",
+            "content": "טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט"
+          }
+        }
+      },
+      "block_order": [
+        "point_rhEEkK1",
+        "point_rhEEkK2",
+        "point_rhEEkK3",
+        "point_rhEEkK4",
+        "point_rhEEkK5",
+        "point_rhEEkK6",
+        "point_rhEEkK7"
+      ],
+      "settings": {
+        "title": "ארבע שכבות לתמיכה חלומית"
+      }
+    },
+    "info_tech": {
+      "type": "product__info-tech",
+      "settings": {}
+    },
+    "banner-image": {
+      "type": "product__banner-image",
+      "settings": {}
+    },
+    "our_technologies": {
+      "type": "dynamic__custom-slideshow",
+      "blocks": {
+        "d125a9a1-c38f-4584-be60-feeb4004d619111": {
+          "type": "slide",
+          "settings": {
+            "video_url": "https://www.youtube.com/watch?v=MlFcL6mbtfU",
+            "image": "shopify://shop_images/Screenshot_2.png",
+            "heading": "תמיכה מחוזקת",
+            "subheading": "Posturepedic Technology™",
+            "description": "הידעתם ש-50% ממשקל גופכם נמצא במרכז המזרן?  זו הסיבה שסילי פיתחה עבורכם את טכנולוגיית ה-פוסטרופדיק טכנולוגיה המחזקת את מרכז המזרן ובכך נותנת לכם תמיכה לאזור הגב, בדיוק במקום בו אתם זקוקים לתמיכה מרבית.",
+            "products_hidden_list": [
+              "מזרן-ויסקו-g-7",
+              "g-7-multi-elastic-visco-מזרן-ילדים-ונוער",
+              "g-7-multi-elastic-hybrid",
+              "מזרן-ויסקו-לילדים-sealy-kids"
+            ]
+          }
+        },
+        "d125a9a1-c38f-4584-be60-feeb4004d61911": {
+          "type": "slide",
+          "settings": {
+            "video_url": "https://www.youtube.com/watch?v=dKy1z6O1PM4",
+            "image": "shopify://shop_images/dureflex.png",
+            "heading": "מערכת תמיכה היקפית",
+            "subheading": "DuraFlex™ Coil Edge",
+            "description": "במזרני סילי בנויה מערכת חיזוק היקפית, DuraFlex™ Coil Edge , מסביב לכל המזרן המאפשרת שינה גם בקצוות של המזרן וישיבה נוחה בציידי המזרן בזמן כניסה ויציאה מהמיטה.",
+            "products_hidden_list": []
+          }
+        },
+        "d125a9a1-c38f-4584-be60-feeb4004d619": {
+          "type": "slide",
+          "settings": {
+            "video_url": "https://www.youtube.com/watch?v=Bwy8XbAmkyg",
+            "image": "shopify://shop_images/2e97fcf3f98949485216e2d7fbc5ec76_d514b755-845b-4b3e-9ad1-4ab257466774.png",
+            "heading": "הפגת לחצים",
+            "subheading": "ComfortSense™",
+            "description": "החומרים המתקדמים שנמצאים במזרני סילי נועדו כדי לספוג את הלחץ המופעל במהלך הלילה לשינה רגועה ונינוחה.",
+            "products_hidden_list": []
+          }
+        },
+        "d125a9a1-c38f-4584-be60-feeb4004d6191": {
+          "type": "slide",
+          "settings": {
+            "video_url": "https://www.youtube.com/watch?v=6bNCnUTGr9o",
+            "image": "shopify://shop_images/56e7ec3c3a1f774eea1074a1c6624404.png",
+            "heading": "מזרן נקי ורענן לאורך זמן",
+            "subheading": "Guard Technology™",
+            "description": "כל מזרני סילי עוברים טיפול אנטי בקטריאלי והיפו אלרגני כדי שתוכלו ליהנות ממשטח שינה נקי ורענן",
+            "products_hidden_list": []
+          }
+        }
+      },
+      "block_order": [
+        "d125a9a1-c38f-4584-be60-feeb4004d619111",
+        "d125a9a1-c38f-4584-be60-feeb4004d61911",
+        "d125a9a1-c38f-4584-be60-feeb4004d619",
+        "d125a9a1-c38f-4584-be60-feeb4004d6191"
+      ],
+      "settings": {
+        "heading": "הטכנולוגיה של סילי",
+        "bg_color": "#ffffff"
+      }
+    },
+    "reviews": {
+      "type": "dynamic__reviews-slideshow",
+      "disabled": true,
+      "settings": {
+        "heading": "חוות דעת",
+        "link": "/",
+        "bg_color": "#f5faff"
+      }
+    },
+    "faq": {
+      "type": "product__faq",
+      "settings": {}
+    },
+    "recommendations": {
+      "type": "product__recommendations",
+      "settings": {}
+    },
+    "recent_products": {
+      "type": "product__recent-products",
+      "settings": {}
+    },
+    "contacts": {
+      "type": "dynamic__contacts",
+      "settings": {
+        "heading": "אנחנו פה לכל שאלה",
+        "bg_color": "rgba(0,0,0,0)"
+      }
+    },
+    "subscribe": {
+      "type": "static__subscribe",
+      "settings": {}
+    },
+    "js_scripts": {
+      "type": "product__js_scripts",
+      "settings": {}
+    }
+  },
+  "order": [
+    "breadcrumbs",
+    "meta",
+    "slider",
+    "rating",
+    "price",
+    "form",
+    "info",
+    "mattress_slider",
+    "info_tech",
+    "banner-image",
+    "our_technologies",
+    "reviews",
+    "faq",
+    "recommendations",
+    "recent_products",
+    "contacts",
+    "subscribe",
+    "js_scripts"
+  ]
+}

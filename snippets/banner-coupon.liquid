@@ -1,0 +1,37 @@
+ {% comment %}
+  props:
+    - bg_image
+    - width
+    - heading
+    - description
+    - coupon_code
+    - class
+ {% endcomment %}
+
+ {% assign width = width | default: 1029 %}
+
+ {%- capture cssVariables -%}
+   {%- if bg_image != blank -%}
+     --section-bg-image: url('{{- bg_image | image_url: width: width -}}');
+   {%- else -%}
+     --section-bg-image: none;
+   {%- endif -%}
+ {%- endcapture -%}
+
+ <banner-coupon
+   data-coupon="{{ coupon_code }}"
+   class="block px-4 pt-8 pb-6 bg-[url:var(--section-bg-image)] bg-center bg-no-repeat bg-cover text-center
+          xl:py-[5.25rem] xl:px-8 {{ class }}"
+   style="{{ cssVariables | strip }}"
+ >
+   <h2 class="text-brand-900 text-3xl font-bold xl:text-40p">{{ heading }}</h2>
+   <p class="font-medium xl:text-xl">{{ description }}</p>
+
+   {%- assign couponButtonContent = 'קוד קופון- ' | append: coupon_code -%}
+   {%-
+     render 'button',
+     content: couponButtonContent,
+     class: 'btn-primary min-w-45 mx-auto text-sm mt-3 relative xl:mt-6 xl:text-lg ',
+     attrs: 'data-copy'
+   -%}
+ </banner-coupon>

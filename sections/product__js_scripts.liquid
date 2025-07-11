@@ -1,0 +1,81 @@
+{%- liquid
+  assign shipping_price = product.metafields.custom.shipping_price.value | default: 0
+  assign assembly_price = product.metafields.custom.assembly_price.value | default: 0
+  assign delivery_price = shipping_price | plus: assembly_price
+-%}
+
+{%- capture imgTag -%}
+  {%-
+    render 'image-with-placeholder',
+    image: product.featured_image,
+    alt: product.title,
+    width: 1029,
+    class: 'object-contain',
+    loading: image_load
+  -%}
+{%- endcapture -%}
+
+<script>
+  window.PRODUCT_PAGE_DATA = {
+    product: {
+      id: {{ product.id | json }},
+      collections: {{ product.collections | map: 'title' | join: ', ' | json }},
+      featuredImage: {
+        tag: {{ imgTag | json }},
+      },
+      url: {{ product.url | json }},
+      title: {{ product.title | json }},
+      currentVariant: {
+        id: {{ product.selected_or_first_available_variant.id | json }},
+        title: {{ product.selected_or_first_available_variant.title | json }},
+        price: {{ product.selected_or_first_available_variant.price | divided_by: 100 | json }},
+      },
+      variantsByOptions: {
+        {% for variant in product.variants %}
+          {{ variant.options | join: '|' | json }}: {
+            ...{{ variant | json }},
+            metafields: {
+              variant_info: {{ variant.metafields.custom.variant_info | json }},
+            }
+        },
+        {% endfor %}
+      }
+    }
+  };
+  {%- assign optional_product = product.metafields.custom.optional_product.value -%}
+  {%- assign optional_products = product.metafields.custom.optional_products.value -%}
+  {% if optional_product != blank %}
+  window.PRODUCT_PAGE_DATA.optionalProducts = {
+    {{ optional_product.id }}: {
+      "variants": {
+        {%- for variant in optional_product.variants -%}
+        {{ variant.option1 | json }}: {
+          "id": {{ variant.id | json }},
+          "price": {{ variant.price | divided_by: 100 | json }},
+          "option1": {{ variant.option1 | json }}
+        },
+        {%- endfor -%}
+      }
+    }
+  }
+  {% endif %}
+  {% if optional_products != blank %}
+  window.PRODUCT_PAGE_DATA.optionalProducts = {
+    {% for optional_product in optional_products %}
+    {{ optional_product.id }}: {
+      "variants": {
+        {%- for variant in optional_product.variants -%}
+        {{ variant.option1 | json }}: {
+          "id": {{ variant.id | json }},
+          "price": {{ variant.price | divided_by: 100 | json }},
+          "option1": {{ variant.option1 | json }}
+        },
+        {%- endfor -%}
+      }
+    },
+    {% endfor %}
+  }
+  {% endif %}
+</script>
+
+{%- render 'vite-tag' with '@/additionalEntrypoints/product/product.ts' -%}

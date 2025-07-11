@@ -1,0 +1,233 @@
+{{ 'product-slider-pdp.css' | asset_url | stylesheet_tag }}
+{{ 'custom-product-card-pdp.css' | asset_url | stylesheet_tag }}
+
+<style>
+  #shopify-section-{{ section.id }} .section-title {
+    text-align: right;
+    margin-bottom: 22px !important;
+    position: relative;
+  }
+  #product-slider-pdp-{{ section.id }} .product-slider-pdp-prev,
+  #product-slider-pdp-{{ section.id }} .product-slider-pdp-next {
+    display: none;
+  }
+</style>
+
+<div class="product-slider-pdp-section" id="product-slider-pdp-{{ section.id }}">
+  <div class="product-slider-pdp-container">
+    {% if section.settings.title != blank %}
+      <div class="section-title">
+        <h2>{{ section.settings.title }}</h2>
+      </div>
+    {% endif %}
+
+    <div class="product-slider-pdp-wrapper">
+      <div class="product-slider-pdp-prev" data-slider="{{ section.id }}">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <div class="product-slider-pdp-next" data-slider="{{ section.id }}">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <div class="swiper product-slider-pdp-swiper" id="swiper-pdp-{{ section.id }}">
+        <div class="swiper-wrapper">
+          <div id="fallback-products-{{ section.id }}" style="display: none;">
+            {% if section.settings.collection != blank %}
+              {% assign collection = collections[section.settings.collection] %}
+              {% for fallback_product in collection.products limit: section.settings.products_to_show %}
+                {% unless fallback_product.id == product.id %}
+                  <div class="swiper-slide">
+                    {% render 'custom-product-card-pdp', product: fallback_product %}
+                  </div>
+                {% endunless %}
+              {% endfor %}
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  ;(function() {
+    const handle = '{{ product.handle }}';
+    const id = {{ product.id }};
+    const data = {
+      handle,
+      id,
+      title: '{{ product.title | escape }}',
+      price: {{ product.price }},
+      compare_at_price: {{ product.compare_at_price | default: 0 }},
+      featured_image: '{{ product.featured_image | img_url: "300x300" }}',
+      metafields: {
+        custom: {
+          reviews_count: {{ product.metafields.custom.reviews_count | default: 0 }},
+          specification: '{{ product.metafields.custom.specification }}',
+          trial_period: '{{ product.metafields.custom.trial_period }}'
+        }
+      }
+    };
+    let arr = JSON.parse(localStorage.getItem('recentlyViewed') || '[]');
+    arr = arr.filter(x => (typeof x === 'string' ? x : x.handle) !== handle);
+    arr.unshift(data);
+    if (arr.length > 20) arr = arr.slice(0, 20);
+    localStorage.setItem('recentlyViewed', JSON.stringify(arr));
+  })();
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const sectionId = '{{ section.id }}';
+    const current = '{{ product.handle }}';
+    const max = {{ section.settings.products_to_show }};
+    const threshold = {{ section.settings.free_shipping_threshold | default: 1000 }};
+    const stored = JSON.parse(localStorage.getItem('recentlyViewed') || '[]');
+    const filtered = stored.filter(x => x.handle && x.handle !== current).slice(0, max);
+
+    if (!filtered.length) {
+      const fallback = document.getElementById('fallback-products-' + sectionId);
+      const wrapper = document.querySelector('#swiper-pdp-' + sectionId + ' .swiper-wrapper');
+      if (fallback && wrapper) {
+        fallback.querySelectorAll('.swiper-slide').forEach(s => wrapper.appendChild(s.cloneNode(true)));
+        initSlider(sectionId);
+      }
+      return;
+    }
+
+    const promises = filtered.map(item =>
+      item.title
+        ? Promise.resolve(item)
+        : fetch(`/products/${item.handle}.js`)
+            .then(r => r.ok ? r.json() : null)
+            .catch(() => null)
+    );
+
+    Promise.all(promises).then(products => {
+      const valid = products.filter(p => p);
+      if (!valid.length) {
+        const fallback = document.getElementById('fallback-products-' + sectionId);
+        const wrapper = document.querySelector('#swiper-pdp-' + sectionId + ' .swiper-wrapper');
+        if (fallback && wrapper) {
+          fallback.querySelectorAll('.swiper-slide').forEach(s => wrapper.appendChild(s.cloneNode(true)));
+          initSlider(sectionId);
+        }
+        return;
+      }
+      renderViews(valid, sectionId, threshold);
+    });
+  });
+
+  function renderViews(products, sectionId, threshold) {
+    const wrapper = document.querySelector('#swiper-pdp-' + sectionId + ' .swiper-wrapper');
+    wrapper.innerHTML = '';
+    products.forEach(prod => {
+      const slide = document.createElement('div');
+      slide.className = 'swiper-slide';
+      slide.innerHTML = renderCard(prod, threshold);
+      wrapper.appendChild(slide);
+    });
+    initSlider(sectionId);
+  }
+
+  function calcRating(id, count) {
+    if (!count) return 0;
+    let seed = id % 11;
+    let r = 4 + seed * 0.1;
+    return r > 5 ? 5 : Math.round(r * 10) / 10;
+  }
+
+  function renderStars(rating, pid) {
+    let html = '';
+    const filled = Math.floor(rating);
+    for (let i = 1; i <= 5; i++) {
+      if (i <= filled) {
+        html += `<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><g clip-path="url(#clip0_filled_${i}_${pid})"><path d="M8.33657 1.65918L10.2852 5.60692L14.6429 6.24386L11.4897 9.31502L12.2339 13.6538L8.33657 11.6042L4.43928 13.6538L5.18342 9.31502L2.03027 6.24386L6.38792 5.60692L8.33657 1.65918Z" fill="#FDB022" stroke="#FDB022" stroke-width="1.68168" stroke-linecap="round" stroke-linejoin="round"/></g><defs><clipPath id="clip0_filled_${i}_${pid}"><rect width="15.1351" height="15.1351" fill="white" transform="translate(0.769043 0.397949)"/></clipPath></defs></svg>`;
+      } else {
+        html += `<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><g clip-path="url(#clip0_empty_${i}_${pid})"><path d="M7.83803 1.65918L9.78668 5.60692L14.1443 6.24386L10.9912 9.31502L11.7353 13.6538L7.83803 11.6042L3.94074 13.6538L4.68489 9.31502L1.53174 6.24386L5.88939 5.60692L7.83803 1.65918Z" stroke="#FDB022" stroke-width="1.68168" stroke-linecap="round" stroke-linejoin="round"/></g><defs><clipPath id="clip0_empty_${i}_${pid}"><rect width="15.1351" height="15.1351" fill="white" transform="translate(0.270508 0.397949)"/></clipPath></defs></svg>`;
+      }
+    }
+    return html;
+  }
+
+  function renderCard(p, threshold) {
+    const onSale = p.compare_at_price > p.price;
+    const discount = onSale ? Math.round((p.compare_at_price - p.price) * 100 / p.compare_at_price) : 0;
+    const price = (p.price / 100).toFixed(0);
+    const original = onSale ? (p.compare_at_price / 100).toFixed(0) : '';
+    const count = p.metafields.custom.reviews_count || 0;
+    const spec = p.metafields.custom.specification || '';
+    const trial = p.metafields.custom.trial_period || '';
+    const rating = calcRating(p.id, count);
+    return `
+      <div class="product-card-pdp">
+        <a href="/products/${p.handle}" class="product-card-pdp-link">
+          <div class="product-card-pdp-badges-top">
+            ${onSale ? `<div class="discount-badge-pdp">${discount}% OFF</div>` : ''}
+            ${trial ? `<div class="trial-badge">${trial} לילות נסיון</div>` : ''}
+          </div>
+          <div class="product-image-pdp-container">
+            <div class="product-image-pdp">
+              <img src="${p.featured_image}" alt="${p.title}" loading="lazy">
+            </div>
+          </div>
+          ${spec ? `<div class="specification-badge"><span class="spec-value">${spec}</span><span class="height-text">גובה</span></div>` : ''}
+          <div class="product-divider-pdp"></div>
+          <div class="product-info-pdp">
+            <h3 class="product-title-pdp">${p.title}</h3>
+            <div class="product-price-pdp">
+              <span class="price-current-pdp">₪${price}</span>
+              ${original ? `<span class="price-original-pdp">₪${original}</span>` : ''}
+            </div>
+            ${count ? `<div class="product-reviews-pdp"><div class="rating-stars-pdp">${renderStars(rating,p.id)}</div><span class="rating-number-pdp">${rating}</span><span class="reviews-count-pdp">(${count})</span></div>` : ''}
+            ${onSale ? `<div class="shipping-info-badge"><span class="shipping-text">חיסכון של ${(threshold/100).toFixed(0)},000 ש״ח</span></div>` : ''}
+          </div>
+        </a>
+      </div>`;
+  }
+
+  function initSlider(sectionId) {
+    new Swiper('#swiper-pdp-' + sectionId, {
+      slidesPerView: 1,
+      spaceBetween: 18,
+      loop: false,
+      centeredSlides: true,
+      navigation: {
+        nextEl: `[data-slider="${sectionId}"].product-slider-pdp-next`,
+        prevEl: `[data-slider="${sectionId}"].product-slider-pdp-prev`
+      },
+      breakpoints: {
+        768: { slidesPerView: 4, spaceBetween: 18, centeredSlides: false, allowTouchMove: false }
+      },
+      on: {
+        init(sw) { toggleArrows(sw, sectionId); },
+        slideChange(sw) { toggleArrows(sw, sectionId); }
+      }
+    });
+    function toggleArrows(sw, sectionId) {
+      const prev = document.querySelector(`[data-slider="${sectionId}"].product-slider-pdp-prev`);
+      const next = document.querySelector(`[data-slider="${sectionId}"].product-slider-pdp-next`);
+      const total = sw.slides.length;
+      const view = window.innerWidth >= 768 ? 4 : 1;
+      if (total > view) { prev.style.display = 'flex'; next.style.display = 'flex'; }
+      else { prev.style.display = 'none'; next.style.display = 'none'; }
+    }
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Product Slider PDP",
+  "settings": [
+    { "type": "text",    "id": "title",                  "label": "Section Title",                   "default": "מוצרים שהתעניינת בהם" },
+    { "type": "collection","id": "collection",            "label": "Fallback Collection",             "info": "Used when no recently viewed products are available" },
+    { "type": "range",   "id": "products_to_show",       "min": 4, "max": 20, "step": 1, "label": "Products to show", "default": 8 },
+    { "type": "checkbox","id": "show_discount_badge",    "label": "Show discount badge",             "default": true },
+    { "type": "number",  "id": "free_shipping_threshold","label": "Free shipping threshold (₪)",     "default": 1000 }
+  ],
+  "presets": [{ "name": "Recently Viewed" }]
+}
+{% endschema %}

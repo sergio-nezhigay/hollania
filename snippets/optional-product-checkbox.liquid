@@ -1,0 +1,80 @@
+{%- comment -%}
+  props:
+    - optional_product: Object
+{%- endcomment -%}
+
+{%- assign optional_product_variant = optional_product.selected_or_first_available_variant -%}
+{%- assign accordionTargetID = 'optionalProductInfo-' | append: optional_product.id -%}
+
+<accordion-component class="block col-span-10" data-optional-product="{{ optional_product.id | json }}">
+  <div
+    data-toggle="closed"
+    data-toggle-for="{{ accordionTargetID }}"
+    class="bg-white border border-grey-300 rounded-lg py-3 px-4 group/toggle"
+  >
+    <div class="flex justify-between lg:hover:cursor-pointer space-x-3 space-x-reverse">
+      <div class="flex items-center space-x-3 space-x-reverse flex-1">
+        <label class="xl:hover:cursor-pointer flex-grow-0 flex-shrink-0">
+          <input
+            class="peer"
+            hidden
+            type="checkbox"
+            name="optionalProductAddToCart"
+            data-op-add-to-cart
+            data-op-variant-id="{{ optional_product_variant.id }}"
+          />
+          <span class="w-5 h-5 peer-checked:[&>.op-cb-checked]:block peer-checked:[&>.op-cb-unchecked]:hidden">
+              {%- render 'icon', name: 'checkbox-unchecked', class: 'w-full h-full op-cb-unchecked text-[#D9DBE4]' -%}
+            {%- render 'icon', name: 'checkbox-checked', class: 'w-full h-full op-cb-checked hidden' -%}
+            </span>
+        </label>
+
+        {% comment %}<span>מגן  מזרן</span>{% endcomment %}
+        <span>{{ optional_product.title }}</span>
+
+        {%- render 'icon', name: 'chevron-down', class: 'w-5 h-5 group-data-[toggle=opened]/toggle:rotate-180 flex-grow-0 flex-shrink-0 !mr-auto' -%}
+
+        {%- liquid
+          assign amountOfDiscountInPercent = optional_product_variant.compare_at_price | minus: optional_product_variant.price | times: 100 | divided_by: optional_product_variant.compare_at_price
+
+          if amountOfDiscountInPercent > 0
+            assign discountBadgeText = amountOfDiscountInPercent | append: '% OFF'
+
+            render 'product-badge', text: discountBadgeText, bg_color: '#F53A41', text_color: 'white', class: 'font-Poppins text-sm', attrs: 'dir="ltr"'
+          endif
+        -%}
+      </div>
+
+      <div class="text-sm flex items-center space-x-reverse space-x-1 flex-grow-0 flex-shrink-0">
+        <div class="font-bold text-brand-600"><span data-op-price>{{ optional_product_variant.price | money_without_currency | split: '.' | first }}</span> ש”ח</div>
+        {%- if optional_product_variant.compare_at_price != blank -%}
+          <s class="font-medium text-grey-500">{{ optional_product_variant.compare_at_price | money_without_currency | split: '.' | first }} ש”ח</s>
+        {%- endif -%}
+        <s></s>
+      </div>
+    </div>
+
+    <div data-target="{{- accordionTargetID -}}" class="overflow-hidden h-0 transition-[height]">
+      <div class="pt-4 flex items-start space-x-reverse space-x-4">
+        {%-
+          render 'image-with-placeholder',
+          image: optional_product.featured_image,
+          alt: optional_product.featured_image.alt,
+          width: 330,
+          class: 'w-1/3 rounded-lg overflow-hidden'
+        -%}
+
+        <div class="flex-1">
+          {%- if optional_product.options contains "Size" -%}
+            <span class="block text-black text-sm font-medium">
+              מידה
+              <span dir="ltr" data-op-c-variant-size>{{- current_variant.option1 | replace: 'X', '*' -}}</span>
+            </span>
+          {%- endif -%}
+          <p class="text-xsm text-grey-900/60">{{ optional_product.description | strip_html }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</accordion-component>
+

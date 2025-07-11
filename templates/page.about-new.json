@@ -1,0 +1,386 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "top": {
+      "type": "page__top",
+      "settings": {}
+    },
+    "main": {
+      "type": "page__main",
+      "disabled": true,
+      "settings": {
+        "title": "",
+        "subtitle": ""
+      }
+    },
+    "timeline_GVWC9c": {
+      "type": "timeline",
+      "blocks": {
+        "timeline_item_7AJ6w9": {
+          "type": "timeline_item",
+          "settings": {
+            "year": "1981",
+            "content": "יוני הקווים העיקריים הראשונים של מדיניות הולנדית בקרב המינהלים האתניים נקבעו במסמך \"מדיניות מיעוטים\" שהתפרסם במאי 1981 יוני ההחלטות כללו: יוני מאמץ שילוב טכנולוגי וחברתי יוני שמירה על זהות תרבותית יוני שיפור המצב המשפטי"
+          }
+        },
+        "timeline_item_Yzyk4m": {
+          "type": "timeline_item",
+          "settings": {
+            "year": "1988",
+            "content": "פתיחת מפעלים חדשונים הכוללים טכנולוגיות הקיימת במקרא בישראל"
+          }
+        },
+        "timeline_item_Cdfxgd": {
+          "type": "timeline_item",
+          "settings": {
+            "year": "1992",
+            "content": "החלטות להפעיל את האיחוד האירופי החדש לבעיות TEMPUS שהיה חידוש עצום ונתנו את כל ההתחלה העיקרית"
+          }
+        },
+        "timeline_item_tBW6Wr": {
+          "type": "timeline_item",
+          "settings": {
+            "year": "1998",
+            "content": "השקעה בגוף החינוכי והמדעי בישראל יותר מתמיד מאיזי לשירותי"
+          }
+        },
+        "timeline_item_MzCj7d": {
+          "type": "timeline_item",
+          "settings": {
+            "year": "1998",
+            "content": "שירות לשעבוד באליפטיקטוט"
+          }
+        },
+        "timeline_item_d9Jjrd": {
+          "type": "timeline_item",
+          "settings": {
+            "year": "2000",
+            "content": "השקעת המיליון האמריקאיים דחף gravity light דחף במסגרת התוכניות לאירועים לאומיות אירופיות"
+          }
+        },
+        "timeline_item_y3KARY": {
+          "type": "timeline_item",
+          "settings": {
+            "year": "2001",
+            "content": "חיבורת הדיוק האחרון של מדיניות gravity zero במסגרת התקופה"
+          }
+        },
+        "timeline_item_hDYCra": {
+          "type": "timeline_item",
+          "settings": {
+            "year": "2013",
+            "content": "חיבורם הקיבוצים שני גליל העיר הלאומית Karim Rashid האמריקאי שהוזמן על חברי גדולי החיפה בישראל הגדיר יעדים ונהלים לאגודה"
+          }
+        },
+        "timeline_item_exDVPc": {
+          "type": "timeline_item",
+          "settings": {
+            "year": "2013",
+            "content": "החלטות הקבוצה על ההקמת המתוחננות זיוון מחלקות החירום לצדי ההחלק בפלציפום. ההה ההבנחשמתי לשירותי צתירה אירון לבבתיאלן וכמו התחום הרטסטי"
+          }
+        },
+        "timeline_item_kXB4de": {
+          "type": "timeline_item",
+          "settings": {
+            "year": "2015",
+            "content": "היירה זמינה שירות היסטוריה פשוטה ביותר טכנית 18 פי יותר מבעבר. בישראל התחדשות בישראל צומחת השטחים"
+          }
+        },
+        "timeline_item_ExMcRP": {
+          "type": "timeline_item",
+          "settings": {
+            "year": "2017",
+            "content": "שני הפיתוח הראל התשאול של השירות Vigoritia המגמתי השתתשל האטלאיקי שנפגעו ביציה עד השבת התגופות לשירות ויטחונתי Vigoritia"
+          }
+        }
+      },
+      "block_order": [
+        "timeline_item_7AJ6w9",
+        "timeline_item_Yzyk4m",
+        "timeline_item_Cdfxgd",
+        "timeline_item_tBW6Wr",
+        "timeline_item_MzCj7d",
+        "timeline_item_d9Jjrd",
+        "timeline_item_y3KARY",
+        "timeline_item_hDYCra",
+        "timeline_item_exDVPc",
+        "timeline_item_kXB4de",
+        "timeline_item_ExMcRP"
+      ],
+      "name": "Timeline",
+      "settings": {
+        "show_header": true,
+        "title": "אודות הולנדיה",
+        "since_text": "מאז 1981",
+        "trust_badge_svg": "<svg width=\"19\" height=\"18\" viewbox=\"0 0 19 18\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M8.53264 9.98148L7.0373 8.50034C6.90975 8.37278 6.75178 8.30753 6.5634 8.30456C6.37501 8.30162 6.20936 8.3716 6.06646 8.51452C5.93298 8.64799 5.86624 8.8098 5.86624 8.99995C5.86624 9.1901 5.93298 9.35191 6.06646 9.48537L7.94977 11.3687C8.1163 11.5352 8.3106 11.6185 8.53264 11.6185C8.75469 11.6185 8.94898 11.5352 9.11551 11.3687L12.9335 7.55068C13.0705 7.41368 13.1382 7.25335 13.1364 7.06967C13.1346 6.88602 13.067 6.72273 12.9335 6.57983C12.7906 6.43691 12.6264 6.36308 12.441 6.35835C12.2556 6.35364 12.0914 6.42273 11.9485 6.56564L8.53264 9.98148ZM6.19223 17.4598L4.9184 15.3178L2.5089 14.8005C2.30219 14.7603 2.13713 14.6516 2.01371 14.4745C1.89028 14.2973 1.84097 14.1054 1.86577 13.8987L2.10141 11.4201L0.462586 9.54562C0.320862 9.39444 0.25 9.21255 0.25 8.99995C0.25 8.78735 0.320862 8.60546 0.462586 8.45427L2.10141 6.57983L1.86577 4.10123C1.84097 3.89452 1.89028 3.70259 2.01371 3.52543C2.13713 3.34825 2.30219 3.23958 2.5089 3.19943L4.9184 2.68211L6.19223 0.540121C6.30327 0.358229 6.45446 0.234209 6.64581 0.168061C6.83714 0.101928 7.03143 0.111971 7.22868 0.198188L9.49999 1.15844L11.7713 0.198188C11.9685 0.111971 12.1628 0.101928 12.3542 0.168061C12.5455 0.234209 12.6967 0.358229 12.8077 0.540121L14.0816 2.68211L16.4911 3.19943C16.6978 3.23958 16.8629 3.34825 16.9863 3.52543C17.1097 3.70259 17.159 3.89452 17.1342 4.10123L16.8986 6.57983L18.5374 8.45427C18.6791 8.60546 18.75 8.78735 18.75 8.99995C18.75 9.21255 18.6791 9.39444 18.5374 9.54562L16.8986 11.4201L17.1342 13.8987C17.159 14.1054 17.1097 14.2973 16.9863 14.4745C16.8629 14.6516 16.6978 14.7603 16.4911 14.8005L14.0816 15.3178L12.8077 17.4598C12.6967 17.6417 12.5455 17.7657 12.3542 17.8318C12.1628 17.898 11.9685 17.8879 11.7713 17.8017L9.49999 16.8415L7.22868 17.8017C7.03143 17.8879 6.83714 17.898 6.64581 17.8318C6.45446 17.7657 6.30327 17.6417 6.19223 17.4598ZM7.15072 16.3242L9.49999 15.3285L11.8776 16.3242L13.1851 14.1131L15.7187 13.532L15.4883 10.9346L17.1927 8.99995L15.4883 7.0369L15.7187 4.43959L13.1851 3.88682L11.8493 1.67574L9.49999 2.67144L7.12236 1.67574L5.81485 3.88682L3.28132 4.43959L3.51164 7.0369L1.80727 8.99995L3.51164 10.9346L3.28132 13.5603L5.81485 14.1131L7.15072 16.3242Z\" fill=\"#38383A\"></path>\n</svg>",
+        "subtitle": "ההיסטוריה של הולנדיה",
+        "description": "",
+        "max_width": 1200,
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "background_color": "#ffffff",
+        "title_color": "#dd2d4a",
+        "since_color": "#38383a",
+        "subtitle_color": "#38383a",
+        "description_color": "#38383a",
+        "year_color": "#dd2d4a",
+        "content_color": "#333333",
+        "line_color": "#d1d5dd",
+        "dot_color": "#dd2d4a",
+        "dot_border_color": "#fbd7dd",
+        "description_size": 16
+      }
+    },
+    "custom_image_with_text_cf33bL": {
+      "type": "custom-image-with-text",
+      "custom_css": [
+        "@media (min-width: 769px) {.hero-section {padding-top: 90px; padding-bottom: 0; }}",
+        "@media (max-width: 768px) {.hero-section {padding-top: 30px; padding-bottom: 40px; }}"
+      ],
+      "name": "Custom Image With Text",
+      "settings": {
+        "image": "shopify://shop_images/image_315.png",
+        "image_position": "left",
+        "title": "הולנדיה היא חברה בינלאומית שהתחילה את דרכה ב- 1981",
+        "description": "<p>הלנדיה היא חברה בינלאומית שהוקמה בשנת 1981 על־ידי מר יצחק ברססט, ומנוהלת כיום על־ידי בנו, אבי ברססט. מאז ייסודה, החברה מייבאת, מפתחת, מייצרת ומשווקת מערכות שינה יוקרתיות ואיכותיות, הנחשבות לטובות בעולם.</p><p>הלנדיה עידנה והביאה לשיא את חוויית שנת הלילה, תוך התחשבות מקיפה בכל צרכי השינה שלכם. מערכות השינה שלה מבוססות על הנדסת שינה פורצת דרך, המספקת שינה עמוקה, נוחה ומרעננת.</p>",
+        "background_color": "#f9f6f4"
+      }
+    },
+    "custom_image_with_text_zYha4r": {
+      "type": "custom-image-with-text",
+      "custom_css": [
+        "@media (min-width: 769px) {.hero-section {padding-bottom: 0; }}",
+        "@media (max-width: 768px) {.hero-section {padding-top: 0px; padding-bottom: 40px; }}"
+      ],
+      "name": "Custom Image With Text",
+      "settings": {
+        "image": "shopify://shop_images/image_315.png",
+        "image_position": "right",
+        "title": "הולנדיה היא חברה בינלאומית שהתחילה את דרכה ב- 1981",
+        "description": "<p>הלנדיה היא חברה בינלאומית שהוקמה בשנת 1981 על־ידי מר יצחק ברססט, ומנוהלת כיום על־ידי בנו, אבי ברססט. מאז ייסודה, החברה מייבאת, מפתחת, מייצרת ומשווקת מערכות שינה יוקרתיות ואיכותיות, הנחשבות לטובות בעולם.</p><p>הלנדיה עידנה והביאה לשיא את חוויית שנת הלילה, תוך התחשבות מקיפה בכל צרכי השינה שלכם. מערכות השינה שלה מבוססות על הנדסת שינה פורצת דרך, המספקת שינה עמוקה, נוחה ומרעננת.</p>",
+        "background_color": "#f9f6f4"
+      }
+    },
+    "custom_image_with_text_aVDHGa": {
+      "type": "custom-image-with-text",
+      "custom_css": [
+        "@media (min-width: 769px) {.hero-section {padding-bottom: 90px; }}",
+        "@media (max-width: 768px) {.hero-section {padding-top: 0px; padding-bottom: 40px; }}"
+      ],
+      "name": "Custom Image With Text",
+      "settings": {
+        "image": "shopify://shop_images/image_315.png",
+        "image_position": "left",
+        "title": "הולנדיה היא חברה בינלאומית שהתחילה את דרכה ב- 1981",
+        "description": "<p>הלנדיה היא חברה בינלאומית שהוקמה בשנת 1981 על־ידי מר יצחק ברססט, ומנוהלת כיום על־ידי בנו, אבי ברססט. מאז ייסודה, החברה מייבאת, מפתחת, מייצרת ומשווקת מערכות שינה יוקרתיות ואיכותיות, הנחשבות לטובות בעולם.</p><p>הלנדיה עידנה והביאה לשיא את חוויית שנת הלילה, תוך התחשבות מקיפה בכל צרכי השינה שלכם. מערכות השינה שלה מבוססות על הנדסת שינה פורצת דרך, המספקת שינה עמוקה, נוחה ומרעננת.</p>",
+        "background_color": "#f9f6f4"
+      }
+    },
+    "team_members_itRzDN": {
+      "type": "team-members",
+      "blocks": {
+        "team_member_EBbhiW": {
+          "type": "team_member",
+          "settings": {
+            "member_image": "shopify://shop_images/Ellipse_37.png",
+            "member_name": "אבי ברנסטן",
+            "member_title": "מנכ\"ל חברת",
+            "member_phone": "054-4530135",
+            "member_email": "avi@hollandia.co.il",
+            "member_bio": "כמנהיג החברה ביומיום וככוח המניע שלה, אבי ברססט הוא האחראי לצמיחתה הלאומית והבינלאומית של הולנדיה ב-20 השנים האחרונות. ברססט הוא אחד מהמומחים העולמיים בעיצוב, יצור ושיווק מערכות שינה מתכווננות, ברססט בודק באופן מקצועי ואישי את כל מוצרי הולנדיה בביתו לפני יציאתם לשוק. ברססט משמש כנציג ארגון השינה העולמי בישראל, כתב ספרים על שינה, בעל תוכנית רדיו קבועה בנושא שינה ומשמש כמרצה בארץ ובעולם כמומחה בתחומו."
+          }
+        },
+        "team_member_PUFj7L": {
+          "type": "team_member",
+          "settings": {
+            "member_image": "shopify://shop_images/Ellipse_37.png",
+            "member_name": "אבי ברנסטן",
+            "member_title": "מנכ\"ל חברת",
+            "member_phone": "054-4530135",
+            "member_email": "avi@hollandia.co.il",
+            "member_bio": "כמנהיג החברה ביומיום וככוח המניע שלה, אבי ברססט הוא האחראי לצמיחתה הלאומית והבינלאומית של הולנדיה ב-20 השנים האחרונות. ברססט הוא אחד מהמומחים העולמיים בעיצוב, יצור ושיווק מערכות שינה מתכווננות, ברססט בודק באופן מקצועי ואישי את כל מוצרי הולנדיה בביתו לפני יציאתם לשוק. ברססט משמש כנציג ארגון השינה העולמי בישראל, כתב ספרים על שינה, בעל תוכנית רדיו קבועה בנושא שינה ומשמש כמרצה בארץ ובעולם כמומחה בתחומו."
+          }
+        },
+        "team_member_nHtFYy": {
+          "type": "team_member",
+          "settings": {
+            "member_image": "shopify://shop_images/Ellipse_37.png",
+            "member_name": "אבי ברנסטן",
+            "member_title": "מנכ\"ל חברת",
+            "member_phone": "054-4530135",
+            "member_email": "avi@hollandia.co.il",
+            "member_bio": "כמנהיג החברה ביומיום וככוח המניע שלה, אבי ברססט הוא האחראי לצמיחתה הלאומית והבינלאומית של הולנדיה ב-20 השנים האחרונות. ברססט הוא אחד מהמומחים העולמיים בעיצוב, יצור ושיווק מערכות שינה מתכווננות, ברססט בודק באופן מקצועי ואישי את כל מוצרי הולנדיה בביתו לפני יציאתם לשוק. ברססט משמש כנציג ארגון השינה העולמי בישראל, כתב ספרים על שינה, בעל תוכנית רדיו קבועה בנושא שינה ומשמש כמרצה בארץ ובעולם כמומחה בתחומו."
+          }
+        },
+        "team_member_MnGff7": {
+          "type": "team_member",
+          "settings": {
+            "member_image": "shopify://shop_images/Ellipse_37.png",
+            "member_name": "אבי ברנסטן",
+            "member_title": "מנכ\"ל חברת",
+            "member_phone": "054-4530135",
+            "member_email": "avi@hollandia.co.il",
+            "member_bio": "כמנהיג החברה ביומיום וככוח המניע שלה, אבי ברססט הוא האחראי לצמיחתה הלאומית והבינלאומית של הולנדיה ב-20 השנים האחרונות. ברססט הוא אחד מהמומחים העולמיים בעיצוב, יצור ושיווק מערכות שינה מתכווננות, ברססט בודק באופן מקצועי ואישי את כל מוצרי הולנדיה בביתו לפני יציאתם לשוק. ברססט משמש כנציג ארגון השינה העולמי בישראל, כתב ספרים על שינה, בעל תוכנית רדיו קבועה בנושא שינה ומשמש כמרצה בארץ ובעולם כמומחה בתחומו."
+          }
+        },
+        "team_member_FwptGq": {
+          "type": "team_member",
+          "settings": {
+            "member_image": "shopify://shop_images/Ellipse_37.png",
+            "member_name": "אבי ברנסטן",
+            "member_title": "מנכ\"ל חברת",
+            "member_phone": "054-4530135",
+            "member_email": "avi@hollandia.co.il",
+            "member_bio": "כמנהיג החברה ביומיום וככוח המניע שלה, אבי ברססט הוא האחראי לצמיחתה הלאומית והבינלאומית של הולנדיה ב-20 השנים האחרונות. ברססט הוא אחד מהמומחים העולמיים בעיצוב, יצור ושיווק מערכות שינה מתכווננות, ברססט בודק באופן מקצועי ואישי את כל מוצרי הולנדיה בביתו לפני יציאתם לשוק. ברססט משמש כנציג ארגון השינה העולמי בישראל, כתב ספרים על שינה, בעל תוכנית רדיו קבועה בנושא שינה ומשמש כמרצה בארץ ובעולם כמומחה בתחומו."
+          }
+        },
+        "team_member_Wm3PzF": {
+          "type": "team_member",
+          "settings": {
+            "member_image": "shopify://shop_images/Ellipse_37.png",
+            "member_name": "אבי ברנסטן",
+            "member_title": "מנכ\"ל חברת",
+            "member_phone": "054-4530135",
+            "member_email": "avi@hollandia.co.il",
+            "member_bio": "כמנהיג החברה ביומיום וככוח המניע שלה, אבי ברססט הוא האחראי לצמיחתה הלאומית והבינלאומית של הולנדיה ב-20 השנים האחרונות. ברססט הוא אחד מהמומחים העולמיים בעיצוב, יצור ושיווק מערכות שינה מתכווננות, ברססט בודק באופן מקצועי ואישי את כל מוצרי הולנדיה בביתו לפני יציאתם לשוק. ברססט משמש כנציג ארגון השינה העולמי בישראל, כתב ספרים על שינה, בעל תוכנית רדיו קבועה בנושא שינה ומשמש כמרצה בארץ ובעולם כמומחה בתחומו."
+          }
+        },
+        "team_member_VGkrrC": {
+          "type": "team_member",
+          "settings": {
+            "member_image": "shopify://shop_images/Ellipse_37.png",
+            "member_name": "אבי ברנסטן",
+            "member_title": "מנכ\"ל חברת",
+            "member_phone": "054-4530135",
+            "member_email": "avi@hollandia.co.il",
+            "member_bio": "כמנהיג החברה ביומיום וככוח המניע שלה, אבי ברססט הוא האחראי לצמיחתה הלאומית והבינלאומית של הולנדיה ב-20 השנים האחרונות. ברססט הוא אחד מהמומחים העולמיים בעיצוב, יצור ושיווק מערכות שינה מתכווננות, ברססט בודק באופן מקצועי ואישי את כל מוצרי הולנדיה בביתו לפני יציאתם לשוק. ברססט משמש כנציג ארגון השינה העולמי בישראל, כתב ספרים על שינה, בעל תוכנית רדיו קבועה בנושא שינה ומשמש כמרצה בארץ ובעולם כמומחה בתחומו."
+          }
+        },
+        "team_member_QLUfnm": {
+          "type": "team_member",
+          "settings": {
+            "member_image": "shopify://shop_images/Ellipse_37.png",
+            "member_name": "אבי ברנסטן",
+            "member_title": "מנכ\"ל חברת",
+            "member_phone": "054-4530135",
+            "member_email": "avi@hollandia.co.il",
+            "member_bio": "כמנהיג החברה ביומיום וככוח המניע שלה, אבי ברססט הוא האחראי לצמיחתה הלאומית והבינלאומית של הולנדיה ב-20 השנים האחרונות. ברססט הוא אחד מהמומחים העולמיים בעיצוב, יצור ושיווק מערכות שינה מתכווננות, ברססט בודק באופן מקצועי ואישי את כל מוצרי הולנדיה בביתו לפני יציאתם לשוק. ברססט משמש כנציג ארגון השינה העולמי בישראל, כתב ספרים על שינה, בעל תוכנית רדיו קבועה בנושא שינה ומשמש כמרצה בארץ ובעולם כמומחה בתחומו."
+          }
+        }
+      },
+      "block_order": [
+        "team_member_EBbhiW",
+        "team_member_PUFj7L",
+        "team_member_nHtFYy",
+        "team_member_MnGff7",
+        "team_member_FwptGq",
+        "team_member_Wm3PzF",
+        "team_member_VGkrrC",
+        "team_member_QLUfnm"
+      ],
+      "name": "Team Section",
+      "settings": {
+        "section_title": "צוות הולנדיה",
+        "section_description": "",
+        "hover_trigger": "hover"
+      }
+    },
+    "logo_list_t8htbB": {
+      "type": "logo-list",
+      "blocks": {
+        "partner_logo_C6WJfb": {
+          "type": "partner_logo",
+          "settings": {
+            "image": "shopify://shop_images/WhatsApp_Image_2025-04-01_at_16.25.27_1.png",
+            "alt_text": ""
+          }
+        },
+        "partner_logo_KRx7UT": {
+          "type": "partner_logo",
+          "settings": {
+            "image": "shopify://shop_images/WhatsApp_Image_2025-04-01_at_16.25.27_1.png",
+            "alt_text": ""
+          }
+        },
+        "partner_logo_jtxeMJ": {
+          "type": "partner_logo",
+          "settings": {
+            "image": "shopify://shop_images/WhatsApp_Image_2025-04-01_at_16.25.27_1.png",
+            "alt_text": ""
+          }
+        },
+        "partner_logo_Ek3tpG": {
+          "type": "partner_logo",
+          "settings": {
+            "image": "shopify://shop_images/WhatsApp_Image_2025-04-01_at_16.25.27_1.png",
+            "alt_text": ""
+          }
+        },
+        "partner_logo_h8JPgF": {
+          "type": "partner_logo",
+          "settings": {
+            "image": "shopify://shop_images/WhatsApp_Image_2025-04-01_at_16.25.27_1.png",
+            "alt_text": ""
+          }
+        },
+        "partner_logo_HcpYYk": {
+          "type": "partner_logo",
+          "settings": {
+            "image": "shopify://shop_images/WhatsApp_Image_2025-04-01_at_16.25.27_1.png",
+            "alt_text": ""
+          }
+        },
+        "partner_logo_HBHfAL": {
+          "type": "partner_logo",
+          "settings": {
+            "image": "shopify://shop_images/WhatsApp_Image_2025-04-01_at_16.25.27_1.png",
+            "alt_text": ""
+          }
+        },
+        "partner_logo_EQeDAD": {
+          "type": "partner_logo",
+          "settings": {
+            "image": "shopify://shop_images/WhatsApp_Image_2025-04-01_at_16.25.27_1.png",
+            "alt_text": ""
+          }
+        }
+      },
+      "block_order": [
+        "partner_logo_C6WJfb",
+        "partner_logo_KRx7UT",
+        "partner_logo_jtxeMJ",
+        "partner_logo_Ek3tpG",
+        "partner_logo_h8JPgF",
+        "partner_logo_HcpYYk",
+        "partner_logo_HBHfAL",
+        "partner_logo_EQeDAD"
+      ],
+      "custom_css": [
+        "@media (min-width: 769px) {.partners-gallery {padding-top: 0; padding-bottom: 120px; }}",
+        "@media (max-width: 768px) {.partners-gallery {padding-top: 0; padding-bottom: 40px; }}"
+      ],
+      "name": "Partners Gallery",
+      "settings": {
+        "title": "בוטניק אותנו מייצגים"
+      }
+    }
+  },
+  "order": [
+    "top",
+    "main",
+    "timeline_GVWC9c",
+    "custom_image_with_text_cf33bL",
+    "custom_image_with_text_zYha4r",
+    "custom_image_with_text_aVDHGa",
+    "team_members_itRzDN",
+    "logo_list_t8htbB"
+  ]
+}

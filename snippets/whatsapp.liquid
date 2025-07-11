@@ -1,0 +1,8 @@
+<a class="z-20 bottom-12 right-3.5 w-[30px] h-[30px]  bg-[#25d366] items-center justify-center fixed text-white rounded-full
+          hover:text-white hover:opacity-90 {% if request.page_type == 'product' %}hidden lg:flex {% else %} flex{% endif %} xl:bottom-7 xl:w-12 xl:h-12"
+   target="_blank"
+   rel="nofollow noreferrer"
+   href="https://api.whatsapp.com/send?phone={% render 'f_adjustedWhatsappNumber' %}"
+>
+  {%- render 'icon', name: 'whatsapp', class: 'w-3/5 aspect-1' -%}
+</a>

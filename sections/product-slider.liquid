@@ -1,0 +1,158 @@
+{{ 'product-slider.css' | asset_url | stylesheet_tag }}
+<style>
+  #shopify-section-{{ section.id }} .section-title {
+  text-align: center;
+  margin-bottom: 32px !important;
+  position: relative;
+}
+</style>
+<div class="product-slider-section" id="product-slider-{{ section.id }}">
+  <div class="product-slider-container">
+    {% if section.settings.title != blank %}
+      <div class="section-title">
+        <h2>{{ section.settings.title }}</h2>
+        {% if section.settings.show_view_all %}
+          <a href="{{ collections[section.settings.collection].url }}" class="view-all-link">
+            {{ section.settings.view_all_text | default: 'צפו בהכל' }}
+          </a>
+        {% endif %}
+      </div>
+    {% endif %}
+    
+    <div class="product-slider-wrapper">
+      <div class="product-slider-prev" data-slider="{{ section.id }}">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      
+      <div class="product-slider-next" data-slider="{{ section.id }}">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      
+      <div class="swiper product-slider-swiper" id="swiper-{{ section.id }}">
+        <div class="swiper-wrapper">
+          {% assign collection = collections[section.settings.collection] %}
+          {% for product in collection.products limit: section.settings.products_to_show %}
+            <div class="swiper-slide">
+              {% render 'custom-product-card', product: product, show_discount_badge: section.settings.show_discount_badge %}
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Ініціалізуємо слайдер для конкретної секції
+    const sectionId = '{{ section.id }}';
+    const swiperElement = document.getElementById('swiper-' + sectionId);
+    
+    if (swiperElement) {
+      const productSlider = new Swiper('#swiper-' + sectionId, {
+        slidesPerView: 1,
+        spaceBetween: 0,
+        loop: false,
+        centeredSlides: true,
+        navigation: {
+          nextEl: '[data-slider="' + sectionId + '"].product-slider-next',
+          prevEl: '[data-slider="' + sectionId + '"].product-slider-prev',
+        },
+        breakpoints: {
+          768: {
+            slidesPerView: 4,
+            spaceBetween: 20,
+            centeredSlides: false,
+            allowTouchMove: false,
+          },
+        },
+        on: {
+          init: function() {
+            this.update();
+            updateNavigation(this, sectionId);
+          },
+          slideChange: function() {
+            updateNavigation(this, sectionId);
+          }
+        }
+      });
+    }
+
+    // Функція оновлення навігації для конкретного слайдера
+    function updateNavigation(swiper, sectionId) {
+      const prevBtn = document.querySelector('[data-slider="' + sectionId + '"].product-slider-prev');
+      const nextBtn = document.querySelector('[data-slider="' + sectionId + '"].product-slider-next');
+      
+      if (prevBtn && nextBtn) {
+        if (swiper.isBeginning) {
+          prevBtn.classList.add('swiper-button-disabled');
+        } else {
+          prevBtn.classList.remove('swiper-button-disabled');
+        }
+        
+        if (swiper.isEnd) {
+          nextBtn.classList.add('swiper-button-disabled');
+        } else {
+          nextBtn.classList.remove('swiper-button-disabled');
+        }
+      }
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Product Slider",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "מבצעים"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 4,
+      "max": 20,
+      "step": 1,
+      "label": "Products to show",
+      "default": 8
+    },
+    {
+      "type": "checkbox",
+      "id": "show_discount_badge",
+      "label": "Show discount badge",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "Show view all link",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "view_all_text",
+      "label": "View all text",
+      "default": "צפו בהכל"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Slider"
+    }
+  ]
+}
+{% endschema %}

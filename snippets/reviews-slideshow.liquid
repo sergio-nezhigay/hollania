@@ -1,0 +1,12 @@
+{% comment %}
+  props:
+    - reviews
+{% endcomment %}
+
+<swiper-container class="sl-slideshow" init="false" navigation="true" space-between="16" slides-per-view="1.05" css-mode="true">
+  {%- for review in (1..8) -%}
+    <swiper-slide class="h-auto">
+      {%- render 'review-card' -%}
+    </swiper-slide>
+  {%- endfor -%}
+</swiper-container>

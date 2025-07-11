@@ -1,0 +1,501 @@
+{{ 'section-contact.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .contact-hero-{{ section.id }} {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 648px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contact-hero-bg,
+  .contact-hero-bg-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 1;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    image-rendering: optimizeQuality;
+    -ms-interpolation-mode: bicubic;
+  }
+
+  @media screen and (min-width: 750px) {
+    .contact-hero-{{ section.id }} {
+      height: 639px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-left: 120px;
+      padding-right: 160px;
+      gap: 40px;
+      width: 100%;
+    }
+  }
+
+  @media screen and (min-width: 1200px) {
+    .contact-hero-{{ section.id }} {
+      {% if section.settings.background_image_desktop %}
+        background-image: url('{{ section.settings.background_image_desktop | image_url }}');
+      {% elsif section.settings.background_image %}
+        background-image: url('{{ section.settings.background_image | image_url }}');
+      {% endif %}
+    }
+  }
+
+  .contact-form-wrapper {
+    background: #FFFFFF;
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 36px 30px;
+    width: 440px;
+    height: 511px;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 10;
+  }
+
+  .contact-form-wrapper input,
+  .contact-form-wrapper textarea,
+  .contact-form-wrapper select {
+    width: 380px;
+    height: 56px;
+    padding: 0 1rem;
+    border: 1px solid #D1D5DD;
+    border-radius: 8px;
+    font-size: 16px;
+    direction: rtl;
+    text-align: right;
+    margin-bottom: 8px;
+    box-sizing: border-box;
+    background: #F9F9F9;
+    color: #89898C;
+  }
+
+  .contact-form-wrapper textarea {
+    height: 142px;
+    padding: 1rem;
+    resize: none;
+  }
+
+  .contact-form-wrapper input:focus,
+  .contact-form-wrapper textarea:focus,
+  .contact-form-wrapper select:focus {
+    outline: none;
+    border-color: #dc2626;
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+  }
+
+  .contact-form-wrapper .form-button {
+    background: #DD2D4A;
+    color: white;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 380px;
+    height: 56px;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+  }
+
+  .contact-form-wrapper .form-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(220, 38, 38, 0.3);
+  }
+
+  .contact-hero-content {
+    color: white;
+    text-align: right;
+    direction: rtl;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 10;
+  }
+
+  .contact-hero-content h1 {
+    font-size: 48px;
+    font-weight: 400;
+    margin: 0 0 1rem 0;
+    letter-spacing: 2px;
+    color: rgba(255, 255, 255, 0.4);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    line-height: 1.2;
+    font-family: 'Inter';
+  }
+
+  .contact-hero-content h2 {
+    font-size: 32px;
+    font-weight: 400;
+    margin: 0 0 0.5rem 0;
+    line-height: 1.4;
+    color: white;
+    text-align: right;
+    width: 100%;
+  }
+
+  .contact-hero-content p {
+    font-size: 28px;
+    margin: 0;
+    color: white;
+    text-align: right;
+    width: 100%;
+    line-height: 1.3;
+  }
+
+  .checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 6px;
+    margin-bottom: 14px;
+    direction: rtl;
+  }
+
+  .checkbox-wrapper input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #dc2626;
+    margin: 0;
+  }
+
+  .checkbox-wrapper label {
+    font-size: 14px;
+    color: #89898C;
+    cursor: pointer;
+  }
+
+  @media screen and (max-width: 749px) {
+    .checkbox-wrapper {
+      margin-top: 5px !important;
+      margin-bottom: 10px !important;
+    }
+    .contact-hero-{{ section.id }} {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 39px 16px 19px 16px;
+    }
+
+    .contact-hero-content {
+      width: 100%;
+      height: auto;
+      text-align: center;
+      position: static;
+      transform: none;
+      margin-bottom: 61px;
+      align-items: center;
+    }
+
+    .contact-hero-content h1 {
+      font-size: 32px;
+      margin: 0 0 3px 0;
+      white-space: normal;
+      text-align: center;
+    }
+
+    .contact-hero-content h2 {
+      font-size: 18px;
+      margin: 0 0 8px 0;
+      text-align: center;
+    }
+
+    .contact-hero-content p {
+      font-size: 14px;
+      margin: 0;
+      text-align: center;
+    }
+
+    .contact-form-wrapper {
+      width: 328px;
+      height: auto;
+      padding: 25px 21px;;
+      position: static;
+      transform: none;
+    }
+
+    .contact-form-wrapper input,
+    .contact-form-wrapper textarea,
+    .contact-form-wrapper select {
+      width: 285px;
+      height: 41px;
+      margin-bottom: 5px;
+    }
+
+    .contact-form-wrapper textarea {
+      height: 115px;
+    }
+
+    .contact-form-wrapper .form-button {
+      width: 285px;
+      height: 41px;
+      line-height: .4;
+    }
+  }
+
+  @media screen and (min-width: 750px) {
+    .contact-form-wrapper {
+      flex-shrink: 0;
+    }
+
+    .contact-hero-content {
+      flex: 1;
+      flex-shrink: 0;
+      min-width: 0;
+      padding-left: 70px;
+    }
+  }
+
+  @media screen and (min-width: 750px) {
+    .contact-form-wrapper {
+      flex-shrink: 0;
+    }
+
+    .contact-hero-content {
+      flex: 1;
+      flex-shrink: 0;
+      min-width: 0;
+      padding-left: 70px;
+    }
+  }
+
+  @media screen and (min-width: 1200px) {
+    .contact-hero-content {
+      position: relative;
+      top: -92px;
+      padding-left: 120px;
+    }
+
+    .contact-hero-content h1 {
+      font-size: 74px;
+    }
+
+    .contact-hero-content h2 {
+      font-size: 36px;
+    }
+
+    .contact-hero-content p {
+      font-size: 30px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="contact-hero-{{ section.id }} section-{{ section.id }}-padding">
+  {% comment %} High quality image without compression {% endcomment %}
+  {% if section.settings.background_image_desktop and section.settings.background_image %}
+    <picture class="contact-hero-bg">
+      <source media="(min-width: 750px)" srcset="{{ section.settings.background_image_desktop | img_url: 'master' }}">
+      <img src="{{ section.settings.background_image | img_url: 'master' }}" alt="{{ section.settings.heading | default: 'Contact Us' }}" class="contact-hero-bg-img" loading="eager">
+    </picture>
+  {% elsif section.settings.background_image_desktop %}
+    <img src="{{ section.settings.background_image_desktop | img_url: 'master' }}" alt="{{ section.settings.heading | default: 'Contact Us' }}" class="contact-hero-bg-img" loading="eager">
+  {% elsif section.settings.background_image %}
+    <img src="{{ section.settings.background_image | img_url: 'master' }}" alt="{{ section.settings.heading | default: 'Contact Us' }}" class="contact-hero-bg-img" loading="eager">
+  {% endif %}
+
+  <div class="contact-hero-content">
+    <h1>{{ section.settings.heading | default: 'Contact Us' }}</h1>
+    <h2>{{ section.settings.subheading | default: 'כל אחד מאיתנו ייחודי, ולכן נדרשת התאמה אישית וחופש בחירה.' }}</h2>
+    <p>{{ section.settings.description | default: 'לפגישת התאמה צרו קשר' }}</p>
+  </div>
+
+  <div class="contact-form-wrapper">
+    {% form 'contact', class: 'contact-form' %}
+      {{ form.errors | default_errors }}
+
+      <div class="form-group">
+        <input
+          type="text"
+          name="contact[first_name]"
+          placeholder="שם"
+          required
+          class="form-input"
+        />
+      </div>
+
+      <div class="form-group">
+        <input
+          type="tel"
+          pattern="\+?\d+"
+          name="contact[phone]"
+          placeholder="טלפון"
+          required
+          class="form-input"
+        />
+      </div>
+
+      <div class="form-group">
+        <input
+          type="email"
+          name="contact[email]"
+          placeholder="מייל"
+          required
+          class="form-input"
+        />
+      </div>
+
+      <div class="form-group">
+        <textarea
+          name="contact[body]"
+          placeholder="הודעה"
+          rows="4"
+          class="form-input"
+        ></textarea>
+      </div>
+
+      <div class="checkbox-wrapper">
+        <input
+          type="checkbox"
+          name="contact[accepts_marketing]"
+          id="accepts_marketing"
+          {% if section.settings.require_checkbox %}required{% endif %}
+        />
+        <label for="accepts_marketing">
+          {{ section.settings.checkbox_text | default: 'מאשר קבלת הודעות על הטבות ומבצעים בדוא"ל / מסרונים' }}
+        </label>
+      </div>
+
+      <button type="submit" class="form-button">
+        {{ section.settings.button_text | default: 'שליחה' }}
+      </button>
+
+      {%- if form.posted_successfully? -%}
+        <div class="form-success" style="color: #10b981; text-align: center; margin-top: 1rem; font-weight: 600;">
+          {{ section.settings.success_message | default: 'ההודעה נשלחה בהצлחה! נחזור אלייך בהקדם' }}
+        </div>
+      {%- endif -%}
+
+      {%- if form.errors -%}
+        <div class="form-error" style="color: #ef4444; text-align: center; margin-top: 1rem;">
+          {{ form.errors.translated_fields.email | capitalize }}
+          {{ form.errors.messages.email }}
+        </div>
+      {%- endif -%}
+    {% endform %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Hebrew Contact Section",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image (Mobile)"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image_desktop",
+      "label": "Background Image (Desktop)"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Main Heading",
+      "default": "Contact Us"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "כל אחד מאיתנו ייחודי, ולכן נדרשת התאמה אישית וחופש בחירה."
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "label": "Description",
+      "default": "לפגישת התאמה צרו קשר"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "שליחה"
+    },
+    {
+      "type": "textarea",
+      "id": "checkbox_text",
+      "label": "Checkbox Text",
+      "default": "מאשר קבלת הודעות על הטבות ומבצעים בדוא\"ל / מסרונים"
+    },
+    {
+      "type": "checkbox",
+      "id": "require_checkbox",
+      "label": "Make checkbox required",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Success Message",
+      "default": "ההודעה נשלחה בהצלחה! נחזור אלייך בהקדם"
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hebrew Contact Section"
+    }
+  ]
+}
+{% endschema %}

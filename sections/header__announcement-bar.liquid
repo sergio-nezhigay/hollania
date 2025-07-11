@@ -1,0 +1,40 @@
+{% for announcement in section.blocks %}
+  <a href="{{ announcement.settings.link }}" class="bg-brand-600 text-center block px-4 py-1.5 relative z-40">
+    <span class="text-white font-medium leading-5 uppercase xl:hidden">{{ announcement.settings.text }}</span>
+    <span class="text-white font-medium leading-5 uppercase text-lg hidden xl:inline-block">{{ announcement.settings.text_desktop }}</span>
+  </a>
+{% endfor %}
+
+{% schema %}
+ {
+   "name": "Announcement Bar",
+   "enabled_on": {
+     "groups": ["header"]
+   },
+   "blocks": [
+     {
+       "type": "announcement",
+       "name": "Announcement",
+       "settings": [
+         {
+           "type": "text",
+           "id": "text",
+           "default": "November sale עד 50% הנחה!",
+           "label": "Announcement text | mobile"
+         },
+         {
+           "type": "text",
+           "id": "text_desktop",
+           "default": "November sale עד 50% הנחה!",
+           "label": "Announcement text | desktop"
+         },
+         {
+           "type": "url",
+           "id": "link",
+           "label": "Link"
+         }
+       ]
+     }
+   ]
+ }
+{% endschema %}

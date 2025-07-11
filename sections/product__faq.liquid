@@ -1,0 +1,45 @@
+{% assign faq_items = product.metafields.custom.faq_items.value %}
+
+{% if faq_items != blank %}
+  {%- capture accordionItem -%}
+    {%- assign accTargetID = 'acc-target-' | append: '((index))' -%}
+    <div
+      class="py-3 border-b border-b-grey-900/10 group first:pt-0 xl:py-4 lg:hover:cursor-pointer"
+      data-toggle="closed"
+      data-toggle-for="{{- accTargetID -}}"
+    >
+      {% comment %}
+        Title
+      {% endcomment %}
+      <div class="flex justify-between items-center text-grey-500">
+        <span class="font-bold text-sm xl:text-base">((title))</span>
+
+        {%-
+          render 'icon',
+          name: 'plus',
+          class: 'w-3.5 h-3.5 transition-all group-data-[toggle=opened]:scale-105 group-data-[toggle=opened]:rotate-45'
+        -%}
+      </div>
+
+      {% comment %}
+        Description
+      {% endcomment %}
+      <div data-target="{{- accTargetID -}}" class="overflow-hidden h-0 transition-[height]">
+        <div class="pt-4 text-xsm text-grey-900/60 xl:text-sm sl-default-text-formatting">
+          ((content))
+        </div>
+      </div>
+    </div>
+  {%- endcapture -%}
+
+  <div class="px-4 py-6 space-y-6 xl:py-14">
+    <span class="block section-title">שאלות נפוצות</span>
+
+    <accordion-component class="block mt-3 lg:max-w-2xl lg:mx-auto xl:mt-8">
+      {%- for item in faq_items -%}
+        {% assign content = item.content | metafield_tag | newline_to_br %}
+        {{- accordionItem | replace: '((index))', forloop.index | replace: '((title))', item.title | replace: '((content))', content -}}
+      {%- endfor -%}
+    </accordion-component>
+  </div>
+{% endif %}

@@ -1,0 +1,172 @@
+{%- liquid
+  assign dateNow = 'now' | date: '%d/%m/%Y'
+
+  assign defaulBlock = false
+  assign datesBlock = false
+
+  for block in section.blocks
+    if block.settings.display_rules == 'default'
+      assign defaulBlock = block
+
+    elsif block.settings.display_rules == 'dates' and block.settings.dates contains dateNow
+      assign datesBlock = block
+    endif
+  endfor
+
+  assign blockForRender = datesBlock | default: defaulBlock
+
+  comment
+    | This loop works only for customizer to see preview of block
+  endcomment
+  if request.design_mode
+    for block in section.blocks
+      if block.settings.preview_mode == true
+        assign blockForRender = block
+        break
+      endif
+    endfor
+  endif
+-%}
+
+{%- if blockForRender -%}
+  <a
+      href="{{- blockForRender.settings.link -}}"
+      class="flex flex-col items-center relative overflow-hidden text-center pt-[118%] pb-7 px-10 xl:pt-[33%] "
+  >
+    <div class="absolute absolute-centered w-full h-full -z-10">
+      {%-
+          render 'image-with-placeholder',
+          image: blockForRender.settings.image_mobile,
+          width: 1125,
+          widths: '375, 650, 1125',
+          sizes: '(min-width: 651px) 1125px, (min-width: 376px) 650px, 375px',
+          class: 'w-full h-full object-cover object-center xl:hidden'
+      -%}
+      {%-
+        render 'image-with-placeholder',
+        image: blockForRender.settings.image_desktop,
+        width: 4320,
+        class: 'w-full h-full object-cover object-center hidden xl:block'
+      -%}
+    </div>
+
+    {% if blockForRender.settings.text_bg != blank or blockForRender.settings.text_big != blank or blockForRender.settings.text_btn != blank %}
+      <div class="absolute-centered-y">
+        {% if blockForRender.settings.text_bg != blank %}
+          <span dir="ltr"
+                class="bg-brand-900 px-2.5 py-1 font-Poppins text-white font-semibold rounded xl:text-2xl xl:font-bold xl:p-4 xl:leading-none">
+      {{- blockForRender.settings.text_bg -}}
+    </span>
+        {% endif %}
+
+        {% if blockForRender.settings.text_big != blank %}
+          <h1
+            class="pt-4 text-white text-4xl font-extrabold max-w-[17.5rem] xl:max-w-[35.25rem] xl:text-6xl xl:font-bold xl:leading-tight">
+            {{- blockForRender.settings.text_big -}}
+          </h1>
+        {% endif %}
+
+        {% if blockForRender.settings.text_btn != blank %}
+          {% capture btnColors -%}
+            --btn-color: {{- blockForRender.settings.btn_color -}};
+            --btn-bg-color: {{- blockForRender.settings.bg_btn -}};
+          {%- endcapture %}
+          <button class="px-10 py-3 text-[--btn-color] bg-[--btn-bg-color] shadow-sm shadow-shadow-btn font-bold leading-5 rounded-lg mt-auto
+    xl:mt-6 xl:px-12 xl:py-4 xl:text-2xl xl:leading-none xl:hover:bg-brand-700"
+                  style="{{ btnColors | strip_newlines }}">
+            {{- blockForRender.settings.text_btn -}}
+          </button>
+        {% endif %}
+      </div>
+    {% endif %}
+  </a>
+{%- endif -%}
+
+{%- schema %}
+{
+  "name": "Composite banner",
+  "blocks": [
+    {
+      "type": "banner",
+      "name": "Banner",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Basic configurations"
+        },
+        {
+          "type": "select",
+          "id": "display_rules",
+          "label": "Display by:",
+          "options": [
+            { "value": "default", "label": "Default" },
+            { "value": "dates", "label": "Dates" }
+          ]
+        },
+        {
+          "type": "textarea",
+          "id": "dates",
+          "label": "Dates (only if \"Display by: Dates\" selected )",
+          "info": "Use format: DD/MM/YYYY,DD/MM/YYYY (example: 01/01/2020,31/01/2020)"
+        },
+        {
+          "type": "checkbox",
+          "id": "preview_mode",
+          "label": "Preview mode",
+          "info": "If checked banner will be visible not depending of the date (only in customizer)"
+        },
+        {
+          "type": "header",
+          "content": "Mobile options"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_mobile",
+          "label": "Image mobile"
+        },
+        {
+          "type": "text",
+          "id": "text_bg",
+          "label": "Text with background"
+        },
+        {
+          "type": "text",
+          "id": "text_big",
+          "label": "Text big"
+        },
+        {
+          "type": "text",
+          "id": "text_btn",
+          "label": "Text button"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "color",
+          "id": "bg_btn",
+          "label": "Background button color",
+          "default": "#1570EF"
+        },
+        {
+          "type": "color",
+          "id": "btn_color",
+          "label": "Text button color",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "header",
+          "content": "Desktop options"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_desktop",
+          "label": "Image desktop"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

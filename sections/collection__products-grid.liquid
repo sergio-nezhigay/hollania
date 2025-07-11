@@ -1,0 +1,30 @@
+{% paginate collection.products by 20 %}
+  <h1>{{ collection.title }}</h1>
+
+  {% if collection.description != blank %}
+    <div class="collection-description">
+      {{ collection.description }}
+    </div>
+  {% endif %}
+
+  <ul class="product-grid">
+    {% for product in collection.products %}
+      <li class="product-card">
+        <a href="{{ product.url | within: collection }}">
+          <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.featured_image.alt | escape }}">
+          <h2>{{ product.title }}</h2>
+          {% if product.price_varies %}
+            <span>від {{ product.price_min | money }}</span>+
+          {% else %}
+            <span>{{ product.price | money }}</span>
+          {% endif %}
+          {% if product.vendor %}
+            <div class="vendor">By {{ product.vendor }}</div>
+          {% endif %}
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+
+  {{ paginate | default_pagination }}
+{% endpaginate %}

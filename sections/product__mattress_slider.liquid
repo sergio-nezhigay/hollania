@@ -1,0 +1,142 @@
+{% unless product.metafields.custom.hide_mattress_slider %}
+  {%- render 'vite-tag' with '@/additionalEntrypoints/product/infoSlider/product.mattress.slider.css' -%}
+
+  <div class="md:grid md:grid-cols-2 md:gap-x-[50px] md:p-4 md:bg-[#F7FCFF] xl:p-8 xl:gap-x-[100px]">
+    {%- for block in section.blocks -%}
+      {%- capture desktopItems -%}
+        {{- desktopItems -}}
+
+        {%- assign accTargetID = forloop.index | append: '-acc-item' -%}
+
+        <div
+          data-index="{{ forloop.index }}"
+          data-toggle="{% if forloop.first %}opened{% else %}closed{% endif %}"
+          data-toggle-for="{{- accTargetID -}}"
+          class="space-x-reverse space-x-4 flex items-start hover:cursor-pointer group "
+        >
+          <div class="rounded-full w-7 h-7 flex-grow-0 flex-shrink-0 flex items-center justify-center bg-brand-600/10
+        text-lg font-medium text-brand-600 group-data-[toggle=opened]:bg-brand-600 group-data-[toggle=opened]:text-white
+        group-data-[toggle=opened]:font-bold xl:w-10 xl:h-10 xl:text-2xl">
+            {{ forloop.index }}
+          </div>
+          <div class="xl:pt-1">
+            <span class="block text-xl group-data-[toggle=opened]:font-bold group-data-[toggle=opened]:text-brand-600 xl:text-2xl">
+              {{ block.settings.title }}
+            </span>
+            <div data-target="{{- accTargetID -}}" class="overflow-hidden h-0 transition-[height]">
+              <p class="text-black/60 pt-2 xl:text-lg">
+                {{ block.settings.content }}
+              </p>
+            </div>
+          </div>
+        </div>
+      {%- endcapture  -%}
+
+      {%- capture slides -%}
+        {{- slides -}}
+
+        <swiper-slide class="h-auto bg-white p-4 rounded-2xl space-y-1 w-full">
+          <span class="block font-bold text-lg">{{ forloop.index }} {{ block.settings.title }}</span>
+          <p class="text-grey-900/60">
+            {{ block.settings.content }}
+          </p>
+        </swiper-slide>
+      {%- endcapture  -%}
+
+      {%- capture controls -%}
+        {{- controls -}}
+
+        {%- liquid
+          case forloop.index
+            when 1
+              assign top_percent = 4
+              assign left_percent = 46
+            when 2
+              assign top_percent = 25
+              assign left_percent = 52
+            when 3
+              assign top_percent = 34
+              assign left_percent = 39
+            when 4
+              assign top_percent = 48
+              assign left_percent = 58
+            when 5
+              assign top_percent = 60
+              assign left_percent = 44
+            when 6
+              assign top_percent = 77
+              assign left_percent = 39
+            when 7
+              assign top_percent = 87
+              assign left_percent = 29
+          endcase
+        -%}
+        <div
+          class="sl-ms__custom-bullet {% if forloop.first -%}active{%- endif -%}"
+          style="left: {{ left_percent }}%; top: {{ top_percent }}%;"
+          data-swiper-bullet="{{ forloop.index }}"
+        >
+          {{ forloop.index }}
+        </div>
+      {%- endcapture  -%}
+
+    {%- endfor -%}
+
+    <span class="block section-title pb-6 px-4 md:col-span-1 md:text-right md:text-black md:px-0 xl:text-5xl">{{ section.settings.title }}</span>
+
+    <div class="relative aspect-w-[375] aspect-h-[350] md:col-start-2 md:col-span-1 md:row-span-3 md:rounded-2xl md:overflow-hidden xl:rounded-3xl">
+      {%-
+        render 'image-with-placeholder',
+        image: images['mattress_slider_bg.jpg'],
+        width: 1125,
+        class: 'w-full h-full object-cover'
+      -%}
+
+      {{- controls -}}
+    </div>
+
+    <div class="bg-brand-50 p-4 pb-8 md:col-span-1 md:row-start-2 md:bg-transparent md:p-0">
+      <swiper-container effect="fade" pagination="true" pagination-clickable="true" class="sl-mattress-slider sl-fix-load" init="false">
+        {{- slides -}}
+      </swiper-container>
+
+      <accordion-component data-always-one-open class="hidden jsMattressAccordion space-y-4 md:block xl:space-y-6">
+        {{- desktopItems -}}
+      </accordion-component>
+    </div>
+  </div>
+
+
+  {%- render 'vite-tag' with '@/additionalEntrypoints/product/infoSlider/product.mattress.slider.ts' -%}
+{% endunless %}
+
+{%- schema -%}
+{
+  "name": "Mattress slider",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "point",
+      "name": "Image point",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "content",
+          "label": "Content"
+        }
+      ]
+    }
+  ]
+}
+{%- endschema -%}

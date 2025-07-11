@@ -1,0 +1,178 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "top": {
+      "type": "page__top",
+      "settings": {}
+    },
+    "banner": {
+      "type": "page__banner",
+      "settings": {
+        "image": "shopify://shop_images/image_315.jpg",
+        "image_desktop": "shopify://shop_images/image315_2.jpg",
+        "image_text": "",
+        "title": "אודות Sealy",
+        "text_gr": "140 שנים של איכות",
+        "icon": "shopify://shop_images/Vector.svg"
+      }
+    },
+    "nav": {
+      "type": "page__about_nav",
+      "blocks": {
+        "nav_item_PYFn4j": {
+          "type": "nav_item",
+          "settings": {
+            "anchor": "section-1",
+            "text": "סילי ארה”ב"
+          }
+        },
+        "nav_item_UMFpty": {
+          "type": "nav_item",
+          "settings": {
+            "anchor": "section-2",
+            "text": "סילי ישראל"
+          }
+        },
+        "nav_item_AjPFbp": {
+          "type": "nav_item",
+          "settings": {
+            "anchor": "section-3",
+            "text": "טכנולוגיה"
+          }
+        }
+      },
+      "block_order": [
+        "nav_item_PYFn4j",
+        "nav_item_UMFpty",
+        "nav_item_AjPFbp"
+      ],
+      "settings": {
+        "title": "סילי ארה\"ב"
+      }
+    },
+    "grid": {
+      "type": "page__about_grid",
+      "blocks": {
+        "block_XGVtrh": {
+          "type": "block",
+          "settings": {
+            "image": "shopify://shop_images/image_121.jpg",
+            "title": "הכל התחיל בשנת 1881 בטקסס ארה\"ב",
+            "text": "דניאל היינס, מגדל כותנה מצליח התחיל בייצור מזרנים עשויים כותנה עבורו ועבור החברים שלו. בשנת 1889 הוא המציא מכונה אשר דחסה כותנה לתוך בד ריפוד והתחיל לייצר בהצלחה מזרנים תחת השם ״מזרני סילי״",
+            "phone": "",
+            "email": "",
+            "full_width": false,
+            "additional_info": ""
+          }
+        },
+        "block_QxcNYN": {
+          "type": "block",
+          "settings": {
+            "image": "shopify://shop_images/image_122.jpg",
+            "title": "בשנת 1950 פותחה טכנולוגיית ה- ״פוסטרופדי״ ונרשמה כפטנט בינלאומי",
+            "text": "ב-70 שנים האחרונות סילי נמצאת בחזית הטכנולוגיה של ייצור מזרנים בעולם את הניסיון העשיר של סילי ביצור מזרנים מנפנו לפיתוח ה- טכנולוגיה החדשנית \"פוסטרופדי\" המעניקה לכם תמיכה נקודתית במרכז המזרן בדיוק במקום שאתם זקוקים לה.",
+            "phone": "",
+            "email": "",
+            "full_width": false,
+            "additional_info": ""
+          }
+        }
+      },
+      "block_order": [
+        "block_XGVtrh",
+        "block_QxcNYN"
+      ],
+      "settings": {
+        "title": "סילי ארה\"ב",
+        "anchor": "section-1"
+      }
+    },
+    "grid2": {
+      "type": "page__about_grid",
+      "blocks": {
+        "block_9C87JH": {
+          "type": "block",
+          "settings": {
+            "image": "shopify://shop_images/image_123.jpg",
+            "title": "דרכה של SEALY ישראל",
+            "text": "לקוחות סילי ישראל זוכים לשינה איכותית בסילי ישראל מתנהלים על פי דרכה של סילי העולמית. לקוחות סילי ישראל זוכים לשינה איכותית על מזרנים מעולים, בנוסף בסניפי סילי תמצאו מבחר גדול ומגוון רחב של מוצרי שינה , בסילי ישראל עובדים נאמנים המאמינים במותג ובמוצריו וישמחו לתת לכם שרות מכל הלב. לסילי ישראל חזון מובן וברור לכל העובדים בחברה, להיות החברה המובילה בתחום השינה בישראל והבחירה \nהטבעית והראשונה של הצרכנים .\n\n  פרטי חברת סילי פוסטרופדיק ח.פ 516113669  \nכתובת- ששת הימים 6, בני ברק",
+            "phone": "",
+            "email": "",
+            "full_width": false,
+            "additional_info": ""
+          }
+        },
+        "block_JJAYV7": {
+          "type": "block",
+          "settings": {
+            "image": "shopify://shop_images/image_124.jpg",
+            "title": "סמנכ\"ל הרשת - מיכה חובב",
+            "text": "מוביל את סילי ישראל, סמנכ\"ל רשת החנויות מיכה חובב, שלוש שנים של ניסיון בניהול רשת חנויות קמעונית וידע רב בשרות לקוחות.",
+            "phone": "050-9215383",
+            "email": "mica@sealy.co.il",
+            "full_width": false,
+            "additional_info": "הזמנות שנעשו באחד מסניפי סילי ניתנים לביטול גם בע\"פ בהגעה לסניף וזאת בהתאם לתנאי ביטול המדיניות בהזמנה שנעשתה בסניף"
+          }
+        }
+      },
+      "block_order": [
+        "block_9C87JH",
+        "block_JJAYV7"
+      ],
+      "settings": {
+        "title": "סילי ישראל",
+        "anchor": "section-2"
+      }
+    },
+    "grid3": {
+      "type": "page__about_grid",
+      "blocks": {
+        "block_9C87JH": {
+          "type": "block",
+          "settings": {
+            "image": "shopify://shop_images/image_315_1.jpg",
+            "title": "הידעתם? 50% ממשקל גופכם נח באמצע המזרן כשאתם ישנים",
+            "text": "לכן הנדסנו את טכנולוגיית  Posturepedic המחזקת את מרכז המזרן כדי  לספק תמיכה מחוזקת כך שגופכם נתמך ונשאר יציב וישר בזמן שאתם ישנים.",
+            "phone": "",
+            "email": "",
+            "full_width": true,
+            "additional_info": ""
+          }
+        }
+      },
+      "block_order": [
+        "block_9C87JH"
+      ],
+      "settings": {
+        "title": "טכנולוגיה",
+        "anchor": "section-3"
+      }
+    },
+    "p_banner": {
+      "type": "page__about_banner",
+      "settings": {
+        "image": "shopify://shop_images/sealy-posturepedic-tech-logo1.png",
+        "title": "תמיכה מדוקדקת בדיוק במקום שאתם זקוקים לה",
+        "text": "הטכנולוגיה הבלעדית שלנו ™Posturepedic - מפותחת בעזרת מומחים אורטופדיים - מספקת תמיכה מחוזקת במקום שאתה הכי זקוק לה",
+        "video": "https://www.youtube.com/watch?v=nIFISw1j6nM"
+      }
+    }
+  },
+  "order": [
+    "top",
+    "banner",
+    "nav",
+    "grid",
+    "grid2",
+    "grid3",
+    "p_banner"
+  ]
+}

@@ -1,0 +1,160 @@
+<style>
+  .award-section {
+    background-color: #F4EFEC;
+    width: 100%;
+    padding: 0;
+  }
+  
+  .award-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: flex-start;
+    min-height: 415px;
+    gap: 75px;
+  }
+  
+  .award-image {
+    flex-shrink: 0;
+    width: 535px;
+    height: 389px;
+    order: 1;
+    align-self: end;
+  }
+  
+  .award-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .award-content {
+    flex: 1;
+    max-width: 590px;
+    padding: 70px 0;
+    order: 2;
+  }
+  
+  .award-title {
+    font-size: 36px;
+    font-weight: bold;
+    margin: 0 0 20px 0;
+    line-height: 1.2;
+    color: #000;
+  }
+  
+  .award-divider {
+    width: 200px;
+    height: 2px;
+    background-color: #DD2D4A;
+    margin: 0 0 20px 0;
+    border: none;
+  }
+  
+  .award-text {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #000;
+    margin: 0;
+  }
+  
+  .award-text p {
+    margin: 0 0 16px 0;
+  }
+  
+  .award-text p:last-child {
+    margin-bottom: 0;
+  }
+  
+  /* Mobile Styles */
+  @media (max-width: 768px) {
+    .award-section {
+      max-height: fit-content;
+    }
+    
+    .award-container {
+      flex-direction: column;
+      text-align: center;
+      gap: 28px;
+      min-height: 534px;
+      padding: 30px 16px;
+      justify-content: center;
+    }
+    
+    .award-image {
+      width: 304px;
+      height: 211px;
+      order: 1;
+      padding-top: 0;
+      align-self: center;
+    }
+    
+    .award-content {
+      max-width: 100%;
+      order: 2;
+      padding: 0;
+    }
+    
+    .award-title {
+      font-size: 26px;
+      margin: 0 0 14px 0;
+    }
+    
+    .award-divider {
+      width: 132px;
+      margin: 0 auto 20px auto;
+    }
+    
+    .award-text {
+      font-size: 14px;
+    }
+  }
+</style>
+
+<section class="award-section">
+  <div class="award-container">
+    {% if section.settings.image %}
+      <div class="award-image">
+        {{ section.settings.image | image_url: width: 535, height: 389 | image_tag: alt: section.settings.image.alt }}
+      </div>
+    {% endif %}
+    
+    <div class="award-content">
+      <h2 class="award-title">{{ section.settings.title }}</h2>
+      <div class="award-divider"></div>
+      <div class="award-text">
+        {{ section.settings.text }}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Award Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "מיטב מיוחדת לאוהבי עיצוב"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text Content",
+      "default": "<p>שנתיים וחצי לאחר המחזות הבכורה וילמס וקהלר Wilms ו Köhler זכו במגורת פרסי עיצוב Red Dot Design Award Good Industrial Design, IF Product Design Award</p><p>בזכות מיון רחוק שמספק לצרכנים ואפשרויות עיצוב החדשות יכולת לאמץ לכל חד שינוי. חנות לעיצוב טוב לכל נושאי טובה יותר לכלכלי. נעימה לצרכנים חדש לי, עכשיו שימוש בחומרים גבוהים עמידים למינו מו סוג. מלאך וחלקי 100%, בזכות שימוש בחומרים עליונים עמידים למינו מו סוג מלאכותיים.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Award Section"
+    }
+  ]
+}
+{% endschema %}

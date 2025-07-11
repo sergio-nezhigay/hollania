@@ -1,0 +1,172 @@
+{{ 'collection-list.css' | asset_url | stylesheet_tag }}
+<div class="collections-section">
+  <div class="collections-container">
+    <h2 class="collections-title">{{ section.settings.title }}</h2>
+    
+    <div class="collections-slider-wrapper">
+      <div class="swiper collections-swiper">
+        <div class="swiper-wrapper">
+          {% for block in section.blocks %}
+            {% assign collection = collections[block.settings.collection] %}
+            {% if collection and collection != empty %}
+              <div class="swiper-slide">
+                <div class="collection-item" data-collection-handle="{{ collection.handle }}">
+                  <div class="collection-circle">
+                    <div class="collection-image">
+                      {% if collection.featured_image %}
+                        <img src="{{ collection.featured_image | image_url: width: 400 }}" alt="{{ collection.title | escape }}" loading="lazy">
+                      {% elsif collection.products.first and collection.products.first.featured_image %}
+                        <img src="{{ collection.products.first.featured_image | image_url: width: 400 }}" alt="{{ collection.title | escape }}" loading="lazy">
+                      {% else %}
+                        <div class="placeholder-image">
+                          <svg width="60" height="60" viewBox="0 0 24 24" fill="none">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2" stroke="currentColor" stroke-width="2"/>
+                            <circle cx="8.5" cy="8.5" r="1.5" stroke="currentColor" stroke-width="2"/>
+                            <polyline points="21,15 16,10 5,21" stroke="currentColor" stroke-width="2"/>
+                          </svg>
+                        </div>
+                      {% endif %}
+                    </div>
+                  </div>
+                  <h3 class="collection-name">{{ collection.title | escape }}</h3>
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+      
+      <div class="swiper-button-prev collections-prev">
+        <svg width="11" height="16" viewBox="0 0 11 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M7.61018 15.1313C7.77595 15.1313 7.94187 15.068 8.06842 14.9414C8.32168 14.6881 8.32168 14.278 8.06842 14.0249L2.04528 8.0018L8.06842 1.97866C8.32168 1.7254 8.32168 1.3153 8.06842 1.0622C7.81516 0.809101 7.40505 0.808939 7.15195 1.0622L0.670583 7.54357C0.417323 7.79683 0.417323 8.20694 0.670583 8.46003L7.15195 14.9414C7.2785 15.068 7.44442 15.1313 7.61018 15.1313Z" fill="#38383A"/>
+        </svg>
+      </div>
+      <div class="swiper-button-next collections-next">
+        <svg width="11" height="16" viewBox="0 0 11 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3.38982 15.1313C3.22405 15.1313 3.05813 15.068 2.93158 14.9414C2.67832 14.6881 2.67832 14.278 2.93158 14.0249L8.95472 8.0018L2.93158 1.97866C2.67832 1.7254 2.67832 1.3153 2.93158 1.0622C3.18484 0.809101 3.59495 0.808939 3.84805 1.0622L10.3294 7.54357C10.5827 7.79683 10.5827 8.20694 10.3294 8.46003L3.84805 14.9414C3.7215 15.068 3.55558 15.1313 3.38982 15.1313Z" fill="#38383A"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  function initCollectionsSwiper() {
+    if (typeof Swiper === 'undefined') {
+      setTimeout(initCollectionsSwiper, 200);
+      return;
+    }
+
+    const swiperContainer = document.querySelector('.collections-swiper');
+    if (!swiperContainer) {
+      return;
+    }
+
+    try {
+      const collectionsSwiper = new Swiper('.collections-swiper', {
+        slidesPerView: 4,
+        spaceBetween: 24,
+        slidesPerGroup: 1,
+        
+        navigation: {
+          nextEl: '.collections-next',
+          prevEl: '.collections-prev',
+        },
+        
+        breakpoints: {
+          320: {
+            slidesPerView: 2.5,
+            spaceBetween: 32,
+          },
+          768: {
+            slidesPerView: 3,
+            spaceBetween: 20,
+          },
+          1024: {
+            slidesPerView: 4,
+            spaceBetween: 24,
+          }
+        },
+        
+        touchRatio: 1,
+        grabCursor: true,
+        speed: 400,
+        allowTouchMove: true,
+        watchOverflow: true,
+      });
+
+      document.querySelectorAll('.collection-item').forEach(item => {
+        item.addEventListener('click', function(e) {
+          if (collectionsSwiper.animating) return;
+          
+          const collectionHandle = this.getAttribute('data-collection-handle');
+          if (collectionHandle) {
+            window.location.href = `/collections/${collectionHandle}`;
+          }
+        });
+      });
+
+    } catch (error) {
+      console.error('Error initializing Swiper:', error);
+    }
+  }
+
+  initCollectionsSwiper();
+});
+</script>
+
+{% schema %}
+{
+  "name": "Collections Showcase",
+  "class": "section-collections-showcase",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Our Collections"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Select Collection"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collections Showcase",
+      "blocks": [
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

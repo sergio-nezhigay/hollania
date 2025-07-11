@@ -1,0 +1,251 @@
+.swiper-button-next:after,
+.swiper-button-prev:after {
+  display: none;
+}
+
+.product-slider-prev svg,
+.product-slider-next svg {
+  width: revert-layer !important;
+}
+
+.product-slider-section {
+  padding: 80px 0;
+  background-color: #ffffff;
+}
+
+.product-slider-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 32px;
+  position: relative;
+}
+
+.section-title h2 {
+  font-size: 42px;
+  font-weight: 700;
+  color: #333;
+}
+
+.view-all-link {
+  color: #DD2D4A;
+  text-decoration: underline;
+  font-size: 22px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.view-all-link:hover {
+  color: #b8253d;
+}
+
+.product-slider-wrapper {
+  position: relative;
+}
+
+.product-slider-swiper {
+  overflow: hidden;
+}
+
+.product-slider-prev,
+.product-slider-next {
+  position: absolute;
+  top: 40%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  background: white;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  color: #666;
+}
+
+.product-slider-prev:hover,
+.product-slider-next:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  color: #DD2D4A;
+  transform: translateY(-50%) scale(1.05);
+}
+
+.product-slider-prev {
+  left: -20px;
+}
+
+.product-slider-next {
+  right: -20px;
+}
+
+.product-slider-prev.swiper-button-disabled,
+.product-slider-next.swiper-button-disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.product-slider-prev.swiper-button-disabled:hover,
+.product-slider-next.swiper-button-disabled:hover {
+  transform: translateY(-50%);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  color: #666;
+}
+
+.product-slider-swiper .swiper-slide {
+  height: auto;
+  display: flex;
+  align-items: stretch;
+}
+
+.product-slider-swiper .swiper-wrapper {
+  align-items: stretch;
+}
+
+/* Desktop: 4 products in a row with 20px gap */
+@media (min-width: 768px) {
+  .product-slider-container {
+
+  }
+  
+  .product-slider-swiper {
+    width: 1200px;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+  
+  .product-slider-swiper .swiper-slide {
+    width: 285px !important;
+    flex-shrink: 0;
+  }
+}
+
+/* RTL Support */
+[dir="rtl"] .product-slider-prev {
+  left: auto;
+  right: -20px;
+}
+
+[dir="rtl"] .product-slider-next {
+  right: auto;
+  left: -20px;
+}
+
+[dir="rtl"] .product-slider-prev svg {
+  transform: scaleX(-1);
+}
+
+[dir="rtl"] .product-slider-next svg {
+  transform: scaleX(-1);
+}
+
+/* Mobile and Tablet Styles */
+@media (max-width: 767px) {
+  .section-title {
+    margin-bottom: 22px;
+  }
+  .discount-badge {
+    display: none;
+  }
+  .product-slider-section {
+    padding: 30px 0;
+  }
+
+  .product-slider-container {
+    padding: 0 20px;
+  }
+
+  .section-title {
+    margin-bottom: 30px;
+  }
+
+  .section-title h2 {
+    font-size: 30px;
+  }
+
+  .view-all-link {
+    font-size: 16px;
+  }
+
+  .product-slider-prev,
+  .product-slider-next {
+    width: 36px;
+    height: 36px;
+  }
+
+  .product-slider-prev {
+    left: -18px;
+  }
+
+  .product-slider-next {
+    right: -18px;
+  }
+
+  .product-slider-prev svg,
+  .product-slider-next svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .product-slider-swiper {
+    overflow: hidden;
+    padding: 0;
+    width: 100%;
+  }
+
+  .product-slider-swiper .swiper-slide {
+    width: 100% !important;
+    display: flex;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  [dir="rtl"] .product-slider-prev {
+    left: auto;
+    right: -18px;
+  }
+
+  [dir="rtl"] .product-slider-next {
+    right: auto;
+    left: -18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-slider-prev,
+  .product-slider-next {
+    width: 36px;
+    height: 36px;
+  }
+
+  .product-slider-prev {
+    left: -16px;
+  }
+
+  .product-slider-next {
+    right: -16px;
+  }
+
+  .product-slider-prev svg,
+  .product-slider-next svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  [dir="rtl"] .product-slider-prev {
+    left: auto;
+    right: -16px;
+  }
+
+  [dir="rtl"] .product-slider-next {
+    right: auto;
+    left: -16px;
+  }
+}

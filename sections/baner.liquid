@@ -1,0 +1,96 @@
+<section class="custom-image-section">
+  {% if section.settings.image != blank %}
+    <div class="custom-image-wrapper">
+      {% if section.settings.image_url != blank %}
+        <a href="{{ section.settings.image_url }}" class="custom-image-link">
+          <img
+            src="{{ section.settings.image | image_url: width: 1200, height: 387, crop: 'center' }}"
+            alt="{{ section.settings.image.alt | escape }}"
+          />
+        </a>
+      {% else %}
+        <img
+          src="{{ section.settings.image | image_url: width: 1200, height: 387, crop: 'center' }}"
+          alt="{{ section.settings.image.alt | escape }}"
+        />
+      {% endif %}
+    </div>
+  {% endif %}
+</section>
+
+<style>
+.custom-image-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.custom-image-wrapper {
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.custom-image-link {
+  display: block;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.custom-image-wrapper img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Desktop: fixed dimensions */
+@media screen and (min-width: 750px) {
+  .custom-image-wrapper {
+    width: 1200px;
+    height: 387px;
+  }
+  .custom-image-wrapper img {
+    width: 1200px;
+    height: 387px;
+  }
+}
+
+/* Mobile: fixed dimensions and center-cropped, no border radius */
+@media screen and (max-width: 749px) {
+  .custom-image-wrapper {
+    width: 360px;
+    height: 309px;
+    border-radius: 0;
+  }
+  .custom-image-wrapper img {
+    width: 360px;
+    height: 309px;
+  }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Custom Image Picker",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Select Image"
+    },
+    {
+      "type": "url",
+      "id": "image_url",
+      "label": "Image Link URL",
+      "info": "Add a URL to make the image clickable"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Baner"
+    }
+  ]
+}
+{% endschema %}

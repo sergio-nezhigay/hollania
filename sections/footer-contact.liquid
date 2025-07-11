@@ -1,0 +1,395 @@
+<!-- Contact Info Section -->
+<section class="contact-info-section">
+  <div class="container">
+    <!-- Title -->
+    <h2 class="contact-title">{{ section.settings.title }}</h2>
+    
+    <!-- Subtitle -->
+    <p class="contact-subtitle">{{ section.settings.subtitle }}</p>
+    
+    <!-- Working Hours -->
+    <div class="working-hours">{{ section.settings.working_hours }}</div>
+    
+    <!-- Divider Line -->
+    <div class="divider-line"></div>
+    
+    <!-- Contact Info Container -->
+    <div class="contact-container">
+      <div class="contact-row">
+        {% for block in section.blocks %}
+          <div class="contact-item" {{ block.shopify_attributes }}>
+            <h3 class="contact-item-title">{{ block.settings.department_title }}</h3>
+            <div class="contact-links">
+              <a href="tel:{{ block.settings.phone_number }}" class="contact-link">
+                {% render 'phone-icon' %}
+                <span>{{ block.settings.phone_number }}</span>
+              </a>
+              <a href="https://wa.me/{{ block.settings.whatsapp_number }}" class="contact-link whatsapp-link">
+                {% render 'whatsapp-icon' %}
+                <span>{{ block.settings.whatsapp_text }}</span>
+              </a>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.contact-info-section {
+  background-color: {{ section.settings.background_color }};
+  padding: 40px 0;
+  direction: rtl;
+  text-align: center;
+}
+
+.contact-info-section .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.contact-title {
+  font-size: 42px;
+  font-weight: bold;
+  color: {{ section.settings.title_color }};
+  margin: 0;
+  line-height: 1.2;
+}
+
+.contact-subtitle {
+  font-size: 26px;
+  color: {{ section.settings.subtitle_color }};
+  margin: 4px 0 0 0;
+  line-height: 1.3;
+}
+
+.working-hours {
+  font-size: 26px;
+  font-weight: bold;
+  color: {{ section.settings.hours_color }};
+  margin: 2px 0 0 0;
+}
+
+.divider-line {
+  width: 100%;
+  max-width: 1029px;
+  height: 1px;
+  background-color: {{ section.settings.divider_color }};
+  margin: 26px auto 20px auto;
+}
+
+.contact-container {
+  max-width: 880px;
+  margin: 0 auto;
+  min-height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 128px;
+  position: relative;
+}
+
+.contact-row::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 1px;
+  height: 90px;
+  background-color: #B6B8C1;
+}
+
+.contact-item {
+  flex: 1;
+  text-align: right;
+}
+
+.contact-item-title {
+  font-size: 26px;
+  font-weight: bold;
+  color: {{ section.settings.department_title_color }};
+  margin: 0 0 16px 0;
+  text-align: right;
+}
+
+.contact-links {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 30px;
+  flex-direction: row;
+  margin-right: -5px;
+}
+
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: {{ section.settings.link_color }};
+  font-size: 23px;
+  transition: opacity 0.3s ease;
+}
+
+.contact-link:hover {
+  opacity: 0.7;
+}
+
+.contact-link svg {
+  width: 27px;
+  height: 27px;
+  flex-shrink: 0;
+}
+
+.whatsapp-link svg {
+  color: {{ section.settings.whatsapp_color }};
+}
+
+.contact-link:not(.whatsapp-link) svg {
+  color: {{ section.settings.phone_icon_color }};
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .contact-info-section {
+    padding: 30px 0;
+  }
+  
+  .contact-info-section .container {
+    padding: 0 15px;
+  }
+  
+  .contact-title {
+    font-size: 32px;
+  }
+  
+  .contact-subtitle {
+    font-size: 20px;
+  }
+  
+  .working-hours {
+    font-size: 20px;
+  }
+  
+  .divider-line {
+    margin: 20px auto 15px auto;
+  }
+  
+  .contact-container {
+    max-width: 100%;
+    min-height: auto;
+    padding: 0 10px;
+  }
+  
+  .contact-row {
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  .contact-row::before {
+    display: none;
+  }
+  
+  .contact-item {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .contact-item-title {
+    font-size: 20px;
+    margin-bottom: 12px;
+    text-align: center;
+  }
+  
+  .contact-links {
+    justify-content: center;
+    gap: 15px;
+  }
+  
+  .contact-link {
+    font-size: 18px;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-title {
+    font-size: 28px;
+  }
+  
+  .contact-subtitle {
+    font-size: 18px;
+  }
+  
+  .working-hours {
+    font-size: 18px;
+  }
+  
+  .contact-item-title {
+    font-size: 18px;
+  }
+  
+  .contact-link {
+    font-size: 16px;
+  }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Contact Info",
+  "tag": "section",
+  "class": "contact-info-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "כותרות וטקסט"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "כותרת ראשית",
+      "default": "תמיד פה בשבילכם"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "כותרת משנה",
+      "default": "שעות פעילות מוקד שירות לקוחות ושירות האספקות"
+    },
+    {
+      "type": "text",
+      "id": "working_hours",
+      "label": "שעות פעילות",
+      "default": "א-ה: 8:30-16:30"
+    },
+    {
+      "type": "header",
+      "content": "צבעים"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "צבע רקע",
+      "default": "#F4EFEC"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "צבע כותרת ראשית",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "צבע כותרת משנה",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "hours_color",
+      "label": "צבע שעות פעילות",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "divider_color",
+      "label": "צבע קו מפריד",
+      "default": "#B6B8C1"
+    },
+    {
+      "type": "color",
+      "id": "department_title_color",
+      "label": "צבע כותרת מחלקה",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "label": "צבע טקסט קישורים",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "phone_icon_color",
+      "label": "צבע אייקון טלפון",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "whatsapp_color",
+      "label": "צבע אייקון וואטסאפ",
+      "default": "#25D366"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "contact_department",
+      "name": "מחלקת קשר",
+      "settings": [
+        {
+          "type": "text",
+          "id": "department_title",
+          "label": "שם המחלקה",
+          "default": "שירות לקוחות"
+        },
+        {
+          "type": "text",
+          "id": "phone_number",
+          "label": "מספר טלפון",
+          "default": "077-9966249"
+        },
+        {
+          "type": "text",
+          "id": "whatsapp_number",
+          "label": "מספר וואטסאפ (עם קוד מדינה)",
+          "default": "972779966249",
+          "info": "הכנס מספר ללא + (לדוגמה: 972779966249)"
+        },
+        {
+          "type": "text",
+          "id": "whatsapp_text",
+          "label": "טקסט לקישור וואטסאפ",
+          "default": "לצ'אט עם נציג"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Contact Info",
+      "category": "Footer",
+      "blocks": [
+        {
+          "type": "contact_department",
+          "settings": {
+            "department_title": "שירות לקוחות",
+            "phone_number": "077-9966249",
+            "whatsapp_number": "972779966249",
+            "whatsapp_text": "לצ'אט עם נציג"
+          }
+        },
+        {
+          "type": "contact_department",
+          "settings": {
+            "department_title": "תיאום אספקה",
+            "phone_number": "077-8052650",
+            "whatsapp_number": "972778052650",
+            "whatsapp_text": "לצ'אט עם נציג"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

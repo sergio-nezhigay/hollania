@@ -1,0 +1,155 @@
+{{ 'custom-product-card-pdp.css' | asset_url | stylesheet_tag }}
+
+{% assign on_sale = false %}
+{% assign discount_percentage = 0 %}
+{% if product.compare_at_price > product.price %}
+  {% assign on_sale = true %}
+  {% assign discount_percentage = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price | round %}
+{% endif %}
+
+{% assign reviews_count = product.metafields.custom.reviews_count | default: 0 %}
+{% assign specification = product.metafields.custom.specification %}
+{% assign trial_period = product.metafields.custom.trial_period %}
+
+{% assign rating = 0 %}
+{% if reviews_count and reviews_count != blank and reviews_count != "" %}
+  {% assign reviews_count_num = reviews_count | plus: 0 %}
+  {% if reviews_count_num > 0 %}
+    {% assign rating_seed = product.id | modulo: 11 %}
+    {% assign rating_decimal = rating_seed | times: 0.1 %}
+    {% assign rating = 4.0 | plus: rating_decimal %}
+    {% if rating > 5.0 %}
+      {% assign rating = 5.0 %}
+    {% endif %}
+  {% endif %}
+{% endif %}
+
+<div class="product-card-pdp">
+  <a href="{{ product.url }}" class="product-card-pdp-link">
+    <div class="product-card-pdp-badges-top">
+      {% if show_discount_badge and on_sale %}
+        <div class="discount-badge-pdp">
+          {{ discount_percentage }}% OFF
+        </div>
+      {% endif %}
+      
+      {% if trial_period and trial_period != blank and trial_period != "" %}
+        <div class="trial-badge">
+          {{ trial_period }} לילות נסיון
+        </div>
+      {% endif %}
+    </div>
+    
+    <div class="product-image-pdp-container">
+      <div class="product-image-pdp">
+        {% if product.featured_media %}
+          {{ product.featured_media | image_url: width: 570 | image_tag: 
+             alt: product.featured_media.alt | default: product.title,
+             loading: 'lazy',
+             sizes: '(max-width: 767px) 304px, 285px'
+          }}
+        {% else %}
+          <div class="product-image-pdp-placeholder">
+            <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+              <rect width="60" height="60" fill="#E5E7EB"/>
+              <path d="M20 20L40 40M40 20L20 40" stroke="#9CA3AF" stroke-width="2"/>
+            </svg>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+    
+    {% if specification and specification != blank and specification != "" %}
+      <div class="specification-badge">
+        <span class="spec-value">{{ specification }}</span>
+        <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0.849954 1.71787C0.849954 1.41054 0.956427 1.1504 1.16937 0.937459C1.38232 0.724514 1.64245 0.618042 1.94978 0.618042L6.44265 0.618042C6.74998 0.618042 7.01012 0.724514 7.22306 0.937459C7.43601 1.1504 7.54248 1.41054 7.54248 1.71787L7.54248 11.0781C7.54248 11.3854 7.43601 11.6455 7.22306 11.8585C7.01012 12.0714 6.74998 12.1779 6.44265 12.1779L1.94978 12.1779C1.64245 12.1779 1.38232 12.0714 1.16937 11.8585C0.956426 11.6455 0.849954 11.3854 0.849954 11.0781L0.849954 1.71787ZM1.76256 1.71787L1.76256 11.0781C1.76256 11.1249 1.78206 11.1678 1.82106 11.2068C1.86007 11.2458 1.90298 11.2653 1.94978 11.2653L6.44265 11.2653C6.48946 11.2653 6.53236 11.2458 6.57137 11.2068C6.61037 11.1678 6.62987 11.1249 6.62987 11.0781L6.62987 9.28792L4.43024 9.28792L4.43024 8.37532L6.62987 8.37532L6.62987 6.85426L4.43024 6.85426L4.43024 5.94167L6.62987 5.94167L6.62987 4.4206L4.43024 4.4206L4.43024 3.50801L6.62987 3.50801L6.62987 1.71787C6.62987 1.67107 6.61037 1.62816 6.57137 1.58915C6.53237 1.55015 6.48946 1.53065 6.44265 1.53065L1.94978 1.53065C1.90298 1.53065 1.86007 1.55015 1.82106 1.58915C1.78206 1.62816 1.76256 1.67107 1.76256 1.71787Z" fill="#89898C"/>
+        </svg>
+        <span class="height-text">גובה</span>
+      </div>
+    {% endif %}
+    
+    <div class="product-divider-pdp"></div>
+    
+    <div class="product-info-pdp">
+      <h3 class="product-title-pdp">{{ product.title }}</h3>
+      
+      <div class="product-price-pdp">
+        {% if on_sale %}
+          <span class="price-current-pdp">₪{{ product.price | divided_by: 100 }}</span>
+          <span class="price-original-pdp">₪{{ product.compare_at_price | divided_by: 100 }}</span>
+        {% else %}
+          <span class="price-current-pdp">₪{{ product.price | divided_by: 100 }}</span>
+        {% endif %}
+      </div>
+      
+      {% if reviews_count and reviews_count != blank and reviews_count != "" %}
+        {% assign reviews_count_num = reviews_count | plus: 0 %}
+        {% if reviews_count_num > 0 %}
+          <div class="product-reviews-pdp">
+            <div class="rating-stars-pdp">
+              {% assign stars_filled = rating | floor %}
+              {% for i in (1..5) %}
+                {% if i <= stars_filled %}
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_filled_{{ forloop.index }}{{ product.id }}">
+                      <path d="M8.33657 1.65918L10.2852 5.60692L14.6429 6.24386L11.4897 9.31502L12.2339 13.6538L8.33657 11.6042L4.43928 13.6538L5.18342 9.31502L2.03027 6.24386L6.38792 5.60692L8.33657 1.65918Z" fill="#FDB022" stroke="#FDB022" stroke-width="1.68168" stroke-linecap="round" stroke-linejoin="round"/>
+                    </g>
+                    <defs>
+                      <clipPath id="clip0_filled_{{ forloop.index }}{{ product.id }}">
+                        <rect width="15.1351" height="15.1351" fill="white" transform="translate(0.769043 0.397949)"/>
+                      </clipPath>
+                    </defs>
+                  </svg>
+                {% else %}
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_empty_{{ forloop.index }}{{ product.id }}">
+                      <path d="M7.83803 1.65918L9.78668 5.60692L14.1443 6.24386L10.9912 9.31502L11.7353 13.6538L7.83803 11.6042L3.94074 13.6538L4.68489 9.31502L1.53174 6.24386L5.88939 5.60692L7.83803 1.65918Z" stroke="#FDB022" stroke-width="1.68168" stroke-linecap="round" stroke-linejoin="round"/>
+                    </g>
+                    <defs>
+                      <clipPath id="clip0_empty_{{ forloop.index }}{{ product.id }}">
+                        <rect width="15.1351" height="15.1351" fill="white" transform="translate(0.270508 0.397949)"/>
+                      </clipPath>
+                    </defs>
+                  </svg>
+                {% endif %}
+              {% endfor %}
+            </div>
+            <span class="rating-number-pdp">{{ rating }}</span>
+            <span class="reviews-count-pdp">({{ reviews_count }})</span>
+          </div>
+        {% endif %}
+      {% endif %}
+      
+      {% if on_sale %}
+        <div class="shipping-info-badge">
+          <svg width="19" height="20" viewBox="0 0 19 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9.49903 1.72058C7.85497 1.72058 6.24783 2.2081 4.88085 3.12149C3.51387 4.03488 2.44843 5.33311 1.81928 6.85203C1.19013 8.37094 1.02551 10.0423 1.34625 11.6548C1.66699 13.2672 2.45868 14.7484 3.6212 15.9109C4.78373 17.0734 6.26487 17.8651 7.87734 18.1859C9.48981 18.5066 11.1612 18.342 12.6801 17.7128C14.199 17.0837 15.4972 16.0182 16.4106 14.6513C17.324 13.2843 17.8115 11.6771 17.8115 10.0331C17.8115 7.82847 16.9357 5.71415 15.3769 4.15526C13.818 2.59636 11.7036 1.72058 9.49903 1.72058ZM9.20215 4.98621C9.3783 4.98621 9.55049 5.03844 9.69696 5.1363C9.84342 5.23417 9.95757 5.37326 10.025 5.536C10.0924 5.69874 10.11 5.87782 10.0757 6.05058C10.0413 6.22335 9.95648 6.38204 9.83192 6.5066C9.70736 6.63115 9.54867 6.71598 9.37591 6.75034C9.20314 6.78471 9.02407 6.76707 8.86132 6.69966C8.69858 6.63225 8.55949 6.5181 8.46162 6.37164C8.36376 6.22517 8.31153 6.05298 8.31153 5.87683C8.31153 5.64062 8.40536 5.41409 8.57239 5.24706C8.73941 5.08004 8.96594 4.98621 9.20215 4.98621ZM10.6865 14.4862H8.31153C8.15406 14.4862 8.00303 14.4237 7.89168 14.3123C7.78033 14.201 7.71778 14.0499 7.71778 13.8925C7.71778 13.735 7.78033 13.584 7.89168 13.4726C8.00303 13.3613 8.15406 13.2987 8.31153 13.2987H8.90528V9.14246H8.31153C8.15406 9.14246 8.00303 9.0799 7.89168 8.96855C7.78033 8.8572 7.71778 8.70618 7.71778 8.54871C7.71778 8.39123 7.78033 8.24021 7.89168 8.12886C8.00303 8.01751 8.15406 7.95496 8.31153 7.95496H9.49903C9.6565 7.95496 9.80752 8.01751 9.91887 8.12886C10.0302 8.24021 10.0928 8.39123 10.0928 8.54871V13.2987H10.6865C10.844 13.2987 10.995 13.3613 11.1064 13.4726C11.2177 13.584 11.2803 13.735 11.2803 13.8925C11.2803 14.0499 11.2177 14.201 11.1064 14.3123C10.995 14.4237 10.844 14.4862 10.6865 14.4862Z" fill="#F890A1"/>
+          </svg>
+          
+          <span class="shipping-text">חיסכון של {{ free_shipping_threshold | default: 1000 | divided_by: 100 }},000 ש״ח</span>
+          
+          <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g clip-path="url(#clip0_check_{{ product.id }}">
+              <path d="M7.40803 0.171387C3.62452 0.171387 0.546387 3.24952 0.546387 7.03303C0.546387 10.8165 3.62452 13.8947 7.40803 13.8947C11.1915 13.8947 14.2697 10.8165 14.2697 7.03303C14.2697 3.24952 11.1915 0.171387 7.40803 0.171387ZM7.40803 12.6471C4.31239 12.6471 1.79396 10.1286 1.79396 7.03303C1.79396 3.93743 4.31239 1.41896 7.40803 1.41896C10.5037 1.41896 13.0221 3.93743 13.0221 7.03303C13.0221 10.1286 10.5036 12.6471 7.40803 12.6471Z" fill="#DD2D4A"/>
+              <path d="M9.98087 4.60712L6.45215 8.1358L4.83488 6.51849C4.59132 6.27492 4.19634 6.27488 3.95273 6.51845C3.70912 6.76205 3.70912 7.15699 3.95273 7.4006L6.01105 9.45901C6.12803 9.57599 6.28668 9.64174 6.45211 9.64174H6.45215C6.61758 9.64174 6.77623 9.57599 6.89321 9.45906L10.863 5.48932C11.1066 5.24571 11.1066 4.85078 10.863 4.60717C10.6194 4.36356 10.2245 4.36352 9.98087 4.60712Z" fill="#DD2D4A"/>
+            </g>
+            <defs>
+              <clipPath id="clip0_check_{{ product.id }}">
+                <rect width="13.7233" height="13.7233" fill="white" transform="translate(0.546387 0.171387)"/>
+              </clipPath>
+            </defs>
+          </svg>
+          
+          <div class="shipping-divider"></div>
+          
+          <span class="discount-text">{{ discount_percentage }}% הנחה</span>
+          
+          <svg width="12" height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7.35524 11.6914C7.1248 11.9218 6.83926 12.0371 6.49861 12.0371C6.15796 12.0371 5.87242 11.9218 5.64198 11.6914L0.351898 6.40132C0.241688 6.29111 0.154021 6.16086 0.088897 6.01057C0.023773 5.86028 -0.00878906 5.69998 -0.00878906 5.52965V1.23147C-0.00878906 0.900836 0.108935 0.617796 0.344384 0.382348C0.579832 0.146899 0.862872 0.0291748 1.1935 0.0291748H5.49169C5.66202 0.0291748 5.82232 0.0617368 5.97261 0.126861C6.12289 0.191985 6.25314 0.279652 6.36335 0.389862L11.6534 5.69497C11.8839 5.92541 11.9991 6.20845 11.9991 6.54409C11.9991 6.87973 11.8839 7.16277 11.6534 7.3932L7.35524 11.6914ZM6.49861 10.8498L10.7968 6.5516L5.49169 1.23147H1.1935V5.52965L6.49861 10.8498ZM2.69637 3.63605C2.94684 3.63605 3.15975 3.54838 3.33508 3.37305C3.51042 3.19771 3.59808 2.98481 3.59808 2.73433C3.59808 2.48385 3.51042 2.27095 3.33508 2.09561C3.15975 1.92028 2.94684 1.83261 2.69637 1.83261C2.44589 1.83261 2.23298 1.92028 2.05765 2.09561C1.88231 2.27095 1.79465 2.48385 1.79465 2.73433C1.79465 2.98481 1.88231 3.19771 2.05765 3.37305C2.23298 3.54838 2.44589 3.63605 2.69637 3.63605Z" fill="#DD2D4A"/>
+          </svg>
+        </div>
+      {% endif %}
+    </div>
+  </a>
+</div>

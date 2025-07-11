@@ -1,0 +1,109 @@
+<div class="px-4 py-6 space-y-6 lg:pt-6 xl:pl-0 xl:pr-8">
+  {%- if product.metafields.custom.softness != blank -%}
+    <div class="text-grey-900 flex items-center justify-between lg:hidden">
+      גמיש
+
+      <ul class="space-x-reverse space-x-1 inline-flex mx-2 flex-1">
+        {%- for i in (1..9) -%}
+          {%- liquid
+            assign bgCSSVar = '--sealy-color-grey-300'
+            if forloop.index == product.metafields.custom.softness
+              assign bgCSSVar = '--sealy-color-brand-500'
+            endif
+          -%}
+          <li
+            style="--softness-bg-color: var({{- bgCSSVar -}});"
+            class="inline-block flex-1 h-2 rounded-[10px] bg-[--softness-bg-color]"
+          ></li>
+        {%- endfor -%}
+      </ul>
+
+      קשיח
+    </div>
+  {%- endif -%}
+
+  {% comment %}
+    Icon boxes
+  {% endcomment %}
+  <div class="grid gap-3 grid-cols-[repeat(auto-fit,minmax(0,1fr))] justify-center lg:gap-6">
+    {% for icon_box in product.metafields.custom.icon_boxes.value %}
+      <div class="bg-brand-50 rounded-2xl lg:bg-transparent lg:rounded-none lg:relative lg:after:block lg:after:w-px
+      lg:after:h-3/4 lg:after:bg-brand-600/20 lg:after:absolute-centered-y lg:after:-right-3 lg:[&:nth-child(3n-2)]:after:hidden">
+        {%-
+          render 'exclusive-card',
+          text_line_1: icon_box.title,
+          text_line_2: icon_box.subtitle,
+          image: icon_box.icon.value,
+          text1_class: 'lg:text-base xl:text-base',
+          text2_class: 'lg:!text-base xl:!text-base',
+          class: 'lg:py-0 xl:py-0',
+          popup_content: icon_box.popup_content
+        -%}
+      </div>
+    {% endfor %}
+  </div>
+
+  {%- liquid
+    assign product_info = product.metafields.custom.product_info | metafield_tag | newline_to_br
+    assign shipping_info = product.metafields.custom.shipping_info | metafield_tag | newline_to_br
+    assign sizes_info = product.metafields.custom.sizes_info | metafield_tag | newline_to_br
+  -%}
+
+  {%- capture accordionItem -%}
+    {%- assign accTargetID = 'acc-target-' | append: '((index))' -%}
+    <div
+      class="py-3 border-b border-b-grey-900/10 group first:pt-0 lg:hover:cursor-pointer"
+      data-toggle="closed"
+      data-toggle-for="{{- accTargetID -}}"
+    >
+      {% comment %}
+        Title
+      {% endcomment %}
+      <div class="flex justify-between items-center text-grey-500">
+        <span class="font-bold text-sm xl:text-lg">((title))</span>
+
+        {%-
+          render 'icon',
+          name: 'plus',
+          class: 'w-3.5 h-3.5 transition-all group-data-[toggle=opened]:scale-105 group-data-[toggle=opened]:rotate-45'
+        -%}
+      </div>
+
+      {% comment %}
+        Description
+      {% endcomment %}
+      <div data-target="{{- accTargetID -}}" class="overflow-hidden h-0 transition-[height]">
+        <div class="sl-default-text-formatting pt-4 text-xsm text-grey-900/60 xl:text-base">
+          <read-more>
+            <div data-read="less" class="data-[read=less]:line-clamp-10">
+              ((content))
+            </div>
+          </read-more>
+        </div>
+      </div>
+    </div>
+  {%- endcapture -%}
+
+  {%- if product_info != blank or shipping_info != blank or sizes_info != blank -%}
+    <accordion-component class="block" data-first-opened data-info-accordion>
+      {%- if product_info != blank -%}
+        {{- accordionItem | replace: '((index))', 1 | replace: '((title))', 'אודות המוצר' | replace: '((content))', product_info -}}
+      {%- endif -%}
+
+      {%- if shipping_info != blank -%}
+        {{- accordionItem | replace: '((index))', 2 | replace: '((title))', 'זמן אספקה' | replace: '((content))', shipping_info -}}
+      {%- endif -%}
+
+      {%- if sizes_info != blank -%}
+        {{- accordionItem | replace: '((index))', 3 | replace: '((title))', 'מידות' | replace: '((content))', sizes_info -}}
+      {%- endif -%}
+    </accordion-component>
+  {%- endif -%}
+</div>
+
+{%- schema -%}
+{
+  "name": "Product info",
+  "class": "product-info-section"
+}
+{%- endschema -%}

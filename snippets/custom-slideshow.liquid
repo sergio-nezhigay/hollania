@@ -1,0 +1,28 @@
+{% comment %}
+  props:
+    - blocks
+    - product
+{% endcomment %}
+
+<swiper-container class="sl-slideshow" init="false" navigation="true" space-between="16" slides-per-view="1.05" css-mode="true">
+  {%- for block in blocks -%}
+    {% liquid
+      assign is_hidden = false
+
+      for product_to_hide in block.settings.products_hidden_list
+        if product.id == product_to_hide.id
+          assign is_hidden = true
+          break
+        endif
+      endfor
+
+      if is_hidden
+        continue
+      endif
+    %}
+
+    <swiper-slide class="h-auto">
+      {%- render 'custom-card', block: block, image_load: 'lazy' -%}
+    </swiper-slide>
+  {%- endfor -%}
+</swiper-container>

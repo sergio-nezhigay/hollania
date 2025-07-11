@@ -1,0 +1,55 @@
+<div class="grid grid-cols-1 px-4 gap-y-6 pb-6 text-center sl-container md:grid-cols-2 md:gap-x-6 lg:grid-cols-3
+lg:gap-x-6 lg:gap-y-14 xl:px-0 xl:pb-14">
+  {%- for item in section.blocks -%}
+    <a href="{{ item.settings.button_link }}" class="flex flex-col bg-white rounded-lg border border-grey-200 shadow-md overflow-hidden h-full text-right">
+      <div class="flex-1 py-2 flex items-center justify-center">
+        {%-
+          render 'image-with-placeholder',
+          image: item.settings.image,
+          alt: item.settings.title,
+          width: 1029,
+          loading: 'eager'
+        -%}
+      </div>
+      <p class="w-full text-center bg-brand-50 py-2">{{ item.settings.button_title }}</p>
+      <h3 class="font-bold text-lg text-center text-grey-900 py-2">{{ item.settings.title }}</h3>
+    </a>
+  {%- endfor -%}
+</div>
+
+{%- schema -%}
+{
+  "name": "Page grid",
+  "blocks": [
+    {
+      "type": "grid_item",
+      "name": "Grid item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Item title"
+        },
+        {
+          "type": "text",
+          "id": "button_title",
+          "label": "Button title",
+          "default": "Button title"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "PDF Link",
+          "info": "If file - upload it in the Admin panel > Content > Files and paste the link here."
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        }
+      ]
+    }
+  ]
+}
+{%- endschema %}

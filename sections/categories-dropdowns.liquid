@@ -1,0 +1,95 @@
+<accordion-component data-close-on-outside-click class="block relative py-4 bg-white xl:hidden">
+  <ul class="flex overflow-x-auto scrollbar-hidden px-3.5 space-x-6 space-x-reverse">
+    {%- for link in section.settings.categories.links -%}
+      {%- liquid
+        assign linkOptions = link.title | split: '|'
+        assign collectionImage = link.object.image
+        assign collectionTitle = linkOptions.first | strip | default: link.object.title
+        assign linkBgColor = '#FFFFFF'
+        assign linkBorderColor = '#EAECF0'
+
+        for linkOpt in linkOptions offset: 1
+          assign linkOpt = linkOpt | strip | replace: ' ', ''
+          if linkOpt contains 'bg:'
+            assign linkBgColor = linkOpt | remove: 'bg:'
+          elsif linkOpt contains 'border:'
+            assign linkBorderColor = linkOpt | remove: 'border:'
+          endif
+        endfor
+      -%}
+
+      {%- capture cssVars -%}
+        --category-image-border-color: {{- linkBorderColor | default: '#EAECF0' -}};
+        --category-image-background-color: {{- linkBgColor | default: '#FFFFFF' -}};
+      {%- endcapture -%}
+
+      <li>
+
+        {%- if link.links.size > 0 -%}
+        <div data-toggle="closed" class="flex flex-col items-center peer group">
+        {%- else -%}
+        <a href="{{ link.object.url }}" class="flex flex-col items-center peer group">
+        {%- endif -%}
+
+          <div
+              style="{{ cssVars | strip_newlines }}"
+              class="rounded-full overflow-hidden w-14 h-14 flex justify-center items-center border
+              border-[--category-image-border-color]
+              bg-[--category-image-background-color]
+              shadow-sl-12
+              group-data-[toggle=opened]:border-2 group-data-[toggle=opened]:border-brand-600"
+          >
+            {%-
+                render 'image-with-placeholder',
+                image: collectionImage,
+                alt: collectionTitle,
+                width: 168,
+                class: 'w-full h-full object-contain'
+            -%}
+          </div>
+          <span class="font-medium text-xs text-gray-500 pt-2.5 text-center group-data-[toggle=opened]:text-brand-600">{{ collectionTitle }}</span>
+
+        {%- unless link.links.size > 0 -%}
+        </a>
+        {%- else -%}
+        </div>
+        {%- endunless -%}
+
+        <div class="absolute left-0 top-full bg-brand-35 p-6 w-full z-10 grid-cols-4 gap-x-6 gap-y-4 hidden
+                    peer-data-[toggle=opened]:grid md:grid-flow-col md:grid-cols-8 lg:grid-cols-10">
+          {%- for subcategory in link.links -%}
+            <a href="{{- subcategory.url -}}" class="flex flex-col items-center">
+              <div
+                class="rounded-full overflow-hidden w-12 h-12  flex justify-center items-center border shadow-sl-12"
+                style="border-color: {{- linkBorderColor | default: '#FFE2B7' -}};background-color: {{- linkBgColor | default: '#FFEFD7' -}};"
+              >
+                {%-
+                    render 'image-with-placeholder',
+                    image: subcategory.object.image,
+                    alt: subcategory.title,
+                    width: 168,
+                    class: 'w-full h-full object-contain'
+                -%}
+              </div>
+              <span class="font-medium text-xs text-gray-500 pt-2.5 text-center">{{- subcategory.title -}}</span>
+            </a>
+          {%- endfor -%}
+        </div>
+      </li>
+    {%- endfor -%}
+  </ul>
+</accordion-component>
+
+
+{%- schema %}
+{
+  "name": "Categories dropdown",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "categories",
+      "label": "Collections nav"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,133 @@
+{%- render 'vite-tag' with '@/additionalEntrypoints/product/mainSlider/product.main.slider.css' -%}
+
+{%- liquid
+  comment
+        The following code is responsible for rendering the badges that are defined in the tags of the product.
+        The tags should be in the following format: "TEXT | badge: COLOR | text: COLOR"
+        For example: "Best seller | bg: #F53A41 | text: white"
+      endcomment
+  for tag in product.tags
+    assign adjustedTag = tag | strip
+    assign badgeParts = adjustedTag | split: '|'
+
+    if badgeParts.size == 3
+      assign badgeText = badgeParts[0]
+      assign badgeBgColor = badgeParts[1] | split: ':' | last
+      assign badgeTextColor = badgeParts[2] | split: ':' | last
+
+      capture badges
+        echo badges
+        render 'product-badge', text: badgeText, bg_color: badgeBgColor, text_color: badgeTextColor, class: 'text-base'
+      endcapture
+    endif
+  endfor
+-%}
+
+<div class="lg:sticky lg:top-6 xl:aspect-w-5 xl:aspect-h-4 2xl:aspect-h-3">
+  <div class="relative xl:flex xl:items-center">
+    <swiper-container class="sl-product-slider jsProductSlider" pagination="true" css-mode="true">
+      {%- for media in product.media -%}
+        <swiper-slide class="h-auto" data-image-id="{{ media.id }}" data-index="{{ forloop.index | minus: 1 }}">
+          {%- if media.media_type == 'video' -%}
+            <controlled-video>
+              {{- media | video_tag: class: 'w-full h-full' -}}
+              <button
+                class="text-brand-700 bg-brand-50 p-3 shadow-sm shadow-[rgba(16,24,40,0.05)] rounded-lg absolute-centered-x top-1/6 lg:absolute-centered"
+                data-play
+              >
+                {%- render 'icon', name: 'play', class: 'w-10 h-10' -%}
+              </button>
+            </controlled-video>
+          {%- elsif media.media_type == 'external_video' -%}
+            <div class="w-full h-full [&>iframe]:w-full [&>iframe]:h-full">
+              {{- media | external_video_tag -}}
+            </div>
+          {%- else -%}
+            {% assign alt = forloop.index | append: ' ' | append: product.title %}
+            {%-
+              render 'image-with-placeholder',
+              image: media,
+              alt: alt,
+              width: 1125,
+              class: 'object-contain w-full h-full'
+            -%}
+          {%- endif -%}
+        </swiper-slide>
+      {%- endfor -%}
+    </swiper-container>
+
+    <thumbnails-scrollable class="hidden xl:block xl:overflow-hidden xl:flex-shrink-0 xl:flex-grow-0 xl:basis-[110px] xl:h-full xl:mr-6 xl:relative">
+      <button
+        data-arrow-top
+        hidden
+        class="xl:absolute xl:top-0 xl:left-0 xl:w-full xl:py-3 xl:bg-brand-50 xl:rounded-lg xl:flex xl:items-center xl:justify-center
+        xl:hover:bg-brand-100 xl:hover:cursor-pointer xl:z-10"
+      >
+        {%- render 'icon', name: 'chevron-down', class: 'xl:w-5 xl:h-5 xl:text-brand-700 xl:rotate-180' -%}
+      </button>
+
+      <div data-thumbnail-container class="xl:overflow-y-auto xl:scrollbar-hidden xl:h-full xl:w-full xl:absolute xl:left-0 xl:top-0 xl:flex xl:flex-col xl:space-y-4">
+        {%- for media in product.media -%}
+          <div
+            data-thumbnail="{% if forloop.first %}current{% endif %}"
+            class="xl:aspect-w-[110] xl:aspect-h-[118] xl:rounded xl:overflow-hidden xl:select-none xl:hover:cursor-pointer
+            xl:data-[thumbnail=current]:border xl:data-[thumbnail=current]:border-brand-500"
+          >
+            {%-
+              render 'image-with-placeholder',
+              image: media,
+              width: 330,
+              widths: '1w, 110w, 220w, 330w',
+              sizes: '(min-width: 1280px) 110px, (min-width: 2560px) 220px, (min-width: 3840px) 330px, 1px',
+              class: 'xl:w-full xl:h-full xl:object-contain'
+            -%}
+
+            {%- if media.media_type == 'video' or media.media_type == 'external_video' -%}
+              <div>
+                <button
+                  class="text-brand-700 bg-brand-50 p-3 shadow-sm shadow-[rgba(16,24,40,0.05)] rounded-lg absolute-centered-x top-1/6 lg:absolute-centered"
+                >
+                  {%- render 'icon', name: 'play', class: 'w-10 h-10' -%}
+                </button>
+              </div>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+
+      <button
+        data-arrow-bottom
+        hidden
+        class="xl:absolute xl:bottom-0 xl:left-0 xl:w-full xl:py-3 xl:bg-brand-50 xl:rounded-lg xl:flex xl:items-center xl:justify-center
+        xl:hover:bg-brand-100 xl:hover:cursor-pointer xl:z-10"
+      >
+        {%- render 'icon', name: 'chevron-down', class: 'xl:w-5 xl:h-5 xl:text-brand-700 ' -%}
+      </button>
+    </thumbnails-scrollable>
+
+    {%- assign height = product.metafields.custom.height -%}
+
+    {%- if height != blank -%}
+      <div class="absolute left-4 top-14 bg-white shadow-md py-1.5 px-3 rounded-lg border border-gray-200 text-brand-700
+        font-bold text-sm leading-none z-10 xl:top-10 xl:left-36">
+        {{ height }} ס״מ
+        <div class="flex items-center font-medium text-xs">
+          גובה {%- render 'icon', name: 'ruler_vertical', class: 'w-2 h-3 mr-1' -%}
+        </div>
+      </div>
+    {%- endif -%}
+
+    {%- if badges != blank -%}
+      <div class="absolute top-4 left-4 flex items-stretch space-x-reverse space-x-2 z-10 xl:top-0 xl:left-36">
+        {{ badges }}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{%- schema -%}
+{
+  "name": "Product top slider",
+  "class": "product-main-slider-section"
+}
+{%- endschema -%}

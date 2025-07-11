@@ -1,0 +1,72 @@
+{% comment %}
+  props:
+    - text_line_1
+    - text_line_2
+    - image
+    - class: additional block class
+    - text1_class: additional text_line_1 class
+    - text2_class: additional text_line_2 class
+    - image_class: additional image class
+    - popup_content: additional popup content | if empty, popup will not be rendered
+
+    - type: 'shipping' or 'warranty' or 'nights'
+    - value: only for 'warranty' and 'nights' types
+{% endcomment %}
+
+{%- liquid
+  assign class = class | default: 'bg-brand-50'
+
+  case type
+    when 'shipping'
+      assign text_line_1 = text_line_1 | default: 'משלוח חינם'
+      assign text_line_2 = text_line_2 | default: 'עד לבית'
+    when 'warranty'
+    assign default_value = value | default: 10
+    assign default_text_line_1 = 'עד ' | append: default_value
+    assign text_line_1 = text_line_1 | default: default_text_line_1
+      assign text_line_2 = text_line_2 | default: 'שנות אחריות'
+    when 'nights'
+      assign default_value = value | default: 100
+      assign text_line_1 = text_line_1 | default: default_value
+      assign text_line_2 = text_line_2 | default: 'לילות נסיון'
+  endcase
+
+  assign default_icon_name = 'icon--' | append: type | append: '-gr.svg'
+  assign default_image_url = default_icon_name | asset_url
+  assign default_image_class = 'w-6 h-6 mt-2.5 xl:-order-1 xl:mt-0 ' | append: image_class
+-%}
+
+<div class="rounded-2xl p-4 flex flex-col justify-center items-center xl:p-6 {% if popup_content != blank %}relative{% endif %} {{ class }}">
+  <span class="whitespace-nowrap text-brand-900 font-bold xl:text-2xl xl:mt-3 {{ text1_class }}">{{- text_line_1 -}}</span>
+  <span class="whitespace-nowrap text-brand-700 font-medium text-sm xl:text-xl {{ text2_class }}">{{- text_line_2 -}}</span>
+
+  {%- if image != blank -%}
+
+    {%-
+      render 'image-with-placeholder',
+      image: image,
+      width: 72,
+      class: default_image_class
+    -%}
+  {%- else -%}
+    <img src="{{- default_image_url -}}" alt="{{- text_line_1 }} {{ text_line_2 -}}" class="{{ default_image_class }}">
+  {%- endif -%}
+
+  {%- if popup_content != blank -%}
+    <accordion-component data-close-on-outside-click>
+      <div data-toggle="closed" class="absolute w-full h-full left-0 top-0 lg:cursor-pointer peer"></div>
+
+      <div class="peer-data-[toggle=closed]:hidden bg-white rounded-lg p-4 pt-8 fixed left-1/2 top-1/2 -translate-x-1/2
+        -translate-y-1/2 z-50 shadow-sl-24">
+        <div class="sl-default-text-formatting ">
+          {{- popup_content | metafield_tag | newline_to_br -}}
+        </div>
+
+        <button data-toggle-close-all>
+          {% render 'icon', name: 'close', class: 'w-5 h-5 absolute top-2 right-4 lg:cursor-pointer' %}
+        </button>
+      </div>
+
+    </accordion-component>
+  {%- endif -%}
+</div>

@@ -1,0 +1,27 @@
+{%- comment -%}
+  props:
+    - expire_date: string
+    - discont_in_percent: number
+    - show_percentage: boolean
+    - custom_discount_label: string
+    - product_id: number
+{%- endcomment -%}
+
+{% liquid
+  assign discoun_expire_date = expire_date | date: "%d.%m.%y" | default: ''
+  assign discount_percentage_text = discont_in_percent | append: '%' | append: ' הנחה |'
+
+  if show_percentage == false
+    assign discount_percentage_text = ''
+  endif
+%}
+
+{% assign discount_label = custom_discount_label | default: 'מבצע' %}
+
+{% if product_id == 9689607799087 %}
+  <span>{{ discont_in_percent }}% הנחה בתוקף עד ה {{ discoun_expire_date }}</span>
+{% else %}
+  <span>{{ discount_label }} | {{ discount_percentage_text }} בתוקף עד ה {{ discoun_expire_date }}</span>
+{% endif %}
+
+

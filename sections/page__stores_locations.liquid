@@ -1,0 +1,153 @@
+{%- assign isGrey = section.settings.is_grey -%}
+
+<div class="p-4 space-y-4 xl:space-y-6 sl-container xl:pb-0 xl:pt-10 xl:px-0">
+  <div class="xl:mb-10">
+    <{{ section.settings.title_tag }} class="font-bold text-3xl text-center {% if isGrey %}text-black/60{% else %}text-brand-700{% endif %}">{{ section.settings.title }}</{{ section.settings.title_tag }}>
+    {% if section.settings.description != blank %}
+      <p class="text-center text-sm text-black/80 w-3/5 mx-auto mt-2">{{ section.settings.description }}</p>
+    {% endif -%}
+  </div>
+
+  {%- for block in section.blocks %}
+    {%- assign accTargetID = 'acc-target-' | append: forloop.index -%}
+
+    <accordion-component class="block {% if isGrey %}border border-grey-300{% else %}bg-brand-30{% endif %} p-4 rounded-lg xl:p-6">
+      <div
+        class="flex items-center justify-between {% if isGrey %}text-black/60{% else %}text-brand-600{% endif %} group/acc lg:hover:cursor-pointer"
+        data-toggle="closed"
+        data-toggle-for="{{ accTargetID }}"
+      >
+        <span class="font-bold xl:text-2xl">{{ block.settings.title }}</span>
+        {% render 'icon', name: 'chevron-down', class: 'w-5 h-5 group-data-[toggle=opened]/acc:rotate-180 xl:w-8 xl:h-8' %}
+      </div>
+
+      <div data-target="{{- accTargetID -}}" class="overflow-hidden h-0 transition-[height]">
+        <div>
+          <ul class="pt-2 space-y-2 xl:pt-6 xl:space-y-6">
+            {% if block.settings.address != blank %}
+              <li class="flex items-center">
+                <img class="xl:w-12 xl:h-12" src="{{ 'icon--stores-location.svg' | asset_url }}" alt="Store location">
+                {%- if block.settings.waze_link != blank -%}
+                  <a href="{{ block.settings.waze_link }}" target="_blank" class="mr-3 text-sm xl:text-2xl xl:mr-6">{{ block.settings.address }}</a>
+                {% else %}
+                  <span class="mr-3 text-sm xl:text-2xl xl:mr-6">{{ block.settings.address }}</span>
+                {%- endif -%}
+              </li>
+            {% endif %}
+
+            {% if block.settings.phone != blank %}
+              <li class="flex items-center">
+                <img class="xl:w-12 xl:h-12" src="{{ 'icon--stores-phone.svg' | asset_url }}" alt="Store phone">
+                <a href="tel:{{ block.settings.phone }}" class="mr-3 text-sm xl:text-2xl xl:mr-6">{{ block.settings.phone }}</a>
+              </li>
+            {% endif %}
+
+            {% if block.settings.hours != blank %}
+              <li class="flex items-start">
+                <img class="xl:w-12 xl:h-12" src="{{ 'icon--stores-time.svg' | asset_url }}" alt="Store hours">
+                <div class="mr-3 text-sm xl:text-2xl xl:mr-6 xl:leading-loose">{{ block.settings.hours }}</div>
+              </li>
+            {% endif %}
+          </ul>
+
+          {%- if block.settings.btn_link != blank and block.settings.btn_text != blank %}
+            {%-
+              render 'button',
+              url: block.settings.btn_link ,
+              content: block.settings.btn_text,
+              class: 'btn-primary w-full mt-6 md:w-fit md:px-12 md:mx-auto'
+            -%}
+          {%- endif -%}
+        </div>
+      </div>
+    </accordion-component>
+  {% endfor %}
+</div>
+
+{%- schema -%}
+{
+  "name": "Stores locations",
+  "settings": [
+    {
+      "type": "select",
+      "id": "title_tag",
+      "label": "Title tag",
+      "options": [
+        {
+          "value": "h1",
+          "label": "h1"
+        },
+        {
+          "value": "h2",
+          "label": "h2"
+        }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "סניפי סילי"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description"
+    },
+    {
+      "type": "checkbox",
+      "id": "is_grey",
+      "label": "Is grey",
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "store-location",
+      "name": "Store location",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "סניף בני ברק, דיזיין סנטר"
+        },
+        {
+          "type": "text",
+          "id": "address",
+          "label": "Address",
+          "default": "הלח\"י 2 דיזיין סנטר, בני ברק (חניה חינם) "
+        },
+        {
+          "type": "url",
+          "id": "waze_link",
+          "label": "Waze link"
+        },
+        {
+          "type": "text",
+          "id": "phone",
+          "label": "Phone",
+          "default": "077-2308591"
+        },
+        {
+          "type": "richtext",
+          "id": "hours",
+          "label": "Hours"
+        },
+        {
+          "type": "url",
+          "id": "btn_link",
+          "label": "Button link"
+        },
+        {
+          "type": "text",
+          "id": "btn_text",
+          "label": "Button text",
+          "default": "לפרטים נוספים"
+        }
+      ]
+    }
+  ]
+}
+{%- endschema -%}

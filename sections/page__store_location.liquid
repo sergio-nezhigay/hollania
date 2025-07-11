@@ -1,0 +1,90 @@
+{% assign store = page.metafields.custom.store.value %}
+
+<div class="p-4 space-y-4 relative sl-container xl:space-y-0 xl:p-0 xl:mt-[88px] xl:pb-10 xl:grid xl:grid-cols-2 xl:gap-6">
+  <p class="text-lg text-black text-center xl:hidden">סניפי סילי</p>
+  <h1 class="font-bold text-3xl text-center text-brand-700 xl:pb-4 xl:col-span-2">{{ page.title }}</h1>
+
+  <div class="bg-brand-30 p-4 rounded-lg xl:p-6">
+    <ul class="pt-4 space-y-2 xl:pt-6 xl:space-y-6">
+      {% if store.address != blank %}
+        <li class="flex items-center">
+          <img class="xl:w-12 xl:h-12" src="{{ 'icon--stores-location.svg' | asset_url }}" alt="Store location">
+          {%- if store.waze_link != blank -%}
+            <a href="{{ store.waze_link }}" target="_blank" rel="noreferrer nofollow" class="mr-3 text-sm xl:text-2xl xl:mr-6">{{ store.address }}</a>
+          {% else %}
+            <span class="mr-3 text-sm xl:text-2xl xl:mr-6">{{ store.address }}</span>
+          {%- endif -%}
+        </li>
+      {% endif %}
+
+      {% if store.phone != blank %}
+        <li class="flex items-center">
+          <img class="xl:w-12 xl:h-12" src="{{ 'icon--stores-phone.svg' | asset_url }}" alt="Store phone">
+          <a href="tel:{{ store.phone }}" class="mr-3 text-sm xl:text-2xl xl:mr-6">{{ store.phone }}</a>
+        </li>
+      {% endif %}
+
+      {% if store.hours != blank %}
+        <li class="flex items-start">
+          <img class="xl:w-12 xl:h-12" src="{{ 'icon--stores-time.svg' | asset_url }}" alt="Store hours">
+          <div class="mr-3 text-sm xl:text-2xl xl:mr-6 xl:leading-loose">{{ store.hours | metafield_tag }}</div>
+        </li>
+      {% endif %}
+    </ul>
+  </div>
+
+  {%- assign store_accessibilities = store.accessibilities.value -%}
+
+  {%- if store_accessibilities != blank %}
+    <div class="bg-brand-30 p-4 rounded-lg xl:col-start-1 xl:col-span-1 xl:p-6">
+      <span class="block text-brand-600 font-bold xl:text-2xl">נגישות</span>
+
+      <ul class="pt-4 space-y-4 xl:pt-6 xl:space-y-6">
+        {%- for item in store_accessibilities -%}
+          <li class="flex items-center">
+            <img class="xl:w-12 xl:h-12" src="{{ 'icon--store-accessibilty.svg' | asset_url }}" alt="Store accessibility">
+            <span class="mr-3 text-sm xl:text-2xl xl:mr-6">{{ item.title }}</span>
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  {% endif -%}
+
+  {%- if store.map_html != blank %}
+    <div class="rounded-lg overflow-hidden aspect-w-1 aspect-h-1 xl:aspect-none xl:[&>iframe]:w-full
+      xl:[&>iframe]:h-full xl:col-start-2 xl:row-start-2 xl:row-span-2">
+      {{ store.map_html }}
+    </div>
+  {% endif -%}
+
+  {%- capture chevronIcon -%}
+    {% render 'icon', name: 'chevron-down', class: 'rotate-90 w-5 h-5 mr-2' %}
+  {%- endcapture -%}
+
+  {%- assign btn_content = section.settings.btn_text | append: chevronIcon -%}
+  {%-
+    render'button',
+    url: section.settings.btn_link ,
+    content: btn_content,
+    class: 'btn-primary py-4 w-full mt-6 flex items-center justify-center xl:col-span-2 xl:!mt-4 xl:w-fit xl:mx-auto xl:px-12'
+  -%}
+</div>
+
+{%- schema -%}
+{
+  "name": "Store location",
+  "settings": [
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Button text",
+      "default": "לכל סניפי סילי"
+    },
+    {
+      "type": "url",
+      "id": "btn_link",
+      "label": "Button link"
+    }
+  ]
+}
+{%- endschema -%}

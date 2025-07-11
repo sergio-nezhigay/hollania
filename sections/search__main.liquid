@@ -1,0 +1,84 @@
+<script>
+  window.dlPreparedData = window.dlPreparedData || {};
+  window.dlPreparedData['{{ section.id }}'] = window.dlPreparedData['{{ section.id }}'] || { items: [] };
+</script>
+
+<div data-dl-onview="view_item_list" data-dl-id="{{ section.id }}" class="sl-container px-4">
+  <h1 class="pt-6 text-xl font-medium xl:font-bold xl:text-4xl xl:pt-14">תוצאות לחיפוש - "{{ search.terms | escape }}"</h1>
+
+  <form class="py-6 xl:pb-14" action="{{ routes.search_url }}">
+    {%- capture searchIcon  -%}
+      {%- render 'icon', name: 'search', class: 'w-3.5 aspect-square' -%}
+    {%- endcapture  -%}
+
+    <div class="relative">
+      <input
+        type="text"
+        placeholder="חפשו"
+        name="q"
+        value="{{ search.terms | escape }}"
+        class="w-full border border-grey-900/10 shadow-[0_0_20px_0_rgba(0,0,0,0.05)] rounded py-2.5 px-3 leading-snug
+        text-xsm pr-9 focus:outline-brand-500/70 peer xl:text-lg"
+      >
+      {%-
+        render 'button',
+        size: 'xs',
+        attrs: 'type=submit',
+        content: searchIcon,
+        class: 'absolute-centered-y right-0 px-3 text-grey-450 peer-hover:text-brand-700'
+      -%}
+    </div>
+  </form>
+
+  {% if search.results_count > 0 %}
+    {%- paginate search.results by 18 -%}
+      <div class="grid grid-cols-1 gap-y-6 pb-6 text-center sl-container md:grid-cols-2 md:gap-x-6 lg:grid-cols-3 lg:gap-x-6 lg:gap-y-14 xl:pb-14">
+
+        {% for item in search.results %}
+          {% liquid
+            unless item.object_type == 'product'
+              capture other_results
+                echo other_results
+                render 'search-result', item: item
+              endcapture
+              continue
+            endunless
+
+            if item.metafields.custom.upsale_product
+              continue
+            endif
+
+            assign clean_url = item.url | split: '?' | first
+            render 'product-card', product: item, custom_url: clean_url, image_load: 'lazy', index: forloop.index
+          %}
+
+          <script>
+            window.dlPreparedData['{{ section.id }}'].items.push({
+              item_id: "{{ item.id }}",
+              item_name: "{{ item.title }}",
+              item_category: "{{ item.collections | map: 'title' | join: ', ' }}",
+              item_variant: "{{ item.selected_or_first_available_variant.title }}",
+              price: "{{ item.price | money_without_currency }}",
+              currency: "{{ shop.currency }}",
+              item_list_id: "{{ section.id }}",
+              index: "{{ forloop.index }}",
+              image_url: "{{ item.featured_image.src | img_url: '600x' }}",
+              url: "{{ item.url }}",
+            });
+          </script>
+        {% endfor %}
+      </div>
+
+      {{ other_results }}
+
+      {% comment %}
+        Pagination
+      {% endcomment %}
+      {% render 'pagination', paginate: paginate, class: 'pb-10' %}
+    {%- endpaginate -%}
+  {% else %}
+    <div class="py-6 text-center">
+      <p class="text-grey-600">לא נמצאו תוצאות לחיפוש "{{ search.terms | escape }}"</p>
+    </div>
+  {% endif %}
+</div>

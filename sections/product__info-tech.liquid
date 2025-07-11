@@ -1,0 +1,22 @@
+{% for meta_section in product.metafields.custom.info_tech_sections.value %}
+  {%-
+    render 'product-tech-info',
+    title: meta_section.title,
+    image: meta_section.image.value,
+    reverse: meta_section.image_left,
+    columns: meta_section.text_blocks_per_row,
+    info_blocks: meta_section.info_blocks.value
+  -%}
+{% endfor %}
+
+{%- schema -%}
+{
+  "name": "Product info tech",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "This is dynamic section for product tech info. The content is managed by metafields."
+    }
+  ]
+}
+{%- endschema -%}

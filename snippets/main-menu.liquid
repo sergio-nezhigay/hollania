@@ -1,0 +1,102 @@
+<accordion-component class="block pt-6">
+  <ul>
+    {%- for mainLinkItem in linklists.main-menu.links -%}
+      {%- liquid
+        assign accTargetID = 'acc-target-' | append: forloop.index
+
+        assign title_array = mainLinkItem.title | split: '|'
+        assign mainLinkItemTitle = title_array[0] | strip
+        assign mainLinkItemIconName = ''
+
+        for title_array_item in title_array offset: 1
+          assign title_array_item_adjusted = title_array_item | strip
+
+          if title_array_item_adjusted == 'left'
+            continue
+          elsif title_array_item_adjusted contains 'icon'
+            assign mainLinkItemIconName = title_array_item_adjusted | split: ':' | last | strip
+          endif
+        endfor
+      -%}
+
+      <li
+        class="py-4 px-6 border-b border-b-grey-900/10 group data-[toggle=opened]:bg-brand-35 last:border-0 lg:hover:cursor-pointer"
+        {% if mainLinkItem.links != blank -%}
+          data-toggle="closed"
+          data-toggle-for="{{- accTargetID -}}"
+        {%- endif %}
+      >
+        <div class="flex justify-between items-center text-grey-500">
+          {%- if mainLinkItem.links != blank -%}
+            <span class="font-bold text-sm">{{- mainLinkItemTitle -}}</span>
+            {%-
+              render 'icon',
+              name: 'plus',
+              class: 'w-3.5 h-3.5 transition-all group-data-[toggle=opened]:scale-105 group-data-[toggle=opened]:rotate-45'
+            -%}
+          {%- else -%}
+            <a href="{{- mainLinkItem.url -}}" class="font-bold text-sm ml-auto lg:ml-0">{{- mainLinkItemTitle -}}</a>
+          {%- endif -%}
+
+          {% if mainLinkItemIconName != blank %}
+            <img src="{{ mainLinkItemIconName | file_url }}" alt="{{ mainLinkItemTitle }}"
+                 class="-order-1 ml-2 h-6 w-8 inline-block lg:order-none lg:mr-2 lg:ml-auto">
+          {% endif %}
+        </div>
+
+        {% comment %}
+          Sub links
+        {% endcomment %}
+        {%- if mainLinkItem.links != blank -%}
+          <div data-target="{{- accTargetID -}}" class="overflow-hidden h-0 transition-[height]">
+            <ul class="pt-3 grid grid-cols-2 gap-x-10 gap-y-3 group">
+              {%- for subLinkItem in mainLinkItem.links -%}
+                {% liquid
+                  assign subLinkItemTitleArray = subLinkItem.title | split: '|'
+                  assign subLinkItemTitle = subLinkItemTitleArray[0] | strip
+                  assign isButton = false
+
+                  for subLinkItemTitleArrayItem in subLinkItemTitleArray offset: 1
+                    assign subLinkItemTitleArrayItemAdjusted = subLinkItemTitleArrayItem | strip
+
+                    if subLinkItemTitleArrayItemAdjusted == 'mobile:button'
+                      assign isButton = true
+                    endif
+                  endfor
+                %}
+
+                {% if isButton %}
+                  <li class="relative col-span-2 flex justify-center">
+                    {%- render 'button',
+                      content: subLinkItemTitle,
+                      url: mainLinkItem.url,
+                      class: 'btn-bordered inline-flex px-6 text-brand-600 border-brand-600'
+                    -%}
+                  </li>
+                {% else %}
+                  <li
+                    class="relative even:before:block even:before:absolute-centered-y even:before:h-1/2 even:before:w-px
+                  even:before:bg-brand-600/10 even:before:-right-5"
+                  >
+                    <a class="block text-center" href="{{- subLinkItem.url -}}">
+                      <div class="aspect-w-3 aspect-h-2">
+                        {%-
+                          render 'image-with-placeholder',
+                          image: subLinkItem.object.image,
+                          alt: subLinkItemTitle,
+                          width: 420,
+                          class: 'w-full h-full object-contain'
+                        -%}
+                      </div>
+                      <p class="text-xs text-grey-500 leading-relaxed	">{{- subLinkItemTitle -}}</p>
+                    </a>
+                  </li>
+                {% endif %}
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+      </li>
+    {%- endfor -%}
+  </ul>
+</accordion-component>

@@ -1,0 +1,77 @@
+<div class="py-24 px-4 text-center max-w-md mx-auto md:py-40 ">
+  <h1>
+    <span class="block text-5xl font-medium">{{ section.settings.title1 }}</span>
+    <span class="block text-2xl pt-4">{{ section.settings.title2 }}</span>
+  </h1>
+
+  <p class="pt-4">{{ section.settings.description }}</p>
+
+  <form class="py-6" action="{{ routes.search_url }}">
+    {%- capture searchIcon  -%}
+      {%- render 'icon', name: 'search', class: 'w-3.5 aspect-square' -%}
+    {%- endcapture  -%}
+
+    <div class="relative">
+      <input
+        type="text"
+        placeholder="חפשו"
+        name="q"
+        value="{{ search.terms | escape }}"
+        class="w-full border border-grey-900/10 shadow-[0_0_20px_0_rgba(0,0,0,0.05)] rounded py-2.5 px-3 leading-snug
+        text-xsm pr-9 focus:outline-brand-500/70 peer xl:text-lg"
+      >
+      {%-
+        render 'button',
+        size: 'xs',
+        attrs: 'type=submit',
+        content: searchIcon,
+        class: 'absolute-centered-y right-0 px-3 text-grey-450 peer-hover:text-brand-700'
+      -%}
+    </div>
+  </form>
+
+  {%-
+    render 'button',
+    url: section.settings.btn_url,
+    content: section.settings.btn_label,
+    class: 'btn-primary w-fit min-w-[180px] mx-auto xl:min-w-[200px]'
+  -%}
+</div>
+
+{% schema %}
+{
+  "name": "404",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title1",
+      "label": "Title line 1",
+      "default": "404"
+    },
+    {
+      "type": "text",
+      "id": "title2",
+      "label": "Title line 2",
+      "default": "הדף לא נמצא"
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "label": "Content text",
+      "default": "חיפשנו בכל מקום אחר דף זה. האם אתה בטוח שכתובת האתר נכונה? צרו קשר עם בעל האתר."
+    },
+    {
+      "type": "url",
+      "id": "btn_url",
+      "label": "Button url",
+      "default": "/"
+    },
+    {
+      "type": "text",
+      "id": "btn_label",
+      "label": "Button label",
+      "default": "דף הבית"
+    }
+  ]
+}
+{% endschema %}

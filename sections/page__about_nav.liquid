@@ -1,0 +1,47 @@
+<ul class="grid grid-flow-col auto-cols-max gap-x-2 overflow-x-auto scrollbar-hidden px-4 pt-4 lg:hidden">
+  {% for block in section.blocks -%}
+    {%- assign btn_url = '#' | append: block.settings.anchor %}
+    <li>
+      {%- render 'button',
+        size: '2xs',
+        class: 'btn-bordered min-w-60',
+        content: block.settings.text,
+        url: btn_url
+      -%}
+    </li>
+  {%- endfor %}
+</ul>
+
+{%- schema -%}
+{
+  "name": "Page about nav",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "סילי ארה\"ב"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "nav_item",
+      "name": "Nav item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "anchor",
+          "label": "Anchor",
+          "info": "Id of the block to scroll to. Example: block-1"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Text"
+        }
+      ]
+    }
+  ]
+}
+{%- endschema %}

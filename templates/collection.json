@@ -1,0 +1,55 @@
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
+{
+  "sections": {
+    "top": {
+      "type": "collection__top",
+      "settings": {
+      }
+    },
+    "products-grid": {
+      "type": "collection__products-grid",
+      "settings": {
+      }
+    },
+    "info_tech": {
+      "type": "collection__info_tech",
+      "settings": {
+      }
+    },
+    "about": {
+      "type": "collection__about",
+      "settings": {
+        "btn_text_open": "קיראו עוד",
+        "btn_text_close": "סגירה"
+      }
+    },
+    "contacts": {
+      "type": "dynamic__contacts",
+      "settings": {
+        "heading": "אנחנו פה לכל שאלה",
+        "bg_color": "#ffffff"
+      }
+    },
+    "subscribe": {
+      "type": "static__subscribe",
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "top",
+    "products-grid",
+    "info_tech",
+    "about",
+    "contacts",
+    "subscribe"
+  ]
+}

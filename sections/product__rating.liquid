@@ -1,0 +1,36 @@
+<div class="flex items-center py-3 px-4 xl:pl-0 xl:pr-8 xl:pt-1 xl:pb-6">
+  {%- liquid
+    assign currentRating = 4.6
+
+    for i in (1..5)
+      assign itq = i | minus: 0.25
+      assign ih = i | minus: 0.5
+      assign ioq = i | minus: 0.75
+      assign starSuffix = 'empty'
+      if i <= currentRating
+        assign starSuffix = 'full'
+      elsif itq <= currentRating
+        assign starSuffix = 'three_quarters'
+      elsif ih <= currentRating
+        assign starSuffix = 'half'
+      elsif ioq <= currentRating
+        assign starSuffix = 'one_quarter'
+      endif
+
+      assign starName = 'star-' | append: starSuffix
+
+      render 'icon', name: starName, class: 'w-6 h-6 inline-block text-warning-400 ml-0.5 last-of-type:ml-0'
+    endfor
+  -%}
+
+  <span class="mr-3 text-sm text-grey-500 -mb-[0.4%]">
+    <span class="font-medium">{{- currentRating -}}</span> (23)
+  </span>
+</div>
+
+{%- schema -%}
+{
+  "name": "Product rating",
+  "class": "product-rating-section"
+}
+{%- endschema -%}

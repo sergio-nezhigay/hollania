@@ -1,0 +1,173 @@
+<div class="p-4 space-y-4 pb-0 sl-container xl:py-6 xl:px-0">
+  {%- render 'breadcrumbs', page_title: section.settings.cart_title -%}
+</div>
+
+<script>
+  window.dlPreparedData = window.dlPreparedData || {};
+  window.dlPreparedData['{{ section.id }}'] = window.dlPreparedData['{{ section.id }}'] || {
+    items: [],
+    total_price: {{ cart.total_price | divided_by: 100}},
+    total_items: {{ cart.item_count }},
+    currency: "{{ shop.currency }}"
+  };
+</script>
+
+<div class="px-4 mt-2 sl-container xl:mt-0 xl:px-0">
+  <h1 class="text-lg font-medium xl:text-4xl">{{ section.settings.cart_title }}</h1>
+
+  <cart-page>
+    <div data-cart-container
+         data-dl-onview="view_cart" data-dl-id="{{ section.id }}"
+         class="relative md:grid md:grid-cols-[1fr,300px] md:gap-x-6 md:pb-10 lg:grid-cols-[1fr,380px] xl:grid-cols-[1fr,480px] xl:pb-20"
+    >
+      <div class="space-y-3 mt-4 xl:space-y-6">
+        {% for item in cart.items %}
+          <div class="border border-[#e4e4e4] bg-white shadow-sl-12 rounded-lg py-3 px-4 space-y-2 lg:p-4 lg:space-y-2.5 xl:p-8">
+            <div class="flex items-start space-x-reverse space-x-3">
+              {%-
+                render 'image-with-placeholder',
+                image: item.image,
+                alt: item.title,
+                width: 267,
+                class: 'w-20 h-auto flex-shrink-0 flex-grow-0 self-center lg:w-[90px]'
+              -%}
+
+              <div class="space-y-1 flex-1">
+                <a href="{{ item.url }}" class="font-bold text-xs lg:text-lg">{{ item.product.title }}</a>
+
+                {% for option in item.options_with_values %}
+                  {% if option.name == 'Size' %}
+                    <p class="text-grey-600 text-xs lg:text-sm">גודל: {{ option.value }}</p>
+                    {% continue %}
+                  {% endif %}
+
+                  {% if option.name == 'Size sheet width' %}
+                    <p class="text-grey-600 text-xs lg:text-sm">מידת רוחב הסדין : {{ option.value }}</p>
+                    {% continue %}
+                  {% endif %}
+
+                  {% if option.name == 'Color' %}
+                    <p class="text-grey-600 text-xs lg:text-sm">צבע: {{ option.value }}</p>
+                    {% continue %}
+                  {% endif %}
+                {% endfor %}
+
+                {% for prop in item.properties %}
+                  {% if prop.first == '_parent_variant_id'  %}
+                    <p class="text-grey-600 text-xs lg:text-sm">עבור פריט: {{ cart.items | where: 'variant_id', prop.last | map: 'title' }}</p>
+                  {% endif %}
+                {% endfor %}
+              </div>
+
+              <div class="space-y-1 w-20 flex-shrink-0 lg:w-[90px]">
+                <s
+                  class="font-bold text-grey-400 text-xs lg:text-sm">{{ item.variant.compare_at_price | money_without_trailing_zeros }}</s>
+                <p class="font-bold text-brand-700 text-xs lg:text-base">{{ item.variant.price | money_without_trailing_zeros }}</p>
+                {% if item.variant.compare_at_price != blank %}
+                  <div class="text-[8px] font-medium text-brand-700 w-full py-0.5 px-1 bg-brand-50 text-center rounded lg:text-xs">
+                    חסכת {{ item.variant.compare_at_price | minus: item.variant.price | money_without_trailing_zeros | replace: ',', '' }}
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+
+            <div class="flex justify-between lg:pr-[102px]">
+              <div class="flex items-center space-x-reverse space-x-2">
+                {%- capture minus_icon -%}
+                  {%- render 'icon', name: 'minus', class: 'w-3 text-brand-700 lg:text-brand-600 lg:hover:text-brand-700' -%}
+                {%- endcapture -%}
+                {%- capture plus_icon -%}
+                  {%- render 'icon', name: 'plus', class: 'w-3 text-brand-700 lg:text-brand-600 lg:hover:text-brand-700' -%}
+                {%- endcapture -%}
+
+                {% assign minusDisabled = false %}
+
+                {% if item.quantity == 1 %}
+                  {% assign minusDisabled = true %}
+                {% endif %}
+
+                {%-
+                  render 'button',
+                  content: minus_icon,
+                  attrs: 'data-cart-quantity-control=decrease',
+                  class: 'w-9 h-8 bg-brand-50 rounded-lg text-brand-700 p-0 flex items-center justify-center lg:hover:bg-brand-100 disabled:opacity-50',
+                  disabled: minusDisabled
+                -%}
+
+                <input
+                  type="number"
+                  readonly
+                  class="w-12 h-8 rounded-lg border border-grey-300 text-sm text-center text-grey-900/60 input-number-reset focus:outline-none"
+                  value="{{ item.quantity }}"
+                  data-cart-quantity-input="{{ item.key }}">
+
+                {%-
+                  render 'button',
+                  content: plus_icon,
+                  attrs: 'data-cart-quantity-control=increase',
+                  class: 'w-9 h-8 bg-brand-50 rounded-lg text-brand-700 p-0 flex items-center justify-center lg:hover:bg-brand-100'
+                -%}
+              </div>
+              <button class="w-6 h-6 flex items-center justify-center text-black/30" data-remove-cart-item="{{ item.key }}">
+                {% render 'icon', name: 'trash-can', class: 'w-[15px] h-[17px]' %}
+              </button>
+            </div>
+          </div>
+
+          <script>
+            window.dlPreparedData['{{ section.id }}'].items.push({
+              item_id: "{{ item.id }}",
+              item_name: "{{ item.title }}",
+              item_category: "{{ item.collection_name }}",
+              item_variant: "{{ item.variant_title }}",
+              price: "{{ item.original_price }}",
+              discount: "{{ item.line_level_total_discount }}",
+              currency: "{{ shop.currency }}",
+              item_list_id: "{{ section.id }}",
+              index: "{{ forloop.index }}",
+              url: "{{ item.url }}",
+            });
+          </script>
+        {% endfor %}
+      </div>
+
+      <div class="p-6 md:px-0">
+        <ul class="text-grey-600">
+          <li class="flex items-center justify-between border-b border-b-[#E3E3E3] last:border-none py-2.5">
+            <span>עלויות משלוח יוצגו בצ'יק אווט</span>
+          </li>
+          <li class="flex items-center justify-between border-b border-b-[#E3E3E3] last:border-none py-2.5">
+            <span>מספר מוצרים:</span><span class="text-lg w-20 lg:w-24">{{ cart.item_count }}</span>
+          </li>
+          <li class="flex items-center justify-between border-b border-b-[#E3E3E3] last:border-none py-2.5">
+            <span>סה"כ לתשלום:</span><span class="font-bold text-lg text-brand-600 w-20 lg:w-24">{{ cart.total_price | money_without_trailing_zeros }}</span>
+          </li>
+        </ul>
+
+        {%-
+          render 'button',
+          content: 'לתשלום',
+          class: 'btn-primary border-none text-lg mt-4 lg:text-xl lg:p-4',
+          url: '/checkout'
+        -%}
+      </div>
+
+      <div data-cart-disabler class="absolute left-0 top-0 w-full h-full z-50 bg-white/60 hidden"></div>
+    </div>
+  </cart-page>
+</div>
+
+{% schema %}
+{
+  "name": "Cart",
+  "class": "sl-cart-page-js",
+  "settings": [
+    {
+      "type": "text",
+      "id": "cart_title",
+      "label": "Cart page title",
+      "default": "עגלת קניות"
+    }
+  ]
+}
+{% endschema %}

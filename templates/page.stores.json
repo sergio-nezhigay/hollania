@@ -1,0 +1,645 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "top": {
+      "type": "page__top",
+      "settings": {}
+    },
+    "locations": {
+      "type": "page__stores_locations",
+      "blocks": {
+        "store_location_X9fqHg": {
+          "type": "store-location",
+          "settings": {
+            "title": "בני ברק/רמת גן",
+            "address": "ששת הימים 6, בני ברק - חניה ללקוחות סילי בחניון הבניין בתיאום טלפוני. לפתיחת החניה התקשרו",
+            "waze_link": "https://ul.waze.com/ul?place=ChIJaZnImMlLHRURq09_nE4RUqo&ll=32.09705950%2C34.82361520&navigate=yes&utm_campaign=default&utm_source=waze_website&utm_medium=lm_share_location",
+            "phone": "077-8051262",
+            "hours": "<p><strong>שעות פעילות:</strong></p><p>א'-ה': 09:00-21:00</p><p>ו': 09:00-14:00</p><p>מוצ״ש: סגור</p>",
+            "btn_link": "shopify://pages/סניף-בני-ברק-רמת-גן-חדש",
+            "btn_text": "לפרטים נוספים"
+          }
+        },
+        "store_location_gTQeQF": {
+          "type": "store-location",
+          "settings": {
+            "title": "ראשון לציון מתחם GIGIS",
+            "address": "ילדי טהרן 8, ראשון לציון",
+            "waze_link": "https://ul.waze.com/ul?place=ChIJGcogO9mzAhUR3muipbAMBis&ll=31.98530700%2C34.76983440&navigate=yes&utm_campaign=default&utm_source=waze_website&utm_medium=lm_share_location",
+            "phone": "077-8037798",
+            "hours": "<p>א'-ה' 10:00 - 21:00</p><p>ו' - 9:00-14:00</p><p>מוצ\"ש - סגור</p>",
+            "btn_link": "shopify://pages/ראשון-לציון-מתחם-gigis-חדש",
+            "btn_text": "לפרטים נוספים"
+          }
+        },
+        "store_location_X9fqHg1": {
+          "type": "store-location",
+          "settings": {
+            "title": "קרית אתא מתחם Redesign",
+            "address": "דרך חיפה 44, קרית אתא מתחם Redesign, קומה 2",
+            "waze_link": "https://ul.waze.com/ul?place=ChIJAXZO0PSxHRURNP7MBScxJsM&ll=32.80707040%2C35.07432480&navigate=yes&utm_campaign=default&utm_source=waze_website&utm_medium=lm_share_location",
+            "phone": "077-8051480",
+            "hours": "<p>א'-ה' 09:00 - 21:00</p><p>ו' - 9:00-14:00</p><p>מוצ\"ש - סגור</p>",
+            "btn_link": "shopify://pages/קרית-אתא-מתחם-redesign",
+            "btn_text": "לפרטים נוספים"
+          }
+        },
+        "store_location_X9fqHg2": {
+          "type": "store-location",
+          "settings": {
+            "title": "רחובות (בילו סנטר)",
+            "address": "ביל\"ו סנטר OUTLET, קומה 2 ליד עולם הקולנוע",
+            "waze_link": "https://ul.waze.com/ul?preview_venue_id=22806847.228199538.51846&navigate=yes&utm_campaign=default&utm_source=waze_website&utm_medium=lm_share_location",
+            "phone": "077-8044063",
+            "hours": "<p><strong>שעות פעילות:</strong></p><p>א'-ה': 09:00-21:00</p><p>ו': 09:00-14:00</p><p>מוצ״ש: חצי שעה לאחר צאת השבת</p>",
+            "btn_link": "shopify://pages/רחובות-בילו-סנטר",
+            "btn_text": "לפרטים נוספים"
+          }
+        },
+        "store_location_3abiaQ": {
+          "type": "store-location",
+          "settings": {
+            "title": "באר שבע מתחם ONE",
+            "address": "יצחק נפחא 25, מתחם מבנה one",
+            "waze_link": "https://ul.waze.com/ul?place=ChIJn7P4JndnAhURStt1xcv7H18&ll=31.24612590%2C34.81205350&navigate=yes&utm_campaign=default&utm_source=waze_website&utm_medium=lm_share_location",
+            "phone": "077-8053445",
+            "hours": "<p>א'-ה' 9:00-21:00</p><p>ו' - 9:00-14:00</p><p>מוצ\"ש - סגור</p>",
+            "btn_link": "shopify://pages/באר-שבע-מתחם-one",
+            "btn_text": "לפרטים נוספים"
+          }
+        },
+        "store_location_Re7mg7": {
+          "type": "store-location",
+          "disabled": true,
+          "settings": {
+            "title": "אשדוד",
+            "address": "היהלומים 2, אשדוד צמוד לקשת טעמים",
+            "waze_link": "https://ul.waze.com/ul?place=ChIJeZcySJCjAhURh85X7mEm9nY&ll=31.81181130%2C34.66068140&navigate=yes&utm_campaign=default&utm_source=waze_website&utm_medium=lm_share_location",
+            "phone": "077-2319168",
+            "hours": "<p>א'-ה' 09:00 - 21:00</p><p>ו' - 9:00-14:00</p><p>מוצ\"ש - סגור</p>",
+            "btn_link": "shopify://pages/אשדוד-מתחם-קשת-טעמים",
+            "btn_text": "לפרטים נוספים"
+          }
+        },
+        "store_location_E69NJc": {
+          "type": "store-location",
+          "disabled": true,
+          "settings": {
+            "title": "מישור אדומים Dcity",
+            "address": "דרך ימית 10",
+            "waze_link": "https://ul.waze.com/ul?place=ChIJ-zLAhLy9AhURKG9xuWCLMlw&ll=31.79648380%2C35.33348890&navigate=yes&utm_campaign=default&utm_source=waze_website&utm_medium=lm_share_location",
+            "phone": "077-997-9263",
+            "hours": "<p>א'-ה' 10:00-20:00</p><p>ו' - 9:00-14:00</p><p>מוצ\"ש - סגור</p>",
+            "btn_link": "shopify://pages/מישור-אדומים-dcity",
+            "btn_text": "לפרטים נוספים"
+          }
+        },
+        "store_location_e3N9BT": {
+          "type": "store-location",
+          "settings": {
+            "title": "עפולה - מתחם הרכבת",
+            "address": "שדרות יצחק רבין 20, מתחם רכבת צפון עפולה",
+            "waze_link": "https://ul.waze.com/ul?place=ChIJYdKpFAhTHBURVcSUO7fNjmA&ll=32.61467720%2C35.29986050&navigate=yes&utm_campaign=default&utm_source=waze_website&utm_medium=lm_share_location",
+            "phone": "077-8047318",
+            "hours": "<p>א'-ה' 9:00-21:00</p><p>ו' - 9:00-14:00</p><p>מוצ\"ש - סגור</p>",
+            "btn_link": "shopify://pages/עפולה",
+            "btn_text": "לפרטים נוספים"
+          }
+        }
+      },
+      "block_order": [
+        "store_location_X9fqHg",
+        "store_location_gTQeQF",
+        "store_location_X9fqHg1",
+        "store_location_X9fqHg2",
+        "store_location_3abiaQ",
+        "store_location_Re7mg7",
+        "store_location_E69NJc",
+        "store_location_e3N9BT"
+      ],
+      "settings": {
+        "title_tag": "h1",
+        "title": "סניפי סילי",
+        "description": "",
+        "is_grey": false
+      }
+    },
+    "locations2": {
+      "type": "page__stores_locations",
+      "blocks": {
+        "store_location_L7QYnQ": {
+          "type": "store-location",
+          "settings": {
+            "title": "ראשון לציון - סליפ IN",
+            "address": "רחוב סחרוב 17, ראשון לציון",
+            "waze_link": "",
+            "phone": "053-6206619",
+            "hours": "",
+            "btn_link": "",
+            "btn_text": "לפרטים נוספים"
+          }
+        },
+        "store_location_BQB7XA": {
+          "type": "store-location",
+          "settings": {
+            "title": "רעננה - ע.ע שיווק מזרנים",
+            "address": "החרושת 21, רעננה",
+            "waze_link": "",
+            "phone": "052-7409993",
+            "hours": "",
+            "btn_link": "",
+            "btn_text": "לפרטים נוספים"
+          }
+        },
+        "store_location_chDrWE": {
+          "type": "store-location",
+          "settings": {
+            "title": "בית שמש - זה השולחן",
+            "address": "הרב יהושע 1, בית שמש",
+            "waze_link": "",
+            "phone": "02-9992071",
+            "hours": "",
+            "btn_link": "",
+            "btn_text": "לפרטים נוספים"
+          }
+        },
+        "store_location_YhxVJ7": {
+          "type": "store-location",
+          "settings": {
+            "title": "בני ברק - רהיטי יבנה",
+            "address": "יבנה 4, בני ברק",
+            "waze_link": "",
+            "phone": "03616556",
+            "hours": "",
+            "btn_link": "",
+            "btn_text": "לפרטים נוספים"
+          }
+        },
+        "store_location_kxhxdF": {
+          "type": "store-location",
+          "settings": {
+            "title": "אשדוד - המזרונאים",
+            "address": "הבנאים 4, אשדוד",
+            "waze_link": "",
+            "phone": "08-6804870",
+            "hours": "",
+            "btn_link": "",
+            "btn_text": "לפרטים נוספים"
+          }
+        },
+        "store_location_emfabk": {
+          "type": "store-location",
+          "settings": {
+            "title": "חולון - דורון שיווק",
+            "address": "החרש 6, חולון",
+            "waze_link": "",
+            "phone": "072-3953044",
+            "hours": "",
+            "btn_link": "",
+            "btn_text": "לפרטים נוספים"
+          }
+        },
+        "store_location_rJdjCH": {
+          "type": "store-location",
+          "settings": {
+            "title": "ירושלים - ענק המזרנים",
+            "address": "יד חרוצים 16 תלפיות ירושלים",
+            "waze_link": "",
+            "phone": "02-6701700",
+            "hours": "",
+            "btn_link": "",
+            "btn_text": "לפרטים נוספים"
+          }
+        },
+        "store_location_RydyTa": {
+          "type": "store-location",
+          "settings": {
+            "title": "ירושלים - אשל רהיטים",
+            "address": "מעגלי הרים לוין 53, ירושלים",
+            "waze_link": "",
+            "phone": "02-6788883",
+            "hours": "",
+            "btn_link": "",
+            "btn_text": "לפרטים נוספים"
+          }
+        },
+        "store_location_xd9Qtm": {
+          "type": "store-location",
+          "settings": {
+            "title": "קרית עקרון - ענק השינה",
+            "address": "בעלי המלאכה 5 צומת ביל\"ו, קרית עקרון",
+            "waze_link": "",
+            "phone": "08-935800",
+            "hours": "",
+            "btn_link": "",
+            "btn_text": "לפרטים נוספים"
+          }
+        },
+        "store_location_yqy6az": {
+          "type": "store-location",
+          "settings": {
+            "title": "בית שמש - ביג לוטוס א.ת צפוני",
+            "address": "הצבע 5, בית שמש",
+            "waze_link": "",
+            "phone": "02-9917666",
+            "hours": "",
+            "btn_link": "",
+            "btn_text": "לפרטים נוספים"
+          }
+        },
+        "store_location_PtPiCR": {
+          "type": "store-location",
+          "settings": {
+            "title": "תל אביב - רהיטי צבר",
+            "address": "הרצל 44, תל אביב",
+            "waze_link": "",
+            "phone": "050-5233333",
+            "hours": "",
+            "btn_link": "",
+            "btn_text": "לפרטים נוספים"
+          }
+        },
+        "store_location_VczwXp": {
+          "type": "store-location",
+          "disabled": true,
+          "settings": {
+            "title": "תל אביב - האנגר המזרונים -מרום עדי בע\"מ",
+            "address": "המעפילים 2, תל אביב",
+            "waze_link": "",
+            "phone": "03-5042750",
+            "hours": "",
+            "btn_link": "",
+            "btn_text": "לפרטים נוספים"
+          }
+        },
+        "store_location_3pYCFE": {
+          "type": "store-location",
+          "disabled": true,
+          "settings": {
+            "title": "בני ברק - שפיצר",
+            "address": "אבני נזר 10, בני ברק",
+            "waze_link": "",
+            "phone": "*6590",
+            "hours": "",
+            "btn_link": "",
+            "btn_text": "לפרטים נוספים"
+          }
+        },
+        "store_location_PzjmGV": {
+          "type": "store-location",
+          "settings": {
+            "title": "אור יהודה - שירהיט",
+            "address": "העבודה 14 א.ת חדש, אור יהודה",
+            "waze_link": "",
+            "phone": "03-6344404 ",
+            "hours": "",
+            "btn_link": "",
+            "btn_text": "לפרטים נוספים"
+          }
+        },
+        "store_location_aYn97g": {
+          "type": "store-location",
+          "settings": {
+            "title": "פתח תקווה - גלובוס אלמוגי",
+            "address": "בן ציון גליס 8, פתח תקווה",
+            "waze_link": "",
+            "phone": "054-4368877",
+            "hours": "",
+            "btn_link": "",
+            "btn_text": "לפרטים נוספים"
+          }
+        },
+        "store_location_6nGCH6": {
+          "type": "store-location",
+          "settings": {
+            "title": "כפר סבא - ניו בד",
+            "address": "התע״ש 7, כפר סבא",
+            "waze_link": "",
+            "phone": "052-4441270  ",
+            "hours": "",
+            "btn_link": "",
+            "btn_text": "לפרטים נוספים"
+          }
+        },
+        "store_location_xknTYU": {
+          "type": "store-location",
+          "disabled": true,
+          "settings": {
+            "title": "ירושלים - LAFORMA",
+            "address": "קינג פייר 39, ירושלים",
+            "waze_link": "",
+            "phone": "055-6640112",
+            "hours": "",
+            "btn_link": "",
+            "btn_text": "לפרטים נוספים"
+          }
+        },
+        "store_location_yfxGar": {
+          "type": "store-location",
+          "disabled": true,
+          "settings": {
+            "title": "ירושלים - שפיצר",
+            "address": "בר אילן 20, ירושלים",
+            "waze_link": "",
+            "phone": "*6590",
+            "hours": "",
+            "btn_link": "",
+            "btn_text": "לפרטים נוספים"
+          }
+        },
+        "store_location_fbEMc7": {
+          "type": "store-location",
+          "disabled": true,
+          "settings": {
+            "title": "ירושלים - מ.ממן ובניו יזמות ובניה בע\"מ ",
+            "address": "יד חרוצים 16 קומה 1, ירושלים",
+            "waze_link": "",
+            "phone": "055-6640112",
+            "hours": "",
+            "btn_link": "",
+            "btn_text": "לפרטים נוספים"
+          }
+        },
+        "store_location_nLPkFD": {
+          "type": "store-location",
+          "settings": {
+            "title": "חדרה - המזרונאים",
+            "address": "הרב עובדיה יוסף 2, חדרה",
+            "waze_link": "",
+            "phone": "072-2800003",
+            "hours": "",
+            "btn_link": "",
+            "btn_text": "לפרטים נוספים"
+          }
+        },
+        "store_location_r4jq7A": {
+          "type": "store-location",
+          "settings": {
+            "title": "ירושלים - טווין קונספט בע\"מ",
+            "address": "ירמיהו 56 ,ירושלים",
+            "waze_link": "",
+            "phone": "02-5022555",
+            "hours": "",
+            "btn_link": "",
+            "btn_text": "לפרטים נוספים"
+          }
+        },
+        "store_location_EYTqt7": {
+          "type": "store-location",
+          "disabled": true,
+          "settings": {
+            "title": "באר שבע - ליסקר עומר",
+            "address": "עוזי חיטמן 4, באר שבע",
+            "waze_link": "",
+            "phone": "058-6458918",
+            "hours": "",
+            "btn_link": "",
+            "btn_text": "לפרטים נוספים"
+          }
+        },
+        "store_location_3wXNLy": {
+          "type": "store-location",
+          "disabled": true,
+          "settings": {
+            "title": "ראמללה - ווסף מוטיה (WASEF MUTIE)",
+            "address": "ראמללה",
+            "waze_link": "",
+            "phone": "059-9201278",
+            "hours": "",
+            "btn_link": "",
+            "btn_text": "לפרטים נוספים"
+          }
+        },
+        "store_location_8kLDNH": {
+          "type": "store-location",
+          "settings": {
+            "title": "טבריה - טופ רהיט",
+            "address": "אוהל יעקב 7, טבריה",
+            "waze_link": "",
+            "phone": "04-6726701",
+            "hours": "",
+            "btn_link": "",
+            "btn_text": "לפרטים נוספים"
+          }
+        },
+        "store_location_iTpEr9": {
+          "type": "store-location",
+          "settings": {
+            "title": "כרמיאל - רהיטי זילבר",
+            "address": "החרושת 11, כרמיאל",
+            "waze_link": "",
+            "phone": "04-9985130 / 072-2204400",
+            "hours": "",
+            "btn_link": "",
+            "btn_text": "לפרטים נוספים"
+          }
+        },
+        "store_location_CfWmqM": {
+          "type": "store-location",
+          "settings": {
+            "title": "עפולה – סקויה רהיטים",
+            "address": "שדרות מנחם בגין 77",
+            "waze_link": "",
+            "phone": "072-3717198 , 0528398804",
+            "hours": "",
+            "btn_link": "",
+            "btn_text": "לפרטים נוספים"
+          }
+        },
+        "store_location_X9fqHg1": {
+          "type": "store-location",
+          "settings": {
+            "title": "חיפה - גולד סליפ",
+            "address": "מרדכי מקלף 7, חיפה",
+            "waze_link": "",
+            "phone": "08-8100112",
+            "hours": "",
+            "btn_link": "",
+            "btn_text": "לפרטים נוספים"
+          }
+        },
+        "store_location_hnbkKf": {
+          "type": "store-location",
+          "disabled": true,
+          "settings": {
+            "title": "חיפה - נייטי סנטר",
+            "address": "החרושת 9 חוצות המפרץ, חיפה",
+            "waze_link": "",
+            "phone": "054-7683733",
+            "hours": "",
+            "btn_link": "",
+            "btn_text": "לפרטים נוספים"
+          }
+        },
+        "store_location_X9fqHg2": {
+          "type": "store-location",
+          "settings": {
+            "title": "נשר חיפה - נייטי ",
+            "address": "בר יהודה 147 מתחם מבנה, נשר חיפה",
+            "waze_link": "",
+            "phone": "073-75172111",
+            "hours": "",
+            "btn_link": "",
+            "btn_text": "לפרטים נוספים"
+          }
+        },
+        "store_location_X9fqHg": {
+          "type": "store-location",
+          "settings": {
+            "title": "קרית ביאליק - גב נוח",
+            "address": "רחוב החרושת 30, קרית ביאליק",
+            "waze_link": "",
+            "phone": "04-8530353",
+            "hours": "",
+            "btn_link": "",
+            "btn_text": "לפרטים נוספים"
+          }
+        },
+        "store_location_dwdhhh": {
+          "type": "store-location",
+          "settings": {
+            "title": "קרית שמונה - רפאל רהיטים",
+            "address": "רחוב א.ת. דרומי מתחם מבנה, קרית שמונה",
+            "waze_link": "",
+            "phone": "04-6160994",
+            "hours": "",
+            "btn_link": "",
+            "btn_text": "לפרטים נוספים"
+          }
+        },
+        "store_location_QWGpd6": {
+          "type": "store-location",
+          "settings": {
+            "title": "באר שבע - רהיטי שלומית",
+            "address": "הנגרים 1, באר שבע",
+            "waze_link": "",
+            "phone": "052-2292775",
+            "hours": "",
+            "btn_link": "",
+            "btn_text": "לפרטים נוספים"
+          }
+        },
+        "store_location_LYjQpD": {
+          "type": "store-location",
+          "disabled": true,
+          "settings": {
+            "title": "באר שבע - המזרונאים",
+            "address": "דרך חברון 105, באר שבע",
+            "waze_link": "",
+            "phone": "052-2511741",
+            "hours": "",
+            "btn_link": "",
+            "btn_text": "לפרטים נוספים"
+          }
+        },
+        "store_location_nber8N": {
+          "type": "store-location",
+          "settings": {
+            "title": "אילת - רהיטי העיר",
+            "address": "חטיבת הנגב 13, אילת",
+            "waze_link": "",
+            "phone": "054-7880395",
+            "hours": "",
+            "btn_link": "",
+            "btn_text": "לפרטים נוספים"
+          }
+        },
+        "store_location_QVnBgQ": {
+          "type": "store-location",
+          "disabled": true,
+          "settings": {
+            "title": "ירושלים - הפורטל לשינה טובה בע\"מ",
+            "address": "ירושלים",
+            "waze_link": "",
+            "phone": "",
+            "hours": "",
+            "btn_link": "",
+            "btn_text": "לפרטים נוספים"
+          }
+        },
+        "store_location_iNyyx9": {
+          "type": "store-location",
+          "settings": {
+            "title": "ראשל\"צ - הום דקור",
+            "address": "אלחנן 10, ראשון לציון",
+            "waze_link": "",
+            "phone": "03-9523333",
+            "hours": "",
+            "btn_link": "",
+            "btn_text": "לפרטים נוספים"
+          }
+        },
+        "store_location_pMCedm": {
+          "type": "store-location",
+          "settings": {
+            "title": "אשקלון - טיב עיצובים",
+            "address": "פלדה 65 אזור תעשייה צפוני (ליד ביתן), אשקלון",
+            "waze_link": "",
+            "phone": "08-6169900",
+            "hours": "",
+            "btn_link": "",
+            "btn_text": "לפרטים נוספים"
+          }
+        }
+      },
+      "block_order": [
+        "store_location_L7QYnQ",
+        "store_location_BQB7XA",
+        "store_location_chDrWE",
+        "store_location_YhxVJ7",
+        "store_location_kxhxdF",
+        "store_location_emfabk",
+        "store_location_rJdjCH",
+        "store_location_RydyTa",
+        "store_location_xd9Qtm",
+        "store_location_yqy6az",
+        "store_location_PtPiCR",
+        "store_location_VczwXp",
+        "store_location_3pYCFE",
+        "store_location_PzjmGV",
+        "store_location_aYn97g",
+        "store_location_6nGCH6",
+        "store_location_xknTYU",
+        "store_location_yfxGar",
+        "store_location_fbEMc7",
+        "store_location_nLPkFD",
+        "store_location_r4jq7A",
+        "store_location_EYTqt7",
+        "store_location_3wXNLy",
+        "store_location_8kLDNH",
+        "store_location_iTpEr9",
+        "store_location_CfWmqM",
+        "store_location_X9fqHg1",
+        "store_location_hnbkKf",
+        "store_location_X9fqHg2",
+        "store_location_X9fqHg",
+        "store_location_dwdhhh",
+        "store_location_QWGpd6",
+        "store_location_LYjQpD",
+        "store_location_nber8N",
+        "store_location_QVnBgQ",
+        "store_location_iNyyx9",
+        "store_location_pMCedm"
+      ],
+      "settings": {
+        "title_tag": "h2",
+        "title": "משווקים מורשים",
+        "description": "אין חובה על המשווקים המורשים להציג את כל מגוון מוצרי סילי",
+        "is_grey": true
+      }
+    }
+  },
+  "order": [
+    "top",
+    "locations",
+    "locations2"
+  ]
+}

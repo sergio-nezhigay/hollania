@@ -1,0 +1,109 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "Header group",
+  "type": "header",
+  "sections": {
+    "announcement_bar_9XEGDr": {
+      "type": "announcement-bar",
+      "blocks": {
+        "announcement_bTVDJp": {
+          "type": "announcement",
+          "settings": {
+            "message": "מבצע מיוחד - הנחה של 50% על כל המזרונים"
+          }
+        },
+        "announcement_ChNAX7": {
+          "type": "announcement",
+          "settings": {
+            "message": "משלוח חינם לכל הארץ על קניות מעל 500 ₪"
+          }
+        },
+        "announcement_JMmy4w": {
+          "type": "announcement",
+          "settings": {
+            "message": "מתווה אחים יכולים לקוגש שינה משלוחת, מחיר טמפרף 39 ₪ ער תחתירת"
+          }
+        }
+      },
+      "block_order": [
+        "announcement_bTVDJp",
+        "announcement_ChNAX7",
+        "announcement_JMmy4w"
+      ],
+      "name": "Announcement Bar",
+      "settings": {}
+    },
+    "announcement_bar": {
+      "type": "header__announcement-bar",
+      "blocks": {
+        "e2d457c9-2e0b-4c69-8109-9f512f4e903b": {
+          "type": "announcement",
+          "settings": {
+            "text": "November sale עד 50% הנחה!",
+            "text_desktop": "November sale עד 50% הנחה!",
+            "link": "/"
+          }
+        }
+      },
+      "block_order": [
+        "e2d457c9-2e0b-4c69-8109-9f512f4e903b"
+      ],
+      "disabled": true,
+      "settings": {}
+    },
+    "header": {
+      "type": "header",
+      "blocks": {
+        "mega_menu_wePhKk": {
+          "type": "mega_menu",
+          "settings": {
+            "menu_trigger": "מבצעים",
+            "mega_item_1_image": "shopify://shop_images/Rectangle_2126.png",
+            "mega_item_1_title": "מיטות מתכווננות",
+            "mega_item_1_link": "#",
+            "mega_item_2_image": "shopify://shop_images/Rectangle_2126_1.png",
+            "mega_item_2_title": "מיטות זוגיות",
+            "mega_item_2_link": "#",
+            "mega_item_3_image": "shopify://shop_images/Rectangle_2126_2.png",
+            "mega_item_3_title": "מיטות יהודיות",
+            "mega_item_3_link": "#",
+            "mega_item_4_image": "shopify://shop_images/Rectangle_2126_3.png",
+            "mega_item_4_title": "מיטות עם ארגז מצעים",
+            "mega_item_4_link": "#"
+          }
+        }
+      },
+      "block_order": [
+        "mega_menu_wePhKk"
+      ],
+      "settings": {
+        "main_menu": "main-menu",
+        "magazine_text": "מגזין שינה",
+        "magazine_link": "",
+        "support_text": "שירות לקוחות",
+        "support_link": "",
+        "stores_text": "סניפים",
+        "stores_link": ""
+      }
+    },
+    "mega_menu": {
+      "type": "header__mega-menu",
+      "disabled": true,
+      "settings": {}
+    }
+  },
+  "order": [
+    "announcement_bar_9XEGDr",
+    "announcement_bar",
+    "header",
+    "mega_menu"
+  ]
+}

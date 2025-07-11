@@ -1,0 +1,47 @@
+<div class="bg-white overflow-y-auto scrollbar-hidden">
+  <div class="pb-4 pt-6 mx-6 border-b border-grey-900/5">
+    <form action="{{ routes.search_url }}">
+      {%- capture searchIcon  -%}
+        {%- render 'icon', name: 'search', class: 'w-3.5 aspect-square' -%}
+      {%- endcapture  -%}
+
+      {%- capture customerServicesBtnContent  -%}
+        {%- render 'icon', name: 'support-agent', class: 'w-6 aspect-square ml-2' -%}
+        שירות לקוחות
+      {%- endcapture  -%}
+
+      <div class="relative">
+        <input
+          type="text"
+          placeholder="חפשו"
+          name="q"
+          value="{{ search.terms | escape }}"
+          class="w-full border border-grey-900/10 shadow-[0_0_20px_0_rgba(0,0,0,0.05)] rounded py-2.5 px-3 leading-snug
+        text-xsm pr-9 focus:outline-brand-500/70 peer"
+        >
+
+        {%-
+          render 'button',
+          size: 'xs',
+          attrs: 'type=submit',
+          content: searchIcon,
+          class: 'absolute-centered-y right-0 px-3 text-grey-450 peer-hover:text-brand-700'
+        -%}
+      </div>
+    </form>
+
+    {%-
+      render 'button',
+      url: '/pages/customer-service',
+      content: customerServicesBtnContent,
+      class: 'bg-brand-600/10 rounded h-10 flex items-center justify-center text-brand-600 w-full mt-4'
+    -%}
+  </div>
+
+  {%- render 'main-menu' -%}
+
+  <div class="bg-brand-35 p-6">
+    {% comment %}{%- render 'secondary-menu' -%}{% endcomment %}
+    {%- render 'mobile-menu_contacts' -%}
+  </div>
+</div>

@@ -1,0 +1,17 @@
+{%- comment -%}
+
+  props:
+    - name
+
+{%- endcomment -%}
+
+{%- assign attributes = 'xmlns="http://www.w3.org/2000/svg"' -%}
+
+{%- case name -%}
+  {%- when 'arrow-left' -%}
+    {%- capture inlineSvg -%}
+      <svg viewBox="0 0 21 21" fill="none" {{ attributes }}><path d="M15.9264 10.1546H4.25977M4.25977 10.1546L10.0931 15.988M4.25977 10.1546L10.0931 4.32129" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    {%- endcapture -%}
+
+    data:image/svg+xml;base64,{{- inlineSvg | strip_newlines | base64_encode -}}
+{%- endcase -%}

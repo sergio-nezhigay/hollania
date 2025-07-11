@@ -1,0 +1,25 @@
+{%- comment -%}
+  props:
+    - url: string
+    - content: string or html
+    - class: string
+    - size: xs, sm, md, lg
+    - attrs: html attributes
+    - disabled: boolean
+{%- endcomment -%}
+
+{% liquid
+  assign disabled = disabled | default: false
+%}
+
+{%- if url != blank -%}
+  <a {% if disabled %}disabled{% endif %} class="btn-{{ size | default: 'md' }} {{ class }}" href="{{ url }}" {{ attrs }}>
+    {{ content }}
+  </a>
+
+  {%- else -%}
+  <button {% if disabled %}disabled{% endif %} class="btn-{{ size | default: 'md' }} {{ class }}" {{ attrs }}>
+    {{ content }}
+  </button>
+{%- endif -%}
+

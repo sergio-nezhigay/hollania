@@ -1,0 +1,102 @@
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
+{
+  "sections": {
+    "top": {
+      "type": "page__top",
+      "settings": {
+      }
+    },
+    "banner": {
+      "type": "page__banner",
+      "settings": {
+        "image": "shopify:\/\/shop_images\/cs_mobile_hero.jpg",
+        "image_desktop": "shopify:\/\/shop_images\/cs_mobile_hero_desktop.jpg",
+        "image_text": "{{ page.title }}",
+        "title": "",
+        "text_gr": "Text gradient"
+      }
+    },
+    "main": {
+      "type": "page__customer-services_main",
+      "blocks": {
+        "form_3": {
+          "type": "contact_form",
+          "settings": {
+            "label": "שירות לאחר רכישה",
+            "hours_title": "שעות פעילות מוקד שירות לקוחות:",
+            "hours": "א-ה 08:30-16:30",
+            "whatsapp_title": "שירות לקוחות ב - WhatsApp",
+            "whatsapp": "055-9596317",
+            "phone_title": "שירות לקוחות בטלפון",
+            "phone": "077-9969040",
+            "title": "צרו קשר ונחזור אליכם בהקדם",
+            "subjects": "",
+            "form_action": "default"
+          }
+        },
+        "form_2": {
+          "type": "contact_form",
+          "settings": {
+            "label": "מחלקת אספקה",
+            "hours_title": "שעות פעילות מחלקת אספקה:",
+            "hours": "א-ה 08:30-16:30",
+            "whatsapp_title": "מחלקת אספקה ב - WhatsApp",
+            "whatsapp": "055-9596317",
+            "phone_title": "מחלקת אספקה בטלפון",
+            "phone": "077-9707090",
+            "title": "צרו קשר ונחזור אליכם בהקדם",
+            "subjects": "",
+            "form_action": "default"
+          }
+        },
+        "contact_form_4C8NDB": {
+          "type": "contact_form",
+          "settings": {
+            "label": "מתעניינים ברכישת מוצר חדש",
+            "hours_title": "שעות פעילות מחלקת מכירות:",
+            "hours": "א-ה 08:30-16:30",
+            "whatsapp_title": "לצ'ט עם נציג ב - WhatsApp",
+            "whatsapp": "0559596317",
+            "phone_title": "לשיחה עם נציג",
+            "phone": "0559596317",
+            "title": "צרו קשר ונחזור אליכם בהקדם",
+            "subjects": "",
+            "form_action": "default"
+          }
+        }
+      },
+      "block_order": [
+        "form_3",
+        "form_2",
+        "contact_form_4C8NDB"
+      ],
+      "settings": {
+        "title": "נשמח לעמוד לשירותכם בכל עת, השאירו פרטיכם ונחזור אליכם בהקדם",
+        "select_placeholder": "איך אפשר לעזור לכם?"
+      }
+    },
+    "our_branches": {
+      "type": "banner-image",
+      "settings": {
+        "button_text": "בקרו בסניפים שלנו",
+        "link": "shopify:\/\/pages\/stores",
+        "image": "shopify:\/\/shop_images\/d6555b2c5dcdf756505d56b3b757e624.jpg",
+        "image_desktop": "shopify:\/\/shop_images\/banner_img_desktop_3x_d3426569-a703-4ca1-9445-48728b00e9a1.jpg"
+      }
+    }
+  },
+  "order": [
+    "top",
+    "banner",
+    "main",
+    "our_branches"
+  ]
+}

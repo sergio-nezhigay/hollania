@@ -1,0 +1,55 @@
+{% comment %}
+  props:
+    - products
+    - products_limit: number | default: 100
+    - exclude_product_id: string | default: ''
+    - show_price: boolean | default: true
+    - show_badges: boolean | default: true
+    - size: string | default: 'md' | options: 'sm', 'md'
+{% endcomment %}
+
+{%- assign products_limit = products_limit | default: 100 -%}
+{%- assign exclude_product_id = exclude_product_id | default: '' -%}
+
+<script>
+  window.dlPreparedData = window.dlPreparedData || {};
+  window.dlPreparedData['{{ section.id }}'] = window.dlPreparedData['{{ section.id }}'] || { items: [] };
+</script>
+
+<swiper-container
+  data-dl-onview="view_item_list" data-dl-id="{{ section.id }}" class="sl-slideshow" init="false"
+  navigation="true" space-between="16" slides-per-view="1.05" css-mode="true"
+>
+  {%- if products == blank -%}
+    {%- for skeleton in (1..5) -%}
+      <swiper-slide class="h-auto">
+        {%- render 'product-card', product: blank, show_price: show_price, show_badges: show_badges, size: size, index: forloop.index -%}
+      </swiper-slide>
+    {%- endfor -%}
+
+    {%- else -%}
+    {%- for product in products limit: products_limit -%}
+      {%- if product.id == exclude_product_id or product.metafields.custom.upsale_product -%}
+        {%- continue -%}
+      {%- endif -%}
+      <swiper-slide class="h-auto" lazy="true">
+        {%- render 'product-card', product: product, image_load: 'lazy', show_price: show_price, show_badges: show_badges, size: size, index: forloop.index -%}
+      </swiper-slide>
+
+      <script>
+        window.dlPreparedData['{{ section.id }}'].items.push({
+          item_id: "{{ product.id }}",
+          item_name: "{{ product.title }}",
+          item_category: "{{ product.collections | map: 'title' | join: ', ' }}",
+          item_variant: "{{ product.selected_or_first_available_variant.title }}",
+          price: "{{ product.price | money_without_currency }}",
+          currency: "{{ shop.currency }}",
+          item_list_id: "{{ section.id }}",
+          index: "{{ forloop.index }}",
+          image_url: "{{ product.featured_image.src | img_url: '600x' }}",
+          url: "{{ product.url }}",
+        });
+      </script>
+    {%- endfor -%}
+  {%- endif -%}
+</swiper-container>

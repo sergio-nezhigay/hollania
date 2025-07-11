@@ -1,0 +1,521 @@
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+-%}
+{%- capture cssVars -%}
+  {% for entry in shop.metaobjects.fabric_colors.values %}
+    --product-color-{{ entry.color_name |  handleize }}: {{ entry.color }};
+  {% endfor %}
+{%- endcapture -%}
+{%- form 'product', product -%}
+  <div class="grid grid-cols-10 gap-x-2 gap-y-3.5 bg-[#F9FAFB] p-4 mt-6 lg:bg-transparent lg:pt-0 xl:p-0 xl:pr-8 xl:gap-y-6">
+    {%- unless product.has_only_default_variant -%}
+      {% for opt in product.options %}
+        {% case opt %}
+          {% comment %}
+            Color selector
+          {% endcomment %}
+          {% when 'Color' %}
+            {% assign color_options = product.options_by_name[opt].values %}
+
+            {% if color_options != blank %}
+              <div class="col-span-10">
+                <p>
+                  <span class="font-medium">צבע:</span> <span data-color-title-display></span>
+                  <span class="relative inline-block align-middle">
+                {%- render 'icon', name: 'info', class: 'w-5 h-5 text-black/60 peer' -%}
+                <span class="block z-20 w-40 text-xs text-center p-2 rounded-lg absolute-centered-x bottom-full -translate-y-2 bg-white
+                  shadow-sl-12 invisible peer-hover:visible">
+                  דוגמאות הצבעים להמחשה בלבד, בשל מגבלות רזולוציה תתכנה סטיות בגוון הצבע
+
+                  <span class="w-0 h-0 absolute-centered-x top-full
+                    border-l-[7px] border-l-transparent
+                    border-t-[7px] border-t-white
+                    border-r-[7px] border-r-transparent">
+                  </span>
+                </span>
+              </span>
+                </p>
+                <div class="px-4 -mx-4 pb-3 overflow-x-auto scrollbar-hidden space-x-reverse space-x-1 flex xl:mt-3" style="{{ cssVars | strip_newlines | remove: ' ' }}">
+                  {%- for color in color_options -%}
+                    {%- liquid
+                      assign itemId = 'vcolor-' | append: color | handleize
+                    -%}
+
+                    <div>
+                      <input
+                        hidden
+                        class="peer"
+                        id="{{ itemId }}"
+                        data-variant-select
+                        type="radio"
+                        name="color"
+                        value="{{ color }}"
+                        {% if current_variant.options contains color -%}checked{%- endif %}
+                      />
+                      <label
+                        for="{{ itemId }}"
+                        class="block w-8 h-8 rounded-full cursor-pointer m-1 peer-checked:outline peer-checked:outline-2
+                peer-checked:outline-brand-600 peer-checked:outline-offset-2 shadow-[0_0_6px_0_rgba(0,0,0,0.24)]"
+                        style="background-color: var(--product-color-{{ color | handleize }}, rgba(0,0,0,0.1));"
+                      ></label>
+                    </div>
+                  {%- endfor -%}
+                </div>
+              </div>
+            {% endif %}
+
+            {% comment %}
+              Style selector
+            {% endcomment %}
+          {% when 'Style' %}
+            {% assign style_options = product.options_by_name[opt].values %}
+
+            {%- if style_options != blank-%}
+              <div class="col-span-10">
+                <div class="px-4 -mx-4 pb-0 overflow-x-auto scrollbar-hidden grid gap-2 grid-cols-2 xl:mt-3">
+                  {%- for style in style_options -%}
+                    {%- liquid
+                      assign itemId = 'vstyle-' | append: style | handleize
+                    -%}
+
+                    <div>
+                      <input
+                        hidden
+                        class="peer"
+                        id="{{ itemId }}"
+                        type="radio"
+                        name="style"
+                        data-variant-select
+                        value="{{ style }}"
+                        {% if current_variant.options contains style -%}checked{%- endif %}
+                      />
+                      <label
+                        for="{{ itemId }}"
+                        class="w-full block bg-white text-center py-3 px-3 rounded-lg border border-grey-300 whitespace-nowrap peer-checked:bg-brand-50
+                      peer-checked:border-brand-600 peer-checked:font-bold peer-checked:text-brand-600
+                      peer-disabled:text-grey-300 peer-disabled:border-grey-300 lg:hover:cursor-pointer"
+                      >{{ style }}</label>
+                    </div>
+                  {%- endfor -%}
+                </div>
+              </div>
+            {%- endif -%}
+
+            {% comment %}
+              Size width selector
+            {% endcomment %}
+          {% when 'Size sheet width' %}
+            {% assign size_width_options = product.options_by_name[opt].values %}
+            {% assign option_index_selector = 'option' | append: forloop.index %}
+
+            {%- if size_width_options != blank-%}
+              <p class="hidden xl:block xl:col-span-10 xl:-mb-3">מידת רוחב הסדין</p>
+              <custom-select
+                data-closed="true"
+                class="block col-span-7 group/cs relative lg:hover:cursor-pointer lg:hover:bg-brand-30"
+              >
+                <div
+                  data-custom-select-placeholder
+                  class="relative py-3 px-4 bg-white z-20 rounded-lg border border-grey-300 group-data-[closed=false]/cs:border-b-0
+          group-data-[closed=false]/cs:rounded-b-none lg:hover:cursor-pointer"
+                >
+                  <span dir="ltr">{{ current_variant[option_index_selector] }}</span>
+                  {%- render 'icon', name: 'chevron-down', class: 'absolute-centered-y left-4 w-5 h-5 group-data-[closed=false]/cs:rotate-180' -%}
+                </div>
+
+                <ul class="group-data-[closed=true]/cs:hidden -mt-1 absolute top-full left-0 w-full bg-white rounded-b-lg
+            shadow-sl-12 z-10 overflow-hidden border border-grey-300 border-t-0">
+                  {%- for size in size_width_options -%}
+                    {%- liquid
+                      assign selected = false
+                      assign label = size
+
+                      if size == current_variant[option_index_selector]
+                        assign selected = true
+                      endif
+                    -%}
+
+                    <li
+                      dir="ltr"
+                      data-option
+                      data-selected="{{ selected }}"
+                      class="py-2 px-4 text-xsm
+              data-[selected=true]:font-medium data-[selected=true]:text-brand-600 data-[selected=true]:bg-brand-600/10 lg:hover:cursor-pointer lg:hover:bg-brand-30"
+                    >
+                      {{ label }}
+                    </li>
+
+                    {%- capture optionsForSelectTag -%}
+                      {{- optionsForSelectTag -}}
+                      <option
+                        {% if selected -%}selected="selected"{%- endif %}
+                        value='{{- size -}}'
+                      ></option>
+                    {%- endcapture -%}
+                  {%- endfor -%}
+                </ul>
+
+                <select
+                  name="size_width"
+                  data-size-width-select
+                  data-variant-select
+                  hidden
+                >
+                  {{- optionsForSelectTag -}}
+                </select>
+              </custom-select>
+            {%- endif -%}
+
+            {% comment %}
+              Size selector
+            {% endcomment %}
+          {% when 'Size' %}
+            {% assign size_options = product.options_by_name[opt].values %}
+            {% assign option_index_selector = 'option' | append: forloop.index %}
+
+
+            {%- if size_options != blank-%}
+              {% liquid
+                assign sizeWord = 'גודל'
+                assign protectorProductWord = ''
+                assign productTypeWord = ''
+
+                assign productCollectionsHandles = product.collections | map: 'handle'
+                if productCollectionsHandles contains 'מיטות'
+                  assign productTypeWord = 'מיטה'
+                elsif productCollectionsHandles contains 'מזרנים'
+                  assign productTypeWord = 'מזרן'
+                endif
+
+                if product.id == 10136195760431
+                  assign protectorProductWord = 'מגן מזרן'
+                endif
+              %}
+
+              <p class="hidden xl:block xl:col-span-10 xl:-mb-3">בחירת {{ sizeWord }} {{ protectorProductWord }} {{ productTypeWord }}</p>
+
+              <custom-select
+                data-closed="true"
+                class="block col-span-7 group/cs relative lg:hover:cursor-pointer lg:hover:bg-brand-30"
+              >
+                <div
+                  data-custom-select-placeholder
+                  class="relative py-3 px-4 bg-white z-20 rounded-lg border border-grey-300 group-data-[closed=false]/cs:border-b-0
+          group-data-[closed=false]/cs:rounded-b-none lg:hover:cursor-pointer"
+                >
+                  <span dir="ltr">{{ current_variant[option_index_selector] | replace: 'X', '*' }}</span>
+                  {%- render 'icon', name: 'chevron-down', class: 'absolute-centered-y left-4 w-5 h-5 group-data-[closed=false]/cs:rotate-180' -%}
+                </div>
+
+                <ul class="group-data-[closed=true]/cs:hidden -mt-1 absolute top-full left-0 w-full bg-white rounded-b-lg
+            shadow-sl-12 z-10 overflow-hidden border border-grey-300 border-t-0">
+                  {%- for size in size_options -%}
+                    {%- liquid
+                      assign selected = false
+                      assign label = size | replace: 'X', '*'
+
+                      if size == current_variant[option_index_selector]
+                        assign selected = true
+                      endif
+                    -%}
+
+                    <li
+                      dir="ltr"
+                      data-option
+                      data-selected="{{ selected }}"
+                      class="py-2 px-4 text-xsm
+              data-[selected=true]:font-medium data-[selected=true]:text-brand-600 data-[selected=true]:bg-brand-600/10 lg:hover:cursor-pointer lg:hover:bg-brand-30"
+                    >
+                      {{ label }}
+                    </li>
+
+                    {%- capture optionsForSelectTag -%}
+                      {{- optionsForSelectTag -}}
+                      <option
+                        {% if selected -%}selected="selected"{%- endif %}
+                        value="{{- size -}}"
+                      ></option>
+                    {%- endcapture -%}
+                  {%- endfor -%}
+                </ul>
+
+                <select
+                  name="size"
+                  data-variant-select
+                  data-size-select
+                  hidden
+                >
+                  {{- optionsForSelectTag -}}
+                </select>
+              </custom-select>
+            {%- endif -%}
+
+            {% comment %}
+               Other variants render
+            {% endcomment %}
+          {% else %}
+            {% assign other_options = product.options_by_name[opt].values %}
+            {% assign option_index_selector = 'option' | append: forloop.index %}
+
+            {%- if other_options != blank-%}
+              <p class="hidden xl:block xl:col-span-10 xl:-mb-3">{{ opt }}</p>
+
+              <custom-select
+                data-closed="true"
+                class="block col-span-7 group/cs relative lg:hover:cursor-pointer lg:hover:bg-brand-30"
+              >
+                <div
+                  data-custom-select-placeholder
+                  class="relative py-3 px-4 bg-white z-20 rounded-lg border border-grey-300 group-data-[closed=false]/cs:border-b-0
+            group-data-[closed=false]/cs:rounded-b-none lg:hover:cursor-pointer"
+                >
+                  <span dir="ltr">{{ current_variant[option_index_selector]  }}</span>
+                  {%- render 'icon', name: 'chevron-down', class: 'absolute-centered-y left-4 w-5 h-5 group-data-[closed=false]/cs:rotate-180' -%}
+                </div>
+
+                <ul class="group-data-[closed=true]/cs:hidden -mt-1 absolute top-full left-0 w-full bg-white rounded-b-lg
+              shadow-sl-12 z-10 overflow-hidden border border-grey-300 border-t-0">
+                  {%- for item in other_options -%}
+                    {%- liquid
+                      assign selected = false
+
+                      if item == current_variant[option_index_selector]
+                        assign selected = true
+                      endif
+                    -%}
+
+                    <li
+                      dir="ltr"
+                      data-option
+                      data-selected="{{ selected }}"
+                      class="py-2 px-4 text-xsm
+                data-[selected=true]:font-medium data-[selected=true]:text-brand-600 data-[selected=true]:bg-brand-600/10 lg:hover:cursor-pointer lg:hover:bg-brand-30"
+                    >
+                      {{ item }}
+                    </li>
+
+                    {%- capture optionsForSelectTag -%}
+                      {{- optionsForSelectTag -}}
+                      <option
+                        {% if selected -%}selected="selected"{%- endif %}
+                        value='{{- item -}}'
+                      ></option>
+                    {%- endcapture -%}
+                  {%- endfor -%}
+                </ul>
+
+                <select
+                  name='{{ opt | handleize }}'
+                  data-variant-select
+                  data-option-select
+                  hidden
+                >
+                  {{- optionsForSelectTag -}}
+                </select>
+              </custom-select>
+            {%- endif -%}
+        {% endcase %}
+      {% endfor %}
+    {%- endunless -%}
+
+    {% comment %}
+      Quantity selector
+    {% endcomment %}
+    <custom-number-input data-min="1" class="block col-span-3 relative">
+      {%- capture minusIcon -%}
+        {%- render 'icon', name: 'minus',  class: 'w-3.5 h-3.5' -%}
+      {%- endcapture -%}
+
+      {%- capture plusIcon -%}
+        {%- render 'icon', name: 'plus', class: 'w-3.5 h-3.5' -%}
+      {%- endcapture -%}
+
+      {% render 'button', content: minusIcon, attrs: 'data-decrease', size: 'xs', class: 'absolute-centered-y left-1.5' %}
+
+      <input
+        data-quantity-input
+        class="input-number-reset bg-white w-full py-3 px-4 rounded-lg border border-grey-300 focus:outline-none focus:border-brand-600 text-center"
+        type="number"
+        required
+        value="1"
+        min="1"
+        name="quantity"
+      />
+
+      {% render 'button', content: plusIcon, attrs: 'data-increase', size: 'xs', class: 'absolute-centered-y right-1.5' %}
+    </custom-number-input>
+
+    {% comment %}
+      Size info text
+    {% endcomment %}
+    <div class="col-span-10" data-size-info-text hidden></div>
+
+    {% comment %}
+      Optional product checkbox
+    {% endcomment %}
+    {%- assign optional_product = product.metafields.custom.optional_product.value -%}
+    {%- assign optional_products = product.metafields.custom.optional_products.value -%}
+
+    {%- if optional_product != blank -%}
+      {%- render 'optional-product-checkbox', optional_product: optional_product -%}
+    {%- endif -%}
+
+    {%- if optional_products != blank -%}
+      {%- for optional_product in optional_products -%}
+        {%- render 'optional-product-checkbox', optional_product: optional_product -%}
+      {%- endfor -%}
+    {%- endif -%}
+
+    {% comment %}
+      Complectation details
+    {% endcomment %}
+    {% unless product.metafields.custom.hide_detailed_bed_price_table.value -%}
+      <accordion-component class="col-span-10">
+        {%- assign accDetailsTargetID = 'complectationDetailsTarget' -%}
+        <div
+          data-toggle="closed"
+          data-toggle-for="{{ accDetailsTargetID }}"
+          class="group flex items-center lg:cursor-pointer">
+          פירוט מרכיבי ומחירי החבילה
+          {%- render 'icon', name: 'plus-in-circle', class: 'w-4 h-4 text-black group-data-[toggle=opened]:rotate-45 transition-transform mr-2' -%}
+        </div>
+
+        <div data-target="{{ accDetailsTargetID }}" class="overflow-hidden h-0 transition-[height]">
+          {% assign hasFrames = false %}
+          {%- for variant in product.variants -%}
+            {%- liquid
+              if last_rendered_variant_option_1 == variant.option1
+                continue
+              endif
+
+              assign last_rendered_variant_option_1 = variant.option1
+
+              assign bed_price = variant.metafields.custom.bed_price.value
+              assign bed_frame_price = variant.metafields.custom.bed_frame_price.value
+              assign bed_mattress_price = variant.metafields.custom.bed_mattress_price.value
+
+              if bed_frame_price != blank
+                assign hasFrames = true
+              endif
+            -%}
+
+            {% capture complectTableItems %}
+              {{ complectTableItems }}
+
+              <div class="px-1 py-2 text-xs text-center whitespace-nowrap">{{ variant.option1 }}</div>
+              <div class="px-1 py-2 text-xs text-center whitespace-nowrap">{{ bed_price | money_without_trailing_zeros }}</div>
+              <div class="px-1 py-2 text-xs text-center whitespace-nowrap" data-table-bed-frame>{{ bed_frame_price | money_without_trailing_zeros }}</div>
+              <div class="px-1 py-2 text-xs text-center whitespace-nowrap">{{ bed_mattress_price | money_without_trailing_zeros }}</div>
+              <s class="px-1 py-2 text-xs text-center font-normal whitespace-nowrap">
+                {{ bed_price | plus: bed_frame_price | plus: bed_mattress_price | money_without_trailing_zeros }}
+              </s>
+              <div class="px-1 py-2 text-xs text-center font-medium whitespace-nowrap">
+                {{ variant.compare_at_price | default: variant.price | money_without_trailing_zeros }}
+              </div>
+
+              <hr class="col-span-10 border-black/10 last:hidden">
+            {%endcapture%}
+          {%- endfor -%}
+
+          <div class="grid {% if hasFrames %}grid-cols-6 {%else%}grid-cols-5 {%endif%}">
+            <div class="p-3 text-sm font-medium text-grey-500 flex justify-center items-center text-center">מידה</div>
+            <div class="p-3 text-sm font-medium text-grey-500 flex justify-center items-center text-center">מיטה</div>
+            {% if hasFrames %}
+              <div class="p-3 text-sm font-medium text-grey-500 flex justify-center items-center text-center">בסיס  מתכוננן</div>
+            {% endif %}
+            <div class="p-3 text-sm font-medium text-grey-500 flex justify-center items-center text-center">מזרן</div>
+            <div class="p-3 text-sm font-medium text-grey-500 flex justify-center items-center text-center">סה”כ</div>
+            <div class="p-3 text-sm font-medium text-grey-500 flex justify-center items-center text-center">עסקת חבילה</div>
+
+            <hr class="col-span-10 border-black/10">
+
+            {{ complectTableItems | replace: '<div class="px-1 py-2 text-xs text-center whitespace-nowrap" data-table-bed-frame></div>', ''}}
+          </div>
+        </div>
+
+      </accordion-component>
+    {%- endunless %}
+
+    {% comment %}
+      Desktop softness
+    {% endcomment %}
+    {%- if product.metafields.custom.softness != blank -%}
+      <div class="text-grey-900 col-span-10 hidden lg:flex lg:items-center lg:justify-between">
+        גמיש
+
+        <ul class="space-x-reverse space-x-1 inline-flex mx-4 flex-1">
+          {%- for i in (1..9) -%}
+            {%- liquid
+              assign bgCSSVar = '--sealy-color-grey-300'
+              if forloop.index == product.metafields.custom.softness
+                assign bgCSSVar = '--sealy-color-brand-500'
+              endif
+            -%}
+            <li
+              style="--softness-bg-color: var({{- bgCSSVar -}});"
+              class="inline-block flex-1 h-2 rounded-[10px] bg-[--softness-bg-color]"
+            ></li>
+          {%- endfor -%}
+        </ul>
+
+        קשיח
+      </div>
+    {%- endif -%}
+  </div>
+
+  <input data-variant-input type="hidden" name="id" value="{{ current_variant.id }}">
+
+  {% comment %}
+    Buttons
+  {% endcomment %}
+  <div class="fixed bottom-0 bg-white py-3 px-4 z-30 flex justify-center items-stretch w-full space-x-reverse space-x-2 shadow-sl-12
+              lg:static lg:bg-transparent lg:shadow-none lg:space-x-0 lg:py-0 xl:pl-0 xl:pr-8 xl:pt-6 xl:pb-0">
+    <a
+      href="https://api.whatsapp.com/send?phone={% render 'f_adjustedWhatsappNumber' %}"
+      target="_blank"
+      rel="noreferrer nofollow"
+      class="py-1 px-2 rounded-lg bg-success-400/5 flex flex-col justify-center items-center text-success-400 space-y-1 lg:hidden"
+    >
+      <div class="w-4.5 aspect-h-1">
+        {%- render 'icon', name: 'whatsapp' -%}
+      </div>
+      <span class="text-xs">צרו קשר</span>
+    </a>
+
+    <div class="flex-1 flex items-stretch relative">
+      <div data-out-of-stock-message class="{% if current_variant.available %}hidden{% endif %} absolute left-0 bottom-full
+        bg-white text-center mt-1 text-red-400 rounded-md w-full text-sm">
+        לא ניתן להוסיף לעגלה, מוצר זה אזל מהמלאי
+      </div>
+
+      {%- liquid
+        assign btn1_attrs = 'data-submit'
+        assign btn2_attrs = 'data-submit-secondary'
+
+        unless  current_variant.available
+          assign btn1_attrs = btn1_attrs | append: ' disabled'
+          assign btn2_attrs = btn2_attrs | append: ' disabled'
+        endunless
+      -%}
+      {%-
+        render 'button',
+        content: 'הוסיפו לעגלה',
+        class: 'btn-secondary border-none rounded-l-none flex-1 text-base xl:text-xl xl:p-4',
+        attrs: btn1_attrs
+      -%}
+      {%-
+        render 'button',
+        content: 'קנו עכשיו',
+        class: 'btn-primary border-none rounded-r-none flex-1 text-sm xl:text-xl xl:p-4',
+        attrs: btn2_attrs
+      -%}
+    </div>
+  </div>
+{%- endform -%}
+
+{%- schema -%}
+{
+  "name": "Product mattress form",
+  "class": "product-form-section"
+}
+{%- endschema -%}

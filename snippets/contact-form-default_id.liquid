@@ -1,0 +1,74 @@
+{% form 'contact', class: 'space-y-4' -%}
+  {{ form.errors | default_errors -}}
+
+  <input
+    type="text"
+    name="contact[first_name]"
+    placeholder="שם מלא"
+    class="py-3.5 px-4 leading-normal border border-grey-300 rounded-lg shadow-sm shadow-grey-900/5 w-full placeholder-grey-900/60 focus:outline-brand-500/70"
+  />
+
+  <input
+    type="tel"
+    pattern="\+?\d+"
+    name="contact[phone]"
+    placeholder="מספר טלפון"
+    class="[direction:rtl] py-3.5 px-4 leading-normal border border-grey-300 rounded-lg shadow-sm shadow-grey-900/5 w-full placeholder-grey-900/60 focus:outline-brand-500/70"
+  />
+
+  <input
+    type="email"
+    required
+    name="contact[email]"
+    placeholder="דואר אלקטרוני"
+    class="py-3.5 px-4 leading-normal border border-grey-300 rounded-lg shadow-sm shadow-grey-900/5 w-full placeholder-grey-900/60 focus:outline-brand-500/70"
+  />
+
+  <input
+    type="text"
+    name="contact[id_card]"
+    placeholder='ת"ז'
+    class="py-3.5 px-4 leading-normal border border-grey-300 rounded-lg shadow-sm shadow-grey-900/5 w-full placeholder-grey-900/60 focus:outline-brand-500/70"
+  />
+
+  <input
+    type="text"
+    name="contact[order_number]"
+    placeholder="מספר הזמנה"
+    class="py-3.5 px-4 leading-normal border border-grey-300 rounded-lg shadow-sm shadow-grey-900/5 w-full placeholder-grey-900/60 focus:outline-brand-500/70"
+  />
+
+  <textarea
+    name="contact[note]"
+    placeholder="סיבת הביטול"
+    rows="4"
+    class="py-3.5 px-4 leading-normal border border-grey-300 rounded-lg shadow-sm shadow-grey-900/5 w-full placeholder-grey-900/60 focus:outline-brand-500/70"></textarea>
+
+  {%- render 'button', size: 'lg', attrs: 'type="submit"', class: 'w-full btn-gradient', content: 'שליחה ' -%}
+
+  {%- if form.errors -%}
+    <h3
+      dir="ltr"
+      class="text-red-600 text-lg focus:outline-none text-center"
+      id="ContactFooter-error"
+      autofocus
+    >
+      {{- form.errors.translated_fields.email | capitalize }}
+      {{ form.errors.messages.email -}}
+    </h3>
+  {%- endif -%}
+
+
+  {% if form.posted_successfully? %}
+    <h3
+      dir="ltr"
+      class="text-green-600 text-lg focus:outline-none text-center"
+      autofocus
+      id="ContactFooter-success"
+    >
+      ההודעה נשלחה בהצלחה
+      נחזור אלייך בהקדם
+    </h3>
+  {% endif %}
+
+{%- endform %}

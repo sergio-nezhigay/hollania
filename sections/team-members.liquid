@@ -1,0 +1,225 @@
+{{ 'team-members.css' | asset_url | stylesheet_tag }}
+
+<section class="team-section">
+  {% if section.settings.section_title != blank %}
+    <h2>{{ section.settings.section_title }}</h2>
+  {% endif %}
+  
+  {% if section.settings.section_description != blank %}
+    <div class="team-description">
+      {{ section.settings.section_description }}
+    </div>
+  {% endif %}
+
+  <div class="team-grid">
+    {% for block in section.blocks %}
+      {% case block.type %}
+        {% when 'team_member' %}
+          <div class="team-member {{ section.settings.hover_trigger }}-trigger" data-member-id="{{ block.id }}">
+              <div class="member-content">
+                {% if block.settings.member_image != blank %}
+                  {{ block.settings.member_image | image_url: width: 370 | image_tag: 
+                     alt: block.settings.member_name, 
+                     class: 'member-image',
+                     loading: 'lazy' }}
+                {% else %}
+                  <div class="member-image" style="background: #f0f0f0; display: flex; align-items: center; justify-content: center; color: #999;">
+                    {{ block.settings.member_name | slice: 0, 2 | upcase }}
+                  </div>
+                {% endif %}
+
+                <div class="member-info">
+                  {% if block.settings.member_name != blank %}
+                    <div class="member-name">{{ block.settings.member_name }}</div>
+                  {% endif %}
+                  
+                  {% if block.settings.member_title != blank %}
+  <div class="member-title">{{ block.settings.member_title }}</div>
+  <div class="member-title-divider"></div>
+{% endif %}
+                  
+                  <div class="member-contact">
+                    {% if block.settings.member_phone != blank %}
+                      <div>{{ block.settings.member_phone }}</div>
+                    {% endif %}
+                    {% if block.settings.member_email != blank %}
+                      <div>{{ block.settings.member_email }}</div>
+                    {% endif %}
+                  </div>
+                </div>
+
+                {% if block.settings.member_bio != blank %}
+                  <div class="member-overlay">
+                    <div class="member-bio">{{ block.settings.member_bio }}</div>
+                  </div>
+                {% endif %}
+              </div>
+          </div>
+      {% endcase %}
+    {% endfor %}
+  </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const teamMembers = document.querySelectorAll('.team-member');
+  const clickTriggerMembers = document.querySelectorAll('.team-member.click-trigger');
+  
+  function isMobile() {
+    return window.innerWidth <= 768;
+  }
+  
+  clickTriggerMembers.forEach(function(member) {
+    member.addEventListener('click', function(e) {
+      if (!isMobile()) {
+        e.preventDefault();
+        
+        clickTriggerMembers.forEach(function(otherMember) {
+          if (otherMember !== member) {
+            otherMember.classList.remove('active');
+          }
+        });
+        
+        this.classList.toggle('active');
+      }
+    });
+  });
+
+  teamMembers.forEach(function(member) {
+    member.addEventListener('click', function(e) {
+      if (isMobile()) {
+        e.preventDefault();
+        
+        teamMembers.forEach(function(otherMember) {
+          if (otherMember !== member) {
+            otherMember.classList.remove('mobile-active');
+          }
+        });
+        
+        this.classList.toggle('mobile-active');
+      }
+    });
+  });
+
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.team-member')) {
+      if (isMobile()) {
+        teamMembers.forEach(function(member) {
+          member.classList.remove('mobile-active');
+        });
+      } else {
+        clickTriggerMembers.forEach(function(member) {
+          member.classList.remove('active');
+        });
+      }
+    }
+  });
+  
+  window.addEventListener('resize', function() {
+    if (!isMobile()) {
+      teamMembers.forEach(function(member) {
+        member.classList.remove('mobile-active');
+      });
+    }
+  });
+});
+</script>
+
+{% schema %}
+{
+  "name": "Team Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "צוות הולנדיה"
+    },
+    {
+      "type": "text",
+      "id": "section_description",
+      "label": "Section Description",
+      "default": "כמיטב היכולת ביותר בתחום הנדלן בהולנד..."
+    },
+    {
+      "type": "select",
+      "id": "hover_trigger",
+      "label": "Desktop Interaction",
+      "info": "Choose how overlay appears on desktop. Mobile always uses tap.",
+      "options": [
+        {
+          "value": "hover",
+          "label": "Show on Hover"
+        },
+        {
+          "value": "click",
+          "label": "Show on Click"
+        }
+      ],
+      "default": "hover"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "team_member",
+      "name": "Team Member",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "member_image",
+          "label": "Member Image"
+        },
+        {
+          "type": "text",
+          "id": "member_name",
+          "label": "Member Name",
+          "default": "אבי ברנסטן"
+        },
+        {
+          "type": "text",
+          "id": "member_title",
+          "label": "Member Title",
+          "default": "מנכ\"ל חברת"
+        },
+        {
+          "type": "text",
+          "id": "member_phone",
+          "label": "Phone Number",
+          "default": "054-4530135"
+        },
+        {
+          "type": "text",
+          "id": "member_email",
+          "label": "Email",
+          "default": "avi@hollandia.co.il"
+        },
+        {
+          "type": "textarea",
+          "id": "member_bio",
+          "label": "Member Bio",
+          "default": "פרטים נוספים על חבר הצוות..."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Team Section",
+      "blocks": [
+        {
+          "type": "team_member"
+        },
+        {
+          "type": "team_member"
+        },
+        {
+          "type": "team_member"
+        },
+        {
+          "type": "team_member"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
