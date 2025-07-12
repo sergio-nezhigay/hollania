@@ -1,27 +1,31 @@
 /*
-* ------------------------------------------------------------
-* IMPORTANT: The contents of this file are auto-generated.
-*
-* This file may be updated by the Shopify admin theme editor
-* or related systems. Please exercise caution as any changes
-* made to this file may be overwritten.
-* ------------------------------------------------------------
-*/
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "top": {
       "type": "collection__top",
-      "settings": {
-      }
+      "settings": {}
     },
     "products-grid": {
       "type": "collection__products-grid",
-      "settings": {
-      }
+      "settings": {}
     },
     "info_tech": {
       "type": "collection__info_tech",
+      "settings": {}
+    },
+    "collection-showcase": {
+      "type": "collection__showcase",
       "settings": {
+        "heading": "הקולקציה שלנו",
+        "subheading": "הקולקציה החדשה שלנו כוללת מגוון רחב של מוצרים מעוצבים ואיכותיים."
       }
     },
     "about": {
@@ -40,13 +44,13 @@
     },
     "subscribe": {
       "type": "static__subscribe",
-      "settings": {
-      }
+      "settings": {}
     }
   },
   "order": [
     "top",
     "products-grid",
+    "collection-showcase",
     "info_tech",
     "about",
     "contacts",

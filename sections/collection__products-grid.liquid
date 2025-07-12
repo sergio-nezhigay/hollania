@@ -27,13 +27,14 @@
 
             {% if index == 3 %}
               <div class="banner banner-mobile">
-                {% render 'banner-section' %}
+                {% render 'custom-image' %}
+                {% comment %}remove old banner fromsection{% endcomment %}
               </div>
             {% endif %}
 
             {% if index == 6 %}
               <div class="banner banner-desktop">
-                {% render 'banner-section' %}
+                {% render 'custom-image' %}
               </div>
             {% endif %}
           {% endfor %}
@@ -41,8 +42,6 @@
       </div>
     </div>
   </div>
-
-  {% render 'custom-image' %}
 
   <!-- Load More Button -->
   <div class="load-more-section">
