@@ -1,246 +1,70 @@
-{%- comment -%}
-  props:
-    - product | if is blank, skeleton will be rendered
-    - custom_url
-    - image_load
-    - show_price: boolean | default: true
-    - show_badges: boolean | default: true
-    - size: string | default: 'md' | options: 'sm', 'md'
-    - index: number
-{%- endcomment -%}
+<div class="product-card" data-category="{{ product.tags | join: ' ' | downcase }}">
+  <div class="product-image-wrapper">
+    {% if product.featured_image %}
+      <img
+        src="{{ product.featured_image | image_url: width: 400, height: 400 }}"
+        alt="{{ product.title }}"
+        class="product-image"
+        width="400"
+        height="400"
+      >
+    {% endif %}
 
-{%- liquid
-  assign priceLabel = 'מחיר'
-  assign current_variant = product.selected_or_first_available_variant
+    {% if product.compare_at_price > product.price %}
+      <span class="sale-badge">במבצע</span>
+    {% endif %}
 
-  if product != blank
-    assign height = product.metafields.custom.height
-
-    if product.metafields.custom.price_label != blank
-      assign priceLabel = product.metafields.custom.price_label
-    else
-      unless product.metafields.custom.hide_detailed_bed_price_table.value
-        assign priceLabel = 'מחיר חבילה'
-      endunless
-
-      if current_variant.compare_at_price != blank
-        assign priceLabel = 'מחיר מבצע'
-      endif
-    endif
-
-    assign link = custom_url | default: product.url | default: '#'
-    assign size = size | default: 'md'
-
-    assign display_price = true
-    assign display_badges = true
-
-    if show_price == false
-      assign display_price = false
-    endif
-
-    if show_badges == false
-      assign display_badges = false
-    endif
-
-    assign discount_expire_date = product.metafields.custom.discount_expire_date.value
-
-    assign gift_message_price = current_variant.metafields.custom.gift_price.value
-    assign gift_expire_date = current_variant.metafields.custom.gift_expire_date.value
-
-    if display_badges and product != blank
-      assign amountOfDiscountInPercent = current_variant.compare_at_price | minus: current_variant.price | times: 100 | divided_by: current_variant.compare_at_price
-
-      comment
-      if amountOfDiscountInPercent > 0
-        assign discountBadgeText = amountOfDiscountInPercent | append: '% OFF'
-
-        capture badges
-          render 'product-badge', text: discountBadgeText, bg_color: '#F53A41', text_color: 'white', class: 'font-Poppins text-sm', attrs: 'dir="ltr"'
-        endcapture
-      endif
-      endcomment
-
-      comment
-        The following code is responsible for rendering the badges that are defined in the tags of the product.
-        The tags should be in the following format: "TEXT | badge: COLOR | text: COLOR"
-        For example: "Best seller | bg: #F53A41 | text: white"
-      endcomment
-      for tag in product.tags
-        assign adjustedTag = tag | strip
-        assign badgeParts = adjustedTag | split: '|'
-
-        if badgeParts.size == 3
-          assign badgeText = badgeParts[0]
-          assign badgeBgColor = badgeParts[1] | split: ':' | last
-          assign badgeTextColor = badgeParts[2] | split: ':' | last
-
-          capture badges
-            echo badges
-            render 'product-badge', text: badgeText, bg_color: badgeBgColor, text_color: badgeTextColor, class: 'text-base'
-          endcapture
-        endif
-      endfor
-    endif
-  endif
-
-  assign image_classes = '[&>img]:object-contain'
-  assign image_classes = image_classes | append: ' [&>img]:p-4'
--%}
-
-<a data-product-card
-   data-dl-onclick="select_item"
-   data-index="{{- index -}}"
-   data-dl-id="{{- section.id -}}"
-   href="{{- link -}}" class="flex flex-col bg-white rounded-lg border border-grey-200 shadow-md overflow-hidden pb-4 h-full text-right"
->
-  <div class="relative">
-    <div class="aspect-w-5 aspect-h-3 {{ image_classes }}">
-      {%- if product == blank -%}
-        <div data-product-card-image class="bg-gray-200 animate-pulse"></div>
-
-        {%- else -%}
-
-        {%-
-          render 'image-with-placeholder',
-          image: product.featured_image,
-          alt: product.title,
-          width: 1029,
-          loading: image_load
-        -%}
-      {%- endif -%}
+    <div class="size-badge">
+      <div class="size-icon">
+        <span class="size-label">sdrtyh</span>
+        {% render 'icon--ruler' %}
+      </div>
+      <span class="size-text">13 ס״מ</span>
     </div>
 
-    {%- if height != blank -%}
-      <div class="absolute right-4 top-full -translate-y-1/2 bg-white shadow-md py-1.5 px-3 rounded-lg border border-gray-200 text-brand-700 font-bold text-sm leading-none">
-        {{ height }} ס״מ
-        <div class="flex items-center font-medium text-xs">
-          גובה {%- render 'icon', name: 'ruler_vertical', class: 'w-2 h-3 mr-1' -%}
-        </div>
-      </div>
-    {%- endif -%}
-
-    {%- if display_badges and product != blank -%}
-      {%- if badges != blank -%}
-        <div class="absolute top-2 right-4 flex items-stretch space-x-reverse space-x-2">
-          {{ badges }}
-        </div>
-      {%- endif -%}
-    {%- endif -%}
+    <div class="product-overlay">
+      <button class="quick-view-btn">צפייה מהירה</button>
+      <button class="add-to-cart-btn">הוספה לעגלה</button>
+    </div>
   </div>
 
-  <div class="px-4 space-y-4 flex-col flex flex-1">
+  <div class="product-info">
+    <h3 class="product-title">{{ product.title }}</h3>
 
-    <h3 class="font-bold text-lg text-grey-900 {% if height == blank %}mt-4{% else %}mt-9{% endif %}">
-        {%- if product == blank -%}
-          <div data-product-card-title class="bg-gray-200 animate-pulse w-4/5 h-7"></div>
-        {%- else -%}
-          {{ product.title }}
-        {%- endif -%}
-    </h3>
+    <div class="product-price">
+      {% if product.compare_at_price > product.price %}
+        <span class="sale-price">₪{{ product.price | money_without_currency }}</span>
+        <span class="original-price">₪{{ product.compare_at_price | money_without_currency }}</span>
+      {% else %}
+        <span class="regular-price">₪{{ product.price | money_without_currency }}</span>
+      {% endif %}
+    </div>
 
-    {%- if display_price -%}
-      {%- if product == blank -%}
-        <div class="bg-gray-200 animate-pulse w-1/2 h-7"></div>
-      {%- else -%}
-        <div class="text-sm space-x-reverse space-x-2 xl:space-x-0">
-          <span class="font-medium text-[rgba(16,24,40,0.80)] xl:block">{{ priceLabel }}:</span>
-          <span class="font-bold text-brand-700 text-base">{{ current_variant.price | money_without_trailing_zeros | replace: '.', ',' }}</span>
-          <s class="font-bold text-grey-400 xl:pr-2">{{ current_variant.compare_at_price | money_without_trailing_zeros | replace: '.', ',' }}</s>
-        </div>
-        {% render 'payment-by-parts-message', price: current_variant.price, parts: product.metafields.custom.payment_parts, class: 'font-bold text-sm text-brand-700' %}
-      {%- endif -%}
-    {%- endif -%}
-
-    {%- if product.metafields.custom.softness != blank -%}
-      {%- if product == blank -%}
-        <div class="bg-gray-200 animate-pulse w-full h-5"></div>
-
-      {%- else -%}
-        <div class="text-grey-900 text-sm flex items-center justify-between w-4/5">
-          גמיש
-
-          <ul class="space-x-reverse space-x-1 inline-flex mx-2 flex-1">
-            {%- for i in (1..9) -%}
-              {%- liquid
-                assign bgCSSVar = '--sealy-color-grey-300'
-                if forloop.index == product.metafields.custom.softness
-                  assign bgCSSVar = '--sealy-color-brand-500'
-                endif
-              -%}
-              <li
-                style="--softness-bg-color: var({{- bgCSSVar -}});"
-                class="inline-block flex-1 h-1.5 rounded-[10px] bg-[--softness-bg-color]"
-              ></li>
-            {%- endfor -%}
-          </ul>
-
-          קשיח
-        </div>
-      {%- endif -%}
-    {%- endif -%}
-
-    {% comment %}{%- if product == blank -%}{% endcomment %}
-      {% comment %}<div data-product-card-reviews class="bg-gray-200 animate-pulse w-2/3 h-5"></div>{% endcomment %}
-    {% comment %}{%- else -%}{% endcomment %}
-      {% comment %}<div class="flex items-center">{% endcomment %}
-        {%- liquid
-          comment
-          assign currentRating = 4.6
-
-          for i in (1..5)
-            assign itq = i | minus: 0.25
-            assign ih = i | minus: 0.5
-            assign ioq = i | minus: 0.75
-            assign starSuffix = 'empty'
-            if i <= currentRating
-              assign starSuffix = 'full'
-            elsif itq <= currentRating
-              assign starSuffix = 'three_quarters'
-            elsif ih <= currentRating
-              assign starSuffix = 'half'
-            elsif ioq <= currentRating
-              assign starSuffix = 'one_quarter'
-            endif
-
-            assign starName = 'star-' | append: starSuffix
-
-            render 'icon', name: starName, class: 'w-5 h-5 inline-block text-warning-400'
-          endfor
-          endcomment
-        -%}
-{% comment %}{% endcomment %}
-        {% comment %}<span class="mr-3 text-sm text-grey-500 -mb-[0.4%]">{% endcomment %}
-        {% comment %}<span class="font-medium">{{- currentRating -}}</span> (23){% endcomment %}
-      {% comment %}</span>{% endcomment %}
-      {% comment %}</div>{% endcomment %}
-    {% comment %}{%- endif -%}{% endcomment %}
-
-    {% comment %}
-      discount line
-    {% endcomment %}
-    {% if gift_message_price != blank and gift_expire_date != blank %}
-      <div class="!mt-auto pt-4">
-        <div class="bg-red-500/5 px-2 py-1 rounded space-x-reverse space-x-2 flex items-center text-red-500 font-medium text-xsm">
-          {% render 'icon', name: 'gift', class: 'w-5' %}
-
-          שווי מתנה {{ gift_message_price | divided_by: 100 }} ש"ח בתוקף עד ה {{ gift_expire_date | date: "%d.%m.%y" }}
-        </div>
+    <div class="product-rating">
+      <div class="stars">
+        <span class="star filled">★</span>
+        <span class="star filled">★</span>
+        <span class="star filled">★</span>
+        <span class="star filled">★</span>
+        <span class="star bordered">★</span>
       </div>
-    {% elsif amountOfDiscountInPercent != blank and discount_expire_date != blank %}
-      <div class="!mt-auto pt-4">
-        <div class="bg-red-500/5 px-2 py-1 rounded space-x-reverse space-x-2 flex items-center text-red-500 font-medium text-xsm">
-          {% render 'icon', name: 'discount', class: 'w-3.5' %}
 
-          {%-
-            render 'product-discount-message',
-            expire_date: discount_expire_date,
-            discont_in_percent: amountOfDiscountInPercent,
-            show_percentage: product.metafields.custom.discount_show_percentage.value,
-            custom_discount_label: product.metafields.custom.discount-label,
-            product_id: product.id
-          -%}
-        </div>
+      <span class="rating-value">
+        {{ product.id | modulo: 10 | divided_by: 2.0 | plus: 1 }}
+      </span>
+
+      <span class="rating-count">({{ product.id | modulo: 50 | plus: 10 }})</span>
+    </div>
+
+    <div class="sold-save-container">
+      <div class="sold-save-icons">
+        {% render 'icon--tag' %}
+        <span class="save-text">Save 18%</span>
+        <div class="checkmark-icon">{% render 'icon--checkmark' %}</div>
+
+        <span class="sold-text">משלוח חינם</span>
       </div>
-    {% endif %}
+      {% render 'icon--info' %}
+    </div>
   </div>
-</a>
+</div>

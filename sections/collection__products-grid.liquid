@@ -1,30 +1,141 @@
-{% paginate collection.products by 20 %}
-  <h1>{{ collection.title }}</h1>
-
-  {% if collection.description != blank %}
-    <div class="collection-description">
-      {{ collection.description }}
+{{ 'collection-products-grid.css' | asset_url | stylesheet_tag }}
+{{ 'custom-image.css' | asset_url | stylesheet_tag }}
+<div>
+  <!-- Filter Tabs -->
+  <div class="filter-tabs">
+    <div class="container">
+      <div class="tabs-wrapper">
+        <button class="tab-button active" data-filter="all">הכל</button>
+        <button class="tab-button" data-filter="modern">מודרני</button>
+        <button class="tab-button" data-filter="classic">קלאסי</button>
+        <button class="tab-button" data-filter="luxury">יוקרתי</button>
+        <button class="tab-button" data-filter="sale">במבצע</button>
+      </div>
     </div>
-  {% endif %}
+  </div>
 
-  <ul class="product-grid">
-    {% for product in collection.products %}
-      <li class="product-card">
-        <a href="{{ product.url | within: collection }}">
-          <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.featured_image.alt | escape }}">
-          <h2>{{ product.title }}</h2>
-          {% if product.price_varies %}
-            <span>від {{ product.price_min | money }}</span>+
-          {% else %}
-            <span>{{ product.price | money }}</span>
-          {% endif %}
-          {% if product.vendor %}
-            <div class="vendor">By {{ product.vendor }}</div>
-          {% endif %}
-        </a>
-      </li>
-    {% endfor %}
-  </ul>
+  <!-- Products Grid -->
+  <div class="products-section">
+    <div class="container">
+      {% assign index = 0 %}
+      <div class="products-grid">
+        <!-- to debug -->
+        {% for i in (1..3) %}
+          {% for product in collection.products %}
+            {% assign index = index | plus: 1 %}
+            {% render 'product-card', product: product %}
 
-  {{ paginate | default_pagination }}
-{% endpaginate %}
+            {% if index == 3 %}
+              <div class="banner banner-mobile">
+                {% render 'banner-section' %}
+              </div>
+            {% endif %}
+
+            {% if index == 6 %}
+              <div class="banner banner-desktop">
+                {% render 'banner-section' %}
+              </div>
+            {% endif %}
+          {% endfor %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  {% render 'custom-image' %}
+
+  <!-- Load More Button -->
+  <div class="load-more-section">
+    <div class="container">
+      <button class="load-more-btn">טען עוד מוצרים</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // Filter functionality
+    const filterButtons = document.querySelectorAll('.tab-button');
+    const productCards = document.querySelectorAll('.product-card');
+
+    filterButtons.forEach((button) => {
+      button.addEventListener('click', function () {
+        const filter = this.dataset.filter;
+
+        // Update active button
+        filterButtons.forEach((btn) => btn.classList.remove('active'));
+        this.classList.add('active');
+
+        // Filter products
+        productCards.forEach((card) => {
+          if (filter === 'all') {
+            card.style.display = 'block';
+          } else {
+            const category = card.dataset.category;
+            if (category && category.includes(filter)) {
+              card.style.display = 'block';
+            } else {
+              card.style.display = 'none';
+            }
+          }
+        });
+      });
+    });
+
+    // Load more functionality
+    const loadMoreBtn = document.querySelector('.load-more-btn');
+    if (loadMoreBtn) {
+      loadMoreBtn.addEventListener('click', function () {
+        // Add your load more logic here
+        // This could involve AJAX calls to load more products
+        console.log('Load more products');
+      });
+    }
+
+    // Quick view functionality
+    const quickViewBtns = document.querySelectorAll('.quick-view-btn');
+    quickViewBtns.forEach((btn) => {
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        // Add your quick view modal logic here
+        console.log('Quick view clicked');
+      });
+    });
+
+    // Add to cart functionality
+    const addToCartBtns = document.querySelectorAll('.add-to-cart-btn');
+    addToCartBtns.forEach((btn) => {
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        // Add your add to cart logic here
+        console.log('Add to cart clicked');
+      });
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Custom Image Picker",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Select Image"
+    },
+    {
+      "type": "url",
+      "id": "image_url",
+      "label": "Image Link URL",
+      "info": "Add a URL to make the image clickable"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Baner"
+    }
+  ]
+}
+{% endschema %}

@@ -1,133 +1,18 @@
-{%- liquid
-  assign colLinkItem = ''
-
-  for link in linklists.collections.links
-    if link.object.title == collection.title
-      assign colLinkItem = link
-      break
-    endif
-
-    for subLink in link.links
-      if subLink.object.title == collection.title
-        assign colLinkItem = link
-        break
-      endif
-    endfor
-  endfor
-
-  assign linkOptions = colLinkItem.title | replace: ' ', '' | split: '|'
-  assign linkBgColor = '#FFFFFF'
-  assign linkBorderColor = '#EAECF0'
-
-  for linkOpt in linkOptions offset: 1
-    if linkOpt contains 'bg:'
-      assign linkBgColor = linkOpt | remove: 'bg:'
-    elsif linkOpt contains 'border:'
-      assign linkBorderColor = linkOpt | remove: 'border:'
-    endif
-  endfor
--%}
-
-{%- capture cssVars -%}
-  --category-image-border-color: {{- linkBorderColor | default: '#EAECF0' -}};
-  --category-image-background-color: {{- linkBgColor | default: '#FFFFFF' -}};
-{%- endcapture -%}
-
-<div class="pt-4 pb-6 space-y-4 sl-container xl:pt-6 xl:pb-14 xl:space-y-14">
-  <div class="px-4">
-    {%- render 'breadcrumbs', collection: collection -%}
+{{ 'collection-top.css' | asset_url | stylesheet_tag }}
+<!-- sections/collection-template.liquid -->
+<section class="collection-top">
+  <div class="p-4 space-y-4 pb-0 sl-container xl:py-6 xl:px-0">
+    {%- render 'breadcrumbs' -%}
   </div>
 
-  <div class="flex items-center {% if collection.description != blank %}lg:items-start{% endif %} space-x-reverse
-    space-x-3 px-4 xl:space-x-reverse xl:space-x-5">
-    <div
-      style="{{ cssVars | strip_newlines }}"
-      class="rounded-full overflow-hidden w-14 h-14 flex justify-center items-center border flex-shrink-0
-      border-[--category-image-border-color] bg-[--category-image-background-color] shadow-sl-12
-      xl:w-20 xl:h-20"
-    >
-      {%-
-        render 'image-with-placeholder',
-        image: collection.image,
-        alt: collection.title,
-        width: 168,
-        class: 'w-full h-full object-contain'
-      -%}
-    </div>
-
-    <div>
-      <h1 class="font-medium text-xl xl:text-3xl">{{ collection.title }}</h1>
-      {%- if collection.description != blank -%}
-        <read-more class="hidden lg:block">
-          <p data-read="less" class="text-lg text-grey-900/60 leading-none data-[read=less]:line-clamp-3 mt-1">
-            {{- collection.description | strip_html -}}
-          </p>
-        </read-more>
-      {%- endif -%}
-    </div>
-  </div>
-
-  {%- if collection.description != blank -%}
-    <read-more class="block px-4 lg:hidden">
-      <p data-read="less" class="text-xs text-grey-900/60 leading-snug data-[read=less]:line-clamp-2">
-        {{- collection.description | strip_html -}}
+  <!-- Collection Header -->
+  <div class="collection-header">
+    <div class="container">
+      <h1 class="collection-title">מיטות זוגיות</h1>
+      <p class="collection-description">
+        גלה את המגוון הרחב של מיטות זוגיות איכותיות שלנו. עיצובים מודרניים וקלאסיים, חומרים איכותיים ומחירים אטרקטיביים.
+        מיטות זוגיות למכירה
       </p>
-    </read-more>
-  {%- endif -%}
-
-  {% comment %}
-    The following code is used to render the sub collection links.
-    The subcollections declared in Online store > Navigation > Collections.
-  {% endcomment %}
-  {%- if colLinkItem.links != blank -%}
-    <ul data-subcollections-list class="grid grid-flow-col auto-cols-max gap-x-2 overflow-x-auto scrollbar-hidden px-4 xl:gap-x-4">
-      {% comment %}
-        The following code is used to render the main collection link.
-      {% endcomment %}
-      {%- liquid
-        assign mainItemTitle = colLinkItem.title | split: '|' | first | prepend: 'כל ה'
-        assign mainButtonClass = 'btn-bordered min-w-60'
-
-        if colLinkItem.active
-          assign mainButtonClass = mainButtonClass | append: 'font-medium bg-brand-600 text-white xl:hover:text-white'
-          assign mainButtonAttrs = 'data-subcollection-current'
-        endif
-      -%}
-      <li>
-        {%- render 'button',
-          size: '2xs',
-          class: mainButtonClass,
-          content: mainItemTitle,
-          url: colLinkItem.url,
-          attrs: mainButtonAttrs
-        -%}
-      </li>
-      {% comment %}
-        The following code is used to render the sub collection links.
-      {% endcomment %}
-      {%- for subcolLinkItem in colLinkItem.links -%}
-        {%- liquid
-          assign buttonClass = 'btn-bordered min-w-60'
-
-          if subcolLinkItem.active
-            assign buttonClass = buttonClass | append: 'font-medium bg-brand-600 text-white xl:hover:text-white'
-            assign buttonAttrs = 'data-subcollection-current'
-          endif
-        -%}
-
-        <li>
-          {%- render 'button',
-            size: '2xs',
-            class: buttonClass,
-            content: subcolLinkItem.title,
-            url: subcolLinkItem.url,
-            attrs: buttonAttrs
-          -%}
-        </li>
-      {%- endfor -%}
-    </ul>
-  {%- endif -%}
-</div>
-
-{%- render 'vite-tag' with '@/additionalEntrypoints/collection/collectionTop.ts' -%}
-
+    </div>
+  </div>
+</section>
