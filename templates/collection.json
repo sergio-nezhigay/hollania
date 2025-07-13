@@ -37,10 +37,12 @@
           "settings": {
             "video": "shopify://files/videos/invideo-ai-1080 Furniture Store Ad for Israel 2025-07-12.mp4",
             "video_url": "",
-            "autoplay": true,
-            "loop": true,
-            "muted": true,
-            "controls": false
+            "autoplay": false,
+            "loop": false,
+            "muted": false,
+            "controls": false,
+            "poster": "shopify://shop_images/Frame_872.webp",
+            "youtube_id": "dQw4w9WgXcQ"
           }
         },
         "product_item_Vac6ib": {

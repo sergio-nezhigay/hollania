@@ -3,138 +3,170 @@
 {% endcomment %}
 
 <style>
-  .showcase-product-showcase {
-    max-width: 1440px;
-    margin: 0 auto;
-    padding: 70px 120px 100px;
-    outline: 1px dotted green;
-    background-color: white;
-  }
+    .showcase-product-showcase {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 70px 120px 100px;
+      outline: 1px dotted green;
+      background-color: white;
+    }
 
-  .showcase-product-row {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 72px;
-    margin-bottom: 70px;
-    min-height: 283px;
-    {% comment %}outline: 1px dotted orange;{% endcomment %}
-  }
+    .showcase-product-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 72px;
+      margin-bottom: 70px;
+      min-height: 283px;
+      {% comment %}outline: 1px dotted orange;{% endcomment %}
+    }
 
-  .showcase-product-row.reverse {
-    flex-direction: row-reverse;
-  }
-
-  .showcase-product-image {
-    flex: 1;
-    max-width: 450px;
-    height: 283px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.08);
-    border-radius: 14px;
-    overflow: hidden;
-  }
-
-  .showcase-product-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-
-  .showcase-product-content {
-    flex: 1;
-    max-width: 458px;
-    text-align: right;
-    direction: rtl;
-  }
-
-  .showcase-product-title {
-    font-size: 22px;
-    font-weight: 700;
-    color: #5f626a;
-    margin-bottom: 8px;
-    line-height: 1.45;
-  }
-
-  .showcase-product-description {
-    font-size: 16px;
-    line-height: 1.6;
-    color: #5f626a;
-  }
-
-  .showcase-product-description p:empty + p:empty {
-      margin-top: 1em;
-  }
-
-  .showcase-video-banner {
-    width: 100%;
-    margin-bottom: 80px;
-    position: relative;
-    overflow: hidden;
-    border-radius: 8px;
-  }
-
-  .showcase-video-banner video {
-    width: 100%;
-    height: auto;
-    min-height: 300px;
-    max-height: 421px;
-    object-fit: cover;
-    display: block;
-  }
-
-  .showcase-video-banner .showcase-video-placeholder {
-    width: 100%;
-    height: 300px;
-    background: #f5f5f5;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #999;
-    font-size: 18px;
-    border-radius: 8px;
-  }
-
-  @media (max-width: 768px) {
-    .showcase-product-row,
     .showcase-product-row.reverse {
-      flex-direction: column;
-      gap: 30px;
-      margin-bottom: 60px;
+      flex-direction: row-reverse;
     }
 
     .showcase-product-image {
-      height: 250px;
-      max-width: 100%;
+      flex: 1;
+      max-width: 450px;
+      height: 283px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.08);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .showcase-product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
     .showcase-product-content {
-      text-align: center;
+      flex: 1;
+      max-width: 458px;
+      text-align: right;
+      direction: rtl;
     }
 
     .showcase-product-title {
-      font-size: 24px;
+      font-size: 22px;
+      font-weight: 700;
+      color: #5f626a;
+      margin-bottom: 8px;
+      line-height: 1.45;
     }
 
     .showcase-product-description {
-      font-size: 14px;
+      font-size: 16px;
+      line-height: 1.6;
+      color: #5f626a;
+    }
+
+    .showcase-product-description p:empty + p:empty {
+        margin-top: 1em;
     }
 
     .showcase-video-banner {
-      margin-bottom: 60px;
+      width: 100%;
+      margin-bottom: 80px;
+      position: relative;
+      overflow: hidden;
     }
 
     .showcase-video-banner video {
-      min-height: 200px;
+      width: 100%;
+      height: auto;
+      min-height: 300px;
+      max-height: 421px;
+      object-fit: cover;
+      display: block;
     }
 
     .showcase-video-banner .showcase-video-placeholder {
-      height: 200px;
+      width: 100%;
+      height: 300px;
+      background: #f5f5f5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
+
+    .video-poster {
+    position: relative;
+    width: 100%;
+    height: 100%;
   }
+
+  .poster-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 80px;
+    height: 80px;
+    z-index: 10;
+  }
+
+  .play-button img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .video-embed iframe {
+    width: 100%;
+    height: 421px;
+  }
+
+
+    @media (max-width: 768px) {
+      .showcase-product-row,
+      .showcase-product-row.reverse {
+        flex-direction: column;
+        gap: 30px;
+        margin-bottom: 60px;
+      }
+
+      .showcase-product-image {
+        height: 250px;
+        max-width: 100%;
+      }
+
+      .showcase-product-content {
+        text-align: center;
+      }
+
+      .showcase-product-title {
+        font-size: 24px;
+      }
+
+      .showcase-product-description {
+        font-size: 14px;
+      }
+
+      .showcase-video-banner {
+        margin-bottom: 60px;
+      }
+
+      .showcase-video-banner video {
+        min-height: 200px;
+      }
+
+      .showcase-video-banner .showcase-video-placeholder {
+        height: 200px;
+      }
+    }
 </style>
 
 <div class="showcase-product-showcase">
@@ -172,58 +204,103 @@
       </div>
 
     {% elsif block.type == 'video_banner' %}
-      <div class="showcase-video-banner">
-        {% if block.settings.video %}
-          <video
-            {% if block.settings.autoplay %}
-              autoplay
-            {% endif %}
-            {% if block.settings.loop %}
-              loop
-            {% endif %}
-            {% if block.settings.muted %}
-              muted
-            {% endif %}
-            {% if block.settings.controls %}
-              controls
-            {% endif %}
-            playsinline
-            preload="metadata"
+      {% comment %}
+        <div class="showcase-video-banner">
+          {% if block.settings.video %}
+            <video
+              {% if block.settings.autoplay %}
+                autoplay
+              {% endif %}
+              {% if block.settings.loop %}
+                loop
+              {% endif %}
+              {% if block.settings.muted %}
+                muted
+              {% endif %}
+              {% if block.settings.controls %}
+                controls
+              {% endif %}
+              playsinline
+              preload="metadata"
+            >
+              {% for source in block.settings.video.sources %}
+                <source src="{{ source.url }}" type="{{ source.mime_type }}">
+              {% endfor %}
+              Your browser does not support the video tag.
+            </video>
+          {% elsif block.settings.video_url != blank %}
+            <video
+              {% if block.settings.autoplay %}
+                autoplay
+              {% endif %}
+              {% if block.settings.loop %}
+                loop
+              {% endif %}
+              {% if block.settings.muted %}
+                muted
+              {% endif %}
+              {% if block.settings.controls %}
+                controls
+              {% endif %}
+              playsinline
+              preload="metadata"
+            >
+              <source src="{{ block.settings.video_url }}" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          {% else %}
+            <div class="showcase-video-placeholder">
+              <span>📹 Video Banner Placeholder</span>
+            </div>
+          {% endif %}
+        </div>
+      {% endcomment %}
+      <div class="showcase-video-banner" id="video-wrapper-{{ block.id }}">
+        <div class="video-poster" id="poster-{{ block.id }}">
+          <img
+            src="{{ block.settings.poster | image_url }}"
+            alt="Video preview"
+            class="poster-img"
           >
-            {% for source in block.settings.video.sources %}
-              <source src="{{ source.url }}" type="{{ source.mime_type }}">
-            {% endfor %}
-            Your browser does not support the video tag.
-          </video>
-        {% elsif block.settings.video_url != blank %}
-          <video
-            {% if block.settings.autoplay %}
-              autoplay
-            {% endif %}
-            {% if block.settings.loop %}
-              loop
-            {% endif %}
-            {% if block.settings.muted %}
-              muted
-            {% endif %}
-            {% if block.settings.controls %}
-              controls
-            {% endif %}
-            playsinline
-            preload="metadata"
+          <button
+            class="play-button"
+            id="play-btn-{{ block.id }}"
+            data-youtube-id="{{ block.settings.youtube_id }}"
           >
-            <source src="{{ block.settings.video_url }}" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        {% else %}
-          <div class="showcase-video-placeholder">
-            <span>📹 Video Banner Placeholder</span>
-          </div>
-        {% endif %}
+            {% render 'icon--play' %}
+          </button>
+        </div>
+        <div class="video-embed" id="embed-{{ block.id }}" style="display: none;"></div>
       </div>
     {% endif %}
   {% endfor %}
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll("[id^='play-btn-']").forEach((btn) => {
+      const id = btn.id.replace('play-btn-', '');
+      const poster = document.getElementById(`poster-${id}`);
+      const embed = document.getElementById(`embed-${id}`);
+      const youtubeId = btn.dataset.youtubeId;
+
+      btn.addEventListener('click', () => {
+        poster.style.display = 'none';
+        embed.style.display = 'block';
+
+        const iframe = document.createElement('iframe');
+        iframe.setAttribute('src', `https://www.youtube.com/embed/${youtubeId}?autoplay=1&rel=0&showinfo=0`);
+        iframe.setAttribute('frameborder', '0');
+        iframe.setAttribute('allow', 'autoplay; encrypted-media');
+        iframe.setAttribute('allowfullscreen', 'true');
+        iframe.style.width = '100%';
+        iframe.style.height = '421px';
+
+        embed.appendChild(iframe);
+      });
+    });
+  });
+</script>
 
 {% schema %}
 {
@@ -303,6 +380,17 @@
           "label": "Show Controls",
           "default": false,
           "info": "Show video player controls"
+        },
+        {
+          "type": "image_picker",
+          "id": "poster",
+          "label": "Poster Image"
+        },
+        {
+          "type": "text",
+          "id": "youtube_id",
+          "label": "YouTube Video ID",
+          "default": "dQw4w9WgXcQ"
         }
       ]
     }
