@@ -1,80 +1,60 @@
-<div class="py-6 px-4 bg-brand-30 xl:py-14">
-  <div class="rounded-lg p-6 bg-white space-y-4 shadow-[0_0_16px_0_rgba(0,0,0,0.06)] sl-container xl:py-14 xl:px-30 xl:space-y-6">
-    <div class="text-center px-6 space-y-3 xl:space-y-6">
-      <span class="block text-2xl font-bold bg-clip-text text-transparent bg-brand-gradient-bg-2 xl:text-40p xl:relative">
-        מותג המזרנים האמין ביותר בארה”ב
-        <img
-          class="hidden xl:block xl:absolute xl:left-[31%] xl:-bottom-2.5 xl:w-52 xl:h-2"
-          src="{{ 'icon--subscribe_underline.svg' | asset_url }}" alt="Underline decoration"
-        />
-      </span>
-      <ul class="flex flex-col items-start text-grey-900/60 text-xs max-w-[22.81rem] mx-auto xl:max-w-none xl:flex-row xl:items-center xl:justify-center xl:text-2xl xl:space-x-reverse xl:space-x-4">
-        <li>{%- render 'icon', name: 'checkmark-gr', class: 'w-4 h-4 inline-block mx-0.5 xl:w-8 xl:h-8' -%} מעל 100 מליון מזרנים נמכרו בעולם</li>
-        <li>{%- render 'icon', name: 'checkmark-gr', class: 'w-4 h-4 inline-block mx-0.5 xl:w-8 xl:h-8' -%} 143 שנים של ניסיון , ידע ואיכות בייצור מזרנים </li>
-      </ul>
-      <span class="block font-bold bg-clip-text text-transparent bg-brand-gradient-bg-2 xl:text-2xl">הצטרפו למועדון המעריצים של סילי וקבלו ראשונים עדכונים על הטבות ומבצעים בלעדיים </span>
-
+<div class="subscribe-section">
+  <div class="subscribe-container">
+    <div class="subscribe-header">
+      <h2 class="subscribe-title">נשמח לעמוד לשירותכם בכל עת</h2>
+      <div class="subscribe-subtitle">השאירו פרטיכם ונחזור אליכם בהקדם</div>
     </div>
-
     {%- form 'customer' -%}
       <input type="hidden" name="contact[tags]" value="newsletter">
-
-      <div class="space-y-4 max-w-[22.81rem] mx-auto">
+      <div class="subscribe-form">
         {%- if form.posted_successfully? -%}
           <span
-              dir="ltr"
-              class="block text-green-600 text-lg focus:outline-none text-center"
-              id="ContactFooter-success"
-              autofocus
+            dir="ltr"
+            class="subscribe-success"
+            id="ContactFooter-success"
+            autofocus
           >
             תודה שנרשמת למועדון הלקוחות של סילי
           </span>
         {%- else -%}
           <input
-              type="text"
-              name="contact[first_name]"
-              placeholder="שם מלא"
-              class="py-3.5 px-4 leading-normal border border-grey-300 rounded-lg shadow-sm shadow-grey-900/5 w-full placeholder-grey-900/60 focus:outline-brand-500/70"
-          />
+            type="text"
+            name="contact[first_name]"
+            placeholder="שם מלא"
+            class="subscribe-input"
+          >
           <input
-              type="email"
-              required
-              name="contact[email]"
-              placeholder="דואר אלקטרוני"
-              class="py-3.5 px-4 leading-normal border border-grey-300 rounded-lg shadow-sm shadow-grey-900/5 w-full placeholder-grey-900/60 focus:outline-brand-500/70"
-          />
+            type="email"
+            required
+            name="contact[email]"
+            placeholder="דואר אלקטרוני"
+            class="subscribe-input"
+          >
           <input
-              type="tel"
-              pattern="\+?\d+"
-              name="contact[note]"
-              placeholder="מספר טלפון"
-              class="[direction:rtl] py-3.5 px-4 leading-normal border border-grey-300 rounded-lg shadow-sm shadow-grey-900/5 w-full placeholder-grey-900/60 focus:outline-brand-500/70"
-          />
-
-          <label class="flex space-x-reverse space-x-2 xl:items-center xl:hover:cursor-pointer text-grey-450">
+            type="tel"
+            pattern="\+?\d+"
+            name="contact[note]"
+            placeholder="מספר טלפון"
+            class="subscribe-input"
+          >
+          <label class="subscribe-checkbox-label">
             <input
-              class="peer"
-              hidden
               type="checkbox"
               checked
               name="accepts_marketing"
               required
-            />
-            <span class="h-3.5 mt-0.5 flex-[0_0_0.85rem] peer-checked:[&>.icon--cb-checked]:block peer-checked:[&>.icon--cb-unchecked]:hidden xl:mt-0">
-              {%- render 'icon', name: 'checkbox-unchecked', class: 'w-full h-full icon--cb-unchecked' -%}
-              {%- render 'icon', name: 'checkbox-checked', class: 'w-full h-full icon--cb-checked hidden' -%}
-            </span>
-            <span class="text-xsm">אישור לקבלת מבצעים/הנחות והטבות בדוא"ל/SMS</span>
+              class="subscribe-checkbox"
+            >
+            <span class="subscribe-checkbox-custom"></span>
+            <span class="subscribe-checkbox-text">אני מאשר קבלת מבצעים והטבות בדוא"ל או סמס</span>
           </label>
-
-          {%- render 'button', size: 'lg', attrs: 'type="submit"', class: 'w-full btn-gradient', content: 'צרפו אותי' -%}
-
+          <button type="submit" class="subscribe-btn">הצטרפו</button>
           {%- if form.errors -%}
             <span
-                dir="ltr"
-                class="block text-red-600 text-lg focus:outline-none text-center"
-                id="ContactFooter-error"
-                autofocus
+              dir="ltr"
+              class="subscribe-error"
+              id="ContactFooter-error"
+              autofocus
             >
               {{- form.errors.translated_fields.email | capitalize }}
               {{ form.errors.messages.email -}}
@@ -82,44 +62,153 @@
           {%- endif -%}
         {%- endif -%}
       </div>
-
-      {% comment %} Recaptcha fix {% endcomment %}
-      {%- if request.path contains 'challenge' -%}
-        <script>
-          window.onload = () => {
-            let times = 10
-            const recaptchaFixInterval = setInterval(() => {
-              const $recaptcha = document.querySelector('.shopify-challenge__container')
-
-              if ($recaptcha === null) {
-                times--
-                if (times === 0) clearInterval(recaptchaFixInterval)
-                return
-              }
-
-              clearInterval(recaptchaFixInterval)
-
-              const $form = document.querySelector('#contact_form')
-              if ($form === null) return
-
-              $form.after($recaptcha)
-              $form.style.display = 'none'
-            }, 500)
-          }
-        </script>
-      {%- endif -%}
-
     {%- endform -%}
-
-    <style>
-      .grecaptcha-badge {
-        visibility: hidden;
-          z-index: -999999;
-      }
-    </style>
   </div>
+  <style>
+    .subscribe-section {
+      background: #fff;
+      padding: 70px 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      outline: 1px dotted red;
+    }
+    .subscribe-container {
+      max-width: 489px;
+      margin: 0 auto;
+    }
+    .subscribe-header {
+      text-align: center;
+      margin-bottom: 34px;
+    }
+    .subscribe-title {
+      font-size: 36px;
+      font-weight: 700;
+      color: #1a1a1b;
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+    .subscribe-subtitle {
+      font-size: 26px;
+      color: #1c1c1c;
+      margin-bottom: 0;
+      font-weight: 600;
+    }
+    .subscribe-form {
+      display: flex;
+      flex-direction: column;
+      margin: 0 auto;
+      gap: 8px;
+      max-width: 390px;
+    }
+    .subscribe-input {
+      width: 100%;
+      padding: 12px 20px;
+      border: 1px solid #d1d5dd;
+      border-radius: 8px;
+      background: #f9f9f9;
+      font-size: 16px;
+      line-height: 1.37;
+      text-align: right;
+      color: #89898c;
+      outline: none;
+      box-sizing: border-box;
+      transition: border 0.2s;
+    }
+    .subscribe-input:focus {
+      border: 1.5px solid #e23a53;
+      background: #fff;
+    }
+    .subscribe-checkbox-label {
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      color: #6b6b6b;
+      cursor: pointer;
+      user-select: none;
+      gap: 8px;
+      margin: 6px 0;
+    }
+    .subscribe-checkbox {
+      display: none;
+    }
+    .subscribe-checkbox-custom {
+      width: 18px;
+      height: 18px;
+      border: 2px solid #dd2d4a;
+      border-radius: 4px;
+      background: #fff;
+      position: relative;
+      display: inline-block;
+      margin-left: 4px;
+    }
+    .subscribe-checkbox:checked + .subscribe-checkbox-custom {
+      background: #dd2d4a;
+      border-color: #dd2d4a;
+    }
+    .subscribe-checkbox:checked + .subscribe-checkbox-custom:after {
+      content: '';
+      position: absolute;
+      left: 4px;
+      top: 0px;
+      width: 6px;
+      height: 10px;
+      border: solid #fff;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+      display: block;
+    }
+    .subscribe-checkbox-text {
+      font-size: 14px;
+      color: #5f626a;
+    }
+    .subscribe-btn {
+      width: 100%;
+      background: #dd2d4a;
+      color: #fff;
+      font-size: 22px;
+      font-weight: 700;
+      border: none;
+      border-radius: 32px;
+      padding: 12px 0;
+      cursor: pointer;
+      margin-top: 0px;
+      transition: background 0.2s;
+    }
+    .subscribe-btn:hover {
+      background: #c91e3b;
+    }
+    .subscribe-success {
+      color: #1db954;
+      font-size: 1.25rem;
+      text-align: center;
+      display: block;
+      margin-bottom: 16px;
+    }
+    .subscribe-error {
+      color: #e23a53;
+      font-size: 1.25rem;
+      text-align: center;
+      display: block;
+      margin-top: 8px;
+    }
+    @media (max-width: 600px) {
+      .subscribe-container {
+        padding: 24px 8px 20px 8px;
+      }
+      .subscribe-title {
+        font-size: 1.5rem;
+      }
+      .subscribe-subtitle {
+        font-size: 1rem;
+      }
+      .subscribe-btn {
+        font-size: 1.125rem;
+        padding: 12px 0;
+      }
+    }
+  </style>
 </div>
-
 {%- schema -%}
 {
   "name": "Footer sub newsletter"
