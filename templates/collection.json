@@ -15,18 +15,64 @@
     },
     "products-grid": {
       "type": "collection__products-grid",
+      "settings": {
+        "image": "shopify://shop_images/142506_1920x620_2.webp",
+        "image_url": "shopify://collections"
+      }
+    },
+    "collection-showcase": {
+      "type": "collection__showcase",
+      "blocks": {
+        "product_item_tBJ8Eb": {
+          "type": "product_item",
+          "settings": {
+            "image": "shopify://shop_images/image_150.webp",
+            "title": "מנגנון מתכווננן GEMINI",
+            "description": "<p>מיטות זוגיות מתכווננות בעלות המנגנון המתכוונן Gemini שמגיע במיוחד מאיטליה. מערכת הפעלה פשוטה להפליא וכל הפיצ'רים הללו יוצרים הרמוניה משגעת שאי אפשר להגיד לה לא.5 מפרקים מתכווננים אוורור מקסימלי אזור נוחות לכתפיים תמיכה מוגברת לגב תחתון ושלט אלחוטי.</p>",
+            "reverse_layout": true
+          }
+        },
+        "video_banner_qAmN3c": {
+          "type": "video_banner",
+          "settings": {
+            "video": "shopify://files/videos/invideo-ai-1080 Furniture Store Ad for Israel 2025-07-12.mp4",
+            "video_url": "",
+            "autoplay": true,
+            "loop": true,
+            "muted": true,
+            "controls": false
+          }
+        },
+        "product_item_Vac6ib": {
+          "type": "product_item",
+          "settings": {
+            "image": "shopify://shop_images/image_151.webp",
+            "title": "מיטה מתכווננת עם מערכת הפעלה חשמלית",
+            "description": "<p>בנוסף לאיכות של המזרן והמסגרת של המיטה, גם מערכת ההפעלה החשמלית צריכה להלקח בחשבון. יש הרבה פקטורים בקנייה של מיטה מתכווננת. אין מדובר בהוצאה שעושים לעתים תכופות. ומכאן, עליכם להיות שלמים לחלוטין עם </p><p>הקנייה.  אצלנו בסילי, לגמרי מודעים לזה ונותנים דגש מיוחד לכל שלב בתהליך. אחרי הכל, המוצרים שלנו אמורים ללוות אתכם גם בעוד שנים, יש להן השפעה אדירה על הבריאות שלכם ואין להקל בכך ראש.</p>",
+            "reverse_layout": false
+          }
+        },
+        "product_item_w934wJ": {
+          "type": "product_item",
+          "settings": {
+            "image": "shopify://shop_images/image_152.webp",
+            "title": "מיטות מתכווננות ומעוצבות במנגנון אוטומטי",
+            "description": "<p>בסילי תמצאו את המזרן האיכותי ביותר, אשר משלב בתוכו את מיטב הטכנולוגיות. כל קפיץ וכל תפר בבד נמצא במקום, ובאופן כללי, חומרי הגלם נבחרו בקפידה ובדאגה אין קץ. אתם מוזמנים להנות משקט ושלווה, לעצום עיניים ולתת למיטה המתכווננת שלנו לדבר בעד עצמה..קוראים ספר או רואים טלוויזיה ולא נוח לכם גם כשאתם משחקים עם הכריות? גם זאת לא בעיה. מוזמנים ללחוץ על הכפתור והיא כבר תעשה את שלה, עד שתהיו הכי מרוצים שיש. הגיעה השעה ללכת לישון? שום בעיה. לחיצה, ואתם במצב שינה חלומי!<br/><br/></p>",
+            "reverse_layout": true
+          }
+        }
+      },
+      "block_order": [
+        "product_item_tBJ8Eb",
+        "video_banner_qAmN3c",
+        "product_item_Vac6ib",
+        "product_item_w934wJ"
+      ],
       "settings": {}
     },
     "info_tech": {
       "type": "collection__info_tech",
       "settings": {}
-    },
-    "collection-showcase": {
-      "type": "collection__showcase",
-      "settings": {
-        "heading": "הקולקציה שלנו",
-        "subheading": "הקולקציה החדשה שלנו כוללת מגוון רחב של מוצרים מעוצבים ואיכותיים."
-      }
     },
     "about": {
       "type": "collection__about",

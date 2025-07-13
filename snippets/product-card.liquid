@@ -1,70 +1,67 @@
 <div class="product-card" data-category="{{ product.tags | join: ' ' | downcase }}">
-  <div class="product-image-wrapper">
-    {% if product.featured_image %}
-      <img
-        src="{{ product.featured_image | image_url: width: 400, height: 400 }}"
-        alt="{{ product.title }}"
-        class="product-image"
-        width="400"
-        height="400"
-      >
-    {% endif %}
-
-    {% if product.compare_at_price > product.price %}
-      <span class="sale-badge">במבצע</span>
-    {% endif %}
-
-    <div class="size-badge">
-      <div class="size-icon">
-        <span class="size-label">sdrtyh</span>
-        {% render 'icon--ruler' %}
-      </div>
-      <span class="size-text">13 ס״מ</span>
-    </div>
-
-    <div class="product-overlay">
-      <button class="quick-view-btn">צפייה מהירה</button>
-      <button class="add-to-cart-btn">הוספה לעגלה</button>
-    </div>
-  </div>
-
-  <div class="product-info">
-    <h3 class="product-title">{{ product.title }}</h3>
-
-    <div class="product-price">
-      {% if product.compare_at_price > product.price %}
-        <span class="sale-price">₪{{ product.price | money_without_currency }}</span>
-        <span class="original-price">₪{{ product.compare_at_price | money_without_currency }}</span>
-      {% else %}
-        <span class="regular-price">₪{{ product.price | money_without_currency }}</span>
+  <a href="{{ product.url }}" class="product-card-link">
+    <div class="collection-product-image-wrapper">
+      {% if product.featured_image %}
+        <img
+          src="{{ product.featured_image | image_url: width: 388, height: 196 }}"
+          alt="{{ product.title }}"
+          class="collection-product-image"
+          width="388"
+          height="196"
+        >
       {% endif %}
+
+      {% if product.compare_at_price > product.price %}
+        <span class="sale-badge">במבצע</span>
+      {% endif %}
+
+      <div class="size-badge">
+        <div class="size-icon">
+          <span class="size-label">sdrtyh</span>
+          {% render 'icon--ruler' %}
+        </div>
+        <span class="size-text">13 ס״מ</span>
+      </div>
     </div>
 
-    <div class="product-rating">
-      <div class="stars">
-        <span class="star filled">★</span>
-        <span class="star filled">★</span>
-        <span class="star filled">★</span>
-        <span class="star filled">★</span>
-        <span class="star bordered">★</span>
+    <div class="product-info">
+      <h3 class="product-title">{{ product.title }}</h3>
+
+      <div class="product-price">
+        {% if product.compare_at_price > product.price %}
+          <span class="sale-price">₪{{ product.price | money_without_currency }}</span>
+          <span class="original-price">₪{{ product.compare_at_price | money_without_currency }}</span>
+        {% else %}
+          <span class="regular-price">₪{{ product.price | money_without_currency }}</span>
+        {% endif %}
       </div>
 
-      <span class="rating-value">
-        {{ product.id | modulo: 10 | divided_by: 2.0 | plus: 1 }}
-      </span>
+      <div class="product-rating">
+        <div class="stars">
+          <span class="star filled">★</span>
+          <span class="star filled">★</span>
+          <span class="star filled">★</span>
+          <span class="star filled">★</span>
+          <span class="star bordered">★</span>
+        </div>
 
-      <span class="rating-count">({{ product.id | modulo: 50 | plus: 10 }})</span>
-    </div>
+        <span class="rating-value">
+          {{ product.id | modulo: 10 | divided_by: 2.0 | plus: 1 }}
+        </span>
 
-    <div class="sold-save-container">
-      <div class="sold-save-icons">
-        {% render 'icon--tag' %}
-        <span class="save-text">Save 18%</span>
-        <div class="checkmark-icon">{% render 'icon--checkmark' %}</div>
-
-        <span class="sold-text">משלוח חינם</span>
+        <span class="rating-count">({{ product.id | modulo: 50 | plus: 10 }})</span>
       </div>
-      {% render 'icon--info' %}
+
+      <div class="sold-save-container">
+        <div class="sold-save-icons">
+          {% render 'icon--tag' %}
+          <span class="save-text">Save 18%</span>
+          <div class="checkmark-icon">{% render 'icon--checkmark' %}</div>
+
+          <span class="sold-text">משלוח חינם</span>
+        </div>
+        {% render 'icon--info' %}
+      </div>
     </div>
-  </div>
+  </a>
 </div>

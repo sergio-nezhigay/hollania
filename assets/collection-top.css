@@ -1,16 +1,16 @@
-.collection-page {
-  background-color: #f2f2f2;
-}
-.container {
+/*.collection-container {
   max-width: 1440px;
   margin: 0 auto;
   padding: 0 120px;
-}
+}*/
 
-/* Collection Header */
-.collection-header {
-  padding: 20px 0;
+/* Collection Top */
+.collection-top {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 20px 120px;
   text-align: right;
+  background-color: white;
   outline: 1px dotted blue;
 }
 
