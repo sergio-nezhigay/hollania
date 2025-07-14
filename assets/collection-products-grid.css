@@ -1,13 +1,23 @@
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
 .collection-products-grid {
   max-width: 1440px;
   margin: 0 auto;
-  padding: 0 120px;
-  background-color: white;
+  padding: 0 120px 70px;
   outline: 1px dotted red;
 }
 
 .filter-tabs {
-  padding: 20px 0;
+  padding: 20px 0 28px;
 }
 
 .tabs-wrapper {
@@ -19,7 +29,7 @@
 
 .tab-button {
   background: none;
-  border: none;
+  border: 1px solid #d1d5dd;
   color: #5f626a;
   font-size: 18px;
   font-weight: 500;
@@ -32,6 +42,7 @@
 .tab-button.active,
 .tab-button:hover {
   background: #dd2d4a;
+  border: 1px solid #dd2d4a;
   color: white;
 }
 
@@ -127,7 +138,7 @@
 }
 
 .product-info {
-  padding: 18px 16px;
+  padding: 18px 16px 22px;
   background-color: #f4f4f4;
   text-align: center;
 }

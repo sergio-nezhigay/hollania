@@ -8,6 +8,7 @@
  * ------------------------------------------------------------
  */
 {
+  "wrapper": "div.collection-wrapper",
   "sections": {
     "top": {
       "type": "collection__top",

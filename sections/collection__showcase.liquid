@@ -6,9 +6,22 @@
     .showcase-product-showcase {
       max-width: 1440px;
       margin: 0 auto;
-      padding: 70px 120px 100px;
+      padding: 80px 120px 100px;
       outline: 1px dotted green;
-      background-color: white;
+      background-color: #ffffff;
+      border-radius: 14px;
+      margin-bottom: 10px;
+    }
+
+    .visually-hidden {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        border: 0;
     }
 
     .showcase-product-row {
@@ -169,7 +182,8 @@
     }
 </style>
 
-<div class="showcase-product-showcase">
+<section class="showcase-product-showcase">
+  <h2 class="visually-hidden">Featured Products</h2>
   {% for block in section.blocks %}
     {% if block.type == 'product_item' %}
       {% assign is_reverse = false %}
@@ -261,6 +275,8 @@
             src="{{ block.settings.poster | image_url }}"
             alt="Video preview"
             class="poster-img"
+            width="{{ block.settings.poster.width | default: 450 }}"
+            height="{{ block.settings.poster.height | default: 283 }}"
           >
           <button
             class="play-button"
@@ -274,7 +290,7 @@
       </div>
     {% endif %}
   {% endfor %}
-</div>
+</section>
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {

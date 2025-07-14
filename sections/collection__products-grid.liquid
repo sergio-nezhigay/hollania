@@ -1,7 +1,8 @@
 {{ 'collection-products-grid.css' | asset_url | stylesheet_tag }}
 {{ 'custom-image.css' | asset_url | stylesheet_tag }}
-<div class="collection-products-grid">
+<section class="collection-products-grid">
   <!-- Filter Tabs -->
+  <h2 class="visually-hidden">Products list</h2>
   <div class="filter-tabs">
     <div class="tabs-wrapper">
       <button class="tab-button active" data-filter="all">הכל</button>
@@ -37,7 +38,7 @@
       {% endfor %}
     {% endfor %}
   </div>
-</div>
+</section>
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
