@@ -74,7 +74,6 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      outline: 1px dotted red;
     }
     .subscribe-container {
       max-width: 489px;
@@ -83,19 +82,15 @@
     .subscribe-header {
       text-align: center;
       margin-bottom: 34px;
+      color: #1c1c1c;
     }
     .subscribe-title {
       font-size: 36px;
-      font-weight: 700;
-      color: #1a1a1b;
-      margin-bottom: 12px;
-      line-height: 1.2;
+      font-weight: 600;
     }
     .subscribe-subtitle {
-      font-size: 26px;
-      color: #1c1c1c;
+      font-size: 22px;
       margin-bottom: 0;
-      font-weight: 600;
     }
     .subscribe-form {
       display: flex;
@@ -195,20 +190,39 @@
       display: block;
       margin-top: 8px;
     }
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
+      .subscribe-section {
+        padding: 30px 16px;
+      }
       .subscribe-container {
-        padding: 24px 8px 20px 8px;
+        padding: 0;
+      }
+
+      .subscribe-header {
+        margin-bottom: 10px;
       }
       .subscribe-title {
-        font-size: 1.5rem;
+        font-size: 36px;
       }
       .subscribe-subtitle {
-        font-size: 1rem;
+        font-size: 22px;
       }
       .subscribe-btn {
         font-size: 1.125rem;
         padding: 12px 0;
       }
+      .subscribe-form {
+        gap: 6px;
+      }
+      .subscribe-input {
+        font-size: 12px;
+        padding: 11px 14px;
+      }
+      .subscribe-checkbox-label{
+        font-size: 12px;
+        margin: 5px 0;
+      }
+    }
     }
   </style>
 </div>

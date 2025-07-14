@@ -13,7 +13,6 @@
   max-width: 1440px;
   margin: 0 auto;
   padding: 0 120px 70px;
-  outline: 1px dotted red;
 }
 
 .filter-tabs {
@@ -57,7 +56,6 @@
   border-radius: 18px;
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  outline: 1px dotted green;
 }
 
 .product-card-link {
@@ -247,57 +245,53 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .container {
-    padding: 0 12px;
+  .collection-products-grid {
+    margin: 0 auto;
+    padding: 0 12px 30px;
   }
 
-  .breadcrumb {
-    font-size: 14px;
-  }
-
-  .collection-title {
-    font-size: 24px;
-  }
-
-  .collection-description {
-    font-size: 14px;
+  .filter-tabs {
+    padding: 16px 0 22px;
+    margin-left: -12px;
   }
 
   .tabs-wrapper {
     gap: 15px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
   }
 
   .tab-button {
     font-size: 14px;
-    padding: 8px 16px;
+    padding: 6px 16px;
   }
 
-  .banner-content {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .banner-text h2 {
-    font-size: 28px;
+  .collection-product-image {
+    height: 176px;
   }
 
   .product-info {
-    padding: 15px;
+    padding: 16px 25px 22px;
   }
 
   .product-title {
     font-size: 16px;
   }
-}
-
-@media (max-width: 480px) {
   .products-grid {
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 15px;
+    gap: 30px;
   }
-
-  .collection-header {
-    padding: 20px 0;
+  .info-icon,
+  .checkmark-icon {
+    display: none;
+  }
+  .save-text {
+    border-left: none;
+  }
+  .sold-save-container {
+    justify-content: center;
+    padding: 4px;
   }
 }
 

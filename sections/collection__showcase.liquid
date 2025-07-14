@@ -3,111 +3,109 @@
 {% endcomment %}
 
 <style>
-    .showcase-product-showcase {
-      max-width: 1440px;
-      margin: 0 auto;
-      padding: 80px 120px 100px;
-      outline: 1px dotted green;
-      background-color: #ffffff;
-      border-radius: 14px;
-      margin-bottom: 10px;
-    }
+  .showcase-product-showcase {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 80px 120px 100px;
+    background-color: #ffffff;
+    border-radius: 14px;
+    margin-bottom: 10px;
+  }
 
-    .visually-hidden {
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        padding: 0;
-        margin: -1px;
-        overflow: hidden;
-        clip: rect(0, 0, 0, 0);
-        border: 0;
-    }
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }
 
-    .showcase-product-row {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 72px;
-      margin-bottom: 70px;
-      min-height: 283px;
-      {% comment %}outline: 1px dotted orange;{% endcomment %}
-    }
+  .showcase-product-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 72px;
+    margin-bottom: 70px;
+    min-height: 283px;
+  }
 
-    .showcase-product-row.reverse {
-      flex-direction: row-reverse;
-    }
+  .showcase-product-row.reverse {
+    flex-direction: row-reverse;
+  }
 
-    .showcase-product-image {
-      flex: 1;
-      max-width: 450px;
-      height: 283px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.08);
-      border-radius: 14px;
-      overflow: hidden;
-    }
+  .showcase-product-image {
+    flex: 1;
+    max-width: 450px;
+    height: 283px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.08);
+    border-radius: 14px;
+    overflow: hidden;
+  }
 
-    .showcase-product-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
+  .showcase-product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
 
-    .showcase-product-content {
-      flex: 1;
-      max-width: 458px;
-      text-align: right;
-      direction: rtl;
-    }
+  .showcase-product-content {
+    flex: 1;
+    max-width: 458px;
+    text-align: right;
+    direction: rtl;
+  }
 
-    .showcase-product-title {
-      font-size: 22px;
-      font-weight: 700;
-      color: #5f626a;
-      margin-bottom: 8px;
-      line-height: 1.45;
-    }
+  .showcase-product-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #5f626a;
+    margin-bottom: 8px;
+    line-height: 1.45;
+  }
 
-    .showcase-product-description {
-      font-size: 16px;
-      line-height: 1.6;
-      color: #5f626a;
-    }
+  .showcase-product-description {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #5f626a;
+  }
 
-    .showcase-product-description p:empty + p:empty {
-        margin-top: 1em;
-    }
+  .showcase-product-description p:empty + p:empty {
+    margin-top: 1em;
+  }
 
-    .showcase-video-banner {
-      width: 100%;
-      margin-bottom: 80px;
-      position: relative;
-      overflow: hidden;
-    }
+  .showcase-video-banner {
+    {% comment %}width: 100%;{% endcomment %}
+    margin-bottom: 80px;
+    position: relative;
+    overflow: hidden;
+  }
 
-    .showcase-video-banner video {
-      width: 100%;
-      height: auto;
-      min-height: 300px;
-      max-height: 421px;
-      object-fit: cover;
-      display: block;
-    }
+  .showcase-video-banner video {
+    width: 100%;
+    height: auto;
+    min-height: 300px;
+    max-height: 421px;
+    object-fit: cover;
+    display: block;
+  }
 
-    .showcase-video-banner .showcase-video-placeholder {
-      width: 100%;
-      height: 300px;
-      background: #f5f5f5;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+  .showcase-video-banner .showcase-video-placeholder {
+    width: 100%;
+    height: 300px;
+    background: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-    .video-poster {
+  .video-poster {
     position: relative;
     width: 100%;
     height: 100%;
@@ -127,169 +125,134 @@
     background: none;
     border: none;
     cursor: pointer;
-    width: 80px;
-    height: 80px;
     z-index: 10;
+    width: 100px;
   }
 
-  .play-button img {
-    width: 100%;
-    height: 100%;
-  }
+
 
   .video-embed iframe {
     width: 100%;
     height: 421px;
   }
 
-
-    @media (max-width: 768px) {
-      .showcase-product-row,
-      .showcase-product-row.reverse {
-        flex-direction: column;
-        gap: 30px;
-        margin-bottom: 60px;
-      }
-
-      .showcase-product-image {
-        height: 250px;
-        max-width: 100%;
-      }
-
-      .showcase-product-content {
-        text-align: center;
-      }
-
-      .showcase-product-title {
-        font-size: 24px;
-      }
-
-      .showcase-product-description {
-        font-size: 14px;
-      }
-
-      .showcase-video-banner {
-        margin-bottom: 60px;
-      }
-
-      .showcase-video-banner video {
-        min-height: 200px;
-      }
-
-      .showcase-video-banner .showcase-video-placeholder {
-        height: 200px;
-      }
+  @media (max-width: 768px) {
+    .showcase-product-showcase {
+      padding: 0 14px;
+      margin-bottom: 0px;
+      border-radius: 0;
     }
+
+    .showcase-wrapper {
+      padding: 40px 16px 20px;
+      background: linear-gradient(to bottom, #f9f6f4, #ffffff);
+    }
+
+    .showcase-product-row,
+    .showcase-product-row.reverse {
+      flex-direction: column;
+      gap: 22px;
+      margin-bottom: 20px;
+    }
+
+    .showcase-product-image {
+      height: 189px;
+      width: 100%;
+      flex: none;
+    }
+
+    .showcase-product-content {
+      text-align: right;
+    }
+
+    .showcase-product-title {
+      font-size: 18px;
+      margin-bottom: 6px;
+    }
+
+    .showcase-product-description {
+      font-size: 12px;
+    }
+
+    .showcase-video-banner {
+      margin-bottom: 32px;
+      margin-left: -16px;
+      margin-right: -16px;
+      height: 217px;
+    }
+
+    .showcase-video-banner video {
+      min-height: 200px;
+    }
+
+    .showcase-video-banner .showcase-video-placeholder {
+      height: 217px;
+    }
+    .play-button {
+      width: 68px;
+    }
+  }
 </style>
 
 <section class="showcase-product-showcase">
   <h2 class="visually-hidden">Featured Products</h2>
-  {% for block in section.blocks %}
-    {% if block.type == 'product_item' %}
-      {% assign is_reverse = false %}
-      {% if block.settings.reverse_layout %}
-        {% assign is_reverse = true %}
-      {% endif %}
+  <div class="showcase-wrapper">
+    {% for block in section.blocks %}
+      {% if block.type == 'product_item' %}
+        {% assign is_reverse = false %}
+        {% if block.settings.reverse_layout %}
+          {% assign is_reverse = true %}
+        {% endif %}
 
-      <div class="showcase-product-row{% if is_reverse %} reverse{% endif %}">
-        <div class="showcase-product-image">
-          {% if block.settings.image %}
+        <div class="showcase-product-row{% if is_reverse %} reverse{% endif %}">
+          <div class="showcase-product-image">
+            {% if block.settings.image %}
+              <img
+                src="{{ block.settings.image | image_url: width:450, height: 283 }}"
+                alt="{{ block.settings.image.alt | default: block.settings.title }}"
+                width="{{ block.settings.image.width | default: 450 }}"
+                height="{{ block.settings.image.height | default: 283 }}"
+                loading="lazy"
+              >
+            {% else %}
+              <div style="width: 100%; height: 100%; background: #f5f5f5; display: flex; align-items: center; justify-content: center; color: #999;">
+                {{ 'image' | placeholder_svg_tag }}
+              </div>
+            {% endif %}
+          </div>
+          <div class="showcase-product-content">
+            {% if block.settings.title != blank %}
+              <h2 class="showcase-product-title">{{ block.settings.title }}</h2>
+            {% endif %}
+            {% if block.settings.description != blank %}
+              <div class="showcase-product-description">{{ block.settings.description }}</div>
+            {% endif %}
+          </div>
+        </div>
+
+      {% elsif block.type == 'video_banner' %}
+        <div class="showcase-video-banner" id="video-wrapper-{{ block.id }}">
+          <div class="video-poster" id="poster-{{ block.id }}">
             <img
-              src="{{ block.settings.image | image_url: width:450, height: 283 }}"
-              alt="{{ block.settings.image.alt | default: block.settings.title }}"
-              width="{{ block.settings.image.width | default: 450 }}"
-              height="{{ block.settings.image.height | default: 283 }}"
-              loading="lazy"
+              src="{{ block.settings.poster | image_url }}"
+              alt="Video preview"
+              class="poster-img"
+              width="{{ block.settings.poster.width | default: 450 }}"
+              height="{{ block.settings.poster.height | default: 283 }}"
             >
-          {% else %}
-            <div style="width: 100%; height: 100%; background: #f5f5f5; display: flex; align-items: center; justify-content: center; color: #999;">
-              {{ 'image' | placeholder_svg_tag }}
-            </div>
-          {% endif %}
-        </div>
-        <div class="showcase-product-content">
-          {% if block.settings.title != blank %}
-            <h2 class="showcase-product-title">{{ block.settings.title }}</h2>
-          {% endif %}
-          {% if block.settings.description != blank %}
-            <div class="showcase-product-description">{{ block.settings.description }}</div>
-          {% endif %}
-        </div>
-      </div>
-
-    {% elsif block.type == 'video_banner' %}
-      {% comment %}
-        <div class="showcase-video-banner">
-          {% if block.settings.video %}
-            <video
-              {% if block.settings.autoplay %}
-                autoplay
-              {% endif %}
-              {% if block.settings.loop %}
-                loop
-              {% endif %}
-              {% if block.settings.muted %}
-                muted
-              {% endif %}
-              {% if block.settings.controls %}
-                controls
-              {% endif %}
-              playsinline
-              preload="metadata"
+            <button
+              class="play-button"
+              id="play-btn-{{ block.id }}"
+              data-youtube-id="{{ block.settings.youtube_id }}"
             >
-              {% for source in block.settings.video.sources %}
-                <source src="{{ source.url }}" type="{{ source.mime_type }}">
-              {% endfor %}
-              Your browser does not support the video tag.
-            </video>
-          {% elsif block.settings.video_url != blank %}
-            <video
-              {% if block.settings.autoplay %}
-                autoplay
-              {% endif %}
-              {% if block.settings.loop %}
-                loop
-              {% endif %}
-              {% if block.settings.muted %}
-                muted
-              {% endif %}
-              {% if block.settings.controls %}
-                controls
-              {% endif %}
-              playsinline
-              preload="metadata"
-            >
-              <source src="{{ block.settings.video_url }}" type="video/mp4">
-              Your browser does not support the video tag.
-            </video>
-          {% else %}
-            <div class="showcase-video-placeholder">
-              <span>📹 Video Banner Placeholder</span>
-            </div>
-          {% endif %}
+              {% render 'icon--play' %}
+            </button>
+          </div>
+          <div class="video-embed" id="embed-{{ block.id }}" style="display: none;"></div>
         </div>
-      {% endcomment %}
-      <div class="showcase-video-banner" id="video-wrapper-{{ block.id }}">
-        <div class="video-poster" id="poster-{{ block.id }}">
-          <img
-            src="{{ block.settings.poster | image_url }}"
-            alt="Video preview"
-            class="poster-img"
-            width="{{ block.settings.poster.width | default: 450 }}"
-            height="{{ block.settings.poster.height | default: 283 }}"
-          >
-          <button
-            class="play-button"
-            id="play-btn-{{ block.id }}"
-            data-youtube-id="{{ block.settings.youtube_id }}"
-          >
-            {% render 'icon--play' %}
-          </button>
-        </div>
-        <div class="video-embed" id="embed-{{ block.id }}" style="display: none;"></div>
-      </div>
-    {% endif %}
-  {% endfor %}
+      {% endif %}
+    {% endfor %}
+  </div>
 </section>
 
 <script>

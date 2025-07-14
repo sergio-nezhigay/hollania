@@ -1,13 +1,12 @@
 .collection-wrapper {
-  background: linear-gradient(to bottom, #ffffff 0%, #f4efec 100%);
+  background: linear-gradient(to bottom, #ffffff 0%, #ffffff 50%, #f4efec 100%);
 }
-/* Collection Top */
+
 .collection-top {
   max-width: 1440px;
   margin: 0 auto;
   padding: 20px 120px;
   text-align: right;
-  outline: 1px dotted blue;
 }
 
 .collection-title {
@@ -21,4 +20,22 @@
   color: #5f626a;
   line-height: 1.6;
   max-width: 580px;
+}
+
+@media (max-width: 768px) {
+  .collection-wrapper {
+    background: white;
+  }
+
+  .collection-top {
+    padding: 12px 16px 10px;
+  }
+
+  .collection-title {
+    font-size: 20px;
+  }
+
+  .collection-description {
+    font-size: 10px;
+  }
 }
