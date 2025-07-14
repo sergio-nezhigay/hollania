@@ -1,3 +1,4 @@
+/* Utility */
 .visually-hidden {
   position: absolute;
   width: 1px;
@@ -9,23 +10,41 @@
   border: 0;
 }
 
+/* Layout & Grid */
 .collection-products-grid {
   max-width: 1440px;
   margin: 0 auto;
   padding: 0 120px 70px;
 }
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  row-gap: 48px;
+  column-gap: 18px;
+}
 
+/* Banner */
+.banner {
+  display: none;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  grid-column: 1 / -1;
+}
+
+/* Tabs */
 .filter-tabs {
   padding: 20px 0 28px;
 }
-
 .tabs-wrapper {
   display: flex;
   justify-content: start;
   gap: 10px;
   flex-wrap: wrap;
 }
-
 .tab-button {
   background: none;
   border: 1px solid #d1d5dd;
@@ -37,7 +56,6 @@
   border-radius: 8px;
   transition: all 0.3s ease;
 }
-
 .tab-button.active,
 .tab-button:hover {
   background: #dd2d4a;
@@ -45,19 +63,12 @@
   color: white;
 }
 
-.products-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  row-gap: 48px;
-  column-gap: 18px;
-}
-
+/* Product Card & Image */
 .product-card {
   border-radius: 18px;
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
 .product-card-link {
   display: block;
   height: 100%;
@@ -65,28 +76,25 @@
   text-decoration: none;
   color: inherit;
 }
-
 /*.product-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }*/
-
 .collection-product-image-wrapper {
   position: relative;
   overflow: hidden;
 }
-
 .collection-product-image {
   width: 100%;
   height: 196px;
   object-fit: cover;
   transition: transform 0.3s ease;
 }
-
 .product-card:hover .product-image {
   transform: scale(1.05);
 }
 
+/* Badges */
 .sale-badge {
   position: absolute;
   top: 12px;
@@ -98,7 +106,6 @@
   font-size: 14px;
   font-weight: 500;
 }
-
 .size-badge {
   position: absolute;
   bottom: 12px;
@@ -113,19 +120,16 @@
   align-items: center;
   gap: 7px;
 }
-
 .size-text {
   font-size: 12px;
   font-weight: 700;
   color: #38383a;
 }
-
 .size-label {
   font-size: 12px;
   font-weight: 500;
   color: #5f626a;
 }
-
 .size-icon {
   display: flex;
   align-items: center;
@@ -135,19 +139,18 @@
   font-size: 12px;
 }
 
+/* Product Info */
 .product-info {
   padding: 18px 16px 22px;
   background-color: #f4f4f4;
   text-align: center;
 }
-
 .product-title {
   font-size: 16px;
   color: #1a1a1b;
   margin-bottom: 0px;
   font-weight: 400;
 }
-
 .product-rating {
   display: flex;
   align-items: center;
@@ -158,29 +161,26 @@
   color: #5f626a;
   font-weight: 400;
 }
-
 .stars {
   display: flex;
   gap: 3.3px;
 }
-
 .star.filled {
   color: #fdb022;
   font-size: 15px;
   line-height: 15px;
 }
-
 .star.bordered {
   color: transparent;
   font-size: 12px;
   line-height: 15px;
   -webkit-text-stroke: 1px #fdb022;
 }
-
 .rating-value {
   padding-right: 2px;
 }
 
+/* Price */
 .product-price {
   margin-bottom: 0px;
   display: flex;
@@ -188,25 +188,23 @@
   justify-content: center;
   gap: 4px;
 }
-
 .sale-price {
   font-size: 20px;
   font-weight: 600;
   color: #dd2d4a;
 }
-
 .original-price {
   font-size: 14px;
   color: #b6b8c1;
   text-decoration: line-through;
 }
-
 .regular-price {
   font-size: 20px;
   font-weight: 700;
   color: #495057;
 }
 
+/* Sold/Save */
 .sold-save-container {
   display: flex;
   align-items: center;
@@ -217,19 +215,16 @@
   padding: 5px 12px 5px 8px;
   border-radius: 20px;
 }
-
 .sold-save-icons {
   display: flex;
   align-items: center;
   color: #dd2d4a;
 }
-
 .sold-text {
   font-weight: 600;
   font-size: 14px;
   line-height: 21px;
 }
-
 .save-text {
   font-size: 14px;
   line-height: 21px;
@@ -237,7 +232,6 @@
   padding-right: 8px;
   border-left: 1px solid #fcbbc6;
 }
-
 .checkmark-icon {
   padding-right: 11px;
   padding-left: 8px;
@@ -249,32 +243,26 @@
     margin: 0 auto;
     padding: 0 12px 30px;
   }
-
   .filter-tabs {
     padding: 16px 0 22px;
     margin-left: -12px;
   }
-
   .tabs-wrapper {
     gap: 15px;
     flex-wrap: nowrap;
     overflow-x: auto;
     overflow-y: hidden;
   }
-
   .tab-button {
     font-size: 14px;
     padding: 6px 16px;
   }
-
   .collection-product-image {
     height: 176px;
   }
-
   .product-info {
     padding: 16px 25px 22px;
   }
-
   .product-title {
     font-size: 16px;
   }
@@ -292,6 +280,16 @@
   .sold-save-container {
     justify-content: center;
     padding: 4px;
+  }
+}
+@media (max-width: 767px) {
+  .banner-mobile {
+    display: block;
+  }
+}
+@media (min-width: 768px) {
+  .banner-desktop {
+    display: block;
   }
 }
 
