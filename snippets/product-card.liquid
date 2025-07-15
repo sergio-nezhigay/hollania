@@ -1,4 +1,19 @@
-<div class="product-card" data-category="{{ product.tags | join: ' ' | downcase }}">
+{% comment %}demo tag filtering content generating code {% endcomment %}
+
+{%- assign all_tags = 'modern,classic,luxury,sale' | split: ',' -%}
+{%- assign tag_count = all_tags | size -%}
+{%- assign selected_tags = '' -%}
+
+{%- for i in (1..3) -%}
+  {%- assign random_index = 'now' | date: '%N' | slice: i | plus: 0 | modulo: tag_count -%}
+  {%- assign random_tag = all_tags[random_index] -%}
+  {%- unless selected_tags contains random_tag -%}
+    {%- assign selected_tags = selected_tags | append: random_tag | append: ' ' -%}
+  {%- endunless -%}
+{%- endfor -%}
+<div class="product-card" data-category="{{ selected_tags | strip }}">
+  {% comment %}real code to be used in     {% endcomment %}
+  {% comment %}<div class="product-card" data-category="{{ product.tags | join: ' ' | downcase }}">{% endcomment %}
   <a href="{{ product.url }}" class="product-card-link">
     <div class="collection-product-image-wrapper">
       {% if product.featured_image %}

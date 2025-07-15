@@ -77,32 +77,11 @@
       "type": "static__subscribe",
       "settings": {}
     }
-    //"info_tech": {
-    //  "type": "collection__info_tech",
-    //  "settings": {}
-    //},
-    //"about": {
-    //  "type": "collection__about",
-    //  "settings": {
-    //    "btn_text_open": "קיראו עוד",
-    //    "btn_text_close": "סגירה"
-    //  }
-    //},
-    //"contacts": {
-    //  "type": "dynamic__contacts",
-    //  "settings": {
-    //    "heading": "אנחנו פה לכל שאלה",
-    //    "bg_color": "#ffffff"
-    //  }
-    //},
   },
   "order": [
     "top",
     "products-grid",
     "collection-showcase",
     "subscribe"
-    //"contacts",
-    //"info_tech",
-    //"about"
   ]
 }
