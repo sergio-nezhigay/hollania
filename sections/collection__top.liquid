@@ -1,8 +1,9 @@
 {{ 'collection-top.css' | asset_url | stylesheet_tag }}
+{{ 'breadcrumbs.css' | asset_url | stylesheet_tag }}
 <!-- sections/collection-template.liquid -->
-<div class="p-4 space-y-4 pb-0 sl-container xl:py-6 xl:px-0">
-  {%- render 'breadcrumbs' -%}
-</div>
+
+{% comment %}{%- render 'breadcrumbs' -%}{% endcomment %}
+
 <section class="collection-top">
   <h1 class="collection-title">{{ collection.title }}</h1>
   <p class="collection-description">
